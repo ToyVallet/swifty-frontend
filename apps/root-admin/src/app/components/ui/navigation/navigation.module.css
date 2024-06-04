@@ -1,0 +1,13 @@
+.navigation {
+  height: 100dvh;
+}
+
+.sider {
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+.content {
+  background: var(--color-11);
+  margin: 0 3rem;
+}

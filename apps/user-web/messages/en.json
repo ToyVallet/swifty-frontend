@@ -1,0 +1,50 @@
+{
+  "LocaleSwitcher": {
+    "label": "language",
+    "locale": "{locale, select, ko {Korean} en {English} other {Unknown}}"
+  },
+  "GNB": {
+    "title": "DANFESTA 2024",
+    "description": "Welcome to Danfesta 2024!"
+  },
+  "SideNav": {
+    "home": "Home",
+    "lineup": "Lineup",
+    "ticketing": "Ticketing",
+    "stamp": "Stamps",
+    "events": "Events",
+    "login": "Login",
+    "logout": "Logout",
+    "myTickets": "My Tickets",
+    "gotoMypage": "go to mypage",
+    "notice": "Notice"
+  },
+  "Home": {
+    "description": "DKU festa 2024"
+  },
+  "FestivalTile": {
+    "title": "Check Out Festivals",
+    "seeAll": "See all"
+  },
+  "TicketTile": {
+    "title": "Your Tickets",
+    "subtitle": "Danfesta Mobile Ticket System",
+    "ticketStatus": "Ticket Status",
+    "haveTicket": "Available",
+    "noTicket": "No Ticket",
+    "notice": "We will check your ticket and ID when you enter. If we cannnot identify your id, entry may be restricted.",
+    "tapToSee": "Tap to see"
+  },
+  "Carousel": {
+    "nextup": "Next up"
+  },
+  "LoginPage": {
+    "title": "LOGIN",
+    "subTitle": "Login to get full access to Danfesta 2024!",
+    "username": "DKU portal id",
+    "password": "Password",
+    "forgot": "Forgot your password?",
+    "signup": "Sign up",
+    "login": "Login"
+  }
+}
