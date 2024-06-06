@@ -1,5 +1,6 @@
 import { checkStatusForRefreshToken } from '@/app/api/check-status-for-RefreshToken';
-import { SERVER_URL } from '@constant';
+import { getCookieValue } from '@/app/lib/cookies';
+import { COOKIE_KEYS, SERVER_URL } from '@constant';
 
 export interface ErrorResponse {
   message: string;
@@ -11,10 +12,25 @@ export interface ErrorResponse {
 const isErrorResponse = (data: unknown): data is ErrorResponse =>
   typeof data === 'object' && data !== null && 'trackingId' in data;
 
+
+const isServer = () => typeof window === "undefined"
+
 export async function customFetch<T>(
   url: string,
   option?: RequestInit,
 ): Promise<T> {
+
+  if(isServer()){
+    const access = await getCookieValue(COOKIE_KEYS.accessToken)
+    const refresh = await getCookieValue(COOKIE_KEYS.refreshToken)
+    option = {
+      headers:{
+        Cookie : `${COOKIE_KEYS.accessToken}=${access}; ${COOKIE_KEYS.refreshToken}=${refresh};`
+      },
+      ...option
+    }
+  }
+
   try {
     const response = await fetch(`${SERVER_URL}${url}`, {
       headers: {
