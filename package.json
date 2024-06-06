@@ -3,9 +3,10 @@
   "private": true,
   "scripts": {
     "build": "turbo build",
-    "dev": "dotenvx run -- turbo dev",
-    "dev:root": "dotenvx run -- turbo dev --filter root-admin",
-    "dev:user": "dotenvx run -- turbo dev --filter user-web",
+    "dev": "turbo dev",
+    "dev:root": "turbo dev --filter root-admin",
+    "dev:user": "turbo dev --filter user-web",
+    "dev:storybook": "turbo dev --filter storybook",
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "test": "turbo test",

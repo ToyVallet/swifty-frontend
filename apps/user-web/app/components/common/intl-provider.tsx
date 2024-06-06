@@ -1,7 +1,7 @@
 'use client';
 
-import en from '@/messages/en.json';
-import ko from '@/messages/ko.json';
+import en from '../../../messages/en.json';
+import ko from '../../../messages/ko.json';
 import { NextIntlClientProvider, useLocale } from 'next-intl';
 import { PropsWithChildren } from 'react';
 

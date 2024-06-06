@@ -1,7 +1,1 @@
-module.exports = {
-  plugins: {
-    'tailwindcss/nesting': 'postcss-nesting',
-    tailwindcss: {},
-    autoprefixer: {},
-  },
-};
+module.exports = require('@swifty/tailwind-config/postcss.config.js');

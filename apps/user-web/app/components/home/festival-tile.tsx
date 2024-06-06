@@ -1,5 +1,5 @@
-import Tile from '@/app/components/common/carousel/tile';
-import { FestivalInfo } from '@/app/lib/types';
+import Tile from '@components/common/carousel/tile';
+import { FestivalInfo } from '@lib/types';
 import { getTranslations } from 'next-intl/server';
 
 import Carousel from '../common/carousel';

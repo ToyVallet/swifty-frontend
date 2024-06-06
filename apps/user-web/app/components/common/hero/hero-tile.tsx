@@ -1,8 +1,8 @@
+import { ImageWithFallback } from '@components/common';
+import FallbackHero from '@images/fallback-hero.png';
 import { Link } from '@lib/navigation';
 import { FestivalInfo } from '@lib/types';
 import formatDate from '@lib/utils/parser/format-date';
-import { ImageWithFallback } from '@/app/components/common';
-import FallbackHero from '@images/fallback-hero.png';
 
 export default function HeroTile({
   id,
@@ -34,10 +34,16 @@ export default function HeroTile({
       </div>
 
       <div className="absolute bottom-[60px] left-5 right-[74px] h-[114px] text-xl font-semibold">
-        <span className='mt-[3px] text-xs leading-[18px] tracking-[-0.36px]'>{addr}</span>
-        <h4 className='font-bold text-[22px] leading-[33px] tracking-[-0.66px]'>{name}</h4>
-        <span className='block leading-[30px] tracking-[-0.6px] truncate'>{description}</span>
-        <span className='mt-[6px] text-sm tracking-[-0.42px]'>
+        <span className="mt-[3px] text-xs leading-[18px] tracking-[-0.36px]">
+          {addr}
+        </span>
+        <h4 className="font-bold text-[22px] leading-[33px] tracking-[-0.66px]">
+          {name}
+        </h4>
+        <span className="block leading-[30px] tracking-[-0.6px] truncate">
+          {description}
+        </span>
+        <span className="mt-[6px] text-sm tracking-[-0.42px]">
           {formatDate(startdate, enddate, 'ko')}
         </span>
       </div>

@@ -1,13 +1,6 @@
-import type { Config } from 'tailwindcss';
-
-const config = {
-  content: [
-    './pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './components/**/*.{js,ts,jsx,tsx,mdx}',
-    './app/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/**/*.{ts,tsx}',
-  ],
-  prefix: '',
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: ['**/*.{js,jsx,ts,tsx}', '**/*/index.html'],
   theme: {
     container: {
       center: true,
@@ -68,7 +61,9 @@ const config = {
       },
     },
   },
-  plugins: [require('tailwindcss-animate'), require('tailwind-scrollbar-hide')],
-} satisfies Config;
-
-export default config;
+  plugins: [
+    require('tailwindcss-animate'),
+    require('tailwind-scrollbar-hide'),
+    'prettier-plugin-tailwindcss',
+  ],
+};
