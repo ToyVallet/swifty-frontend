@@ -1,9 +1,18 @@
-import { customFetch } from "@/app/api";
-import { UserApi } from "@/app/types/user";
-import { API_CLIENT } from "@/constant";
+import { customFetch } from '@/app/api';
+import { UserApi } from '@/app/types/user';
+import { API_CLIENT } from '@/constant';
+
+import styles from './user.module.css';
 
 export default async function Page() {
-  const data = await customFetch<UserApi>(API_CLIENT.host(), {cache: "no-cache"})
+  const data = await customFetch<UserApi>(API_CLIENT.host(), {
+    cache: 'no-cache',
+  });
+  console.log(data);
 
-  return <div></div>;
+  return (
+    <main>
+      <h2 className={styles.heading}>계정 관리</h2>
+    </main>
+  );
 }
