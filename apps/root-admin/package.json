@@ -10,6 +10,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@swifty/shared-lib": "*",
     "@ant-design/nextjs-registry": "^1.0.0",
     "antd": "^5.17.3",
     "cookies-next": "^4.2.1",

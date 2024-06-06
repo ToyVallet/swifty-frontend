@@ -3,18 +3,18 @@
   "private": true,
   "scripts": {
     "build": "turbo build",
-    "dev": "turbo dev",
-    "dev:root": "turbo dev --filter root-admin",
-    "dev:user": "turbo dev --filter user-web",
+    "dev": "dotenvx run -- turbo dev",
+    "dev:root": "dotenvx run -- turbo dev --filter root-admin",
+    "dev:user": "dotenvx run -- turbo dev --filter user-web",
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
   "devDependencies": {
     "@swifty/eslint-config": "*",
     "@swifty/typescript-config": "*",
+    "husky": "^7.0.2",
     "prettier": "^3.2.5",
-    "turbo": "latest",
-    "husky": "^7.0.2"
+    "turbo": "latest"
   },
   "engines": {
     "node": ">=18"
@@ -23,5 +23,9 @@
   "workspaces": [
     "apps/*",
     "packages/*"
-  ]
+  ],
+  "dependencies": {
+    "@dotenvx/dotenvx": "^0.44.1",
+    "dotenv-cli": "^7.4.2"
+  }
 }

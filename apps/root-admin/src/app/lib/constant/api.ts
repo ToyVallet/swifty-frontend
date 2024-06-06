@@ -1,5 +1,3 @@
-export const SERVER_URL = 'https://dpi.swifty.kr' as const;
-
 export const API_LINEUP = {
   lineup: (id?: string) => (id ? `/admin/line_up/${id}` : '/admin/line_up'),
 } as const;
