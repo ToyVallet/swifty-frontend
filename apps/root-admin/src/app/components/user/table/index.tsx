@@ -3,11 +3,9 @@
 import { customFetch } from '@/app/api';
 import { User, UserApi } from '@/app/types/user';
 import { API_CLIENT } from '@/constant';
-import { Pagination, Table } from 'antd';
+import { Table } from 'antd';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
-
-import styles from './table.module.css';
 
 interface Props {
   data: User[];
@@ -51,28 +49,24 @@ function CustomTable({ data, pageSize, total }: Props) {
   };
 
   return (
-    <section className={styles.container}>
+    <section>
       <Table
         columns={columns}
         dataSource={tableData}
-        pagination={false}
+        pagination={{
+          current: pagination.current,
+          pageSize: pagination.pageSize,
+          total: pagination.total,
+          showSizeChanger: true,
+          size: 'small',
+          showTotal: (total) => `Total ${total} items`,
+          onChange: (page, pageSize) => handleTableChange(page, pageSize),
+        }}
         loading={loading}
         onRow={(record) => ({
           onClick: () => onClickRow(record),
         })}
         rowKey="userSubId"
-      />
-      <Pagination
-        className={styles.pagenation}
-        current={pagination.current}
-        pageSize={pagination.pageSize}
-        total={pagination.total}
-        onChange={handleTableChange}
-        showSizeChanger
-        size="small"
-        showQuickJumper
-        showTotal={(total) => `Total ${total} items`}
-        responsive
       />
     </section>
   );
