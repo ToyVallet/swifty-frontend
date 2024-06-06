@@ -9,5 +9,8 @@
   },
   "dependencies": {
     "@swifty/typescript-config": "*"
+  },
+  "devDependencies": {
+    "husky": "^9.0.11"
   }
 }

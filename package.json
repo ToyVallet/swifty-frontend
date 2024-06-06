@@ -13,7 +13,8 @@
     "@swifty/eslint-config": "*",
     "@swifty/typescript-config": "*",
     "prettier": "^3.2.5",
-    "turbo": "latest"
+    "turbo": "latest",
+    "husky": "^7.0.2"
   },
   "engines": {
     "node": ">=18"

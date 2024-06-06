@@ -35,6 +35,9 @@ module.exports = {
       },
     },
   },
+  rules: {
+    'no-console': 'error',
+  },
   ignorePatterns: ['.*.js', 'node_modules/'],
   overrides: [{ files: ['*.js?(x)', '*.ts?(x)'] }],
 };
