@@ -12,23 +12,21 @@ export interface ErrorResponse {
 const isErrorResponse = (data: unknown): data is ErrorResponse =>
   typeof data === 'object' && data !== null && 'trackingId' in data;
 
-
-const isServer = () => typeof window === "undefined"
+const isServer = () => typeof window === 'undefined';
 
 export async function customFetch<T>(
   url: string,
   option?: RequestInit,
 ): Promise<T> {
-
-  if(isServer()){
-    const access = await getCookieValue(COOKIE_KEYS.accessToken)
-    const refresh = await getCookieValue(COOKIE_KEYS.refreshToken)
+  if (isServer()) {
+    const access = await getCookieValue(COOKIE_KEYS.accessToken);
+    const refresh = await getCookieValue(COOKIE_KEYS.refreshToken);
     option = {
-      headers:{
-        Cookie : `${COOKIE_KEYS.accessToken}=${access}; ${COOKIE_KEYS.refreshToken}=${refresh};`
+      headers: {
+        Cookie: `${COOKIE_KEYS.accessToken}=${access}; ${COOKIE_KEYS.refreshToken}=${refresh};`,
       },
-      ...option
-    }
+      ...option,
+    };
   }
 
   try {

@@ -1,3 +1,5 @@
+import { UserRole } from '@/app/types/user';
+
 export const SERVER_URL = 'https://dpi.swifty.kr' as const;
 
 export const API_LINEUP = {
@@ -5,7 +7,11 @@ export const API_LINEUP = {
 } as const;
 
 export const API_CLIENT = {
-  host: (id?: string) => (id ? `/admin/host/${id}` : '/admin/host'),
+  hosts: (userRole?: UserRole, page: number = 0, size: number = 20) =>
+    userRole
+      ? `/admin/host?userRole=${userRole}&page=${page}&size=${size}`
+      : `/admin/host?page=${page}&size=${size}`,
+  host: (id: string) => `/admin/host/${id}`,
 } as const;
 
 export const API_FESTIVAL = {
