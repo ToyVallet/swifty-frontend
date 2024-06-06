@@ -34,3 +34,7 @@ yarn-error.log*
 # Misc
 .DS_Store
 *.pem
+
+# yarn
+.yarn/*
+apps/root-admin/.yarn/*
