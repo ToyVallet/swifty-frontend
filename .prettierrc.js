@@ -1,4 +1,5 @@
 module.exports = {
+  bracketSpacing: true,
   printWidth: 80,
   tabWidth: 2,
   trailingComma: 'all',
@@ -8,6 +9,7 @@ module.exports = {
   importOrderSeparation: true,
   importOrderSortSpecifiers: true,
   plugins: [
+    'prettier-plugin-tailwindcss',
     '@trivago/prettier-plugin-sort-imports',
   ],
   tailwindFunctions: ['clsx', 'tw'],

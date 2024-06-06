@@ -3,11 +3,25 @@
   "display": "Next.js",
   "extends": "./base.json",
   "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
     "plugins": [{ "name": "next" }],
     "module": "ESNext",
     "moduleResolution": "Bundler",
     "allowJs": true,
     "jsx": "preserve",
-    "noEmit": true
-  }
+    "noEmit": true,
+    "types": ["@testing-library/jest-dom"],
+    "paths": {
+      "@app/*": ["./app/*"],
+      "@components/*": ["./app/components/*"],
+      "@lib/*": ["./app/lib/*"],
+      "@hooks/*": ["./app/hooks/*"],
+      "@api/*": ["./app/api/*"],
+      "@store/*": ["./app/store/*"],
+      "@images/*": ["./public/images/*"],
+      "@icons/*": ["./public/icons/*"]
+    }
+  },
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "exclude": ["node_modules"]
 }
