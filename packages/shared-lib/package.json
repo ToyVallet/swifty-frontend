@@ -1,0 +1,13 @@
+{
+  "name": "@swifty/shared-lib",
+  "version": "0.1.0",
+  "main": "index.js",
+  "author": "이호연",
+  "license": "MIT",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "dependencies": {
+    "@swifty/typescript-config": "*"
+  }
+}
