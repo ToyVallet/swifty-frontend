@@ -3,7 +3,7 @@
 import { Link } from '@components/common';
 import { SheetClose } from '@components/ui/sheet';
 import { useAuth } from '@hooks/.';
-import { cn } from '@lib/utils';
+import { cn } from '@swifty/shared-lib';
 
 type NavLinkProps = {
   link: string;

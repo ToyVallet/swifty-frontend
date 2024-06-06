@@ -1,6 +1,6 @@
 'use client';
 
-import { cn } from '@lib/utils';
+import { cn } from '@swifty/shared-lib';
 import { Dayjs } from 'dayjs';
 import 'dayjs/locale/ko';
 import { motion } from 'framer-motion';

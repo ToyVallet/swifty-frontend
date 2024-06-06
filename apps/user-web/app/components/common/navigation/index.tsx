@@ -1,7 +1,7 @@
 import { BackButton, Link } from '@components/common';
 import LogoLink from '@components/common/navigation/logo-link';
 import Magnifier from '@icons/magnifier.svg';
-import { cn } from '@lib/utils';
+import { cn } from '@swifty/shared-lib';
 import { IoArrowBackOutline } from 'react-icons/io5';
 
 type Props = {

@@ -1,7 +1,7 @@
 'use client';
 
-import { customFetch } from '@/app/api';
-import { API_AUTH } from '@/constant';
+import { API_AUTH } from '@lib/constant/api';
+import { customFetch } from '@swifty/shared-lib';
 import type { FormProps } from 'antd';
 import { Button, Form, Input } from 'antd';
 import { useRouter } from 'next/navigation';

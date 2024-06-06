@@ -1,6 +1,6 @@
-import { Link } from '@/app/components/common/';
-import { cn } from '@/app/lib/utils';
+import { Link } from '@components/common';
 import Logo from '@icons/logo.svg';
+import { cn } from '@swifty/shared-lib';
 
 interface Prop {
   className?: string;

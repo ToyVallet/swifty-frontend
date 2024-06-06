@@ -1,5 +1,5 @@
-import { cn } from '@/app/lib/utils';
 import { Link } from '@components/common';
+import { cn } from '@swifty/shared-lib';
 import type { PropsWithChildren } from 'react';
 
 export default function TileHeader({

@@ -1,6 +1,6 @@
 'use client';
 
-import { cn } from '@/app/lib/utils';
+import { cn } from '@swifty/shared-lib';
 import { OTPInput, SlotProps } from 'input-otp';
 import { Dot } from 'lucide-react';
 import * as React from 'react';

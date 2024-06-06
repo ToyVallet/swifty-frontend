@@ -1,4 +1,4 @@
-import { cn } from '@lib/utils';
+import { cn } from '@swifty/shared-lib';
 import { PropsWithChildren } from 'react';
 
 type HeroProps = PropsWithChildren<{

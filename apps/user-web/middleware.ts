@@ -1,13 +1,10 @@
+import { COOKIE_KEYS } from '@swifty/shared-lib';
 import { jwtDecode } from 'jwt-decode';
 import createMiddleware from 'next-intl/middleware';
 import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
 
-import {
-  COOKIE_KEYS,
-  privateRoutes,
-  protectedRoutes,
-} from './app/lib/constants';
+import { privateRoutes, protectedRoutes } from './app/lib/constants';
 import { AccessToken } from './app/lib/utils/validation/assert/jwt';
 
 const i18nMiddleware = createMiddleware({

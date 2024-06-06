@@ -1,5 +1,5 @@
-import { If } from '@/app/components/util';
-import { type TicketInfo } from '@/app/lib/mock/type';
+import { If } from '@components/util';
+import { type TicketInfo } from '@lib/mock/type';
 
 export default function StudentInfo({ info }: { info: TicketInfo | null }) {
   return (
