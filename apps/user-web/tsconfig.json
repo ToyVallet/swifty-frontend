@@ -10,7 +10,8 @@
       "@api/*": ["./app/api/*"],
       "@store/*": ["./app/store/*"],
       "@images/*": ["./public/images/*"],
-      "@icons/*": ["./public/icons/*"]
+      "@icons/*": ["./public/icons/*"],
+      "@page/*": ["./app/[locale]/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

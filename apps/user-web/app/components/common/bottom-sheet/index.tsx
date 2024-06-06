@@ -1,6 +1,6 @@
 'use client';
 
-import { cn } from '@/app/lib/utils';
+import { cn } from '@swifty/shared-lib';
 import clsx from 'clsx';
 import {
   AnimatePresence,

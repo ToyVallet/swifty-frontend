@@ -1,7 +1,7 @@
 'use client';
 
-import { cn } from '@/app/lib/utils';
 import * as AccordionPrimitive from '@radix-ui/react-accordion';
+import { cn } from '@swifty/shared-lib';
 import { ChevronDown } from 'lucide-react';
 import * as React from 'react';
 

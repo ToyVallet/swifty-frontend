@@ -4,7 +4,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@components/ui/avatar';
 import { SheetClose } from '@components/ui/sheet';
 import { If } from '@components/util';
 import { useAuth } from '@hooks/.';
-import { cn } from '@lib/utils';
+import { cn } from '@swifty/shared-lib';
 import { useTranslations } from 'next-intl';
 import { IoChevronForwardOutline } from 'react-icons/io5';
 import {

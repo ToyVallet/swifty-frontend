@@ -1,7 +1,7 @@
 'use client';
 
 import { type NonEmptyArray } from '@lib/types';
-import { cn } from '@lib/utils';
+import { cn } from '@swifty/shared-lib';
 import { motion } from 'framer-motion';
 import { Children, isValidElement, useEffect } from 'react';
 

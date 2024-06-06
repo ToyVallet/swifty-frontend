@@ -1,7 +1,8 @@
 'use client';
 
 import { Button } from '@components/common';
-import { cn, parseMStoMinSec } from '@lib/utils';
+import { parseMStoMinSec } from '@lib/utils';
+import { cn } from '@swifty/shared-lib';
 import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 

@@ -1,7 +1,7 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { cn } from '@lib/utils';
+import { cn } from '@swifty/shared-lib';
 import clsx from 'clsx';
 import { HTMLAttributes } from 'react';
 import {

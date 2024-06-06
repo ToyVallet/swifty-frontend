@@ -15267,6 +15267,13 @@ tailwind-merge@^2.2.2:
   dependencies:
     "@babel/runtime" "^7.24.1"
 
+tailwind-merge@^2.3.0:
+  version "2.3.0"
+  resolved "https://registry.npmjs.org/tailwind-merge/-/tailwind-merge-2.3.0.tgz#27d2134fd00a1f77eca22bcaafdd67055917d286"
+  integrity sha512-vkYrLpIP+lgR0tQCG6AP7zZXCTLc1Lnv/CCRT3BqJ9CZ3ui2++GPaGb1x/ILsINIMSYqqvrpqjUFsMNLlW99EA==
+  dependencies:
+    "@babel/runtime" "^7.24.1"
+
 tailwind-scrollbar-hide@^1.1.7:
   version "1.1.7"
   resolved "https://registry.npmjs.org/tailwind-scrollbar-hide/-/tailwind-scrollbar-hide-1.1.7.tgz"

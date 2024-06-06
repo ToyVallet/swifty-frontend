@@ -1,7 +1,8 @@
 'use server';
 
-import { API_ROUTES, COOKIE_KEYS } from '@/app/lib/constants';
-import { CustomError, ErrorCause, assert } from '@/app/lib/utils';
+import { API_ROUTES } from '@lib/constants';
+import { CustomError, ErrorCause, assert } from '@lib/utils';
+import { COOKIE_KEYS } from '@swifty/shared-lib';
 import { cookies } from 'next/headers';
 
 import { post } from '.';
