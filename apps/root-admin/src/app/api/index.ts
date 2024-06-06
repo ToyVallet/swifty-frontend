@@ -1,5 +1,6 @@
 import { checkStatusForRefreshToken } from '@/app/api/check-status-for-RefreshToken';
 import { getCookieValue } from '@/app/lib/cookies';
+import { isServer } from '@/app/util/isServer';
 import { COOKIE_KEYS, SERVER_URL } from '@constant';
 
 export interface ErrorResponse {
@@ -11,8 +12,6 @@ export interface ErrorResponse {
 
 const isErrorResponse = (data: unknown): data is ErrorResponse =>
   typeof data === 'object' && data !== null && 'trackingId' in data;
-
-const isServer = () => typeof window === 'undefined';
 
 export async function customFetch<T>(
   url: string,
