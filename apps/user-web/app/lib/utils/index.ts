@@ -1,4 +1,4 @@
-export * from './device';
+export * from '../../../../../packages/shared-lib/src/utils/device';
 export * from './parser';
 export * from './validation';
 export { default as getRandomNickname } from './get-random-nickname';
