@@ -1,8 +1,8 @@
-type LineUpInfoResponse = {
+export type LineUpInfoResponse = {
   subId: string;
   title: string;
   description: string;
   performanceDate: string;
   lineUpImagePath: string;
-  isOpened: "BEFORE" | "PROCESS" | "CLOSED";
-}
+  isOpened: 'BEFORE' | 'PROCESS' | 'CLOSED';
+};
