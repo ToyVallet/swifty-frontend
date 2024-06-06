@@ -33,7 +33,7 @@ function CustomTable({ data, pageSize, total }: Props) {
   const handleTableChange = async (page: number, pageSize: number) => {
     setLoading(true);
     const data = await customFetch<UserApi>(
-      API_CLIENT.hosts(undefined, page - 1),
+      API_CLIENT.hosts(undefined, page - 1, pageSize),
     );
     setTableData(data.content);
     setPagination({
