@@ -1,8 +1,8 @@
 'use client';
 
-import { customFetch } from '@/app/api';
-import { User, UserApi } from '@/app/types/user';
-import { API_CLIENT } from '@/constant';
+import { customFetch } from '@api/index';
+import { API_CLIENT } from '@lib/constant/api';
+import { User, UserApi } from '@type/user';
 import { Table } from 'antd';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
@@ -14,7 +14,7 @@ interface Props {
 }
 
 function CustomTable({ data, pageSize, total }: Props) {
-  const columns = Object.keys(data[0])
+  const columns = Object.keys(data[0] ? data[0] : {})
     .map((name) => ({
       title: name.toUpperCase(),
       dataIndex: name,

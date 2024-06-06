@@ -6,7 +6,7 @@ export default function CardList({
   className,
   children,
 }: {
-  className: string;
+  className?: string;
   children: React.ReactNode;
 }) {
   return <ul className={clsx(styles.cardList, className)}>{children}</ul>;

@@ -1,7 +1,7 @@
-import { checkStatusForRefreshToken } from '@/app/api/check-status-for-RefreshToken';
-import { getCookieValue } from '@/app/lib/cookies';
-import { isServer } from '@/app/util/isServer';
-import { COOKIE_KEYS, SERVER_URL } from '@constant';
+import { checkStatusForRefreshToken } from '@api/check-status-for-RefreshToken';
+import { getCookieValue } from '@lib/cookies';
+import { isServer } from '@lib/util/isServer';
+import { COOKIE_KEYS, SERVER_URL } from '@swifty/shared-lib';
 
 export interface ErrorResponse {
   message: string;

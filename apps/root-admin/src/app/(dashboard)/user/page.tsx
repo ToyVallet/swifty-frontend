@@ -1,7 +1,7 @@
-import { customFetch } from '@/app/api';
-import { UserApi } from '@/app/types/user';
-import { API_CLIENT } from '@/constant';
 import { Table } from '@components/user';
+import { API_CLIENT } from '@lib/constant/api';
+import { customFetch } from '@swifty/shared-lib';
+import { UserApi } from '@type/user';
 
 import styles from './user.module.css';
 
