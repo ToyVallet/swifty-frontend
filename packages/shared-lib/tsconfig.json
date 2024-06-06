@@ -1,0 +1,4 @@
+{
+  "extends": "@swifty/typescript-config/base.json",
+  "compilerOptions": { "moduleResolution": "bundler", "module": "esnext" }
+}

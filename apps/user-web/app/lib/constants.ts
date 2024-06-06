@@ -1,13 +1,6 @@
-import { type FestivalDate } from '@/app/lib/mock/type';
 import { type User } from '@api/.';
 
 export const API_URL = process.env.NEXT_PUBLIC_API_URL as string;
-
-export const COOKIE_KEYS = {
-  accessToken: 'access-token',
-  refreshToken: 'refresh-token',
-  verified: 'danfesta-verified-student',
-} as const;
 
 export const API_ROUTES = {
   user: {

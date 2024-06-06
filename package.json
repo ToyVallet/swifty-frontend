@@ -3,16 +3,22 @@
   "private": true,
   "scripts": {
     "build": "turbo build",
-    "dev": "turbo dev",
-    "dev:root": "turbo dev --filter root-admin",
-    "dev:user": "turbo dev --filter user-web",
+    "dev": "dotenvx run -- turbo dev",
+    "dev:root": "dotenvx run -- turbo dev --filter root-admin",
+    "dev:user": "dotenvx run -- turbo dev --filter user-web",
     "lint": "turbo lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "test": "turbo test",
+    "test:watch": "turbo test:watch"
   },
   "devDependencies": {
     "@swifty/eslint-config": "*",
     "@swifty/typescript-config": "*",
+    "@types/jest": "^29.5.12",
+    "husky": "^7.0.2",
+    "jest": "^29.7.0",
     "prettier": "^3.2.5",
+    "ts-jest": "^29.1.4",
     "turbo": "latest"
   },
   "engines": {

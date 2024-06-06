@@ -1,7 +1,7 @@
 'use client';
 
 import { Link as IntlLink } from '@lib/navigation';
-import { cn } from '@lib/utils';
+import { cn } from '@swifty/shared-lib';
 import { ComponentProps, PropsWithChildren } from 'react';
 
 import Button, { ButtonProps } from './button';

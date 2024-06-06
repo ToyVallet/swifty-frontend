@@ -1,4 +1,4 @@
-import { Button } from '@/app/components/common';
+import { Button } from '@components/common';
 import '@testing-library/jest-dom';
 import { fireEvent, render, screen } from '@testing-library/react';
 

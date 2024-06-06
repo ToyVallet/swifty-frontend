@@ -1,6 +1,5 @@
-import { getLineupHero } from '@/app/[locale]/(root-nav)/action';
-import { Carousel, Footer, Hero, HeroTile } from '@/app/components/common';
-import { festivalLinupes } from '@/app/lib/mock/data';
+import { Carousel, Footer, Hero, HeroTile } from '@components/common';
+import { getLineupHero } from '@page/(root-nav)/action';
 import { PropsWithChildren } from 'react';
 
 export default async function RootNavLayout({ children }: PropsWithChildren) {

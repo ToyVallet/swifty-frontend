@@ -1,7 +1,7 @@
 'use client';
 
-import { cn } from '@/app/lib/utils';
 import * as AvatarPrimitive from '@radix-ui/react-avatar';
+import { cn } from '@swifty/shared-lib';
 import * as React from 'react';
 
 const Avatar = React.forwardRef<

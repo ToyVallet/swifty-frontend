@@ -1,3 +1,3 @@
-# `@turbo/eslint-config`
+# `@swifty/eslint-config`
 
-Collection of internal eslint configurations.
+eslint 세팅 입니다.
