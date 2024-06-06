@@ -1,5 +1,6 @@
-/** @type {import('tailwindcss').Config} */
-module.exports = {
+import { type Config } from 'tailwindcss';
+
+const config = {
   content: ['**/*.{js,jsx,ts,tsx}', '**/*/index.html'],
   theme: {
     container: {
@@ -66,4 +67,6 @@ module.exports = {
     require('tailwind-scrollbar-hide'),
     'prettier-plugin-tailwindcss',
   ],
-};
+} satisfies Config;
+
+export default config;

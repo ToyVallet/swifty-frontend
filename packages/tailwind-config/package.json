@@ -5,7 +5,8 @@
   "license": "MIT",
   "exports": {
     "./tailwind.config.js": "./tailwind.config.js",
-    "./postcss.config.js": "./postcss.config.js"
+    "./postcss.config.js": "./postcss.config.js",
+    "./index.css": "./index.css"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.19",

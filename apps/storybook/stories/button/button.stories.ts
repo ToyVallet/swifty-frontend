@@ -12,7 +12,10 @@ type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {
   args: {
-    appName: 'Button',
     children: 'I am a primary button.',
+    variant: 'default',
+    disabled: false,
+    type: 'button',
+    isLoading: false,
   },
 };
