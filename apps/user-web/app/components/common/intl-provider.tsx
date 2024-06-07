@@ -1,9 +1,10 @@
 'use client';
 
+import { NextIntlClientProvider, useLocale } from 'next-intl';
+import { type PropsWithChildren } from 'react';
+
 import en from '../../../messages/en.json';
 import ko from '../../../messages/ko.json';
-import { NextIntlClientProvider, useLocale } from 'next-intl';
-import { PropsWithChildren } from 'react';
 
 const messages = {
   en,

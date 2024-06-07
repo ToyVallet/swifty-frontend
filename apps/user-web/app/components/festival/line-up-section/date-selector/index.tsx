@@ -1,6 +1,6 @@
 'use client';
 
-import dayjs, { type Dayjs } from 'dayjs';
+import { type Dayjs } from 'dayjs';
 
 import DateBlock from './date-block';
 

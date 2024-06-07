@@ -2,9 +2,9 @@
 
 import { Link as IntlLink } from '@lib/navigation';
 import { cn } from '@swifty/shared-lib';
-import { ComponentProps, PropsWithChildren } from 'react';
+import type { ComponentProps, PropsWithChildren } from 'react';
 
-import Button, { ButtonProps } from './button';
+import Button, { type ButtonProps } from './button';
 
 type LinkProps = PropsWithChildren<{
   disabled?: boolean;

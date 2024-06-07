@@ -1,10 +1,17 @@
-import { Col, DatePicker, Form, Input, Row, TimePicker, DatePickerProps } from 'antd';
+import {
+  Col,
+  DatePicker,
+  DatePickerProps,
+  Form,
+  Input,
+  Row,
+  TimePicker,
+} from 'antd';
 
 export default function ConcertUpdateForm() {
-  const onChange: DatePickerProps['onChange'] = (date, dateString) => {
-  };
+  const onChange: DatePickerProps['onChange'] = (date, dateString) => {};
   return (
-    <Form layout="vertical" hideRequiredMark>
+    <Form layout="vertical">
       <Row gutter={16}>
         <Col span={12}>
           <Form.Item

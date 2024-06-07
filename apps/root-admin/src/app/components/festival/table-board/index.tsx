@@ -1,9 +1,17 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { Button, Table } from "antd";
-import { Tabs, DrawerButton, LineupCreateForm, LineupUpdateForm, StatusNotifier } from "@components/festival";
-import styles from "./table-board.module.css";
+import { ConcertsResponse } from '@app/types/concert';
+import {
+  DrawerButton,
+  LineupCreateForm,
+  LineupUpdateForm,
+  StatusNotifier,
+  Tabs,
+} from '@components/festival';
+import { Button, Table } from 'antd';
+import { useState } from 'react';
+
+import styles from './table-board.module.css';
 
 const columnsOfTable = [
   { title: 'Name', dataIndex: 'name', key: 'name' },
@@ -18,31 +26,41 @@ type TargetKey = React.MouseEvent | React.KeyboardEvent | string;
 
 export default function TableBoard({
   concertsInfo,
-}: { concertsInfo: ConcertsResponse[] }) {
+}: {
+  concertsInfo: ConcertsResponse[];
+}) {
   const defaultPanes = concertsInfo.map(({ subId, name }) => {
     return {
       label: name,
-      key: subId
+      key: subId,
     };
   });
-  const [activeKey, setActiveKey] = useState(defaultPanes[0].key);
+  const [activeKey, setActiveKey] = useState(defaultPanes[0]?.key);
   const [items, setItems] = useState(defaultPanes);
-  const activeConcertInfo = concertsInfo.filter(({ subId }) => subId === activeKey)[0];
-  const dataSource = activeConcertInfo.lineUpInfoResponses.map(({ subId, title, description, performanceDate, isOpened }) => ({
-    key: subId,
-    subId: subId,
-    name: title,
-    date: new Date(performanceDate).toLocaleDateString('ko-KR', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-      timeZone: 'Asia/Seoul'
+  const activeConcertInfo = concertsInfo.filter(
+    ({ subId }) => subId === activeKey,
+  )[0];
+  const dataSource = activeConcertInfo?.lineUpInfoResponses.map(
+    ({ subId, title, description, performanceDate, isOpened }) => ({
+      key: subId,
+      subId: subId,
+      name: title,
+      date: new Date(performanceDate).toLocaleDateString('ko-KR', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        timeZone: 'Asia/Seoul',
+      }),
+      description,
+      isopened: <StatusNotifier status={isOpened} />,
+      update: (
+        <DrawerButton variant="lineup-update">
+          <LineupUpdateForm />
+        </DrawerButton>
+      ),
+      delete: <Button>삭제</Button>,
     }),
-    description,
-    isopened: <StatusNotifier status={isOpened} />,
-    update: <DrawerButton variant="lineup-update"><LineupUpdateForm /></DrawerButton>,
-    delete: <Button>삭제</Button>,
-  }));
+  );
 
   const onChange = (key: string) => {
     setActiveKey(key);
@@ -56,14 +74,16 @@ export default function TableBoard({
     }
   };
 
-  const add = () => {
-  };
+  const add = () => {};
 
   const remove = (targetKey: TargetKey) => {
     const targetIndex = items.findIndex((pane) => pane.key === targetKey);
     const newPanes = items.filter((pane) => pane.key !== targetKey);
     if (newPanes.length && targetKey === activeKey) {
-      const { key } = newPanes[targetIndex === newPanes.length ? targetIndex - 1 : targetIndex];
+      const { key } =
+        newPanes[
+          targetIndex === newPanes.length ? targetIndex - 1 : targetIndex
+        ];
       setActiveKey(key);
     }
     setItems(newPanes);
@@ -76,10 +96,24 @@ export default function TableBoard({
         activeKey={activeKey}
         onChange={onChange}
         onEdit={onEdit}
-        concertInfo={activeConcertInfo}
+        concertInfo={
+          activeConcertInfo ?? {
+            subId: '',
+            name: '',
+            startDate: '',
+            endDate: '',
+            location: '',
+            description: '',
+            lineUpInfoResponses: [],
+            concertStatus: 'BEFORE',
+          }
+        }
       />
       <div className={styles.wrapper}>
-        <DrawerButton className={styles.lineupCreateButton} variant='lineup-create'>
+        <DrawerButton
+          className={styles.lineupCreateButton}
+          variant="lineup-create"
+        >
           <LineupCreateForm />
         </DrawerButton>
         <Table

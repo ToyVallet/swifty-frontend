@@ -2,10 +2,14 @@
 
 import { cn } from '@swifty/shared-lib';
 import { AnimatePresence, motion } from 'framer-motion';
-import { HTMLAttributes, type HTMLInputTypeAttribute, forwardRef } from 'react';
 import {
-  ChangeHandler,
-  RegisterOptions,
+  type HTMLAttributes,
+  type HTMLInputTypeAttribute,
+  forwardRef,
+} from 'react';
+import {
+  type ChangeHandler,
+  type RegisterOptions,
   useFormContext,
 } from 'react-hook-form';
 

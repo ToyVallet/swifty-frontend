@@ -1,3 +1,4 @@
+import type { ConcertsResponse } from '@app/types/concert';
 import {
   ConcertUpdateForm,
   DrawerButton,
@@ -5,10 +6,11 @@ import {
 } from '@components/festival';
 import formatDate from '@lib/util/formatDate';
 import { Button } from 'antd';
+import type { PropsWithChildren } from 'react';
 
 import styles from './card.module.css';
 
-export default function Card({ children }: { children: React.ReactNode }) {
+export default function Card({ children }: PropsWithChildren) {
   return <li className={styles.item}>{children}</li>;
 }
 function FestivalDescription({

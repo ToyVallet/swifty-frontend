@@ -2,7 +2,7 @@
 
 import { useRouter } from '@lib/navigation';
 import { cn } from '@swifty/shared-lib';
-import { PropsWithChildren } from 'react';
+import { type PropsWithChildren } from 'react';
 
 export default function BackButton({
   children,

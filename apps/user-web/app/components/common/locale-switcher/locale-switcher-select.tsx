@@ -9,7 +9,7 @@ import {
 import { usePathname, useRouter } from '@lib/navigation';
 import { useLocale } from 'next-intl';
 import { useParams } from 'next/navigation';
-import { ReactNode, useTransition } from 'react';
+import { type ReactNode, useTransition } from 'react';
 
 type Props = {
   children: ReactNode;
@@ -20,7 +20,6 @@ type Props = {
 export default function LocaleSwitcherSelect({
   children,
   defaultValue,
-  label,
 }: Props) {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();

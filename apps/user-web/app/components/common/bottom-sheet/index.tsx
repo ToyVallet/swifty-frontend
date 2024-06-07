@@ -4,15 +4,15 @@ import { cn } from '@swifty/shared-lib';
 import clsx from 'clsx';
 import {
   AnimatePresence,
-  PanInfo,
+  type PanInfo,
   motion,
   useDragControls,
 } from 'framer-motion';
-import { PointerEvent, useEffect, useState } from 'react';
+import { type PointerEvent, useEffect, useState } from 'react';
 
 import Overlay from '../overlay';
 import { transition, variants } from './motion';
-import { Height } from './types';
+import { type Height } from './types';
 
 export interface BottomSheetProps extends React.HTMLAttributes<HTMLDivElement> {
   isOpen: boolean;

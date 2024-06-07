@@ -1,4 +1,4 @@
-import { FestivalInfo } from '@/app/lib/types';
+import type { FestivalInfo } from '@lib/types';
 
 export const festivalLinupes: FestivalInfo[] = [
   {

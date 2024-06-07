@@ -26,7 +26,7 @@
         ".env.development",
         ".env"
       ],
-      "env": ["SERVER_URL"],
+      "env": ["SERVER_URL", "NEXT_PUBLIC_API_URL"],
       "cache": false,
       "persistent": true
     },

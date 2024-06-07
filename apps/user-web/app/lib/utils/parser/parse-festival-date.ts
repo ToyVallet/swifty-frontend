@@ -1,4 +1,4 @@
-import { FestivalDate } from '@/app/lib/mock/type';
+import type { FestivalDate } from '@lib/mock/type';
 
 export default function parseFestivalDate(date: FestivalDate): number {
   switch (date) {

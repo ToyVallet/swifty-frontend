@@ -1,9 +1,9 @@
 'use client';
 
-import { AuthTokens, User, post } from '@api/.';
+import { type AuthTokens, type User, post } from '@api/.';
 import { API_ROUTES, API_URL } from '@lib/constants';
 import { useRouter } from '@lib/navigation';
-import { AuthInfoSchema } from '@lib/schema/schema';
+import { type AuthInfoSchema } from '@lib/schema/schema';
 import { APIError } from '@lib/utils/validation';
 import useAuthStore from '@store/auth-store';
 import { COOKIE_KEYS } from '@swifty/shared-lib';

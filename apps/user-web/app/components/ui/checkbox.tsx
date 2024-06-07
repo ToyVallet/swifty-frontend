@@ -2,7 +2,6 @@
 
 import * as CheckboxPrimitive from '@radix-ui/react-checkbox';
 import { cn } from '@swifty/shared-lib';
-import { Check } from 'lucide-react';
 import * as React from 'react';
 
 import { AnimatedCheck } from '../common';

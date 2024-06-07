@@ -2,7 +2,7 @@
 
 import { IntlProvider } from '@components/common';
 import { cn } from '@swifty/shared-lib';
-import { EmblaOptionsType } from 'embla-carousel';
+import { type EmblaOptionsType } from 'embla-carousel';
 import Autoplay from 'embla-carousel-autoplay';
 import useEmblaCarousel from 'embla-carousel-react';
 import { useEffect, useState } from 'react';

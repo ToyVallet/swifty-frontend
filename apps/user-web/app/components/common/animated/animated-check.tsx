@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 
-import { AnimatedIconProps } from './types';
+import { type AnimatedIconProps } from './types';
 
 export default function AnimatedCheck({
   size = 258,

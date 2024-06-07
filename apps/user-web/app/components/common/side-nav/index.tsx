@@ -1,12 +1,10 @@
 import { Separator } from '@components/ui/separator';
 import { Sheet, SheetContent, SheetTrigger } from '@components/ui/sheet';
 import { getTranslations } from 'next-intl/server';
-import { getLocale } from 'next-intl/server';
 import { IoIosMenu } from 'react-icons/io';
 
 import Button from '../button';
 import IntlProvider from '../intl-provider';
-import LocaleSwitcher from '../locale-switcher';
 import AuthGroup from './auth-group';
 import NavLink from './nav-link';
 
@@ -48,7 +46,6 @@ const links: LinkInfo[] = [
 ];
 
 export default async function SideNav() {
-  const locale = await getLocale();
   const t = await getTranslations('SideNav');
 
   const className =
@@ -81,9 +78,6 @@ export default async function SideNav() {
             ))}
           </ul>
         </div>
-        {/* <IntlProvider>
-          <LocaleSwitcher />
-        </IntlProvider> */}
       </SheetContent>
     </Sheet>
   );

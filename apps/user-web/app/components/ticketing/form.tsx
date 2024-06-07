@@ -1,9 +1,9 @@
 'use client';
 
-import { post } from '@/app/api';
-import { API_ROUTES } from '@/app/lib/constants';
-import { APIError, CustomError, ErrorCause } from '@/app/lib/utils/validation';
+import { post } from '@app/api';
 import { useClientSideToken } from '@app/hooks';
+import { API_ROUTES } from '@lib/constants';
+import { type APIError, CustomError, ErrorCause } from '@lib/utils/validation';
 import { useLocale } from 'next-intl';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';

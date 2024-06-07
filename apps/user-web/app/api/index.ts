@@ -1,5 +1,5 @@
-import { API_ROUTES, API_URL } from '@lib/constants';
-import { DeepValueOf } from '@lib/types';
+import { type API_ROUTES, API_URL } from '@lib/constants';
+import { type DeepValueOf } from '@lib/types';
 import { APIError, type APIErrorResponse } from '@lib/utils/validation';
 
 type APIOptions = {

@@ -4,6 +4,7 @@ import React, { useRef } from 'react';
 import { Tabs as AntdTabs, TabsProps } from 'antd';
 import { DrawerButton, ConcertCreateForm, Card } from '@components/festival';
 import styles from './tabs.module.css';
+import { ConcertsResponse } from '@app/types/concert';
 
 export default function Tabs({
   concertInfo,

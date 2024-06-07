@@ -1,7 +1,7 @@
 import { ImageWithFallback, Link } from '@components/common';
-import { FestivalInfo } from '@lib/types';
-import dayjs from 'dayjs';
 import FallbackFestival from '@images/fallback-festival.png';
+import { type FestivalInfo } from '@lib/types';
+import dayjs from 'dayjs';
 
 export default function Tile({
   id,
