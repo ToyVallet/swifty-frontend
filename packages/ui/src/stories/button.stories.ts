@@ -32,7 +32,7 @@ const meta = {
       control: {
         type: 'select',
       },
-      options: ['default', 'outline', 'destructive'],
+      options: ['default', 'white', 'destructive'],
       description: '버튼의 스타일을 설정합니다.',
     },
     isLoading: {

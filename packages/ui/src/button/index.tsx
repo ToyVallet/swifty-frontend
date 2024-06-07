@@ -17,7 +17,7 @@ const buttonVariants = cva(
         default: 'bg-primary text-primary-foreground hover:bg-primary/90',
         destructive:
           'bg-destructive text-destructive-foreground hover:bg-destructive/90',
-        white: 'bg-white hover:bg-accent hover:text-accent-foreground',
+        white: 'bg-white',
         ghost: 'hover:bg-accent hover:text-accent-foreground',
       },
       size: {
@@ -50,14 +50,18 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps & MotionProps>(
       return (
         <button
           className={cn(
-            'relative',
             buttonVariants({ variant, size, className }),
+            'pointer-events-none opacity-50',
           )}
           disabled
           ref={ref}
           {...props}
         >
-          <PulseLoader role="status" size={8} color="#f0f0f0" />
+          <PulseLoader
+            role="status"
+            size={8}
+            color={variant === 'white' ? '#A2A2A7' : '#f0f0f0'}
+          />
         </button>
       );
     }
