@@ -3,14 +3,15 @@
 import { cn } from '@swifty/shared-lib';
 import { cva } from 'class-variance-authority';
 import { MotionProps, motion } from 'framer-motion';
+import React from 'react';
 import { useFormContext } from 'react-hook-form';
 import PulseLoader from 'react-spinners/PulseLoader';
 
-import '../../global.css';
+import '../tailwind.css';
 
 export type ButtonProps = MotionProps & {
   className?: string;
-  children: React.ReactNode;
+  label: string;
   onClick?: () => void;
   isLoading?: boolean;
   type?: 'submit' | 'reset' | 'button';
@@ -46,7 +47,7 @@ export const buttonVariants = cva(
 
 export default function Button({
   className,
-  children,
+  label,
   variant = 'default',
   type = 'button',
   onClick,
@@ -90,7 +91,7 @@ export default function Button({
       {isLoading ? (
         <PulseLoader role="status" size={8} color="#f0f0f0" />
       ) : (
-        children
+        label
       )}
     </motion.button>
   );
