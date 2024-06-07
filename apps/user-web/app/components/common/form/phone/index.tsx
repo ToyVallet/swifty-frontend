@@ -3,8 +3,7 @@
 import { post } from '@app/api';
 import { useBottomSheet } from '@app/hooks';
 import { API_ROUTES } from '@lib/constants';
-import { useRouter } from '@lib/navigation';
-import { useLocale } from 'next-intl';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { toast } from 'sonner';
 import { z } from 'zod';
@@ -40,7 +39,6 @@ export default function Phone({ type, token: tokenParam }: PhoneProps) {
   const [loading, setLoading] = useState(false);
 
   const router = useRouter();
-  const locale = useLocale();
 
   const handlePhoneNumberSubmit = async ({
     phoneNumber,

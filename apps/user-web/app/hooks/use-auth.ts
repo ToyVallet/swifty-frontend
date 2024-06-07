@@ -2,13 +2,13 @@
 
 import { type AuthTokens, type User, post } from '@api/.';
 import { API_ROUTES, API_URL } from '@lib/constants';
-import { useRouter } from '@lib/navigation';
 import { type AuthInfoSchema } from '@lib/schema/schema';
 import { APIError } from '@lib/utils/validation';
 import useAuthStore from '@store/auth-store';
 import { COOKIE_KEYS } from '@swifty/shared-lib';
 import { deleteCookie, setCookie } from 'cookies-next';
 import { useCookies } from 'next-client-cookies';
+import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import { toast } from 'sonner';
 

@@ -29,6 +29,9 @@ module.exports = {
       },
       colors: {
         primary: '#1967FF',
+        'primary-foreground': '#FFFFFF',
+        destructive: '#FF004D',
+        'destructive-foreground': '#FFFFFF',
       },
       fontFamily: {
         Pretendard: ['Pretendard', 'sans-serif'],

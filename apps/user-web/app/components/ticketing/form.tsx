@@ -4,7 +4,6 @@ import { post } from '@app/api';
 import { useClientSideToken } from '@app/hooks';
 import { API_ROUTES } from '@lib/constants';
 import { type APIError, CustomError, ErrorCause } from '@lib/utils/validation';
-import { useLocale } from 'next-intl';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
 import { z } from 'zod';
@@ -28,7 +27,6 @@ export default function TicketingForm({
   captchaKey,
 }: Omit<TicketApplyRequest, 'captchaValue'>) {
   const router = useRouter();
-  const locale = useLocale();
   const token = useClientSideToken();
 
   const handleSubmit = async (v: Schema) => {
@@ -45,7 +43,7 @@ export default function TicketingForm({
       });
 
       toast.success('신청이 완료되었습니다.');
-      router.push(`/${locale}/ticketing/${eventId}/result`);
+      router.push(`/ticketing/${eventId}/result`);
     } catch (error) {
       const e = error as APIError;
       console.error(e);

@@ -10,7 +10,8 @@
     "dev": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "lint": "eslint . --max-warnings 0",
-    "generate:component": "turbo gen react-component"
+    "generate:component": "turbo gen react-component",
+    "chromatic": "npx chromatic --project-token=chpt_fb751b3caf36885"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^1.5.0",
@@ -36,21 +37,26 @@
     "@types/react": "^18.2.61",
     "@types/react-dom": "^18.2.19",
     "autoprefixer": "^10.4.19",
+    "chromatic": "^11.5.3",
     "eslint": "^8.57.0",
     "eslint-plugin-storybook": "^0.8.0",
     "husky": "^9.0.11",
     "postcss": "^8.4.38",
     "react": "^18.2.0",
     "storybook": "^8.1.6",
+    "storybook-dark-mode": "^4.0.1",
     "tailwind-scrollbar-hide": "^1.1.7",
     "tailwindcss": "^3.4.4",
     "tailwindcss-animate": "^1.0.7",
     "typescript": "^5.4.5"
   },
   "dependencies": {
+    "@radix-ui/react-slot": "^1.0.2",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "lucide-react": "^0.390.0",
+    "next": "^14.2.3",
+    "react-dom": "^18.3.1",
     "react-spinners": "^0.13.8",
     "tailwind-merge": "^2.3.0",
     "tailwindcss-animate": "^1.0.7"

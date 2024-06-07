@@ -8,7 +8,6 @@ export { default as Footer } from './footer';
 export { default as Carousel } from './carousel';
 export { default as FloatingTicket } from './floating-ticket';
 export * from './form';
-export { default as IntlProvider } from './intl-provider';
 export * from './animated';
 export { default as BackButton } from './back-button';
 export { default as Hero } from './hero';

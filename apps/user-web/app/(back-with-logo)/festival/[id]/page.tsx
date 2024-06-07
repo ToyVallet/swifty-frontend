@@ -1,11 +1,18 @@
-import { Hero, ImageWithFallback, MenuTiles, TileHeader, TileInfo } from '@components/common';
+import type {
+  TileInfo} from '@components/common';
+import {
+  Hero,
+  ImageWithFallback,
+  MenuTiles,
+  TileHeader
+} from '@components/common';
 import FadeOverlay from '@components/common/carousel/fade-overlay';
 import { LineUpSection, TopCard } from '@components/festival';
+import FallbackHero from '@images/fallback-hero.png';
 import type { Locale, Params } from '@lib/types';
 import formatDate from '@lib/utils/parser/format-date';
 import { BsBellFill } from 'react-icons/bs';
 import { TiStarFullOutline } from 'react-icons/ti';
-import FallbackHero from '@images/fallback-hero.png';
 
 import { getFestivalInfos, getLineups } from './action';
 

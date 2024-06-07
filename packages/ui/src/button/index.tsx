@@ -1,42 +1,31 @@
 'use client';
 
+import { Slot } from '@radix-ui/react-slot';
 import { cn } from '@swifty/shared-lib';
-import { cva } from 'class-variance-authority';
-import { MotionProps, motion } from 'framer-motion';
+import { type VariantProps, cva } from 'class-variance-authority';
+import { type MotionProps, motion } from 'framer-motion';
 import React from 'react';
-import { useFormContext } from 'react-hook-form';
 import PulseLoader from 'react-spinners/PulseLoader';
 
 import { transition } from '../lib';
-import '../tailwind.css';
 
-export type ButtonProps = MotionProps & {
-  className?: string;
-  label: string;
-  onClick?: () => void;
-  isLoading?: boolean;
-  type?: 'submit' | 'reset' | 'button';
-  disabled?: boolean;
-  variant?: 'default' | 'outlined' | 'transparent' | 'bottom';
-};
-
-export const buttonVariants = cva(
-  'inline-flex items-center justify-center whitespace-nowrap rounded-md font-bold ring-offset-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-950 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
+const buttonVariants = cva(
+  'inline-flex items-center justify-center whitespace-nowrap rounded-[12px] h-[50px] font-bold ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 transition-colors duration-200 ease-in-out user-select-none',
   {
     variants: {
       variant: {
-        default: 'bg-primary text-neutral-50',
-        outlined: 'border border-primary',
-        transparent:
-          'text-neutral-500 dark:text-neutral-500 bg-white dark:bg-[#0C0C0C] dark:active:bg-[#1C1C1C]',
-        bottom:
-          'absolute bottom-5 mx-auto w-[calc(100%-2.5rem)] bg-primary text-neutral-50',
+        default: 'bg-primary text-primary-foreground hover:bg-primary/90',
+        destructive:
+          'bg-destructive text-destructive-foreground hover:bg-destructive/90',
+        white: 'bg-white hover:bg-accent hover:text-accent-foreground',
+        ghost: 'hover:bg-accent hover:text-accent-foreground',
       },
       size: {
-        default: 'h-[50px] px-4 py-2',
-        sm: 'h-9 rounded-md px-3',
-        lg: 'h-11 rounded-md px-8',
-        icon: 'h-[50px] w-[50px]',
+        default: 'px-4 py-[13px]',
+        sm: 'h-9 px-3',
+        lg: 'h-11 px-8',
+        icon: 'h-10 w-10',
+        full: 'w-full',
       },
     },
     defaultVariants: {
@@ -46,49 +35,49 @@ export const buttonVariants = cva(
   },
 );
 
-export default function Button({
-  className,
-  label,
-  variant = 'default',
-  type = 'button',
-  onClick,
-  isLoading = false,
-  disabled,
-}: ButtonProps) {
-  const { formState } = useFormContext() ?? {};
-  const isDisabled =
-    type === 'submit'
-      ? formState?.isSubmitting || !formState?.isValid || disabled || isLoading
-      : disabled || isLoading;
-
-  return (
-    <motion.button
-      type={type}
-      onClick={onClick}
-      disabled={isDisabled}
-      className={cn(buttonVariants({ variant }), className)}
-      initial={{
-        scale: 1,
-        background: '',
-        filter: 'brightness(1)',
-      }}
-      whileTap={{
-        scale: 0.99,
-        background: variant === 'outlined' ? '#FEFEFE' : '',
-        color: variant === 'outlined' ? '#000' : '',
-        filter: 'brightness(0.9)',
-      }}
-      whileHover={{
-        background: variant === 'outlined' ? '#FEFEFE' : '',
-        color: variant === 'outlined' ? '#000' : '',
-      }}
-      transition={transition}
-    >
-      {isLoading ? (
-        <PulseLoader role="status" size={8} color="#f0f0f0" />
-      ) : (
-        label
-      )}
-    </motion.button>
-  );
+export interface ButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+    VariantProps<typeof buttonVariants> {
+  asChild?: boolean;
+  isLoading?: boolean;
 }
+
+const Button = React.forwardRef<HTMLButtonElement, ButtonProps & MotionProps>(
+  (
+    { className, variant, size, asChild = false, isLoading = false, ...props },
+    ref,
+  ) => {
+    if (isLoading) {
+      return (
+        <button
+          className={cn(
+            'relative',
+            buttonVariants({ variant, size, className }),
+          )}
+          disabled
+          ref={ref}
+          {...props}
+        >
+          <PulseLoader role="status" size={8} color="#f0f0f0" />
+        </button>
+      );
+    }
+
+    const Comp = asChild ? Slot : 'button';
+    const C = motion(Comp);
+    return (
+      <C
+        whileTap={{ scale: 0.98 }}
+        transition={transition}
+        className={cn(buttonVariants({ variant, size, className }))}
+        ref={ref}
+        {...props}
+      />
+    );
+  },
+);
+
+Button.displayName = 'Button';
+
+export default Button;
+export { buttonVariants };

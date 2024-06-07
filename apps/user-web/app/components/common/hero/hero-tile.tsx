@@ -1,8 +1,8 @@
 import { ImageWithFallback } from '@components/common';
 import FallbackHero from '@images/fallback-hero.png';
-import { Link } from '@lib/navigation';
 import type { FestivalInfo } from '@lib/types';
 import formatDate from '@lib/utils/parser/format-date';
+import { Link } from 'next/navigation';
 
 export default function HeroTile({
   id,
