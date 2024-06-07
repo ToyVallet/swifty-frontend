@@ -39,3 +39,4 @@ yarn-error.log*
 # yarn
 .yarn/*
 apps/root-admin/.yarn/*
+storybook-static

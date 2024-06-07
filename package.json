@@ -3,6 +3,7 @@
   "private": true,
   "scripts": {
     "build": "turbo build",
+    "build:storybook": "turbo build:storybook",
     "dev": "turbo dev",
     "dev:root": "turbo dev --filter root-admin",
     "dev:user": "turbo dev --filter user-web",

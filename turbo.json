@@ -9,11 +9,16 @@
         ".env.production.local",
         ".env.local",
         ".env.production",
-        ".env"
+        ".env",
+        "!**/*.stories.{js,jsx,ts,tsx,mdx}"
       ],
       "env": ["SERVER_URL"],
       "dependsOn": ["^build"],
       "outputs": [".next/**", "!.next/cache/**"]
+    },
+    "build:storybook": {
+      "dependsOn": ["^build:storybook"],
+      "outputs": ["storybook-static/**"]
     },
     "lint": {
       "dependsOn": ["^lint"]

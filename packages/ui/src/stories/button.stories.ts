@@ -25,7 +25,7 @@ const meta = {
       control: {
         type: 'select',
       },
-      options: ['default', 'sm', 'lg', 'icon', 'full'],
+      options: ['default', 'sm', 'lg', 'full'],
       description: '버튼의 크기를 설정합니다.',
     },
     variant: {
