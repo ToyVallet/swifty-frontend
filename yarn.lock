@@ -22116,6 +22116,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "swifty-frontend@workspace:."
   dependencies:
+    "@jest/globals": "npm:^29.7.0"
     "@swifty/eslint-config": "npm:*"
     "@swifty/typescript-config": "npm:*"
     "@types/jest": "npm:^29.5.12"

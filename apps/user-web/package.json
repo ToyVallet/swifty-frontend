@@ -9,9 +9,6 @@
     "analyze": "ANALYZE=true yarn build",
     "start": "next start",
     "lint": "next lint",
-    "test:all": "jest",
-    "test:unit": "jest --watch",
-    "test:e2e": "playwright test",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "chromatic": "npx chromatic --project-token=chpt_bdb293785f1f209"
