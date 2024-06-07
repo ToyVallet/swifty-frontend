@@ -17,7 +17,14 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     variant: 'default',
-    label: '버튼 1',
+    label: '기본 버튼',
+  },
+};
+
+export const Outlined: Story = {
+  args: {
+    variant: 'outlined',
+    label: '아웃라인 버튼',
   },
 };
 

@@ -7,6 +7,7 @@ import React from 'react';
 import { useFormContext } from 'react-hook-form';
 import PulseLoader from 'react-spinners/PulseLoader';
 
+import { transition } from '../lib';
 import '../tailwind.css';
 
 export type ButtonProps = MotionProps & {
@@ -81,12 +82,7 @@ export default function Button({
         background: variant === 'outlined' ? '#FEFEFE' : '',
         color: variant === 'outlined' ? '#000' : '',
       }}
-      transition={{
-        type: 'spring',
-        stiffness: 250,
-        damping: 20,
-        duration: 0.01,
-      }}
+      transition={transition}
     >
       {isLoading ? (
         <PulseLoader role="status" size={8} color="#f0f0f0" />

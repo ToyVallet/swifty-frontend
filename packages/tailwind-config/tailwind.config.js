@@ -28,9 +28,7 @@ module.exports = {
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
       colors: {
-        primary: '#0073E5',
-        secondary: '#DD2DE7',
-        ternary: '#00E7E7',
+        primary: '#1967FF',
       },
       fontFamily: {
         Pretendard: ['Pretendard', 'sans-serif'],

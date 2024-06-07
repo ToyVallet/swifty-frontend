@@ -1,3 +1,3 @@
-import config from '@swifty/tailwind-config/postcss.config.ts';
+import config from '@swifty/tailwind-config/postcss.config.js';
 
 export default config;
