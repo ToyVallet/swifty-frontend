@@ -14,6 +14,7 @@
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^1.5.0",
+    "@emotion/is-prop-valid": "^1.2.2",
     "@storybook/addon-essentials": "^8.1.6",
     "@storybook/addon-interactions": "^8.1.6",
     "@storybook/addon-links": "^8.1.6",
@@ -47,6 +48,11 @@
     "typescript": "^5.4.5"
   },
   "dependencies": {
-    "react-spinners": "^0.13.8"
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.1",
+    "lucide-react": "^0.390.0",
+    "react-spinners": "^0.13.8",
+    "tailwind-merge": "^2.3.0",
+    "tailwindcss-animate": "^1.0.7"
   }
 }
