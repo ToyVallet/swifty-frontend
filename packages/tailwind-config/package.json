@@ -4,9 +4,8 @@
   "author": "이호연",
   "license": "MIT",
   "exports": {
-    "./tailwind.config.js": "./tailwind.config.js",
-    "./postcss.config.js": "./postcss.config.js",
-    "./index.css": "./index.css"
+    "./tailwind.config.ts": "./tailwind.config.ts",
+    "./postcss.config.ts": "./postcss.config.ts"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.19",

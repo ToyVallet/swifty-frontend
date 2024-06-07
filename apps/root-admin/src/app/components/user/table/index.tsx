@@ -1,8 +1,8 @@
 'use client';
 
-import { customFetch } from '@api/index';
 import { API_CLIENT } from '@lib/constant/api';
-import { User, UserApi } from '@type/user';
+import { customFetch } from '@swifty/shared-lib';
+import type { User, UserApi } from '@type/user';
 import { Table } from 'antd';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';

@@ -1,6 +1,6 @@
 import config from './tailwind.config';
 
-module.exports = {
+export default {
   plugins: {
     'tailwindcss/nesting': 'postcss-nesting',
     tailwindcss: { config },
