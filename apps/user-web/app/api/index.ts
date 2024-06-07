@@ -1,5 +1,5 @@
-import { API_ROUTES, API_URL } from '@lib/constants';
-import { DeepValueOf } from '@lib/types';
+import { type API_ROUTES, API_URL } from '@lib/constants';
+import { type DeepValueOf } from '@lib/types';
 import { APIError, type APIErrorResponse } from '@lib/utils/validation';
 
 type APIOptions = {
@@ -90,5 +90,4 @@ export async function getImage(path: string, options?: APIOptions) {
 export { default as getServerSideToken } from './get-server-side-token';
 
 export * from './response';
-export { default as getIsVerified } from './get-is-verified';
 export { default as getIsLoggedIn } from './get-is-logged-in';

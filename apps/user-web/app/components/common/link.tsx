@@ -1,10 +1,10 @@
 'use client';
 
-import { Link as IntlLink } from '@lib/navigation';
 import { cn } from '@swifty/shared-lib';
-import { ComponentProps, PropsWithChildren } from 'react';
+import { default as NextLink } from 'next/link';
+import type { ComponentProps, PropsWithChildren } from 'react';
 
-import Button, { ButtonProps } from './button';
+import Button, { type ButtonProps } from './button';
 
 type LinkProps = PropsWithChildren<{
   disabled?: boolean;
@@ -12,7 +12,7 @@ type LinkProps = PropsWithChildren<{
   className?: string;
   href: string | { pathname: string; query: Record<string, string> };
 }> &
-  Omit<ComponentProps<typeof IntlLink>, 'href'>;
+  Omit<ComponentProps<typeof NextLink>, 'href'>;
 
 export default function Link({
   children,
@@ -23,7 +23,7 @@ export default function Link({
   ...props
 }: LinkProps) {
   return variant === 'text' ? (
-    <IntlLink
+    <NextLink
       href={href}
       className={cn(
         'w-full h-full flex justify-center items-center',
@@ -31,16 +31,16 @@ export default function Link({
       )}
     >
       {children}
-    </IntlLink>
+    </NextLink>
   ) : (
     <Button variant={variant} disabled={disabled} className={className}>
-      <IntlLink
+      <NextLink
         href={href}
         className="w-full h-full flex justify-center items-center"
         scroll={props.scroll}
       >
         {children}
-      </IntlLink>
+      </NextLink>
     </Button>
   );
 }

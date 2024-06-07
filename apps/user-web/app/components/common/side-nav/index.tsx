@@ -1,12 +1,8 @@
 import { Separator } from '@components/ui/separator';
 import { Sheet, SheetContent, SheetTrigger } from '@components/ui/sheet';
-import { getTranslations } from 'next-intl/server';
-import { getLocale } from 'next-intl/server';
 import { IoIosMenu } from 'react-icons/io';
 
 import Button from '../button';
-import IntlProvider from '../intl-provider';
-import LocaleSwitcher from '../locale-switcher';
 import AuthGroup from './auth-group';
 import NavLink from './nav-link';
 
@@ -48,9 +44,6 @@ const links: LinkInfo[] = [
 ];
 
 export default async function SideNav() {
-  const locale = await getLocale();
-  const t = await getTranslations('SideNav');
-
   const className =
     'text-neutral-400 flex items-center justify-end gap-2 w-full text-end py-3 px-4 rounded-lg active:scale-[0.98] active:dark:bg-neutral-800 active:bg-neutral-200 transition-all duration-200 ease-in-out';
 
@@ -64,9 +57,8 @@ export default async function SideNav() {
 
       <SheetContent className="bg-white dark:bg-[#0C0C0C] dark:border-[#181818] flex flex-col justify-between">
         <div className="flex flex-col items-end gap-4">
-          <IntlProvider>
-            <AuthGroup className={className} />
-          </IntlProvider>
+          <AuthGroup className={className} />
+
           <Separator />
           <ul className="flex flex-col items-end gap-1 w-full">
             {links.map((link) => (
@@ -76,14 +68,11 @@ export default async function SideNav() {
                 link={link.link}
                 privateRoute={link.privateRoute}
               >
-                {t(link.nameKey)}
+                {link.nameKey}
               </NavLink>
             ))}
           </ul>
         </div>
-        {/* <IntlProvider>
-          <LocaleSwitcher />
-        </IntlProvider> */}
       </SheetContent>
     </Sheet>
   );

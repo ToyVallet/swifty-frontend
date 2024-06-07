@@ -5,11 +5,3 @@ export type DeepValueOf<T> = T extends object
   : T;
 
 export type NonEmptyArray<T> = [T, ...T[]];
-
-export type Params<P extends Record<string, any>> = {
-  params: P;
-};
-
-export type SearchParams<P extends Record<string, any>> = {
-  searchParams: P;
-};

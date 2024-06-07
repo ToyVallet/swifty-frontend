@@ -1,4 +1,4 @@
-import { User } from '@/app/api';
+import type { User } from '@app/api';
 import { create } from 'zustand';
 
 type AuthStore = {

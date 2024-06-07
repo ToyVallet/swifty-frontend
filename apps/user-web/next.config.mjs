@@ -1,11 +1,8 @@
 import withBundleAnalyzer from '@next/bundle-analyzer';
 import withPlaiceholder from '@plaiceholder/next';
-import createNextIntlPlugin from 'next-intl/plugin';
 import withPWA from 'next-pwa';
 
 const prod = process.env.NODE_ENV === 'production';
-
-const withNextIntl = createNextIntlPlugin('./i18n.ts');
 
 const withPWAConfig = withPWA({
   dest: 'public',
@@ -51,19 +48,17 @@ const nextConfig = {
 };
 
 export default withBundleAnalyzerConfig(
-  withPWAConfig(
-    withNextIntl(withPlaiceholder(nextConfig)),
-    {
-      silent: true,
-      org: 'danfesta',
-      project: 'javascript-nextjs',
-    },
-    {
-      widenClientFileUpload: true,
-      tunnelRoute: '/monitoring',
-      hideSourceMaps: true,
-      disableLogger: true,
-      automaticVercelMonitors: true,
-    },
-  ),
+  withPWAConfig(withPlaiceholder(nextConfig)),
+  {
+    silent: true,
+    org: 'danfesta',
+    project: 'javascript-nextjs',
+  },
+  {
+    widenClientFileUpload: true,
+    tunnelRoute: '/monitoring',
+    hideSourceMaps: true,
+    disableLogger: true,
+    automaticVercelMonitors: true,
+  },
 );

@@ -35,6 +35,8 @@ yarn-error.log*
 .DS_Store
 *.pem
 
+*storybook.log
 # yarn
 .yarn/*
 apps/root-admin/.yarn/*
+storybook-static

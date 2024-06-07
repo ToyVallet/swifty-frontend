@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import React, { useState } from 'react';
 import { PlusOutlined } from '@ant-design/icons';
-import { Image, Upload as AntdUpload } from 'antd';
+import { Upload as AntdUpload, Image } from 'antd';
 import type { GetProp, UploadFile, UploadProps } from 'antd';
+import React, { useState } from 'react';
 
 type FileType = Parameters<GetProp<UploadProps, 'beforeUpload'>>[0];
 
@@ -15,7 +15,7 @@ const getBase64 = (file: FileType): Promise<string> =>
     reader.onerror = (error) => reject(error);
   });
 
-export default function Upload({ }) {
+export default function Upload() {
   const [previewOpen, setPreviewOpen] = useState(false);
   const [previewImage, setPreviewImage] = useState('');
   const [fileList, setFileList] = useState<UploadFile[]>([]);
@@ -61,4 +61,4 @@ export default function Upload({ }) {
       )}
     </>
   );
-};
+}

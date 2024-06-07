@@ -1,6 +1,6 @@
 'use server';
 
-import { FestivalDetailResponse } from '@type/festival';
+import type { FestivalDetailResponse } from '@type/festival';
 
 export const dynamic = 'force-dynamic';
 

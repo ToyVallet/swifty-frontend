@@ -2,7 +2,7 @@
 
 import { cn } from '@swifty/shared-lib';
 import { cva } from 'class-variance-authority';
-import { MotionProps, motion } from 'framer-motion';
+import { type MotionProps, motion } from 'framer-motion';
 import { useFormContext } from 'react-hook-form';
 import PulseLoader from 'react-spinners/PulseLoader';
 

@@ -16,7 +16,6 @@ type APIStatusCode = 400 | 401 | 403 | 404 | 409 | 410 | 429 | 500 | 503 | 504;
 
 // Define the structure of an error
 interface IError extends Error {
-  readonly name: string;
   readonly timestamp: Date;
   readonly trackingId: string;
   readonly statusCode: APIStatusCode;
@@ -54,7 +53,7 @@ export default class APIError {
     code,
     message,
   }: IError) {
-    this.name = name;
+    this.name = name ?? 'APIError';
     this.timestamp = new Date(timestamp);
     this.trackingId = trackingId;
     this.statusCode = statusCode;

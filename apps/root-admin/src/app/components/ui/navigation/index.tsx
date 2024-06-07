@@ -6,28 +6,23 @@ import {
   UploadOutlined,
   UserOutlined,
 } from '@ant-design/icons';
+import { Logo } from '@components/ui';
 import { Button, Layout, Menu, theme } from 'antd';
 import Link from 'next/link';
-import React, { PropsWithChildren, useState } from 'react';
-import { Logo } from '@components/ui';
+import React, { type PropsWithChildren, useState } from 'react';
+
 import styles from './navigation.module.css';
 
 const { Header, Sider, Content } = Layout;
 
-export default function Navigation({
-  children
-}: PropsWithChildren) {
+export default function Navigation({ children }: PropsWithChildren) {
   const [collapsed, setCollapsed] = useState(false);
   const {
-    token: {
-      colorBgContainer,
-    },
+    token: { colorBgContainer },
   } = theme.useToken();
 
   return (
-    <Layout
-      className={styles.navigation}
-    >
+    <Layout className={styles.navigation}>
       <Sider
         className={styles.sider}
         trigger={null}
@@ -38,7 +33,7 @@ export default function Navigation({
         <div className="demo-logo-vertical" />
         <Menu
           style={{
-            borderInlineEnd: 'none'
+            borderInlineEnd: 'none',
           }}
           mode="inline"
           defaultSelectedKeys={['1']}
@@ -61,20 +56,15 @@ export default function Navigation({
         />
       </Sider>
       <Layout>
-        <Header
-          className={styles.header}
-          style={{ background: '#F8F8F8' }}
-        >
+        <Header className={styles.header} style={{ background: '#F8F8F8' }}>
           <Button
             type="primary"
             icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
             onClick={() => setCollapsed(!collapsed)}
           />
         </Header>
-        <Content className={styles.content}>
-          {children}
-        </Content>
+        <Content className={styles.content}>{children}</Content>
       </Layout>
-    </Layout >
+    </Layout>
   );
 }

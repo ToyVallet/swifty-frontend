@@ -11,6 +11,8 @@ export type AccessToken = {
 
 export const userRole = ['ROLE_ADMIN', 'ROLE_USER'] as const;
 
+type UserRole = (typeof userRole)[number];
+
 export default function assertJWT(jwt: string) {
   const isValidString =
     typeof jwt === 'string' &&
@@ -26,7 +28,7 @@ export default function assertJWT(jwt: string) {
   if (!isValidRole) throw new CustomError(ErrorCause.NOT_AUTHORIZED);
 
   const userRoles = decoded.userRole.split(',');
-  if (!userRoles.every((role) => userRole.includes(role as any)))
+  if (!userRoles.every((role) => userRole.includes(role as UserRole)))
     throw new CustomError(ErrorCause.NOT_AUTHORIZED);
 
   if (decoded.exp * 1000 < Date.now())

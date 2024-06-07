@@ -15,6 +15,7 @@ module.exports = {
   },
   extends: [
     'eslint:recommended',
+    'plugin:@typescript-eslint/recommended',
     'prettier',
     require.resolve('@vercel/style-guide/eslint/next'),
     'eslint-config-turbo',
@@ -37,6 +38,8 @@ module.exports = {
   },
   rules: {
     'no-console': 'error',
+    '@typescript-eslint/consistent-type-imports': 'error',
+    '@typescript-eslint/consistent-type-exports': 'error',
   },
   ignorePatterns: ['.*.js', 'node_modules/'],
   overrides: [{ files: ['*.js?(x)', '*.ts?(x)'] }],

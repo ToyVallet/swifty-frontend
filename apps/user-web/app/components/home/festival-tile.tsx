@@ -1,6 +1,5 @@
-import Tile from '@/app/components/common/carousel/tile';
-import { FestivalInfo } from '@/app/lib/types';
-import { getTranslations } from 'next-intl/server';
+import Tile from '@components/common/carousel/tile';
+import type { FestivalInfo } from '@lib/types';
 
 import Carousel from '../common/carousel';
 import TileHeader from './tile-header';
@@ -17,14 +16,12 @@ async function FestivalTiles({
   headerPosiion = 'start',
 }: Props) {
   try {
-    const t = await getTranslations('FestivalTile');
-
     return (
       <div className="flex flex-col gap-5 w-full text-white bg-bgBlack">
         <TileHeader
           className={headerPosiion === 'center' ? 'justify-center' : ''}
         >
-          <TileHeader.Head>{t('title')}</TileHeader.Head>
+          <TileHeader.Head>제목</TileHeader.Head>
         </TileHeader>
         {variant === 'carousel' && <FestivalCarousel festivals={festivals} />}
         {variant === 'grid' && <FestivalGrid festivals={festivals} />}
