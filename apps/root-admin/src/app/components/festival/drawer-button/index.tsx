@@ -54,7 +54,9 @@ export default function DrawerButton({
         extra={
           <Space>
             <Button onClick={onClose}>Cancel</Button>
-            <Button onClick={onClose} type="primary">Submit</Button>
+            <Button
+              onClick={onClose}
+              type="primary">Submit</Button>
           </Space>
         }
       >

@@ -7,11 +7,6 @@
   border-radius: 8px;
 }
 
-.image {
-  object-fit: cover;
-  opacity: 0.5;
-}
-
 .description {
   width: 100%;
   position: absolute;
@@ -25,8 +20,14 @@
 
 .heading {
   color: var(--color-12);
+  flex-basis: 25%;
+  display: flex;
+  justify-content: center;
 }
 
 .content {
   color: var(--color-06);
+  flex-basis: 25%;
+  display: flex;
+  justify-content: center;
 }

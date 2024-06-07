@@ -4,6 +4,7 @@ export {
   API_LINEUP,
   API_CLIENT,
   API_FESTIVAL,
+  API_CONCERT,
   API_SEARCH,
   API_AUTH,
 } from '@/constant/api';

@@ -6,10 +6,10 @@ import { DrawerButton, ConcertCreateForm, Card } from '@components/festival';
 import styles from './tabs.module.css';
 
 export default function Tabs({
+  festivalSubId,
   concertInfo,
   ...props
-}: { concertInfo: ConcertsResponse } & TabsProps) {
-  const newTabIndex = useRef(0);
+}: { festivalSubId: string; concertInfo: ConcertsResponse; } & TabsProps) {
   return (
     <>
       <div className={styles.wrapper}>
@@ -21,14 +21,15 @@ export default function Tabs({
         <DrawerButton
           variant='concert-create'
         >
-          <ConcertCreateForm />
+          <ConcertCreateForm festivalSubId={festivalSubId} />
         </DrawerButton>
       </div>
-      <Card>
-        <Card.ConcertDescription
-          {...concertInfo}
-        />
-      </Card>
+      {
+        concertInfo &&
+        <Card>
+          <Card.ConcertDescription {...concertInfo} />
+        </Card>
+      }
     </>
   );
 };
