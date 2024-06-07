@@ -3,7 +3,8 @@
 import { useState } from "react";
 import { Button, Table } from "antd";
 import { Tabs, DrawerButton, LineupCreateForm, LineupUpdateForm, StatusNotifier } from "@components/festival";
-import styles from "./table-board.module.css";
+import { removeConcert } from "@/app/(dashboard)/festivals/[id]/api";
+import styles from "./concert-board.module.css";
 
 const columnsOfTable = [
   { title: 'Name', dataIndex: 'name', key: 'name' },
@@ -16,19 +17,20 @@ const columnsOfTable = [
 
 type TargetKey = React.MouseEvent | React.KeyboardEvent | string;
 
-export default function TableBoard({
+export default function ConcertBoard({
+  festivalSubId,
   concertsInfo,
-}: { concertsInfo: ConcertsResponse[] }) {
+}: { festivalSubId: string; concertsInfo: ConcertsResponse[]; }) {
   const defaultPanes = concertsInfo.map(({ subId, name }) => {
     return {
       label: name,
       key: subId
     };
   });
-  const [activeKey, setActiveKey] = useState(defaultPanes[0].key);
+  const [activeKey, setActiveKey] = useState(defaultPanes[0]?.key);
   const [items, setItems] = useState(defaultPanes);
   const activeConcertInfo = concertsInfo.filter(({ subId }) => subId === activeKey)[0];
-  const dataSource = activeConcertInfo.lineUpInfoResponses.map(({ subId, title, description, performanceDate, isOpened }) => ({
+  const dataSource = activeConcertInfo?.lineUpInfoResponses.map(({ subId, title, description, performanceDate, isOpened }) => ({
     key: subId,
     subId: subId,
     name: title,
@@ -48,25 +50,14 @@ export default function TableBoard({
     setActiveKey(key);
   };
 
-  const onEdit = (targetKey: TargetKey, action: 'add' | 'remove') => {
-    if (action === 'add') {
-      // add();
-    } else {
+  const onEdit = async (targetKey: TargetKey, action: 'add' | 'remove') => {
+    if (action === 'remove')
       remove(targetKey);
-    }
   };
 
-  const add = () => {
-  };
-
-  const remove = (targetKey: TargetKey) => {
-    const targetIndex = items.findIndex((pane) => pane.key === targetKey);
-    const newPanes = items.filter((pane) => pane.key !== targetKey);
-    if (newPanes.length && targetKey === activeKey) {
-      const { key } = newPanes[targetIndex === newPanes.length ? targetIndex - 1 : targetIndex];
-      setActiveKey(key);
-    }
-    setItems(newPanes);
+  const remove = async (targetKey: TargetKey) => {
+    if (confirm('정말로 삭제하시겠습니까?'))
+      await removeConcert(targetKey as string);
   };
 
   return (
@@ -77,17 +68,21 @@ export default function TableBoard({
         onChange={onChange}
         onEdit={onEdit}
         concertInfo={activeConcertInfo}
+        festivalSubId={festivalSubId}
       />
-      <div className={styles.wrapper}>
-        <DrawerButton className={styles.lineupCreateButton} variant='lineup-create'>
-          <LineupCreateForm />
-        </DrawerButton>
-        <Table
-          columns={columnsOfTable}
-          dataSource={dataSource}
-          pagination={false}
-        />
-      </div>
+      {
+        activeConcertInfo &&
+        <div className={styles.wrapper}>
+          <DrawerButton className={styles.lineupCreateButton} variant='lineup-create'>
+            <LineupCreateForm />
+          </DrawerButton>
+          <Table
+            columns={columnsOfTable}
+            dataSource={dataSource}
+            pagination={false}
+          />
+        </div>
+      }
     </>
   );
 }
