@@ -7,18 +7,25 @@ export type UserRole =
   | 'ADMIN'
   | 'BANNED';
 
-type UserStatus = 'ACTIVE' | 'WITHDRAWL' | 'PAUSE' | 'BANNED';
+export type UserStatus = 'ACTIVE' | 'WITHDRAWAL' | 'PAUSE' | 'BANNED';
 
-type UserGender = 'OLD_MALE' | 'OLE_FEMALE' | 'YOUNG_MALE' | 'YOUNG_FEMALE';
+export type UserGender =
+  | 'OLD_MALE'
+  | 'OLE_FEMALE'
+  | 'YOUNG_MALE'
+  | 'YOUNG_FEMALE';
+
+export type UserEnrolled = 'FORM' | 'KAKAO';
 
 export interface User {
   userSubId: string;
   name: string;
   phoneNumber: string;
   userFormId: string;
+  bod: string;
   gender: UserGender;
   userRole: UserRole;
-  enrolled: 'FORM' | 'KAKAO';
+  enrolled: UserEnrolled;
   status: UserStatus;
 }
 
