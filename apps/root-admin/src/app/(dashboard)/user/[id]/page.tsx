@@ -1,7 +1,7 @@
+import UserInfo from '@app/components/user/user-info';
 import { API_CLIENT } from '@app/lib/constant/api';
 import insertCookieInRequest from '@app/lib/util/insert-cookie-in-request';
-import type { BreadcrumbList } from '@components/ui';
-import { BreadCrumbs } from '@components/ui';
+import { BreadCrumbs, type BreadcrumbList } from '@components/ui';
 import { customFetch } from '@swifty/shared-lib';
 import type { User } from '@type/user';
 
@@ -29,6 +29,7 @@ export default async function UserDetailPage({ params: { id } }: Props) {
       <div className={styles.heading}>
         <BreadCrumbs separator="/" breadcrumbList={breadcrumbList} />
       </div>
+      <UserInfo {...data} />
     </main>
   );
 }

@@ -2,7 +2,7 @@ import type { UserRole } from '@app/types/user';
 
 export const API_LINEUP = {
   lineup: (id?: string) =>
-    id ? `/root/admin/line_up/${id}` : '/root/admin/line_up',
+    id ? `/host/admin/line_up/${id}` : '/host/admin/line_up',
 } as const;
 
 export const API_CLIENT = {
@@ -18,8 +18,8 @@ export const API_CLIENT = {
 
 export const API_FESTIVAL = {
   festival: (id?: string) =>
-    id ? `/root/admin/festival/${id}` : '/root/admin/festival',
-  detail: (id: string) => `/root/admin/festival/detail/${id}`,
+    id ? `/host/admin/festival/${id}` : '/host/admin/festival',
+  detail: (id: string) => `/host/admin/festival/detail/${id}`,
 } as const;
 
 export const API_SEARCH = {
