@@ -1,8 +1,7 @@
 'use client';
 
-import { IntlProvider } from '@/app/components/common';
-import { cn } from '@/app/lib/utils';
-import { EmblaOptionsType } from 'embla-carousel';
+import { cn } from '@swifty/shared-lib';
+import { type EmblaOptionsType } from 'embla-carousel';
 import Autoplay from 'embla-carousel-autoplay';
 import useEmblaCarousel from 'embla-carousel-react';
 import { useEffect, useState } from 'react';
@@ -64,14 +63,12 @@ function Carousel({
   }, [emblaApi]);
 
   return (
-    <IntlProvider>
-      <div className="h-full w-full relative" ref={emblaRef}>
-        <div className={cn('flex h-full w-full', className)}>{children}</div>
-        {hasIndicator && Array.isArray(children) && (
-          <Indicator cur={currentIndex} total={children.length} />
-        )}
-      </div>
-    </IntlProvider>
+    <div className="h-full w-full relative" ref={emblaRef}>
+      <div className={cn('flex h-full w-full', className)}>{children}</div>
+      {hasIndicator && Array.isArray(children) && (
+        <Indicator cur={currentIndex} total={children.length} />
+      )}
+    </div>
   );
 }
 

@@ -1,5 +1,9 @@
 import { StatusNotifier, ConcertBoard } from "@components/festival";
 import { getDetailFestival } from "./data";
+import { StatusNotifier, TableBoard } from '@components/festival';
+import type { Params } from '@swifty/shared-lib';
+
+import { getMockFestivalDetail } from './data';
 import styles from './page.module.css';
 
 export default async function Page({ params: { id } }: {

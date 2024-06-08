@@ -1,10 +1,9 @@
 'use client';
 
-import { cn } from '@lib/utils';
-import { Dayjs } from 'dayjs';
+import { cn } from '@swifty/shared-lib';
+import type { Dayjs } from 'dayjs';
 import 'dayjs/locale/ko';
 import { motion } from 'framer-motion';
-import { useLocale } from 'next-intl';
 
 type DateBlockProps = {
   date: Dayjs;
@@ -21,8 +20,6 @@ export default function DateBlock({
   selected,
   onClick,
 }: DateBlockProps) {
-  const locale = useLocale();
-
   return (
     <motion.div
       tabIndex={disabled ? -1 : 0}
@@ -39,7 +36,7 @@ export default function DateBlock({
     >
       <div className="text-xl font-bold z-10">{date.date()}</div>
       <div className="text-xs font-medium z-10">
-        {date.locale(locale).format('ddd')}
+        {date.format('ddd').toUpperCase()}
       </div>
     </motion.div>
   );

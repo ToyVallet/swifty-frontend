@@ -1,5 +1,5 @@
-import { cn } from '@lib/utils';
-import { PropsWithChildren } from 'react';
+import { cn } from '@swifty/shared-lib';
+import type { PropsWithChildren } from 'react';
 
 type HeroProps = PropsWithChildren<{
   variant?: 'carousel' | 'image';

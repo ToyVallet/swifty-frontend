@@ -1,49 +1,17 @@
-"use client";
+import {
+  Col,
+  DatePicker,
+  DatePickerProps,
+  Form,
+  Input,
+  Row,
+  TimePicker,
+} from 'antd';
 
-import { customFetch } from '@/app/api';
-import { API_CONCERT } from '@/constant';
-import { Col, DatePicker, Form, Input, Row, TimePicker, DatePickerProps, FormProps } from 'antd';
-import { useRouter } from 'next/navigation';
-
-export default function ConcertCreateForm({ festivalSubId }: { festivalSubId: string }) {
-  const [form] = Form.useForm();
-  const router = useRouter();
-  const onChange: DatePickerProps['onChange'] = (date, dateString) => {
-  };
-
-  type FieldType = {
-  }
-
-  const onFinish: FormProps<FieldType>['onFinish'] = async () => {
-    console.log('form', JSON.stringify(form));
-    /*
-      await customFetch(API_CONCERT.register, {
-        method: 'POST',
-        body: JSON.stringify({ values }),
-      });
-      form.setFieldValue('name', '');
-      form.setFieldValue('dateTime', '');
-      form.setFieldValue('time', '');
-      form.setFieldValue('location', '');
-      form.setFieldValue('description', '');
-    */
-    router.replace('/');
-  };
-
-  const onFinishFailed: FormProps<FieldType>['onFinishFailed'] = async (
-    errorInfo,
-  ) => {
-    console.log('Failed:', errorInfo);
-  };
-
+export default function ConcertCreateForm() {
+  const onChange: DatePickerProps['onChange'] = (date, dateString) => {};
   return (
-    <Form
-      layout="vertical"
-      hideRequiredMark
-      form={form}
-      onFinish={onFinish}
-      onFinishFailed={onFinishFailed}
-    >
+    <Form layout="vertical">
       <Row gutter={16}>
         <Col span={12}>
           <Form.Item

@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
-import { Col, DatePicker, Form, Input, Row, DatePickerProps } from 'antd';
 import { Upload } from '@components/festival';
+import { Col, DatePicker, DatePickerProps, Form, Input, Row } from 'antd';
+
 export default function LineupCreateForm() {
-  const onChange: DatePickerProps['onChange'] = (date, dateString) => {
-  };
+  const onChange: DatePickerProps['onChange'] = (date, dateString) => {};
   return (
-    <Form layout="vertical" hideRequiredMark>
+    <Form layout="vertical" hideRequredMark>
       <Row gutter={16}>
         <Col span={12}>
           <Form.Item
@@ -30,7 +30,10 @@ export default function LineupCreateForm() {
               },
             ]}
           >
-            <Input.TextArea rows={4} placeholder="선곡 : - 스물셋\n- Celebrity" />
+            <Input.TextArea
+              rows={4}
+              placeholder="선곡 : - 스물셋\n- Celebrity"
+            />
           </Form.Item>
         </Col>
       </Row>
@@ -41,7 +44,7 @@ export default function LineupCreateForm() {
             label="PeformanceTime"
             rules={[{ required: true, message: 'Please choose the dateTime' }]}
           >
-            <DatePicker onChange={onChange} placeholder='2024-05-28' />
+            <DatePicker onChange={onChange} placeholder="2024-05-28" />
           </Form.Item>
         </Col>
       </Row>

@@ -2,6 +2,12 @@ import Link from "next/link";
 import { Card, CardList } from "@components/festival";
 import { getAllFestivals } from "./data";
 import styles from "./page.module.css";
+import { Card, CardList } from '@components/festival';
+import getFestivalStatus from '@lib/util/getFestivalStatus';
+import Link from 'next/link';
+
+import { getMockAllFestivals } from './data';
+import styles from './page.module.css';
 
 export default async function Page() {
   const datas = await getAllFestivals();
@@ -21,7 +27,7 @@ export default async function Page() {
               />
             </Card>
           </Link>
-        )}
+        ))}
       </CardList>
     </main>
   );

@@ -4,8 +4,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@components/ui/avatar';
 import { SheetClose } from '@components/ui/sheet';
 import { If } from '@components/util';
 import { useAuth } from '@hooks/.';
-import { cn } from '@lib/utils';
-import { useTranslations } from 'next-intl';
+import { cn } from '@swifty/shared-lib';
 import { IoChevronForwardOutline } from 'react-icons/io5';
 import {
   IoPersonCircleOutline,
@@ -18,7 +17,6 @@ import NavLink from './nav-link';
 
 export default function AuthGroup({ className }: { className?: string }) {
   const { logout, isLoggedIn, isAdmin, userInfo } = useAuth();
-  const t = useTranslations('SideNav');
 
   return (
     <div className="w-full">
@@ -59,28 +57,27 @@ export default function AuthGroup({ className }: { className?: string }) {
                   </div>
 
                   <div className="text-neutral-500 text-sm flex items-center justify-end">
-                    <IoPersonCircleOutline className="mr-2" /> {t('gotoMypage')}{' '}
+                    <IoPersonCircleOutline className="mr-2" /> 마이페이지
                     <IoChevronForwardOutline size={16} />
                   </div>
                 </div>
               </NavLink>
               <NavLink link="/my-tickets" className={className}>
-                <IoTicketOutline className="mr-2" />
-                {t('myTickets')}
+                <IoTicketOutline className="mr-2" />내 티켓
               </NavLink>
             </If.Else>
           </If>
 
           <SheetClose className={className} onClick={logout}>
             <MdLogout />
-            {t('logout')}
+            로그아웃
           </SheetClose>
         </If.Then>
 
         <If.Else>
           <NavLink link="/login" className={className}>
             <MdLogin className="mr-2" />
-            {t('login')}
+            로그인
           </NavLink>
         </If.Else>
       </If>

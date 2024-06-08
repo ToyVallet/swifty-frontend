@@ -1,4 +1,4 @@
-"use server";
+'use server';
 
 import { customFetch } from "@/app/api";
 import { getCookieValue } from "@/app/lib/cookies";

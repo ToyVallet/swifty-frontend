@@ -1,6 +1,6 @@
 'use client';
 
-import { delayFn } from '@/app/lib/utils';
+import { delayFn } from '@lib/utils';
 import { useEffect, useState } from 'react';
 
 import Display from './display';

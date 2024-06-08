@@ -3,7 +3,7 @@ import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { CookiesProvider } from 'next-client-cookies/server';
 import NextTopLoader from 'nextjs-toploader';
-import { PropsWithChildren } from 'react';
+import type { PropsWithChildren } from 'react';
 
 export default function Providers({ children }: PropsWithChildren) {
   return (

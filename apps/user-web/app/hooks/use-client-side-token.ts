@@ -1,5 +1,5 @@
-import { COOKIE_KEYS } from '@/app/lib/constants';
-import { ErrorCause, assert } from '@/app/lib/utils/validation';
+import { ErrorCause, assert } from '@lib/utils/validation';
+import { COOKIE_KEYS } from '@swifty/shared-lib';
 import { useCookies } from 'next-client-cookies';
 
 export default function useClientSideToken() {

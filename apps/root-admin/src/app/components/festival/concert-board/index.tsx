@@ -1,10 +1,9 @@
-"use client";
+'use client';
 
 import { useState } from "react";
 import { Button, Table } from "antd";
 import { Tabs, DrawerButton, LineupCreateForm, LineupUpdateForm, StatusNotifier } from "@components/festival";
-import { removeConcert } from "@/app/(dashboard)/festivals/[id]/api";
-import styles from "./concert-board.module.css";
+import styles from "./table-board.module.css";
 
 const columnsOfTable = [
   { title: 'Name', dataIndex: 'name', key: 'name' },
@@ -24,7 +23,7 @@ export default function ConcertBoard({
   const defaultPanes = concertsInfo.map(({ subId, name }) => {
     return {
       label: name,
-      key: subId
+      key: subId,
     };
   });
   const [activeKey, setActiveKey] = useState(defaultPanes[0]?.key);
@@ -40,11 +39,7 @@ export default function ConcertBoard({
       day: 'numeric',
       timeZone: 'Asia/Seoul'
     }),
-    description,
-    isopened: <StatusNotifier status={isOpened} />,
-    update: <DrawerButton variant="lineup-update"><LineupUpdateForm /></DrawerButton>,
-    delete: <Button>삭제</Button>,
-  }));
+  );
 
   const onChange = (key: string) => {
     setActiveKey(key);

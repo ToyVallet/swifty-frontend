@@ -4,7 +4,7 @@ import { Link } from '@components/common';
 import { If } from '@components/util';
 import { useAuth } from '@hooks/.';
 import { AnimatePresence, motion } from 'framer-motion';
-import { PropsWithChildren } from 'react';
+import { type PropsWithChildren } from 'react';
 import { BsTicketFill } from 'react-icons/bs';
 
 export function FloatingButton({

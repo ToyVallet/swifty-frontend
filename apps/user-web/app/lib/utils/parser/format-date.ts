@@ -2,7 +2,7 @@ import dayjs from 'dayjs';
 import 'dayjs/locale/en';
 import 'dayjs/locale/ko';
 
-import { Locale } from '../../types';
+import type { Locale } from '../../types';
 
 const format = {
   ko: {

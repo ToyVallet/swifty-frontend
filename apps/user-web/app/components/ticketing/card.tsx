@@ -1,4 +1,3 @@
-import { type FestivalEvent } from '@/app/lib/mock/type';
 import { get, getServerSideToken } from '@api/.';
 import {
   Card as CardComponent,
@@ -8,8 +7,8 @@ import {
   CardTitle,
 } from '@components/ui/card';
 import { API_ROUTES } from '@lib/constants';
-import { cn } from '@lib/utils';
-import { getLocale } from 'next-intl/server';
+import { type FestivalEvent } from '@lib/mock/type';
+import { cn } from '@swifty/shared-lib';
 import Link from 'next/link';
 import { FiCalendar, FiClock } from 'react-icons/fi';
 import { twMerge } from 'tailwind-merge';
@@ -20,7 +19,6 @@ export default async function Card({ id, name, from, to }: FestivalEvent) {
   const toTime = new Date(to);
   const now = new Date();
   const isOpen = now >= fromTime && now <= toTime;
-  const locale = await getLocale();
   let isAlreadyTurn = false;
   let myTurn = -1;
 
@@ -45,7 +43,7 @@ export default async function Card({ id, name, from, to }: FestivalEvent) {
 
   return (
     <Link
-      href={isOpen ? `/${locale}/ticketing/${id}` : ''}
+      href={isOpen ? `/ticketing/${id}` : ''}
       className={!isOpen || isAlreadyTurn ? 'pointer-events-none' : ''}
       aria-disabled={!isOpen || isAlreadyTurn}
       tabIndex={!isOpen || isAlreadyTurn ? -1 : undefined}

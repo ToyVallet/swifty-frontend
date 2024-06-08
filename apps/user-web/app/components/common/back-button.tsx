@@ -1,8 +1,8 @@
 'use client';
 
-import { cn } from '@/app/lib/utils';
-import { useRouter } from '@lib/navigation';
-import { PropsWithChildren } from 'react';
+import { cn } from '@swifty/shared-lib';
+import { useRouter } from 'next/navigation';
+import { type PropsWithChildren } from 'react';
 
 export default function BackButton({
   children,

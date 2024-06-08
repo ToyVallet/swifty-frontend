@@ -1,7 +1,8 @@
 'use server';
 
-import { API_ROUTES, COOKIE_KEYS } from '@/app/lib/constants';
-import { CustomError, ErrorCause } from '@/app/lib/utils/validation';
+import { API_ROUTES } from '@lib/constants';
+import { CustomError, ErrorCause } from '@lib/utils/validation';
+import { COOKIE_KEYS } from '@swifty/shared-lib';
 import { cookies } from 'next/headers';
 
 import { User, get, getServerSideToken } from '.';

@@ -25,5 +25,5 @@ export default function assert<T extends AssertKeys>(
   type: T,
   value: AssertTypeValue<T>,
 ) {
-  assertType[type](value as any);
+  assertType[type](value as unknown as string);
 }

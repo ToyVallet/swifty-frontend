@@ -1,7 +1,7 @@
 'use server';
 
-import { deleteCookie } from '@/app/lib/cookies';
-import { COOKIE_KEYS } from '@constant';
+import { deleteCookie } from '@lib/cookies';
+import { COOKIE_KEYS } from '@swifty/shared-lib';
 import { RedirectType, redirect } from 'next/navigation';
 
 export const checkStatusForRefreshToken = async (status: number) => {

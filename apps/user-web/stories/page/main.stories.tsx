@@ -1,10 +1,9 @@
-import * as FestivalAPI from '@/app/[locale]/(root-nav)/action';
-import RootNavLayout from '@/app/[locale]/(root-nav)/layout';
-import Home from '@/app/[locale]/(root-nav)/page';
-import LocaleLayout from '@/app/[locale]/layout';
-import { festivalLinupes } from '@/app/lib/mock/data';
-import { Meta, StoryObj } from '@storybook/react';
-import * as NextIntlServer from 'next-intl/server';
+import * as FestivalAPI from '@app/(root-nav)/action';
+import RootNavLayout from '@app/(root-nav)/layout';
+import Home from '@app/(root-nav)/page';
+import LocaleLayout from '@app/layout';
+import { festivalLinupes } from '@lib/mock/data';
+import type { Meta, StoryObj } from '@storybook/react';
 import { createMock } from 'storybook-addon-module-mock';
 
 const meta: Meta<typeof Home> = {
@@ -19,33 +18,12 @@ type Story = StoryObj<typeof Home>;
 
 export const Default: Story = {
   args: {},
-  parameters: {
-    moduleMock: {
-      mock: () => {
-        const getTranslationsMock = createMock(
-          NextIntlServer,
-          'getTranslations',
-        );
-        getTranslationsMock.mockReturnValue(
-          Promise.resolve<any>((link: string) => link),
-        );
-
-        const heroMock = createMock(FestivalAPI, 'getLineupHero');
-        heroMock.mockReturnValue(Promise.resolve(festivalLinupes));
-
-        const festivalMock = createMock(FestivalAPI, 'getLineupInfos');
-        festivalMock.mockReturnValue(Promise.resolve(festivalLinupes));
-        return [getTranslationsMock, heroMock, festivalMock];
-      },
-    },
-  },
+  parameters: {},
   render: () => {
     return (
-      <LocaleLayout>
-        <RootNavLayout>
-          <Home />
-        </RootNavLayout>
-      </LocaleLayout>
+      <RootNavLayout>
+        <Home />
+      </RootNavLayout>
     );
   },
 };

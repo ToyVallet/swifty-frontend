@@ -1,4 +1,6 @@
-"use server";
+'use server';
+
+import { FestivalInfoResponse } from '@type/festival';
 
 import { customFetch } from "@/app/api";
 import { getCookieValue } from "@/app/lib/cookies";
@@ -10,7 +12,7 @@ export async function getAllFestivals(id?: string) {
   return await customFetch<FestivalInfoResponse[]>(API_FESTIVAL.festival(id), {
     method: 'GET',
     headers: {
-      Cookie: `swifty-access=${access}; swifty-refresh=${refresh}`
+      Cookie: `swiftyroot-access=${access}; swifty-refresh=${refresh}`
     }
   });
 }

@@ -1,4 +1,6 @@
-type ConcertsResponse = {
+import { LineUpInfoResponse } from './lineup';
+
+export type ConcertsResponse = {
   subId: string;
   name: string;
   startDate: string;
@@ -6,5 +8,5 @@ type ConcertsResponse = {
   location: string;
   description: string;
   lineUpInfoResponses: LineUpInfoResponse[];
-  concertStatus: "BEFORE" | "PROCESS" | "CLOSED";
-}
+  concertStatus: 'BEFORE' | 'PROCESS' | 'CLOSED';
+};
