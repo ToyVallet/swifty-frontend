@@ -1,0 +1,36 @@
+'use client';
+
+import { Breadcrumb as AntdBreadCrumb, type BreadcrumbProps } from 'antd';
+import Link from 'next/link';
+
+import styles from './brandcrumb.module.css';
+
+export type BreadcrumbList = { title: string; path?: string }[];
+
+interface Props {
+  separator?: string;
+  breadcrumbList: BreadcrumbList;
+}
+
+type ItemRender = BreadcrumbProps['itemRender'];
+const itemRender: ItemRender = (currentRoute, params, items, paths) => {
+  const isLast = currentRoute?.path === items[items.length - 1]?.path;
+
+  return isLast ? (
+    <span className={styles.text}>{currentRoute.title}</span>
+  ) : (
+    <Link href={`/${paths.join('/')}`} className={styles.text}>
+      {currentRoute.title}
+    </Link>
+  );
+};
+
+export default function Brandcrumb({ breadcrumbList, separator = '/' }: Props) {
+  return (
+    <AntdBreadCrumb
+      separator={<li className={styles.separator}>{separator}</li>}
+      itemRender={itemRender}
+      items={breadcrumbList}
+    />
+  );
+}
