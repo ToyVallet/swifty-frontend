@@ -20,6 +20,8 @@ import { Table } from 'antd';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 
+import styles from './table.module.css';
+
 interface Props {
   data: User[];
   pageSize: number;
@@ -119,6 +121,7 @@ function CustomTable({ data, pageSize, total }: Props) {
         onRow={(record) => ({
           onClick: () => onClickRow(record),
         })}
+        rowClassName={styles.row}
         rowKey="userSubId"
       />
     </section>
