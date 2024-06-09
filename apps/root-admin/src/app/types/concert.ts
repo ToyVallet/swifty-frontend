@@ -1,4 +1,4 @@
-import { LineUpInfoResponse } from './lineup';
+import type { LineUpInfoResponse } from '@app/types/lineup';
 
 export type ConcertsResponse = {
   subId: string;
@@ -8,5 +8,5 @@ export type ConcertsResponse = {
   location: string;
   description: string;
   lineUpInfoResponses: LineUpInfoResponse[];
-  concertStatus: 'BEFORE' | 'PROCESS' | 'CLOSED';
+  concertStatus: 'OPEN' | 'HIDDEN';
 };

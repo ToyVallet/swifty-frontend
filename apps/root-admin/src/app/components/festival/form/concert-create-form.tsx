@@ -1,49 +1,71 @@
+"use client";
+
+import useConcert from '@app/hooks/festival/useConcert';
+import { useRouter } from 'next/navigation';
 import {
   Col,
   DatePicker,
-  DatePickerProps,
   Form,
   Input,
   Row,
-  TimePicker,
+  Select,
 } from 'antd';
+import type { DatePickerProps, FormProps } from 'antd';
+import 'moment/locale/ko';
+import locale from 'antd/es/date-picker/locale/ko_KR';
 
-export default function ConcertCreateForm() {
-  const onChange: DatePickerProps['onChange'] = (date, dateString) => {};
+type FieldType = {
+  name: string;
+  rangeDateTime: string[];
+  location: string;
+  description: string;
+};
+
+export default function ConcertCreateForm({ festivalSubId }: { festivalSubId: string }) {
+  const { RangePicker } = DatePicker;
+  const { isLoading, error, createConcert } = useConcert();
+  const router = useRouter();
+  const onChange: DatePickerProps['onChange'] = (date, dateString) => { };
+  const [form] = Form.useForm();
+
+
+  const onFinish: FormProps<FieldType>['onFinish'] = async (values) => {
+    await createConcert(festivalSubId, values);
+  };
+
   return (
-    <Form layout="vertical">
+    <Form
+      form={form}
+      id="concert-create"
+      layout="vertical"
+      onFinish={onFinish}
+    >
       <Row gutter={16}>
         <Col span={12}>
           <Form.Item
             name="name"
-            label="Name"
-            rules={[{ required: true, message: 'Please enter user name' }]}
+            label="콘서트 이름"
+            rules={[{ required: true }]}
           >
-            <Input placeholder="ex) 1일차" />
+            <Select placeholder='콘서트 이름을 선택해주세요.'>
+              <Select.Option value="1일차">1일차</Select.Option>
+              <Select.Option value="2일차">2일차</Select.Option>
+              <Select.Option value="3일차">3일차</Select.Option>
+              <Select.Option value="4일차">4일차</Select.Option>
+            </Select>
           </Form.Item>
         </Col>
       </Row>
       <Row gutter={16}>
-        <Col span={12}>
+        <Col span={16}>
           <Form.Item
-            name="dateTime"
-            label="DateTime"
-            rules={[{ required: true, message: 'Please choose the dateTime' }]}
-          >
-            <DatePicker onChange={onChange} />
-          </Form.Item>
-        </Col>
-      </Row>
-      <Row gutter={16}>
-        <Col span={12}>
-          <Form.Item
-            name="time"
-            label="Time"
-            rules={[{ required: true, message: 'Please choose the time' }]}
-          >
-            <TimePicker.RangePicker
-              style={{ width: '100%' }}
-              getPopupContainer={(trigger) => trigger.parentElement!}
+            name="rangeDateTime"
+            label="콘서트 시작 시점 - 콘서트 종료 시점"
+            rules={[{ required: true, }]}>
+            <RangePicker
+              showTime
+              format="YYYY-MM-DD HH:mm:ss"
+              locale={locale}
             />
           </Form.Item>
         </Col>
@@ -52,10 +74,10 @@ export default function ConcertCreateForm() {
         <Col span={12}>
           <Form.Item
             name="location"
-            label="Location"
-            rules={[{ required: true, message: 'Please enter location' }]}
+            label="콘서트 장소"
+            rules={[{ required: true, message: 'Please enter concert location' }]}
           >
-            <Input placeholder="ex) 중앙 운동장" />
+            <Input placeholder="ex) 강당" />
           </Form.Item>
         </Col>
       </Row>
@@ -63,18 +85,19 @@ export default function ConcertCreateForm() {
         <Col span={24}>
           <Form.Item
             name="description"
-            label="Description"
+            label="콘서트 설명"
             rules={[
               {
                 required: true,
-                message: 'please enter url description',
+                message: 'please enter concert description',
               },
             ]}
           >
-            <Input.TextArea rows={4} placeholder="ex) 물 지참" />
+            <Input.TextArea rows={4} placeholder="ex) 물을 지참해 주시기 바랍니다." />
           </Form.Item>
         </Col>
       </Row>
-    </Form>
+    </Form >
   );
 }
+

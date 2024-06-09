@@ -4,18 +4,16 @@ import styles from "./status-notifier.module.css";
 export default function StatusNotifier({
   className,
   status,
-}: { className?: string, status: 'BEFORE' | 'PROCESS' | 'CLOSED' }) {
+}: { className?: string, status: 'HIDDEN' | 'OPEN' }) {
   return (
     <>
       <div className={clsx(styles.notifier, className,
         {
-          [styles.before]: status === 'BEFORE',
-          [styles.pending]: status === 'PROCESS',
-          [styles.end]: status === 'CLOSED',
+          [styles.hidden as string]: status === 'HIDDEN',
+          [styles.open as string]: status === 'OPEN',
         })}>
-        {status === 'BEFORE' && 'Before'}
-        {status === 'PROCESS' && 'Process'}
-        {status === 'CLOSED' && 'Closed'}
+        {status === 'OPEN' && 'Open'}
+        {status === 'HIDDEN' && 'Hidden'}
       </div>
     </>
   )

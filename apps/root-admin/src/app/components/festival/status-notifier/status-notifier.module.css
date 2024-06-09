@@ -22,30 +22,20 @@
   left: 1rem;
 }
 
-.notifier.before::before {
+.notifier.open::before {
   background: #33D69F;
 }
 
-.notifier.pending::before {
-  background: #FF8F00;
-}
-
-.notifier.end::before {
+.notifier.hidden::before {
   background: #373B53;
 }
 
-.before {
+.open {
   color: #33D69F;
   background: #E6F9F0;
 }
 
-.pending {
-  color: #FF8F00;
-  background: #FFF4E6;
-  text-indent: 1rem;
-}
-
-.end {
+.hidden {
   color: #373B53;
   background: #F1F1F4;
 }
