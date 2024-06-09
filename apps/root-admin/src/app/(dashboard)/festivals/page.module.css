@@ -5,3 +5,7 @@
 .cardList {
   margin-top: 1rem;
 }
+
+.card:hover {
+  outline: 3px solid #7C5DFA;
+}

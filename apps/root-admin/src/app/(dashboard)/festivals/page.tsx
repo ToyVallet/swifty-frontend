@@ -1,12 +1,8 @@
 import Link from "next/link";
-import { Card, CardList } from "@components/festival";
-import { getAllFestivals } from "./data";
-import styles from "./page.module.css";
 import { Card, CardList } from '@components/festival';
-import getFestivalStatus from '@lib/util/getFestivalStatus';
-import Link from 'next/link';
 
-import { getMockAllFestivals } from './data';
+import { getAllFestivals } from './data';
+import type { FestivalInfoResponse } from "@app/types/festival";
 import styles from './page.module.css';
 
 export default async function Page() {
@@ -17,7 +13,7 @@ export default async function Page() {
       <CardList className={styles.cardList}>
         {datas.map(({ subId, name, addr, description, startDate, endDate }: FestivalInfoResponse) =>
           <Link href={`festivals/${subId}`} key={subId}>
-            <Card>
+            <Card className={styles.card}>
               <Card.FestvialDescription
                 name={name}
                 addr={addr}
@@ -27,7 +23,7 @@ export default async function Page() {
               />
             </Card>
           </Link>
-        ))}
+        )}
       </CardList>
     </main>
   );

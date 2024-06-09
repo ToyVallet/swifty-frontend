@@ -1,8 +1,9 @@
 'use server';
 
-import { customFetch } from "@/app/api";
-import { getCookieValue } from "@/app/lib/cookies";
-import { API_FESTIVAL } from "@/constant";
+import { customFetch } from '@swifty/shared-lib';
+import { getCookieValue } from "@lib/cookies";
+import { API_FESTIVAL } from '@lib/constant/api';
+import type { FestivalDetailResponse } from '@app/types/festival';
 
 export async function getDetailFestival(id: string) {
   const access = await getCookieValue('swifty-access');

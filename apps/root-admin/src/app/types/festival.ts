@@ -1,4 +1,4 @@
-import { ConcertsResponse } from './concert';
+import type { ConcertsResponse } from '@app/types/concert';
 
 export type FestivalRequest = {
   sort: 'updated' | 'recently' | 'popular';
@@ -20,7 +20,7 @@ export type FestivalDetailResponse = {
   adminFestivalInfoResponse: {
     revealStartDate: string;
     revealEndDate: string;
-    festivalStatus: 'BEFORE' | 'PROCESS' | 'CLOSED';
+    festivalStatus: 'OPEN' | 'HIDDEN';
     thumbnail: string;
     poster: string;
     logo: string;

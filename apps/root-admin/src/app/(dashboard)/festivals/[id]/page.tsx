@@ -1,27 +1,24 @@
 import { StatusNotifier, ConcertBoard } from "@components/festival";
+import { Flex } from "antd";
 import { getDetailFestival } from "./data";
-import { StatusNotifier, TableBoard } from '@components/festival';
 import type { Params } from '@swifty/shared-lib';
 
-import { getMockFestivalDetail } from './data';
 import styles from './page.module.css';
 
-export default async function Page({ params: { id } }: {
-  params: { id: string }
-}) {
+export default async function Page({ params: { id } }: Params<{ id: string }>) {
   const {
     adminFestivalInfoResponse,
     adminConcertInfoResponses
   } = await getDetailFestival(id);
   return (
     <main className={styles.main}>
-      <div className={styles.headerWrapper}>
+      <Flex align='center' gap={'1rem'} className={styles.headerWrapper}>
         <h2 className={styles.heading}>{adminFestivalInfoResponse.addr}</h2>
         <StatusNotifier
           className={styles.statusNotifier}
           status={adminFestivalInfoResponse.festivalStatus}
         />
-      </div>
+      </Flex>
       <ConcertBoard
         festivalSubId={id}
         concertsInfo={adminConcertInfoResponses}

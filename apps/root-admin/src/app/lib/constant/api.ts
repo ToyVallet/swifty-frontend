@@ -1,7 +1,7 @@
-import { UserRole } from '@app/types/user';
+import type { UserRole } from '@app/types/user';
 
 export const API_LINEUP = {
-  lineup: (id?: string) => `/admin/line_up/${id}`
+  lineup: (id?: string) => (id ? `/host/admin/line_up/${id}` : '/host/admin/line_up'),
 } as const;
 
 export const API_CLIENT = {
@@ -18,7 +18,7 @@ export const API_FESTIVAL = {
 } as const;
 
 export const API_CONCERT = {
-  concert: (id?: string) => `/host/admin/concert/${id}`,
+  concert: (id?: string) => (id ? `/host/admin/concert/${id}` : '/host/admin/concert'),
 } as const;
 
 export const API_SEARCH = {
