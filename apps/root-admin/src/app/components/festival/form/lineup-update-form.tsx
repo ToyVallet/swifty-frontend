@@ -1,9 +1,10 @@
 'use client';
 
-import { Col, DatePicker, DatePickerProps, Form, Input, Row } from 'antd';
+import { Col, DatePicker, Form, Input, Row } from 'antd';
+import type { DatePickerProps } from 'antd';
 
 export default function LineupUpdateForm() {
-  const onChange: DatePickerProps['onChange'] = (date, dateString) => {};
+  const onChange: DatePickerProps['onChange'] = (date, dateString) => { };
 
   return (
     <Form layout="vertical">

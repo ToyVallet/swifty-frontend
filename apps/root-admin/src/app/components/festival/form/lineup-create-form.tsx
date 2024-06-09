@@ -1,12 +1,36 @@
 'use client';
 
+import { useLineup } from '@app/hooks/festival/useLineup';
 import { Upload } from '@components/festival';
-import { Col, DatePicker, DatePickerProps, Form, Input, Row } from 'antd';
+import { Col, DatePicker, Form, Input, Row } from 'antd';
+import type { DatePickerProps, FormProps, UploadFile } from 'antd';
+import { useState } from 'react';
 
-export default function LineupCreateForm() {
-  const onChange: DatePickerProps['onChange'] = (date, dateString) => {};
+type FieldType = {
+  title: string;
+  description: string;
+  performanceTime: string;
+  newFile: UploadFile;
+}
+
+export default function LineupCreateForm({
+  concertSubId
+}: { concertSubId: string }) {
+  const [form] = Form.useForm();
+  const { isLoading, createLineup } = useLineup(concertSubId);
+  const [fileList, setFileList] = useState<UploadFile[]>([]);
+  const onChange: DatePickerProps['onChange'] = (date, dateString) => { };
+  const onFinish: FormProps<FieldType>['onFinish'] = async (values) => {
+    await createLineup({ ...values, newFile: fileList[0] });
+  };
+
   return (
-    <Form layout="vertical" hideRequredMark>
+    <Form
+      form={form}
+      id="lineup-create"
+      layout="vertical"
+      onFinish={onFinish}
+    >
       <Row gutter={16}>
         <Col span={12}>
           <Form.Item
@@ -53,9 +77,9 @@ export default function LineupCreateForm() {
           <Form.Item
             name="newFile"
             label="NewFile"
-            rules={[{ required: true, message: 'Please choose the dateTime' }]}
+          // rules={[{ required: true, message: 'Please choose the picutre' }]}
           >
-            <Upload />
+            <Upload fileList={fileList} setFileList={setFileList} />
           </Form.Item>
         </Col>
       </Row>

@@ -1,6 +1,11 @@
-.wrapper {
-  margin-top: 2rem;
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: space-between;
+.concertCreateButton {
+  margin: 2rem 0 1rem;
+}
+
+.tabs {
+  transform: translate(1px, 1rem);
+}
+
+.card {
+  border-top-right-radius: 0;
 }

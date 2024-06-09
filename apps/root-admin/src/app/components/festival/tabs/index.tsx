@@ -1,34 +1,36 @@
 "use client";
 
-import React, { useRef } from 'react';
-import { Tabs as AntdTabs, TabsProps } from 'antd';
+import React from 'react';
+import { Tabs as AntdTabs, Flex } from 'antd';
+import type { TabsProps } from 'antd';
 import { DrawerButton, ConcertCreateForm, Card } from '@components/festival';
+import type { ConcertsResponse } from '@app/types/concert';
+
 import styles from './tabs.module.css';
-import { ConcertsResponse } from '@app/types/concert';
 
 export default function Tabs({
   festivalSubId,
   concertInfo,
   ...props
-}: { festivalSubId: string; concertInfo: ConcertsResponse; } & TabsProps) {
+}: { festivalSubId: string; concertInfo?: ConcertsResponse; } & TabsProps) {
   return (
     <>
-      <div className={styles.wrapper}>
-        <AntdTabs
-          {...props}
-          hideAdd
-          type="editable-card"
-        />
-        <DrawerButton
-          variant='concert-create'
-        >
+      <Flex justify='end'>
+        <DrawerButton className={styles.concertCreateButton} variant='concert-create'>
           <ConcertCreateForm festivalSubId={festivalSubId} />
         </DrawerButton>
-      </div>
-      {
-        concertInfo &&
-        <Card>
-          <Card.ConcertDescription {...concertInfo} />
+      </Flex>
+      <Flex justify='end'>
+        <AntdTabs
+          className={styles.tabs}
+          type="editable-card"
+          hideAdd
+          {...props}
+        />
+      </Flex>
+      {concertInfo &&
+        <Card className={styles.card}>
+          <Card.ConcertDescprtion festivalSubId={festivalSubId} {...concertInfo} />
         </Card>
       }
     </>
