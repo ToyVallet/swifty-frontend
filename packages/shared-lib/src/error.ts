@@ -15,7 +15,7 @@ type APIStatus =
 type APIStatusCode = 400 | 401 | 403 | 404 | 409 | 410 | 429 | 500 | 503 | 504;
 
 // Define the structure of an error
-interface IError extends Error {
+export interface IError extends Error {
   readonly timestamp: Date;
   readonly trackingId: string;
   readonly statusCode: APIStatusCode;
