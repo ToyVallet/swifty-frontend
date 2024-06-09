@@ -12,7 +12,7 @@ interface Props {
 }
 
 export default async function UserDetailPage({ params: { id } }: Props) {
-  const requestOption = await insertCookieInRequest({});
+  const requestOption = await insertCookieInRequest({ cache: 'no-cache' });
   const data = await customFetch<User>(API_CLIENT.user(id), requestOption);
 
   const breadcrumbList: BreadcrumbList = [

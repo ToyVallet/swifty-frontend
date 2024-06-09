@@ -1,6 +1,7 @@
 'use client';
 
 import { API_CLIENT } from '@app/lib/constant/api';
+import { clearServerCache } from '@app/lib/util/clear-server-cache';
 import { customFetch } from '@swifty/shared-lib';
 import type { UserStatus } from '@type/user';
 import { Button, Popconfirm } from 'antd';
@@ -37,6 +38,7 @@ export default function UserStateButtonList({
           : (state.toUpperCase() as UserStatus),
       );
       setErrorMessage(null);
+      await clearServerCache('users');
     } catch (err) {
       if (err instanceof Error) {
         setErrorMessage(`Change ${state.toUpperCase()} : ${err.message}`);
@@ -47,6 +49,7 @@ export default function UserStateButtonList({
 
   const deleteUser = async () => {
     await customFetch(API_CLIENT.user(userSubId), { method: 'DELETE' });
+    await clearServerCache('users');
     router.replace('/user');
   };
 

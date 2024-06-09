@@ -9,6 +9,7 @@ import styles from './user.module.css';
 export default async function Page() {
   const requestOption = await InsertCookieInRequest({
     cache: 'no-cache',
+    next: { tags: ['users'] },
   });
 
   const data = await customFetch<UserApi>(API_CLIENT.users(), requestOption);
