@@ -1,8 +1,10 @@
 "use client";
 
 import React, { useState } from 'react';
-import { Button, Drawer, DrawerProps, Space } from 'antd';
+import { Button, Drawer, Space } from 'antd';
+import type { DrawerProps } from 'antd';
 import clsx from 'clsx';
+
 import styles from './drawer-button.module.css';
 
 const variantButtons = {
@@ -14,12 +16,14 @@ const variantButtons = {
 
 interface DrawerButtonProps extends DrawerProps {
   variant: keyof typeof variantButtons;
+  children: React.ReactNode;
 }
 
 export default function DrawerButton({
   className,
   variant,
-  children
+  children,
+  ...drawerProps
 }: DrawerButtonProps) {
   const [open, setOpen] = useState(false);
 
@@ -34,7 +38,7 @@ export default function DrawerButton({
   return (
     <>
       <Button
-        className={clsx({ [styles.createButton]: variant.includes('create') }, className)}
+        className={clsx({ [styles.createButton as string]: variant.includes('create') }, className)}
         type={variant.includes('create') ? 'primary' : 'default'}
         style={variant.includes('create') ? { height: '3rem', borderRadius: '1.5rem', fontSize: '14px', fontWeight: '700' } : {}}
         onClick={showDrawer}
@@ -46,17 +50,17 @@ export default function DrawerButton({
         width={720}
         onClose={onClose}
         open={open}
-        styles={{
-          body: {
-            paddingBottom: 80,
-          },
-        }}
+        {...drawerProps}
         extra={
           <Space>
             <Button onClick={onClose}>Cancel</Button>
             <Button
-              onClick={onClose}
-              type="primary">Submit</Button>
+              type="primary"
+              htmlType="submit"
+              form={variant}
+            >
+              Submit
+            </Button>
           </Space>
         }
       >
@@ -65,3 +69,4 @@ export default function DrawerButton({
     </>
   );
 }
+

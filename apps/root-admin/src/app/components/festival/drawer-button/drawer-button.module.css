@@ -1,7 +1,6 @@
 .createButton {
-  background: red;
   width: 9.375rem;
-  text-indent: 0.5rem;
+  text-indent: 1.25rem;
   position: relative;
 }
 
