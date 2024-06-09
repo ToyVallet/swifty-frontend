@@ -15,7 +15,10 @@ interface UserActionsProps {
   onStatusChange: (newStatus: UserStatus) => void;
 }
 
-export default function UserActions({
+type States = 'active' | 'ban' | 'pause';
+const USER_STATES = ['active', 'ban', 'pause'] as const;
+
+export default function UserStateButtonList({
   userSubId,
   status,
   onStatusChange,
@@ -23,30 +26,24 @@ export default function UserActions({
   const router = useRouter();
   const [errorMessage, setErrorMessage] = useState<null | string>(null);
 
-  const handleStatusChange = async (
-    newStatus: UserStatus,
-    apiEndpoint: string,
-  ) => {
+  // 낙관적 업데이트 적용
+  const onChangeStatus = async (state: States) => {
     const prevStatus = status;
-    onStatusChange(newStatus);
-
     try {
-      await customFetch(apiEndpoint, { method: 'PATCH' });
+      await customFetch(API_CLIENT[state](userSubId), { method: 'PATCH' });
+      onStatusChange(
+        state.toUpperCase() === 'BAN'
+          ? 'BANNED'
+          : (state.toUpperCase() as UserStatus),
+      );
       setErrorMessage(null);
     } catch (err) {
       if (err instanceof Error) {
-        setErrorMessage(`Change ${newStatus} : ${err.message}`);
+        setErrorMessage(`Change ${state.toUpperCase()} : ${err.message}`);
       }
       onStatusChange(prevStatus);
     }
   };
-
-  const changeActivate = () =>
-    handleStatusChange('ACTIVE', API_CLIENT.activation(userSubId));
-  const changeBan = () =>
-    handleStatusChange('BANNED', API_CLIENT.ban(userSubId));
-  const changePause = () =>
-    handleStatusChange('PAUSE', API_CLIENT.pause(userSubId));
 
   const deleteUser = async () => {
     await customFetch(API_CLIENT.user(userSubId), { method: 'DELETE' });
@@ -68,16 +65,15 @@ export default function UserActions({
             Delete
           </Button>
         </Popconfirm>
-
-        <Button size="large" onClick={changeActivate} type="primary">
-          Activate
-        </Button>
-        <Button size="large" onClick={changeBan} type="primary">
-          Ban
-        </Button>
-        <Button size="large" onClick={changePause} type="primary">
-          Pause
-        </Button>
+        {USER_STATES.map((state) => (
+          <Button
+            size="large"
+            onClick={() => onChangeStatus(state)}
+            type="primary"
+          >
+            {state.toUpperCase()}
+          </Button>
+        ))}
         {errorMessage && (
           <span className={styles.errorMessage}>{errorMessage}</span>
         )}

@@ -11,7 +11,7 @@ export const API_CLIENT = {
       ? `/root/admin/user?userRole=${userRole}&page=${page}&size=${size}`
       : `/root/admin/user?page=${page}&size=${size}`,
   user: (id: string) => `/root/admin/user/${id}`,
-  activation: (id: string) => `/root/admin/user/${id}/activation`,
+  active: (id: string) => `/root/admin/user/${id}/activation`,
   ban: (id: string) => `/root/admin/user/${id}/ban`,
   pause: (id: string) => `/root/admin/user/${id}/pause`,
 } as const;

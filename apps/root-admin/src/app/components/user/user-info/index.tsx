@@ -3,7 +3,7 @@
 import type { User, UserStatus } from '@type/user';
 import { useState } from 'react';
 
-import UserActions from './user-action';
+import UserStateButtonList from './user-state-button-list';
 import styles from './userInfo.module.css';
 
 export default function UserInfo(props: User) {
@@ -14,7 +14,7 @@ export default function UserInfo(props: User) {
 
   return (
     <div className={styles.container}>
-      <UserActions
+      <UserStateButtonList
         userSubId={props.userSubId}
         status={props.status}
         onStatusChange={setStatus}
