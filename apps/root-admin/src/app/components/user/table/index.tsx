@@ -1,11 +1,26 @@
 'use client';
 
+import {
+  DefaultTag,
+  GenderTag,
+  LoginTag,
+  StatusTag,
+} from '@app/components/ui/tag';
 import { API_CLIENT } from '@lib/constant/api';
 import { customFetch } from '@swifty/shared-lib';
-import type { User, UserApi } from '@type/user';
+import type {
+  User,
+  UserApi,
+  UserEnrolled,
+  UserGender,
+  UserStatus,
+} from '@type/user';
+import type { TableProps } from 'antd';
 import { Table } from 'antd';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
+
+import styles from './table.module.css';
 
 interface Props {
   data: User[];
@@ -13,14 +28,54 @@ interface Props {
   total: number;
 }
 
+const columns: TableProps<User>['columns'] = [
+  {
+    title: 'Name',
+    dataIndex: 'name',
+    key: 'name',
+  },
+  {
+    title: 'Phone',
+    dataIndex: 'phoneNumber',
+    key: 'phoneNumber',
+  },
+  {
+    title: 'ID',
+    dataIndex: 'userFormId',
+    key: 'userFormId',
+  },
+  {
+    title: 'Birth Of Date',
+    dataIndex: 'bod',
+    key: 'bod',
+  },
+  {
+    title: 'Gender',
+    dataIndex: 'gender',
+    key: 'gender',
+    render: (value: UserGender) => <GenderTag gender={value} />,
+  },
+  {
+    title: 'User Role',
+    dataIndex: 'userRole',
+    key: 'userRole',
+    render: (value: string) => <DefaultTag value={value} />,
+  },
+  {
+    title: 'Login Type',
+    dataIndex: 'enrolled',
+    key: 'enrolled',
+    render: (value: UserEnrolled) => <LoginTag type={value} />,
+  },
+  {
+    title: 'User Status',
+    dataIndex: 'status',
+    key: 'status',
+    render: (value: UserStatus) => <StatusTag status={value} />,
+  },
+];
+
 function CustomTable({ data, pageSize, total }: Props) {
-  const columns = Object.keys(data[0] ? data[0] : {})
-    .map((name) => ({
-      title: name.toUpperCase(),
-      dataIndex: name,
-      key: name,
-    }))
-    .filter((obj) => obj.key !== 'userSubId');
   const router = useRouter();
   const [tableData, setTableData] = useState<User[]>(data);
   const [pagination, setPagination] = useState({
@@ -33,7 +88,7 @@ function CustomTable({ data, pageSize, total }: Props) {
   const handleTableChange = async (page: number, pageSize: number) => {
     setLoading(true);
     const data = await customFetch<UserApi>(
-      API_CLIENT.hosts(undefined, page - 1, pageSize),
+      API_CLIENT.users(undefined, page - 1, pageSize),
     );
     setTableData(data.content);
     setPagination({
@@ -66,6 +121,7 @@ function CustomTable({ data, pageSize, total }: Props) {
         onRow={(record) => ({
           onClick: () => onClickRow(record),
         })}
+        rowClassName={styles.row}
         rowKey="userSubId"
       />
     </section>

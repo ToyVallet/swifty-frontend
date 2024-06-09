@@ -5,11 +5,14 @@ export const API_LINEUP = {
 } as const;
 
 export const API_CLIENT = {
-  hosts: (userRole?: UserRole, page: number = 0, size: number = 20) =>
+  users: (userRole?: UserRole, page: number = 0, size: number = 20) =>
     userRole
-      ? `/admin/host?userRole=${userRole}&page=${page}&size=${size}`
-      : `/admin/host?page=${page}&size=${size}`,
-  host: (id: string) => `/admin/host/${id}`,
+      ? `/root/admin/user?userRole=${userRole}&page=${page}&size=${size}`
+      : `/root/admin/user?page=${page}&size=${size}`,
+  user: (id: string) => `/root/admin/user/${id}`,
+  active: (id: string) => `/root/admin/user/${id}/activation`,
+  ban: (id: string) => `/root/admin/user/${id}/ban`,
+  pause: (id: string) => `/root/admin/user/${id}/pause`,
 } as const;
 
 export const API_FESTIVAL = {
