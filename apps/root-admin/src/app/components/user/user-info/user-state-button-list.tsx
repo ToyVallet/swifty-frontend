@@ -30,13 +30,13 @@ export default function UserStateButtonList({
   // 낙관적 업데이트 적용
   const onChangeStatus = async (state: States) => {
     const prevStatus = status;
+    onStatusChange(
+      state.toUpperCase() === 'BAN'
+        ? 'BANNED'
+        : (state.toUpperCase() as UserStatus),
+    );
     try {
       await customFetch(API_CLIENT[state](userSubId), { method: 'PATCH' });
-      onStatusChange(
-        state.toUpperCase() === 'BAN'
-          ? 'BANNED'
-          : (state.toUpperCase() as UserStatus),
-      );
       setErrorMessage(null);
       await clearServerCache('users');
     } catch (err) {
