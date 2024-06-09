@@ -3,7 +3,7 @@
 import { Breadcrumb as AntdBreadCrumb, type BreadcrumbProps } from 'antd';
 import Link from 'next/link';
 
-import styles from './brandcrumb.module.css';
+import styles from './breadcrumb.module.css';
 
 export type BreadcrumbList = { title: string; path?: string }[];
 
@@ -25,7 +25,7 @@ const itemRender: ItemRender = (currentRoute, params, items, paths) => {
   );
 };
 
-export default function Brandcrumb({ breadcrumbList, separator = '/' }: Props) {
+export default function Breadcrumb({ breadcrumbList, separator = '/' }: Props) {
   return (
     <AntdBreadCrumb
       separator={<li className={styles.separator}>{separator}</li>}
