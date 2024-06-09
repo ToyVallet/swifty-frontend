@@ -5,62 +5,74 @@ import {
   StatusNotifier,
 } from '@components/festival';
 import formatDate from '@lib/util/formatDate';
-import { Button } from 'antd';
-import type { PropsWithChildren } from 'react';
+import type { PropsWithClassName } from '@swifty/shared-lib';
+import clsx from 'clsx';
 
 import styles from './card.module.css';
 
-export default function Card({ children }: PropsWithChildren) {
-  return <li className={styles.item}>{children}</li>;
+export default function Card({ className, children }: PropsWithClassName) {
+  return <li className={clsx(styles.item, className)}>{children}</li>;
 }
+
 function FestivalDescription({
+  className,
   name,
   addr,
   description,
   startDate,
   endDate,
-  status,
 }: {
   name: string;
   addr: string;
   description: string;
   startDate: string;
   endDate: string;
-  status: 'BEFORE' | 'PROCESS' | 'CLOSED';
-}) {
+} & PropsWithClassName) {
   return (
-    <div className={styles.description}>
+    <div className={clsx(styles.description, className)}>
       <h3 className={styles.heading}>{name}</h3>
       <span className={styles.content}>{addr}</span>
       <span className={styles.content}>{description}</span>
-      <span
-        className={styles.content}
-      >{`${formatDate(startDate)} - ${formatDate(endDate)}`}</span>
-      <StatusNotifier status={status} />
+      <span className={styles.content}>{formatDate(startDate)}</span>
+      <span className={styles.content}>{formatDate(endDate)}</span>
     </div>
   );
 }
 
 function ConcertDescription({
+  className,
+  festivalSubId,
+  subId,
   name,
   location,
   startDate,
   endDate,
   description,
   concertStatus,
-}: ConcertsResponse) {
+}: ConcertsResponse & { festivalSubId: string } & PropsWithClassName) {
   return (
-    <div className={styles.description}>
+    <div className={clsx(styles.description, className)}>
       <h3 className={styles.heading}>{location}</h3>
       <span className={styles.content}>{description}</span>
-      <span
-        className={styles.content}
-      >{`${formatDate(startDate)} - ${formatDate(endDate)}`}</span>
-      <StatusNotifier status={concertStatus} />
-      <DrawerButton variant="concert-update">
-        <ConcertUpdateForm />
-      </DrawerButton>
-      <Button>삭제</Button>
+      <span className={styles.content}>{formatDate(startDate)}</span>
+      <span className={styles.content}>{formatDate(endDate)}</span>
+      <div className={styles.content}>
+        <StatusNotifier status={concertStatus} />
+      </div>
+      <div className={styles.content}>
+        <DrawerButton variant="concert-update">
+          <ConcertUpdateForm
+            festivalSubId={festivalSubId}
+            subId={subId}
+            name={name}
+            location={location}
+            startDate={startDate}
+            endDate={endDate}
+            description={description}
+            concertStatus={concertStatus}
+          />
+        </DrawerButton>
+      </div>
     </div>
   );
 }
@@ -69,4 +81,4 @@ FestivalDescription.displayName = 'Festival Description';
 Card.FestvialDescription = FestivalDescription;
 
 ConcertDescription.displayName = 'Concert Description';
-Card.ConcertDescription = ConcertDescription;
+Card.ConcertDescprtion = ConcertDescription;
