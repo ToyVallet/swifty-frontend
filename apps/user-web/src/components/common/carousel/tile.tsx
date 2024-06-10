@@ -13,7 +13,7 @@ export default function Tile({
   description,
   priority = false,
 }: FestivalInfo & { priority?: boolean }) {
-  const period = `${dayjs(startdate).format('YYYY-MM-DD')} - ${dayjs(enddate).format('YYYY-MM-DD')}`;
+  const period = `${dayjs(startdate).format('YYYY.MM.DD')} - ${dayjs(enddate).format('YYYY.MM.DD')}`;
   return (
     <Link href={`/festival/${id}`}>
       <div className="bg-black w-full max-w-[150px] text-white">
@@ -26,6 +26,8 @@ export default function Tile({
             sizes="auto"
             fill
             fallback={FallbackFestival}
+            placeholder="blur"
+            blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkAAIAAAoAAv/lPAAAAA="
           />
         </figure>
         <div className="pt-[10px] flex flex-col items-between">

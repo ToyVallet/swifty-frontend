@@ -37,7 +37,7 @@ async function FestivalTiles({
 
 function FestivalCarousel({ festivals }: { festivals: Props['festivals'] }) {
   return (
-    <Carousel className="gap-5" loop={false}>
+    <Carousel className="gap-3" loop={false}>
       {festivals.map((festival, idx) => (
         <Tile key={idx} {...festival} />
       ))}
