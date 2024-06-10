@@ -6,7 +6,6 @@ export { default as Link } from './link';
 export { default as AdBanner } from './ad-banner';
 export { default as Footer } from './footer';
 export { default as Carousel } from './carousel';
-export { default as FloatingTicket } from './floating-ticket';
 export * from './form';
 export * from './animated';
 export { default as BackButton } from './back-button';

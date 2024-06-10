@@ -1,14 +1,12 @@
-import { getIsLoggedIn, getIsVerified } from '@/app/api';
+import { getIsLoggedIn } from '@api/.';
 
 import { Link } from '../common';
 import NoticeTile from './notice-tile';
 
 export default async function NeedReverificationTile() {
-  const isVerified = await getIsVerified();
   const isLoggedIn = await getIsLoggedIn();
   return (
-    isLoggedIn &&
-    !isVerified && (
+    isLoggedIn && (
       <NoticeTile>
         <span>티켓팅 서비스를 이용하려면 재학생 인증이 필요해요.</span>
         <div className="w-full flex items-center justify-end mt-4">

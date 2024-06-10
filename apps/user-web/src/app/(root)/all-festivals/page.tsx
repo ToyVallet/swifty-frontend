@@ -2,7 +2,7 @@ import { getLineupInfos } from '@app/action';
 import { AdBanner, Navigation } from '@components/common';
 import { FestivalTiles } from '@components/home';
 
-export default async function Page() {
+export default async function AllFestivalsPage() {
   const fesivalLineups = await getLineupInfos();
   return (
     <>

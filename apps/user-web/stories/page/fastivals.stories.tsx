@@ -1,4 +1,4 @@
-import Page from '@app/festivals/page';
+import Page from '@app/(root)/festivals/page';
 import RootNavLayout from '@app/layout';
 import type { Meta, StoryObj } from '@storybook/react';
 

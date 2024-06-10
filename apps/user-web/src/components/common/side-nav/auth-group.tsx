@@ -2,8 +2,8 @@
 
 import { Avatar, AvatarFallback, AvatarImage } from '@components/ui/avatar';
 import { SheetClose } from '@components/ui/sheet';
-import { If } from '@components/util';
 import { cn } from '@swifty/shared-lib';
+import { Choose, Otherwise, When } from '@swifty/ui';
 import { IoChevronForwardOutline } from 'react-icons/io5';
 import {
   IoPersonCircleOutline,
@@ -20,17 +20,17 @@ export default function AuthGroup({ className }: { className?: string }) {
 
   return (
     <div className="w-full">
-      <If condition={isLoggedIn}>
-        <If.Then>
-          <If condition={isAdmin}>
-            <If.Then>
+      <Choose value={isLoggedIn}>
+        <When value={true}>
+          <Choose value={isAdmin}>
+            <When value={true}>
               <NavLink link="/admin" className={className}>
                 <IoPersonSharp className="mr-2" />
                 관리자 페이지
               </NavLink>
-            </If.Then>
+            </When>
 
-            <If.Else>
+            <Otherwise>
               <NavLink
                 privateRoute
                 link="/mypage"
@@ -65,22 +65,22 @@ export default function AuthGroup({ className }: { className?: string }) {
               <NavLink link="/my-tickets" className={className}>
                 <IoTicketOutline className="mr-2" />내 티켓
               </NavLink>
-            </If.Else>
-          </If>
+            </Otherwise>
+          </Choose>
 
           <SheetClose className={className} onClick={logout}>
             <MdLogout />
             로그아웃
           </SheetClose>
-        </If.Then>
+        </When>
 
-        <If.Else>
+        <Otherwise>
           <NavLink link="/login" className={className}>
             <MdLogin className="mr-2" />
             로그인
           </NavLink>
-        </If.Else>
-      </If>
+        </Otherwise>
+      </Choose>
     </div>
   );
 }

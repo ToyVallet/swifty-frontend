@@ -1,39 +1,66 @@
-import { BackButton, Link } from '@components/common';
-import LogoLink from '@components/common/navigation/logo-link';
-import Magnifier from '@icons/magnifier.svg';
+import { BackButton } from '@components/common';
 import { cn } from '@swifty/shared-lib';
+import { Choose, Otherwise, When } from '@swifty/ui';
+import { cva } from 'class-variance-authority';
 import { IoArrowBackOutline } from 'react-icons/io5';
 
-type Props = {
-  variant: 'main' | 'back' | 'back-with-logo';
+import Column from './column';
+import LogoLink from './logo-link';
+
+type NavigationProps = {
+  variant?: 'root' | 'back' | 'back-with-logo';
+  bg?: 'transparent' | 'gradient' | 'solid';
+  search?: boolean;
   title?: string;
 };
 
-export default function Navigation({ title, variant }: Props) {
-  return (
-    <nav
-      className={cn(
-        'z-50 flex w-full justify-between items-center px-5 h-[50px] py-[11px] bg-gradient-header fixed top-0 lg:w-[430px] max-w-[430px]',
-      )}
-    >
-      {variant === 'main' && (
-        <>
-          <LogoLink />
-          <Link href="#" className="w-auto h-auto flex items-center">
-            <Magnifier className="scale-90" fill="white" />
-          </Link>
-        </>
-      )}
+const navigationVariants = cva(
+  'z-30 grid grid-cols-3 w-full px-5 h-[50px] py-5 fixed top-0',
+  {
+    variants: {
+      bg: {
+        transparent: 'bg-transparent',
+        gradient: 'bg-gradient-to-b from-black to-transparent',
+        solid: 'bg-black',
+      },
+    },
+    defaultVariants: {
+      bg: 'transparent',
+    },
+  },
+);
 
-      {(variant === 'back' || variant === 'back-with-logo') && (
+export default function Navigation({
+  title,
+  variant = 'back',
+  bg = 'transparent',
+}: NavigationProps) {
+  return (
+    <nav className={cn(navigationVariants({ bg }))}>
+      <Column>
+        <Choose value={variant}>
+          <When value="root">
+            <LogoLink />
+          </When>
+          <When value="back">
+            <BackButton className="text-white font-bold text-base flex items-center gap-0.5">
+              <IoArrowBackOutline size={25} className="text-white" />
+              {title}
+            </BackButton>
+          </When>
+        </Choose>
+      </Column>
+
+      <Column></Column>
+
+      <Column></Column>
+
+      {/* {(variant === 'back' || variant === 'back-with-logo') && (
         <BackButton className="text-white font-bold text-base flex items-center gap-0.5">
           <IoArrowBackOutline size={25} className="text-white" />
           {title}
         </BackButton>
-      )}
-      {variant === 'back-with-logo' && (
-        <LogoLink className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2" />
-      )}
+      )} */}
     </nav>
   );
 }
