@@ -6,7 +6,7 @@ export default async function AllFestivalsPage() {
   const fesivalLineups = await getLineupInfos();
   return (
     <>
-      <Navigation variant="back-with-logo" />
+      <Navigation variant="back" bg="gradient" centerLogo />
       <div className="mb-20 w-full flex flex-col gap-5 px-5 lg:mx-auto">
         <FestivalTiles
           festivals={fesivalLineups}

@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom';
 import { render } from '@testing-library/react';
 
-import { Choose, Otherwise, When } from '../../../src/lib/utils/choose';
+import { Choose, Otherwise, When } from '../../../src/lib/utils/switch';
 
 describe('Choose 컴포넌트 테스트', () => {
   it('Choose 내부에 value와 일치하는 When 컴포넌트가 있을 때 해당 컴포넌트를 랜더링한다.', () => {
