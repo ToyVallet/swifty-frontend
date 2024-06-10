@@ -1,7 +1,7 @@
 'use client';
 
 import { Link } from '@components/common';
-import { If } from '@components/util';
+import { Choose, Otherwise, When } from '@swifty/ui';
 import { AnimatePresence, motion } from 'framer-motion';
 import { type PropsWithChildren } from 'react';
 import { BsTicketFill } from 'react-icons/bs';
@@ -29,16 +29,16 @@ export default function FloatingTicket() {
   return (
     <AnimatePresence>
       {isLoggedIn && userInfo !== null && (
-        <If condition={isAdmin}>
-          <If.Then>
+        <Choose value={isAdmin}>
+          <When value={true}>
             <FloatingButton href="/admin">관리자 페이지</FloatingButton>
-          </If.Then>
-          <If.Else>
+          </When>
+          <Otherwise>
             <FloatingButton href="/my-tickets">
               <BsTicketFill size={25} />
             </FloatingButton>
-          </If.Else>
-        </If>
+          </Otherwise>
+        </Choose>
       )}
     </AnimatePresence>
   );

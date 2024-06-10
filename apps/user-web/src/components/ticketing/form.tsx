@@ -2,13 +2,14 @@
 
 import { API_ROUTES } from '@lib/constants';
 import { type APIError, CustomError, ErrorCause } from '@lib/utils/validation';
+import { Button } from '@swifty/ui';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
 import { post } from 'src/api';
 import { useClientSideToken } from 'src/hooks';
 import { z } from 'zod';
 
-import { Button, Form, Input } from '../common';
+import { Form, Input } from '../common';
 
 const schema = z.object({
   captchaValue: z.string().trim().min(1, { message: '필수 입력 사항입니다.' }),

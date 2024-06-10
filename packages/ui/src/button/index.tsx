@@ -7,10 +7,10 @@ import { type MotionProps, motion } from 'framer-motion';
 import React from 'react';
 import PulseLoader from 'react-spinners/PulseLoader';
 
-import { transition } from '../lib';
+import { Choose, Otherwise, When, transition } from '../lib';
 
 const buttonVariants = cva(
-  'inline-flex items-center justify-center whitespace-nowrap rounded-xl h-[50px] font-bold ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 transition-colors duration-200 ease-in-out user-select-none',
+  'flex items-center justify-center whitespace-nowrap rounded-xl h-[50px] font-bold ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 transition-colors duration-200 ease-in-out user-select-none',
   {
     variants: {
       variant: {
@@ -67,20 +67,31 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps & MotionProps>(
       );
     }
 
-    const Comp = asChild ? Slot : motion.button;
+    // const Comp = asChild ? Slot : 'button';
     return (
-      <Comp
-        whileTap={{
-          scale: 0.98,
-          backgroundColor:
-            variant === 'outlined' ? 'rgba(255, 255, 255, 1)' : 'auto',
-          color: variant === 'outlined' ? 'rgba(0, 0, 0, 1)' : 'auto',
-        }}
-        transition={transition}
-        className={cn(buttonVariants({ variant, size, className }))}
-        ref={ref}
-        {...props}
-      />
+      <Choose value={asChild}>
+        <When value={true}>
+          <Slot
+            className={cn(buttonVariants({ variant, size, className }))}
+            ref={ref}
+            {...props}
+          />
+        </When>
+        <Otherwise>
+          <motion.button
+            whileTap={{
+              scale: 0.98,
+              backgroundColor:
+                variant === 'outlined' ? 'rgba(255, 255, 255, 1)' : 'auto',
+              color: variant === 'outlined' ? 'rgba(0, 0, 0, 1)' : 'auto',
+            }}
+            transition={transition}
+            className={cn(buttonVariants({ variant, size, className }))}
+            ref={ref}
+            {...props}
+          />
+        </Otherwise>
+      </Choose>
     );
   },
 );

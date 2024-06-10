@@ -11,7 +11,7 @@ type Props = {
   headerPosiion?: 'start' | 'center';
 };
 
-async function FestivalTiles({
+function FestivalTiles({
   festivals,
   variant = 'carousel',
   headerPosiion = 'start',

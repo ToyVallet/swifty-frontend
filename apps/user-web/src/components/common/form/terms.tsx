@@ -1,5 +1,6 @@
 'use client';
 
+import { Button } from '@swifty/ui';
 import { type ReactNode, useState } from 'react';
 
 import {
@@ -10,7 +11,6 @@ import {
 } from '../../ui/accordion';
 import { Checkbox } from '../../ui/checkbox';
 import BottomSheet from '../bottom-sheet';
-import Button from '../button';
 
 export type Terms = {
   id: string;

@@ -1,3 +1,5 @@
+'use client';
+
 import { motion } from 'framer-motion';
 
 import { variants } from './bottom-sheet/motion';

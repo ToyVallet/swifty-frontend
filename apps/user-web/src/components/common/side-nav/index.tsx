@@ -1,8 +1,8 @@
 import { Separator } from '@components/ui/separator';
 import { Sheet, SheetContent, SheetTrigger } from '@components/ui/sheet';
+import { Button } from '@swifty/ui';
 import { IoIosMenu } from 'react-icons/io';
 
-import Button from '../button';
 import AuthGroup from './auth-group';
 import NavLink from './nav-link';
 
@@ -49,7 +49,7 @@ export default async function SideNav() {
 
   return (
     <Sheet>
-      <Button variant="transparent" className="w-auto h-auto p-1">
+      <Button variant="ghost" className="w-auto h-auto p-1">
         <SheetTrigger asChild>
           <IoIosMenu size={40} />
         </SheetTrigger>

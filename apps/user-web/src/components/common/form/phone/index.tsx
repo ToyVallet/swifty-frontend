@@ -1,6 +1,7 @@
 'use client';
 
 import { API_ROUTES } from '@lib/constants';
+import { Button } from '@swifty/ui';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { toast } from 'sonner';
@@ -9,7 +10,6 @@ import { useBottomSheet } from 'src/hooks';
 import { z } from 'zod';
 
 import BottomSheet from '../../bottom-sheet';
-import Button from '../../button';
 import Form from '../form';
 import Input from '../input';
 import OTP from './otp';
@@ -117,7 +117,7 @@ export default function Phone({ type, token: tokenParam }: PhoneProps) {
             return e.target.value;
           }}
         />
-        <Button type="submit" variant="bottom">
+        <Button type="submit" variant="ghost">
           다음
         </Button>
       </Form>

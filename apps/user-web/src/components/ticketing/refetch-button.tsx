@@ -1,9 +1,8 @@
 'use client';
 
+import { Button } from '@swifty/ui';
 import { useRouter } from 'next/navigation';
 import { MdRefresh } from 'react-icons/md';
-
-import { Button } from '../common';
 
 export default function RefetchButton() {
   const router = useRouter();

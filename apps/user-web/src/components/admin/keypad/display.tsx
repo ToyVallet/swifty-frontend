@@ -12,7 +12,7 @@ export default function Display({ value, slot, password }: DisplayProps) {
   return (
     <div className="flex gap-2 w-full px-8 items-center justify-center">
       {Array.from({ length: slot }).map((_, i) => (
-        <Block key={i} value={value[i]} password={password} />
+        <Block key={i} value={value[i] ?? ''} password={password} />
       ))}
     </div>
   );
