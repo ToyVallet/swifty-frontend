@@ -13,14 +13,14 @@ interface IndicatorProps {
 
 function Indicator({ cur, total }: IndicatorProps) {
   return (
-    <div className="absolute bottom-[55px] right-4 bg-bgBlack text-white font-bold text-xs px-2.5 py-[1px] rounded-lg">
+    <div className="absolute bottom-[55px] right-4 bg-black text-white font-bold text-xs px-2.5 py-[1px] rounded-lg">
       {`${cur + 1} / ${total}`}
     </div>
   );
 }
 
 interface CarouselProps extends EmblaOptionsType {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   hasIndicator?: boolean;
   className?: string;
   autoplay?: boolean;
@@ -34,12 +34,13 @@ function Carousel({
   skipSnaps = true,
   autoplay = false,
   duration = 3000,
+  loop = true,
 }: CarouselProps) {
   const [emblaRef, emblaApi] = useEmblaCarousel(
     {
       align,
       skipSnaps,
-      loop: true,
+      loop,
     },
     [
       Autoplay({

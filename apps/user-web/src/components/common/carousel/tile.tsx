@@ -16,7 +16,7 @@ export default function Tile({
   const period = `${dayjs(startdate).format('YYYY-MM-DD')} - ${dayjs(enddate).format('YYYY-MM-DD')}`;
   return (
     <Link href={`/festival/${id}`}>
-      <div className="bg-bgBlack w-[150px] text-white ">
+      <div className="bg-black w-full max-w-[150px] text-white">
         <figure className="relative aspect-[3/4]">
           <ImageWithFallback
             className="absolute object-cover rounded-xl"

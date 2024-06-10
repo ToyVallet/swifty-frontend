@@ -47,9 +47,11 @@ export default function Navigation({
             <LogoLink />
           </When>
           <When value="back">
-            <BackButton className="text-white font-bold text-base flex items-center gap-0.5">
+            <BackButton className="text-white flex items-center">
               <LeftArrow />
-              {title}
+              {title && (
+                <span className="ml-5 font-bold text-base">{title}</span>
+              )}
             </BackButton>
           </When>
         </Choose>

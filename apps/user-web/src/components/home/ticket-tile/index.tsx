@@ -6,9 +6,7 @@ import TicketButton from './ticket-button';
 export default function TicketTile() {
   return (
     <div className="w-full">
-      <TileHeader>
-        <TileHeader.Head>제목</TileHeader.Head>
-      </TileHeader>
+      <TileHeader>제목</TileHeader>
       <Card className="w-full h-32 flex justify-between p-4 rounded-2xl">
         <div className="text-neutral-50 h-full flex flex-col justify-between">
           <h4 className="font-bold text-sm dark:text-neutral-50 text-neutral-900">
