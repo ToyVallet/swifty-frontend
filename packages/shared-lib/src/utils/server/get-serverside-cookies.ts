@@ -6,8 +6,8 @@ export default async function getServerSideCookies(): Promise<string> {
   const allCookies = cookies().getAll();
   const stringified = Object.entries(allCookies).reduce(
     (acc, [, { name, value }]) => {
-      const cookie = `${name}=${value}`;
-      return acc + (acc ? '; ' : '') + cookie;
+      const cookie = `${name}=${value};`;
+      return acc + cookie;
     },
     '',
   );
