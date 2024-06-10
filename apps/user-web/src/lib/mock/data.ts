@@ -1,4 +1,4 @@
-import type { FestivalInfo } from '@lib/types';
+import type { FestivalInfo } from '@swifty/shared-lib';
 
 export const festivalLinupes: FestivalInfo[] = [
   {

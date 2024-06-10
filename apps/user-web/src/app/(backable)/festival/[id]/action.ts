@@ -1,6 +1,6 @@
 'use server';
 
-import type { FestivalInfo, LineUp } from '@lib/types';
+import type { FestivalInfo, LineUp } from '@swifty/shared-lib';
 
 export async function getFestivalInfos(id: number): Promise<FestivalInfo> {
   return {

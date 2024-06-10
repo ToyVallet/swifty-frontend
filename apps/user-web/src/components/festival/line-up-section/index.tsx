@@ -1,6 +1,6 @@
 'use client';
 
-import { type LineUp } from '@lib/types';
+import { type LineUp } from '@swifty/shared-lib';
 import dayjs, { type Dayjs } from 'dayjs';
 import { useState } from 'react';
 

@@ -1,5 +1,5 @@
-import type { LineUp } from '@lib/types';
 import { parseFestivalDate } from '@lib/utils';
+import type { LineUp } from '@swifty/shared-lib';
 import dayjs from 'dayjs';
 import Image from 'next/image';
 

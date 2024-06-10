@@ -5,19 +5,19 @@ import {
   MenuTiles,
   TileHeader,
 } from '@components/common';
-import FadeOverlay from '@components/common/carousel/fade-overlay';
+import { FadeOverlay } from '@components/common';
 import { LineUpSection, TopCard } from '@components/festival';
 import FallbackHero from '@images/fallback-hero.png';
-import type { Locale, Params } from '@lib/types';
 import formatDate from '@lib/utils/parser/format-date';
+import type { Params } from '@swifty/shared-lib';
 import { BsBellFill } from 'react-icons/bs';
 import { TiStarFullOutline } from 'react-icons/ti';
 
 import { getFestivalInfos, getLineups } from './action';
 
 export default async function FestivalHomePage({
-  params: { id, locale },
-}: Params<{ id: string; locale: Locale }>) {
+  params: { id },
+}: Params<{ id: string }>) {
   const festivalInfo = await getFestivalInfos(Number(id));
   const lineups = await getLineups(Number(id));
 
@@ -50,8 +50,8 @@ export default async function FestivalHomePage({
     <div className="mb-[90px]">
       <Hero variant="image">
         <ImageWithFallback
-          src={festivalInfo.festivalimage ?? ''}
-          alt={festivalInfo.festivalimage ?? ''}
+          src={festivalInfo.festivalimage}
+          alt={festivalInfo.festivalimag}
           width={500}
           height={500}
           fallback={FallbackHero}
@@ -65,7 +65,7 @@ export default async function FestivalHomePage({
           period={formatDate(
             festivalInfo.startdate,
             festivalInfo.enddate,
-            locale,
+            'ko',
           )}
         />
         <MenuTiles tiles={tiles} />

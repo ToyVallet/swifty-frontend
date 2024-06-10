@@ -1,6 +1,6 @@
 import { type API_ROUTES, API_URL } from '@lib/constants';
-import { type DeepValueOf } from '@lib/types';
 import { APIError, type APIErrorResponse } from '@lib/utils/validation';
+import { type DeepValueOf } from '@swifty/shared-lib';
 
 type APIOptions = {
   token?: string;

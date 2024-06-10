@@ -4,26 +4,30 @@ import Image, { type ImageProps, type StaticImageData } from 'next/image';
 import { useState } from 'react';
 
 interface ImageWithFallbackProps extends Omit<ImageProps, 'src'> {
-  src: string;
+  src?: StaticImageData | string;
   fallback: StaticImageData | string;
 }
 
 export default function ImageWithFallback({
   src,
+  alt,
   fallback,
   onError,
   ...props
 }: ImageWithFallbackProps) {
-  const [imgSrc, setImgSrc] = useState<StaticImageData | string>(src);
+  const [imgSrc, setImgSrc] = useState<typeof src>(src);
+
+  if (!imgSrc) return <Image src={fallback} alt={alt} {...props} />;
+
   return (
     <Image
-      {...props}
       src={imgSrc}
-      alt={props.alt}
+      alt={alt}
       onError={(e) => {
         setImgSrc(fallback);
         onError?.(e);
       }}
+      {...props}
     />
   );
 }

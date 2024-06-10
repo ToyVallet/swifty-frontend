@@ -1,4 +1,4 @@
-import { ImageWithFallback } from '@components/common';
+import { FadeOverlay, ImageWithFallback } from '@components/common';
 import { Link } from '@components/common';
 import FallbackHero from '@images/fallback-hero.png';
 import type { FestivalInfo } from '@lib/types';
@@ -22,7 +22,7 @@ export default function HeroTile({
       <div className="aspect-square relative h-full w-full flex items-center justify-center">
         <ImageWithFallback
           className="object-cover"
-          src={festivalimage || ''}
+          src={festivalimage}
           alt={name}
           quality={100}
           priority={priority}
@@ -30,7 +30,7 @@ export default function HeroTile({
           fill
           fallback={FallbackHero}
         />
-        <div className="absolute bottom-0 left-0 right-0 top-0 bg-gradient-hero-carousel" />
+        <FadeOverlay />
       </div>
 
       <div className="absolute bottom-[60px] left-5 right-[74px] h-[114px] text-xl font-semibold">

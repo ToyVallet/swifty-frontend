@@ -20,7 +20,7 @@ export default function Tile({
         <figure className="relative aspect-[3/4]">
           <ImageWithFallback
             className="absolute object-cover rounded-xl"
-            src={festivalimage || ''}
+            src={festivalimage}
             alt={name}
             priority={priority}
             sizes="auto"
