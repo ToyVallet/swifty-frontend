@@ -1,6 +1,6 @@
 import { getLineupInfos } from '@app/action';
 import { AdBanner, Link } from '@components/common';
-import FestivalTiles from '@components/home/festival-tile';
+import { FestivalTiles } from '@components/home';
 
 export default async function Home() {
   const festivalLineups = await getLineupInfos(5);

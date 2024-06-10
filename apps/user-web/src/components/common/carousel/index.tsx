@@ -13,7 +13,7 @@ interface IndicatorProps {
 
 function Indicator({ cur, total }: IndicatorProps) {
   return (
-    <div className="absolute bottom-[55px] right-4 bg-black text-white font-bold text-xs px-2.5 py-[1px] rounded-lg">
+    <div className="absolute bottom-[55px] right-4 bg-black text-white font-bold text-xs px-2.5 h-5 rounded-full flex items-center justify-center">
       {`${cur + 1} / ${total}`}
     </div>
   );
