@@ -12,9 +12,12 @@ interface IndicatorProps {
 }
 
 function Indicator({ cur, total }: IndicatorProps) {
+  const currentIndex = String(cur + 1).padStart(2, '0');
+  const totalIndex = String(total).padStart(2, '0');
+
   return (
     <div className="absolute bottom-[55px] right-4 bg-black text-white font-bold text-xs px-2.5 h-5 rounded-full flex items-center justify-center">
-      {`${cur + 1} / ${total}`}
+      {`${currentIndex} / ${totalIndex}`}
     </div>
   );
 }
