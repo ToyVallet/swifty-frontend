@@ -1,5 +1,5 @@
-import { festivalLinupes } from '@/app/lib/mock/data';
 import { Carousel, HeroTile } from '@components/common';
+import { festivalLinupes } from '@lib/mock/data';
 import type { Meta, StoryObj } from '@storybook/react';
 
 const meta: Meta<typeof Carousel> = {

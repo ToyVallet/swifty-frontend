@@ -1,5 +1,5 @@
-import Page from '@app/(root-nav)/festivals/page';
-import RootNavLayout from '@app/(root-nav)/layout';
+import Page from '@app/festivals/page';
+import RootNavLayout from '@app/layout';
 import type { Meta, StoryObj } from '@storybook/react';
 
 const meta: Meta<typeof Page> = {

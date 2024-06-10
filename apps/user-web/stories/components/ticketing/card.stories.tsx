@@ -1,7 +1,5 @@
-import * as api from '@app/api';
 import { Card } from '@components/ticketing';
 import type { Meta, StoryObj } from '@storybook/react';
-import { createMock } from 'storybook-addon-module-mock';
 
 const meta: Meta<typeof Card> = {
   title: 'COMPONENTS/TICKETING/Card',

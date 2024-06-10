@@ -1,6 +1,6 @@
-import HeroTile from '@/app/components/common/hero/hero-tile';
-import { festivalLinupes } from '@/app/lib/mock/data';
 import { Carousel, Hero } from '@components/common';
+import HeroTile from '@components/common/hero/hero-tile';
+import { festivalLinupes } from '@lib/mock/data';
 import type { Meta, StoryObj } from '@storybook/react';
 
 const meta: Meta<typeof Hero> = {
