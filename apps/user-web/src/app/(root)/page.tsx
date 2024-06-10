@@ -7,7 +7,6 @@ export default async function Home() {
   return (
     <>
       <Navigation variant="root" bg="gradient" search />
-
       <section className="mb-20 w-full flex flex-col gap-10 px-5 z-10 lg:mx-auto">
         <FestivalTiles festivals={festivalLineups} />
         <Link
