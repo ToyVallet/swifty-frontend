@@ -8,9 +8,9 @@
   },
   "scripts": {
     "dev": "storybook dev -p 6006",
-    "build:storybook": "storybook build",
     "lint": "eslint . --max-warnings 0",
     "generate:component": "turbo gen react-component",
+    "build-storybook": "storybook build",
     "chromatic": "npx chromatic --project-token=chpt_fb751b3caf36885",
     "test": "jest",
     "test:watch": "jest --watch"

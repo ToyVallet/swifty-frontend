@@ -3,7 +3,8 @@
   "private": true,
   "scripts": {
     "build": "turbo build",
-    "build:storybook": "turbo build:storybook",
+    "build-storybook": "turbo build:storybook",
+    "chromatic": "turbo chromatic",
     "dev": "turbo dev",
     "dev:root": "turbo dev --filter root-admin",
     "dev:user": "turbo dev --filter user-web",
@@ -27,7 +28,7 @@
     "typescript": "^ 5.4.55.3.0"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=16"
   },
   "packageManager": "yarn@1.22.22",
   "workspaces": [

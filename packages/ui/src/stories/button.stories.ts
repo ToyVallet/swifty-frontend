@@ -67,7 +67,7 @@ export const Default: Story = {
 export const White: Story = {
   args: {
     variant: 'white',
-    children: '흰 버튼',
+    children: '흰색 버튼',
   },
 };
 

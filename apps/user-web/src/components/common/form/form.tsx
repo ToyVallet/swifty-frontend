@@ -4,13 +4,8 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { cn } from '@swifty/shared-lib';
 import clsx from 'clsx';
 import type { HTMLAttributes } from 'react';
-import type {
-  FieldValues,
-  SubmitHandler} from 'react-hook-form';
-import {
-  FormProvider,
-  useForm,
-} from 'react-hook-form';
+import type { FieldValues, SubmitHandler } from 'react-hook-form';
+import { FormProvider, useForm } from 'react-hook-form';
 import type { ZodType } from 'zod';
 
 export type FormProps<TFieldValues extends FieldValues> = Omit<
