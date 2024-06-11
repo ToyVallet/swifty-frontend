@@ -1,3 +1,4 @@
+const rules = require('./rules');
 const { resolve } = require('node:path');
 const project = resolve(process.cwd(), 'tsconfig.json');
 /** @type {import("eslint").Linter.Config} */
@@ -23,6 +24,7 @@ module.exports = {
       },
     },
   },
+  rules,
   ignorePatterns: ['.*.js', 'node_modules/', 'dist/'],
   overrides: [
     {
