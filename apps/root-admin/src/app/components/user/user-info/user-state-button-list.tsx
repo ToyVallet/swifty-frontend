@@ -13,7 +13,6 @@ import styles from './userInfo.module.css';
 interface UserActionsProps {
   userSubId: string;
   status: UserStatus;
-  onStatusChange: (newStatus: UserStatus) => void;
 }
 
 type States = 'active' | 'ban' | 'pause';
@@ -22,19 +21,20 @@ const USER_STATES = ['active', 'ban', 'pause'] as const;
 export default function UserStateButtonList({
   userSubId,
   status,
-  onStatusChange,
 }: UserActionsProps) {
   const router = useRouter();
   const [errorMessage, setErrorMessage] = useState<null | string>(null);
+  const [userStatus, setUserStatus] = useState<UserStatus>(status);
+
+  const changeStatesToUserStatus = (state: States) =>
+    state.toUpperCase() === 'BAN'
+      ? 'BANNED'
+      : (state.toUpperCase() as UserStatus);
 
   // 낙관적 업데이트 적용
   const onChangeStatus = async (state: States) => {
     const prevStatus = status;
-    onStatusChange(
-      state.toUpperCase() === 'BAN'
-        ? 'BANNED'
-        : (state.toUpperCase() as UserStatus),
-    );
+    setUserStatus(() => changeStatesToUserStatus(state));
     try {
       await customFetch(API_CLIENT[state](userSubId), { method: 'PATCH' });
       setErrorMessage(null);
@@ -43,7 +43,7 @@ export default function UserStateButtonList({
       if (err instanceof Error) {
         setErrorMessage(`Change ${state.toUpperCase()} : ${err.message}`);
       }
-      onStatusChange(prevStatus);
+      setUserStatus(prevStatus);
     }
   };
 
@@ -55,28 +55,37 @@ export default function UserStateButtonList({
 
   return (
     <div className={styles.container}>
-      <section className={styles.buttonSection}>
-        <Popconfirm
-          title="계정 삭제"
-          description="해당 계정을 삭제하시겠습니까?"
-          okText="확인"
-          okType="danger"
-          cancelText="취소"
-          onConfirm={deleteUser}
-        >
-          <Button type="primary" danger size="large">
-            Delete
-          </Button>
-        </Popconfirm>
-        {USER_STATES.map((state) => (
-          <Button
-            size="large"
-            onClick={() => onChangeStatus(state)}
-            type="primary"
+      <section>
+        <h3>USER STATUS</h3>
+        <div className={styles.buttonSection}>
+          <Popconfirm
+            title="계정 삭제"
+            description="해당 계정을 삭제하시겠습니까?"
+            okText="확인"
+            okType="danger"
+            cancelText="취소"
+            onConfirm={deleteUser}
           >
-            {state.toUpperCase()}
-          </Button>
-        ))}
+            <Button type="primary" danger size="large">
+              Delete
+            </Button>
+          </Popconfirm>
+
+          {USER_STATES.map((state) => (
+            <Button
+              size="large"
+              onClick={() => onChangeStatus(state)}
+              type={
+                userStatus === changeStatesToUserStatus(state)
+                  ? 'primary'
+                  : 'default'
+              }
+            >
+              {state.toUpperCase()}
+            </Button>
+          ))}
+        </div>
+
         {errorMessage && (
           <span className={styles.errorMessage}>{errorMessage}</span>
         )}

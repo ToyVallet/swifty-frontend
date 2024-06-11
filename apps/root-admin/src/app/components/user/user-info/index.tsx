@@ -1,24 +1,18 @@
 'use client';
 
-import type { User, UserStatus } from '@type/user';
-import { useState } from 'react';
+import type { User } from '@type/user';
 
 import UserStateButtonList from './user-state-button-list';
 import styles from './userInfo.module.css';
 
 export default function UserInfo(props: User) {
-  const [status, setStatus] = useState<UserStatus>(props.status);
   const keys = Object.keys(props).filter(
-    (name) => name != 'userSubId',
+    (name) => name !== 'userSubId' && name !== 'status',
   ) as (keyof User)[];
 
   return (
     <div className={styles.container}>
-      <UserStateButtonList
-        userSubId={props.userSubId}
-        status={props.status}
-        onStatusChange={setStatus}
-      />
+      <UserStateButtonList userSubId={props.userSubId} status={props.status} />
       <ul className={styles.list}>
         {keys.map((key) => (
           <li key={key}>

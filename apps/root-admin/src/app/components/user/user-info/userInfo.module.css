@@ -5,6 +5,7 @@
 }
 
 .buttonSection {
+  margin-top: 1rem;
   display: flex;
   position: relative;
   gap: 16px;
