@@ -1,10 +1,6 @@
-import * as FestivalAPI from '@app/(root-nav)/action';
-import RootNavLayout from '@app/(root-nav)/layout';
-import Home from '@app/(root-nav)/page';
-import LocaleLayout from '@app/layout';
-import { festivalLinupes } from '@lib/mock/data';
+import RootNavLayout from '@app/layout';
+import Home from '@app/page';
 import type { Meta, StoryObj } from '@storybook/react';
-import { createMock } from 'storybook-addon-module-mock';
 
 const meta: Meta<typeof Home> = {
   title: 'PAGE/Main',

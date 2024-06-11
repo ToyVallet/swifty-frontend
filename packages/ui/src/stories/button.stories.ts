@@ -32,7 +32,7 @@ const meta = {
       control: {
         type: 'select',
       },
-      options: ['default', 'white', 'destructive'],
+      options: ['default', 'white', 'outlined', 'destructive'],
       description: '버튼의 스타일을 설정합니다.',
     },
     isLoading: {
@@ -64,10 +64,17 @@ export const Default: Story = {
   },
 };
 
-export const Outlined: Story = {
+export const White: Story = {
   args: {
     variant: 'white',
     children: '흰 버튼',
+  },
+};
+
+export const Outlined: Story = {
+  args: {
+    variant: 'outlined',
+    children: '아웃라인 버튼',
   },
 };
 
