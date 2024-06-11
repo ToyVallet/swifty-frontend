@@ -1,3 +1,4 @@
+const rules = require('./rules');
 const { resolve } = require('node:path');
 
 const project = resolve(process.cwd(), 'tsconfig.json');
@@ -36,11 +37,7 @@ module.exports = {
       },
     },
   },
-  rules: {
-    'no-console': 'error',
-    '@typescript-eslint/consistent-type-imports': 'error',
-    '@typescript-eslint/consistent-type-exports': 'error',
-  },
+  rules,
   ignorePatterns: ['.*.js', 'node_modules/'],
   overrides: [{ files: ['*.js?(x)', '*.ts?(x)'] }],
 };

@@ -3,15 +3,14 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@app/*": ["./app/*"],
-      "@components/*": ["./app/components/*"],
-      "@lib/*": ["./app/lib/*"],
-      "@hooks/*": ["./app/hooks/*"],
-      "@api/*": ["./app/api/*"],
-      "@store/*": ["./app/store/*"],
+      "@app/*": ["./src/app/*"],
+      "@components/*": ["./src/components/*"],
+      "@lib/*": ["./src/lib/*"],
+      "@hooks/*": ["./src/hooks/*"],
+      "@api/*": ["./src/api/*"],
+      "@store/*": ["./src/store/*"],
       "@images/*": ["./public/images/*"],
-      "@icons/*": ["./public/icons/*"],
-      "@page/*": ["./app/[locale]/*"]
+      "@icons/*": ["./public/icons/*"]
     }
   },
   "include": [
@@ -19,7 +18,8 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "tailwind.config.cjs"
+    "tailwind.config.js",
+    "postcss.config.js"
   ],
   "exclude": ["node_modules"]
 }

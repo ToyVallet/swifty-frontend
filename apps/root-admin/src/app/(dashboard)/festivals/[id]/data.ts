@@ -2,8 +2,6 @@
 
 import type { FestivalDetailResponse } from '@type/festival';
 
-const dynamic = 'force-dynamic';
-
 export async function getFestivalDetail(subId: string) {
   const res = await fetch(`/admin/festival/detail/${subId}`, {
     method: 'POST',
