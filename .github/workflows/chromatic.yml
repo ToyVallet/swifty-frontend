@@ -3,21 +3,23 @@ name: 'Chromatic Deployment'
 
 # Event for the workflow
 on: push
+# specify the branches to run the workflow
+# on:
+#   push:
+#     branches:
+#      - main
 
-# List of jobs
 jobs:
-  test:
-    # Operating System
+  build:
     runs-on: ubuntu-latest
-    # Job steps
     steps:
-      - uses: actions/checkout@v2 # Update to the latest version of checkout action
+      - uses: actions/checkout@v2
         with:
           fetch-depth: 0
       - name: Setup Node.js
-        uses: actions/setup-node@v2 # Example of using a different action
+        uses: actions/setup-node@v2
         with:
-          node-version: 18
+          node-version: 20.13.1
       - name: Cache Dependencies
         uses: actions/cache@v2
         with:
@@ -26,8 +28,8 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-
       - run: yarn
-      - name: Run Chromatic
-        uses: chromaui/action@v1 # Update to the latest version of Chromatic action
+      - name: Run Chromatic on @swifty/ui
+        uses: chromaui/action@v1
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
-          token: ${{ secrets.GITHUB_TOKEN }}
+          workingDir: packages/ui

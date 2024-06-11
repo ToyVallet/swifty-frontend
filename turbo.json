@@ -16,8 +16,8 @@
       "dependsOn": ["^build"],
       "outputs": [".next/**", "!.next/cache/**"]
     },
-    "build:storybook": {
-      "dependsOn": ["^build:storybook"],
+    "build-storybook": {
+      "dependsOn": ["^build-storybook"],
       "outputs": ["storybook-static/**"]
     },
     "chromatic": {
