@@ -1,10 +1,6 @@
 name: 🚀 Deploy
 
 on:
-  push:
-    # branches:
-    #   - main
-    #   - dev
   pull_request:
 
 concurrency:
@@ -25,15 +21,16 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0
+          fetch-depth: 1
+
       - name: Get changed files
         id: changed-files
         uses: tj-actions/changed-files@v44
         with:
           files: |
-            apps/**
-            packages/**
+            packages/ui/**
             .storybook/**
+            stories/**
 
   chromatic:
     name: Run visual tests

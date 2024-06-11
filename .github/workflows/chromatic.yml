@@ -1,12 +1,6 @@
 # Workflow name
 name: 'Chromatic Deployment'
 
-# specify the branches to run the workflow
-# on:
-#   push:
-#     branches:
-#      - main
-
 on: workflow_call
 
 concurrency:
