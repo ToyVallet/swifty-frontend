@@ -1,6 +1,7 @@
-name: 🚀 Deploy
+name: 🚀 Deploy Chromatic
 
 on:
+  push:
   pull_request:
 
 concurrency:
@@ -33,7 +34,7 @@ jobs:
             stories/**
 
   chromatic:
-    name: Run visual tests
+    name: Run choromatic
     needs: [changed-files]
     if: ${{ needs.changed-files.outputs.any_changed == 'true' }}
     uses: ./.github/workflows/chromatic.yml
