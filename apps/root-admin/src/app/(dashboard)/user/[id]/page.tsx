@@ -1,7 +1,6 @@
-import { API_CLIENT } from '@app/lib/constant/api';
-import insertCookieInRequest from '@app/lib/util/insert-cookie-in-request';
 import { BreadCrumbs, type BreadcrumbList } from '@components/ui';
 import { UserInfo } from '@components/user';
+import { API_CLIENT } from '@lib/constant/api';
 import { customFetch } from '@swifty/shared-lib';
 import type { User } from '@type/user';
 
@@ -12,8 +11,10 @@ interface Props {
 }
 
 export default async function UserDetailPage({ params: { id } }: Props) {
-  const requestOption = await insertCookieInRequest({ cache: 'no-cache' });
-  const data = await customFetch<User>(API_CLIENT.user(id), requestOption);
+  const data = await customFetch<User>(API_CLIENT.user(id), {
+    cache: 'no-store',
+    credentials: 'include',
+  });
 
   const breadcrumbList: BreadcrumbList = [
     {
