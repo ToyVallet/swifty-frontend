@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from 'next/navigation';
-import useConcert from '@app/hooks/festival/useConcert';
+import { useConcertCRUD } from '@app/hooks/festival';
 import {
   Col,
   DatePicker,
@@ -23,7 +23,7 @@ type FieldType = {
 
 export default function ConcertCreateForm({ festivalSubId }: { festivalSubId: string }) {
   const { RangePicker } = DatePicker;
-  const { isLoading, error, createConcert } = useConcert();
+  const { isLoading, error, createConcert } = useConcertCRUD();
   const router = useRouter();
   const onChange: DatePickerProps['onChange'] = (date, dateString) => { };
   const [form] = Form.useForm();
@@ -32,7 +32,6 @@ export default function ConcertCreateForm({ festivalSubId }: { festivalSubId: st
   const onFinish: FormProps<FieldType>['onFinish'] = async (values) => {
     await createConcert(festivalSubId, values);
   };
-
 
   if (isLoading) return <Loading3QuartersOutlined spin />
 

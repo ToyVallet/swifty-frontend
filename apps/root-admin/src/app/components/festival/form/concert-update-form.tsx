@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import {
   Button,
   Col,
@@ -12,14 +12,14 @@ import {
   Select,
 } from 'antd';
 import type { FormProps } from 'antd';
-import type { ConcertsResponse } from '@app/types/concert';
+import type { ConcertStatus, ConcertsResponse } from '@app/types/concert';
 import { LockFilled, UnlockOutlined } from '@ant-design/icons';
+import { Loading3QuartersOutlined } from '@ant-design/icons';
 import locale from 'antd/es/date-picker/locale/ko_KR';
-import useConcert from '@app/hooks/festival/useConcert';
+import { useConcertCRUD } from '@app/hooks/festival';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ko';
 import updateLocale from 'dayjs/plugin/updateLocale';
-import { Loading3QuartersOutlined } from '@ant-design/icons';
 
 dayjs.extend(updateLocale);
 dayjs.updateLocale('ko_KR', { weekStart: 0 })
@@ -32,6 +32,16 @@ type FieldType = {
   description: string;
 };
 
+interface IConcertUpdateForm extends Omit<ConcertsResponse, 'lineUpInfoResponses'> {
+  festivalSubId: string;
+  isLock: boolean;
+  toggleLock: () => void;
+  open: () => void;
+  hidden: () => void;
+}
+
+const CONCERT_STATUS = ['OPENED', 'HIDDEN'] as const;
+
 export default function ConcertUpdateForm({
   festivalSubId,
   subId,
@@ -40,11 +50,13 @@ export default function ConcertUpdateForm({
   startDate,
   endDate,
   description,
-}: { festivalSubId: string } & Omit<ConcertsResponse, 'lineUpInfoResponses'>) {
-
-  const { isLoading, error, updateConcert } = useConcert();
-  const [isLock, setIsLock] = useState<boolean>(true);
-  const toggleLock = () => { setIsLock(prev => !prev) };
+  concertStatus,
+  isLock,
+  toggleLock,
+  open,
+  hidden
+}: IConcertUpdateForm) {
+  const { isLoading, updateConcert } = useConcertCRUD();
   const [form] = Form.useForm();
 
   const initialValues = {
@@ -55,11 +67,25 @@ export default function ConcertUpdateForm({
     description: description,
   };
 
+  useEffect(() => {
+    console.log('hi', concertStatus);
+  }, [concertStatus]);
+
   const onFinish: FormProps<FieldType>['onFinish'] = async (values) => {
     await updateConcert(festivalSubId, subId, { ...values });
   };
 
+  const onChangeStatus = (status: ConcertStatus) => {
+    if (concertStatus === 'HIDDEN' && status === 'OPENED') {
+      open();
+      return;
+    }
+    if (concertStatus === 'OPENED' && status === 'HIDDEN')
+      hidden();
+  }
+
   useEffect(() => {
+    console.log(concertStatus)
     if (!isLock) return;
     form.setFieldsValue({
       name: name,
@@ -157,6 +183,27 @@ export default function ConcertUpdateForm({
           {isLock ? <LockFilled /> : <UnlockOutlined />}
         </Button>
       </Flex>
+      <Form layout="vertical">
+        <Row gutter={16}>
+          <Col span={12}>
+            <Form.Item
+              label="콘서트 상태"
+            >
+              <Flex justify='start' gap={24}>
+                {CONCERT_STATUS.map((status) => (
+                  <Button
+                    size='large'
+                    onClick={() => onChangeStatus(status)}
+                    type={status === concertStatus ? 'primary' : 'dashed'}
+                  >
+                    {status}
+                  </Button>
+                ))}
+              </Flex>
+            </Form.Item>
+          </Col>
+        </Row>
+      </Form>
     </>
   );
 }

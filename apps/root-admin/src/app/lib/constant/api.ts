@@ -22,6 +22,8 @@ export const API_FESTIVAL = {
 
 export const API_CONCERT = {
   concert: (id?: string) => (id ? `/host/admin/concert/${id}` : '/host/admin/concert'),
+  open: (id: string) => (`/host/admin/concert/${id}/open`),
+  hidden: (id: string) => (`/host/admin/concert/${id}/hidden`),
 } as const;
 
 export const API_SEARCH = {

@@ -1,6 +1,6 @@
 'use client';
 
-import { useLineup } from '@app/hooks/festival/useLineup';
+import { useLineupCRUD } from '@app/hooks/festival';
 import { Upload } from '@components/festival';
 import { Col, DatePicker, Form, Input, Row } from 'antd';
 import type { DatePickerProps, FormProps, UploadFile } from 'antd';
@@ -17,11 +17,11 @@ export default function LineupCreateForm({
   concertSubId
 }: { concertSubId: string }) {
   const [form] = Form.useForm();
-  const { isLoading, createLineup } = useLineup(concertSubId);
+  // const { isLoading, createLineup } = useLineupCRUD(concertSubId);
   const [fileList, setFileList] = useState<UploadFile[]>([]);
   const onChange: DatePickerProps['onChange'] = (date, dateString) => { };
   const onFinish: FormProps<FieldType>['onFinish'] = async (values) => {
-    await createLineup({ ...values, newFile: fileList[0] });
+    // await createLineup({ ...values, newFile: fileList[0] });
   };
 
   return (

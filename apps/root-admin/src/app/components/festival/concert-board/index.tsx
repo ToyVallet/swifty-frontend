@@ -4,9 +4,8 @@ import { useState } from "react";
 import { Button, Flex, Table } from "antd";
 import { Tabs, DrawerButton, LineupCreateForm, LineupUpdateForm } from "@components/festival";
 import type { ConcertsResponse } from '@app/types/concert';
-import useConcert from "@app/hooks/festival/useConcert";
+import { useConcertCRUD, useLineupCRUD } from "@app/hooks/festival";
 import { Loading3QuartersOutlined } from '@ant-design/icons';
-import { useLineup } from "@app/hooks/festival/useLineup";
 
 import styles from "./concert-board.module.css";
 
@@ -52,8 +51,8 @@ export default function ConcertBoard({
       await deleteLineup(subId);
   }
 
-  const { isLoading, deleteConcert } = useConcert();
-  const { deleteLineup } = useLineup();
+  const { isLoading, deleteConcert } = useConcertCRUD();
+  const { deleteLineup } = useLineupCRUD();
 
   const onChange = (key: string) => {
     setActiveKey(key);

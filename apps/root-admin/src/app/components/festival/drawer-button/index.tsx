@@ -9,30 +9,34 @@ import styles from './drawer-button.module.css';
 
 const variantButtons = {
   'concert-create': '콘서트 추가',
-  'concert-update': '수정',
+  'concert-update': '콘서트 수정',
   'lineup-create': '라인업 추가',
-  'lineup-update': '수정',
+  'lineup-update': '라인업 수정',
 } as const;
 
 interface DrawerButtonProps extends DrawerProps {
   variant: keyof typeof variantButtons;
+  isLock?: boolean;
+  lock?: () => void;
   children: React.ReactNode;
 }
 
 export default function DrawerButton({
   className,
   variant,
+  isLock = false,
+  lock,
   children,
   ...drawerProps
 }: DrawerButtonProps) {
   const [open, setOpen] = useState(false);
-
   const showDrawer = () => {
     setOpen(true);
   };
-
   const onClose = () => {
     setOpen(false);
+    if (lock)
+      lock();
   };
 
   return (
@@ -43,7 +47,7 @@ export default function DrawerButton({
         style={variant.includes('create') ? { height: '3rem', borderRadius: '1.5rem', fontSize: '14px', fontWeight: '700' } : {}}
         onClick={showDrawer}
       >
-        {variantButtons[variant]}
+        {variant.includes('update') ? '수정' : variantButtons[variant]}
       </Button>
       <Drawer
         title={variantButtons[variant]}
@@ -58,6 +62,7 @@ export default function DrawerButton({
               type="primary"
               htmlType="submit"
               form={variant}
+              disabled={isLock}
             >
               Submit
             </Button>

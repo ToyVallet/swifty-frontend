@@ -10,7 +10,7 @@ type FieldType = {
   newFile: UploadFile;
 };
 
-export function useLineup() {
+export default function useLineupCRUD() {
 
   const createLineup = useCallback(async (values: FieldType) => {
   }, []);

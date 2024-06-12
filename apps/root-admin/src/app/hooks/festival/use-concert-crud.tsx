@@ -33,7 +33,7 @@ function formatDates(rangeDateTime: string[]) {
   };
 }
 
-export default function useConcert() {
+export default function useConcertCRUD() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
