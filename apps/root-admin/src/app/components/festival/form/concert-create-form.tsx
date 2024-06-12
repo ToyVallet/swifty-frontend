@@ -1,7 +1,7 @@
 "use client";
 
-import useConcert from '@app/hooks/festival/useConcert';
 import { useRouter } from 'next/navigation';
+import useConcert from '@app/hooks/festival/useConcert';
 import {
   Col,
   DatePicker,
@@ -11,8 +11,8 @@ import {
   Select,
 } from 'antd';
 import type { DatePickerProps, FormProps } from 'antd';
-import 'moment/locale/ko';
 import locale from 'antd/es/date-picker/locale/ko_KR';
+import { Loading3QuartersOutlined } from '@ant-design/icons';
 
 type FieldType = {
   name: string;
@@ -32,6 +32,9 @@ export default function ConcertCreateForm({ festivalSubId }: { festivalSubId: st
   const onFinish: FormProps<FieldType>['onFinish'] = async (values) => {
     await createConcert(festivalSubId, values);
   };
+
+
+  if (isLoading) return <Loading3QuartersOutlined spin />
 
   return (
     <Form

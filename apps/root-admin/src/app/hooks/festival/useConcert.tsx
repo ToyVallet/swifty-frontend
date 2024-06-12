@@ -22,8 +22,9 @@ type UpdateFieldType = {
 }
 
 function formatDates(rangeDateTime: string[]) {
-  const startDate = new Date(rangeDateTime[0] as string);
-  const endDate = new Date(rangeDateTime[1] as string);
+  const offset = 1000 * 60 * 60 * 9;
+  const startDate = new Date(rangeDateTime[0] as string + offset);
+  const endDate = new Date(rangeDateTime[1] as string + offset);
   const startDateStr = startDate.toISOString().slice(0, 19);
   const endDateStr = endDate.toISOString().slice(0, 19);
   return {
@@ -97,7 +98,6 @@ export default function useConcert() {
     } finally {
       setIsLoading(false);
     }
-
   }, []);
 
   const deleteConcert = useCallback(async (festivalSubId: string, id: string) => {

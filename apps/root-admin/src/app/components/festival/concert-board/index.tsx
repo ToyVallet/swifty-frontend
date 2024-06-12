@@ -20,7 +20,10 @@ const columnsOfTable = [
   { dataIndex: 'delete', key: 'delete' },
 ];
 
-type TargetKey = React.MouseEvent | React.KeyboardEvent | string;
+type TargetKey =
+  | React.MouseEvent
+  | React.KeyboardEvent
+  | string;
 
 export default function ConcertBoard({
   festivalSubId,

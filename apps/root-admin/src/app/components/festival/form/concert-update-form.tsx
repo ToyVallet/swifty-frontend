@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from 'react';
 import {
   Button,
   Col,
@@ -11,13 +12,17 @@ import {
   Select,
 } from 'antd';
 import type { FormProps } from 'antd';
-import { LockFilled, UnlockOutlined } from '@ant-design/icons';
 import type { ConcertsResponse } from '@app/types/concert';
-import { useState, useEffect } from 'react';
-import moment from 'moment';
-import 'moment/locale/ko';
+import { LockFilled, UnlockOutlined } from '@ant-design/icons';
 import locale from 'antd/es/date-picker/locale/ko_KR';
 import useConcert from '@app/hooks/festival/useConcert';
+import dayjs from 'dayjs';
+import 'dayjs/locale/ko';
+import updateLocale from 'dayjs/plugin/updateLocale';
+import { Loading3QuartersOutlined } from '@ant-design/icons';
+
+dayjs.extend(updateLocale);
+dayjs.updateLocale('ko_KR', { weekStart: 0 })
 
 type FieldType = {
   name: string;
@@ -44,32 +49,28 @@ export default function ConcertUpdateForm({
 
   const initialValues = {
     name: name,
-    startDate: moment(startDate),
-    endDate: moment(endDate),
+    startDate: dayjs(startDate),
+    endDate: dayjs(endDate),
     location: location,
     description: description,
   };
 
-  useEffect(() => {
-    if (isLock) {
-      form.setFieldsValue({
-        name: name,
-        startDate: moment(startDate),
-        endDate: moment(endDate),
-        location: location,
-        description: description,
-      });
-    } else {
-      form.setFieldsValue({
-        startDate: null,
-        endDate: null
-      });
-    }
-  }, [isLock]);
-
   const onFinish: FormProps<FieldType>['onFinish'] = async (values) => {
     await updateConcert(festivalSubId, subId, { ...values });
   };
+
+  useEffect(() => {
+    if (!isLock) return;
+    form.setFieldsValue({
+      name: name,
+      startDate: dayjs(startDate),
+      endDate: dayjs(endDate),
+      location: location,
+      description: description,
+    });
+  }, [isLock]);
+
+  if (isLoading) return <Loading3QuartersOutlined spin />
 
   return (
     <>
