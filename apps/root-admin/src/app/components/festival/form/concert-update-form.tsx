@@ -37,7 +37,7 @@ export default function ConcertUpdateForm({
   description,
 }: { festivalSubId: string } & Omit<ConcertsResponse, 'lineUpInfoResponses'>) {
 
-  const { isLoading, error, updateConcert } = useConcert(festivalSubId);
+  const { isLoading, error, updateConcert } = useConcert();
   const [isLock, setIsLock] = useState<boolean>(true);
   const toggleLock = () => { setIsLock(prev => !prev) };
   const [form] = Form.useForm();
@@ -68,7 +68,7 @@ export default function ConcertUpdateForm({
   }, [isLock]);
 
   const onFinish: FormProps<FieldType>['onFinish'] = async (values) => {
-    await updateConcert(subId, { ...values });
+    await updateConcert(festivalSubId, subId, { ...values });
   };
 
   return (

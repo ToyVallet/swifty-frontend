@@ -1,8 +1,9 @@
 "use client";
 
 import { useCallback, useState } from "react";
-import { customFetch, customFetchMultipart } from '@swifty/shared-lib';
+import { customFetch } from '@swifty/shared-lib';
 import { API_CONCERT } from '@lib/constant/api';
+import { clearServerCache } from '@app/lib/util/clear-server-cache';
 import { useRouter } from "next/navigation";
 
 type FieldType = {
@@ -32,6 +33,7 @@ function formatDates(rangeDateTime: string[]) {
 }
 
 export default function useConcert() {
+  const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -54,6 +56,8 @@ export default function useConcert() {
         method: 'POST',
         body: formData
       });
+      await clearServerCache('festival-detail');
+      router.replace(`/festivals/${festivalSubId}`);
     } catch (e) {
       if (e instanceof Error)
         setError(e.message);
@@ -64,7 +68,7 @@ export default function useConcert() {
     }
   }, []);
 
-  const updateConcert = useCallback(async (id: string, values: UpdateFieldType) => {
+  const updateConcert = useCallback(async (festivalSubId: string, id: string, values: UpdateFieldType) => {
     const { name, location, description, startDate: sd, endDate: ed } = values;
     setIsLoading(true);
     setError(null);
@@ -83,6 +87,8 @@ export default function useConcert() {
         method: 'PATCH',
         body: formData
       });
+      await clearServerCache('festival-detail');
+      router.replace(`/festivals/${festivalSubId}`);
     } catch (e) {
       if (e instanceof Error)
         setError(e.message);
@@ -94,7 +100,7 @@ export default function useConcert() {
 
   }, []);
 
-  const deleteConcert = useCallback(async (id: string) => {
+  const deleteConcert = useCallback(async (festivalSubId: string, id: string) => {
     setIsLoading(true);
     setError(null);
     try {
@@ -102,6 +108,8 @@ export default function useConcert() {
         headers: {},
         method: 'DELETE'
       });
+      await clearServerCache('festival-detail');
+      router.replace(`/festivals/${festivalSubId}`);
     } catch (e) {
       if (e instanceof Error)
         setError(e.message);

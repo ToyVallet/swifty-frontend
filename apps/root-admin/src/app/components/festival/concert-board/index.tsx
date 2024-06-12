@@ -63,7 +63,7 @@ export default function ConcertBoard({
 
   const remove = async (targetKey: TargetKey) => {
     if (confirm('정말로 삭제하시겠습니까?'))
-      await deleteConcert(targetKey as string);
+      await deleteConcert(festivalSubId, targetKey as string);
   };
 
   if (isLoading) return <Loading3QuartersOutlined spin />
