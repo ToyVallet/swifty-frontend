@@ -41,7 +41,6 @@ export default function RootLayout({
         <AntdRegistry>
           <ConfigProvider theme={darkTheme}>{children}</ConfigProvider>
         </AntdRegistry>
-        {children}
       </body>
     </html>
   );
