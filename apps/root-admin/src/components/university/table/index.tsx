@@ -1,5 +1,8 @@
 'use client';
 
+import { DrawerButton } from '@components/ui';
+import UniversityLogoUpdateForm from '@components/university/form/logo-update-form';
+import UniversityUpdateForm from '@components/university/form/university-update-form';
 import { API_UNIVERSITY } from '@lib/constant/api';
 import type { University } from '@type/university';
 import type { TableProps } from 'antd';
@@ -7,8 +10,6 @@ import { Button, Table } from 'antd';
 import Link from 'next/link';
 import { useState } from 'react';
 import usePagination from 'src/hook/usePagination';
-
-import styles from './table.module.css';
 
 interface Props {
   data: University[];
@@ -26,19 +27,21 @@ const columns: TableProps<University>['columns'] = [
     title: '대학 정보 수정',
     dataIndex: 'patch',
     key: 'patch',
-    render: (_, record) => <Button onClick={() => {}}>대학 정보 수정</Button>,
+    render: (_, record) => (
+      <DrawerButton variant="university-update">
+        <UniversityUpdateForm university={record} />
+      </DrawerButton>
+    ),
   },
   {
     title: '대학 로고 수정',
     dataIndex: 'logo_patch',
     key: 'logo_patch',
-    render: (_, record) => <Button>대학 로고 수정</Button>,
-  },
-  {
-    title: '삭제',
-    dataIndex: 'delete',
-    key: 'delete',
-    render: (_, record) => <Button danger>대학 삭제</Button>,
+    render: (_, record) => (
+      <DrawerButton variant="university-logo-update">
+        <UniversityLogoUpdateForm university={record} />
+      </DrawerButton>
+    ),
   },
   {
     title: '상세 페이지',
@@ -49,6 +52,12 @@ const columns: TableProps<University>['columns'] = [
         <Link href={`/university/${record.subId}`}>상세 페이지</Link>
       </Button>
     ),
+  },
+  {
+    title: '삭제',
+    dataIndex: 'delete',
+    key: 'delete',
+    render: (_, record) => <Button danger>대학 삭제</Button>,
   },
 ];
 
@@ -76,7 +85,6 @@ function UniversityTable({ data, pageSize, total }: Props) {
           onChange: (page, pageSize) => handleTableChange(page, pageSize),
         }}
         loading={loading}
-        rowClassName={styles.row}
         rowKey="userSubId"
       />
     </section>

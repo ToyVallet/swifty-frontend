@@ -10,9 +10,9 @@
   width: 2rem;
   height: 2rem;
   position: absolute;
-  left: 0.5rem;
+  left: 0.4rem;
   top: 50%;
   transform: translateY(-50%);
   border-radius: 9999px;
-  background: #FFFFFF url('/icons/plus.svg') no-repeat center / 50% 50%;
+  background: #ffffff url('/icons/plus.svg') no-repeat center / 50% 50%;
 }

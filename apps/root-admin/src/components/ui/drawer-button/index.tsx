@@ -1,7 +1,7 @@
 'use client';
 
-import type { DrawerProps} from 'antd';
-import { Button, Drawer, Space } from 'antd';
+import type { DrawerProps } from 'antd';
+import { Button, Drawer, Form, Space } from 'antd';
 import clsx from 'clsx';
 import React, { useState } from 'react';
 
@@ -12,10 +12,15 @@ const variantButtons = {
   'concert-update': '수정',
   'lineup-create': '라인업 추가',
   'lineup-update': '수정',
+  'university-create': '대학교 추가',
+  'university-logo-update': '대학 로고 수정',
+  'university-update': '대학 수정',
+  'host-create': '호스트 관리자 생성',
 } as const;
 
 interface DrawerButtonProps extends DrawerProps {
   variant: keyof typeof variantButtons;
+  children: JSX.Element;
 }
 
 export default function DrawerButton({
@@ -23,6 +28,7 @@ export default function DrawerButton({
   variant,
   children,
 }: DrawerButtonProps) {
+  const [form] = Form.useForm();
   const [open, setOpen] = useState(false);
 
   const showDrawer = () => {
@@ -33,11 +39,15 @@ export default function DrawerButton({
     setOpen(false);
   };
 
+  const onSubmit = () => {
+    form.submit();
+  };
+
   return (
     <>
       <Button
         className={clsx(
-          { [styles.createButton]: variant.includes('create') },
+          { [styles.createButton!]: variant.includes('create') },
           className,
         )}
         type={variant.includes('create') ? 'primary' : 'default'}
@@ -68,13 +78,13 @@ export default function DrawerButton({
         extra={
           <Space>
             <Button onClick={onClose}>Cancel</Button>
-            <Button onClick={onClose} type="primary">
+            <Button onClick={onSubmit} type="primary">
               Submit
             </Button>
           </Space>
         }
       >
-        {children}
+        {React.cloneElement(children, { onClose, form })}
       </Drawer>
     </>
   );

@@ -11,6 +11,9 @@ export default async function UniversityPage() {
     API_UNIVERSITY.get_univiresity(),
     {
       method: 'GET',
+      next: {
+        tags: ['university'],
+      },
     },
   );
 
