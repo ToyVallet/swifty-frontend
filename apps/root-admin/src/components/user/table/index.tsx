@@ -2,18 +2,12 @@
 
 import { DefaultTag, GenderTag, LoginTag, StatusTag } from '@components/ui/tag';
 import { API_CLIENT } from '@lib/constant/api';
-import { customFetch } from '@swifty/shared-lib';
-import type {
-  User,
-  UserApi,
-  UserEnrolled,
-  UserGender,
-  UserStatus,
-} from '@type/user';
+import type { User, UserEnrolled, UserGender, UserStatus } from '@type/user';
 import type { TableProps } from 'antd';
 import { Table } from 'antd';
 import { useRouter } from 'next/navigation';
-import React, { useState } from 'react';
+import { useState } from 'react';
+import usePagination from 'src/hook/usePagination';
 
 import styles from './table.module.css';
 
@@ -70,29 +64,15 @@ const columns: TableProps<User>['columns'] = [
   },
 ];
 
-function CustomTable({ data, pageSize, total }: Props) {
+function UserTable({ data, pageSize, total }: Props) {
   const router = useRouter();
   const [tableData, setTableData] = useState<User[]>(data);
-  const [pagination, setPagination] = useState({
-    current: 1,
+  const { pagination, loading, handleTableChange } = usePagination<User>({
     pageSize,
     total,
+    setTableData,
+    api: API_CLIENT.users,
   });
-  const [loading, setLoading] = useState(false);
-
-  const handleTableChange = async (page: number, pageSize: number) => {
-    setLoading(true);
-    const data = await customFetch<UserApi>(
-      API_CLIENT.users(undefined, page - 1, pageSize),
-    );
-    setTableData(data.content);
-    setPagination({
-      ...pagination,
-      current: page,
-      pageSize,
-    });
-    setLoading(false);
-  };
 
   const onClickRow = (record: User) => {
     router.push(`user/${record.userSubId}`);
@@ -123,4 +103,4 @@ function CustomTable({ data, pageSize, total }: Props) {
   );
 }
 
-export default CustomTable;
+export default UserTable;

@@ -44,7 +44,7 @@ export default function Navigation({ children }: PropsWithChildren) {
               label: '사용자 관리',
               children: [
                 { key: '11', label: <Link href="/user">사용자 목록</Link> },
-                { key: '12', label: <Link href="/user">학교 목록</Link> },
+                { key: '12', label: <Link href="/university">학교 목록</Link> },
               ],
             },
             {

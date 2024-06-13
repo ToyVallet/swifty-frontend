@@ -1,4 +1,4 @@
-import type { UserRole } from '@app/types/user';
+import type { UserRole } from '@type/user';
 
 export const API_LINEUP = {
   lineup: (id?: string) =>
@@ -6,9 +6,9 @@ export const API_LINEUP = {
 } as const;
 
 export const API_CLIENT = {
-  users: (userRole?: UserRole, page: number = 0, size: number = 20) =>
-    userRole
-      ? `/root/admin/user?userRole=${userRole}&page=${page}&size=${size}`
+  users: (page: number = 0, size: number = 20, role?: UserRole) =>
+    role
+      ? `/root/admin/user?userRole=${role}&page=${page}&size=${size}`
       : `/root/admin/user?page=${page}&size=${size}`,
   user: (id: string) => `/root/admin/user/${id}`,
   active: (id: string) => `/root/admin/user/${id}/activation`,
@@ -30,3 +30,11 @@ export const API_SEARCH = {
 export const API_AUTH = {
   login: '/user/login',
 } as const;
+
+export const API_UNIVERSITY = {
+  get_univiresity: (page = 0, size = 20) =>
+    `/root/admin/university?page=${page}&size=${size}`,
+  post_university: () => '/root/admin/university',
+  detail_universiry: (id: string) => `/root/admin/university/${id}`,
+  university_logo: (id: string) => `/root/admin/university/${id}/logo`,
+};
