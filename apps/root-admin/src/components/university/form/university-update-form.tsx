@@ -7,8 +7,8 @@ import { Col, Form, Input, Row } from 'antd';
 import type { FormInstance, FormProps } from 'antd/lib/form';
 
 type FieldType = {
-  university: string;
-  address: string;
+  name: string;
+  addr: string;
 };
 
 interface Props {
@@ -22,7 +22,7 @@ export default function UniversityUpdateForm({
   form,
   university,
 }: Props) {
-  form?.setFieldValue('university', university.name);
+  form?.setFieldValue('name', university.name);
 
   const onFinish: FormProps<FieldType>['onFinish'] = async (
     values: FieldType,
@@ -39,7 +39,7 @@ export default function UniversityUpdateForm({
       <Row gutter={16}>
         <Col span={12}>
           <Form.Item
-            name="university"
+            name="name"
             label="University"
             rules={[{ required: true, message: '대학명을 필수 기재해주세요' }]}
           >
@@ -50,7 +50,7 @@ export default function UniversityUpdateForm({
       <Row gutter={16}>
         <Col span={12}>
           <Form.Item
-            name="address"
+            name="addr"
             label="Address"
             rules={[
               { required: false, message: '대학 위치 주소 명을 기입해주세요' },

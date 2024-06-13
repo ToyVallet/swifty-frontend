@@ -15,10 +15,14 @@ const getBase64 = (file: FileType): Promise<string> =>
     reader.onerror = (error) => reject(error);
   });
 
-export default function Upload() {
+interface Props {
+  fileList: UploadFile<any>[];
+  setFileList: React.Dispatch<React.SetStateAction<UploadFile<any>[]>>;
+}
+
+export default function Upload({ fileList, setFileList }: Props) {
   const [previewOpen, setPreviewOpen] = useState(false);
   const [previewImage, setPreviewImage] = useState('');
-  const [fileList, setFileList] = useState<UploadFile[]>([]);
 
   const handlePreview = async (file: UploadFile) => {
     if (!file.url && !file.preview) {
@@ -41,13 +45,12 @@ export default function Upload() {
   return (
     <>
       <AntdUpload
-        action="https://660d2bd96ddfa2943b33731c.mockapi.io/api/upload"
         listType="picture-card"
         fileList={fileList}
         onPreview={handlePreview}
         onChange={handleChange}
       >
-        {fileList.length >= 8 ? null : uploadButton}
+        {fileList.length >= 1 ? null : uploadButton}
       </AntdUpload>
       {previewImage && (
         <Image

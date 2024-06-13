@@ -1,12 +1,15 @@
 'use client';
 
 import { DrawerButton } from '@components/ui';
-import UniversityLogoUpdateForm from '@components/university/form/logo-update-form';
-import UniversityUpdateForm from '@components/university/form/university-update-form';
+import {
+  UniversityLogoUpdateForm,
+  UniversityUpdateForm,
+} from '@components/university';
 import { API_UNIVERSITY } from '@lib/constant/api';
+import { customFetch, revalidate } from '@swifty/shared-lib';
 import type { University } from '@type/university';
 import type { TableProps } from 'antd';
-import { Button, Table } from 'antd';
+import { Button, Popconfirm, Table } from 'antd';
 import Link from 'next/link';
 import { useState } from 'react';
 import usePagination from 'src/hook/usePagination';
@@ -57,7 +60,25 @@ const columns: TableProps<University>['columns'] = [
     title: '삭제',
     dataIndex: 'delete',
     key: 'delete',
-    render: (_, record) => <Button danger>대학 삭제</Button>,
+    render: (_, record) => (
+      <Popconfirm
+        title="계정 삭제"
+        description="해당 계정을 삭제하시겠습니까?"
+        okText="확인"
+        okType="danger"
+        cancelText="취소"
+        onConfirm={async () => {
+          await customFetch(API_UNIVERSITY.detail_universiry(record.subId), {
+            method: 'DELETE',
+          });
+          await revalidate('university');
+        }}
+      >
+        <Button type="primary" danger>
+          대학 삭제
+        </Button>
+      </Popconfirm>
+    ),
   },
 ];
 

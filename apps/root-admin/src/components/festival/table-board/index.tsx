@@ -1,13 +1,13 @@
 'use client';
 
-import type { ConcertsResponse } from '@app/types/concert';
 import {
-  DrawerButton,
   LineupCreateForm,
   LineupUpdateForm,
   StatusNotifier,
   Tabs,
 } from '@components/festival';
+import { DrawerButton } from '@components/ui';
+import type { ConcertsResponse } from '@type/concert';
 import { Button, Table } from 'antd';
 import { useState } from 'react';
 

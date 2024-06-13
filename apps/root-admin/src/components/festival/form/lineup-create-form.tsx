@@ -1,13 +1,13 @@
 'use client';
 
 import { Upload } from '@components/festival';
-import type { DatePickerProps} from 'antd';
+import type { DatePickerProps } from 'antd';
 import { Col, DatePicker, Form, Input, Row } from 'antd';
 
 export default function LineupCreateForm() {
   const onChange: DatePickerProps['onChange'] = (date, dateString) => {};
   return (
-    <Form layout="vertical" hideRequredMark>
+    <Form layout="vertical">
       <Row gutter={16}>
         <Col span={12}>
           <Form.Item
