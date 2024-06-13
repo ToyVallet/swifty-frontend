@@ -7,7 +7,7 @@ export type UserRole =
   | 'ADMIN'
   | 'BANNED';
 
-export type UserStatus = 'ACTIVE' | 'WITHDRAWAL' | 'PAUSE' | 'BANNED';
+export type UserStatus = 'ACTIVE' | 'WITHDRAWAL' | 'PAUSED' | 'BANNED';
 
 export type UserGender =
   | 'OLD_MALE'

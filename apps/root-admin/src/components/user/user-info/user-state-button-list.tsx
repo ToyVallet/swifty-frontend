@@ -25,10 +25,12 @@ export default function UserStateButtonList({
   const [errorMessage, setErrorMessage] = useState<null | string>(null);
   const [userStatus, setUserStatus] = useState<UserStatus>(status);
 
-  const changeStatesToUserStatus = (state: States) =>
-    state.toUpperCase() === 'BAN'
-      ? 'BANNED'
-      : (state.toUpperCase() as UserStatus);
+  const changeStatesToUserStatus = (state: States): UserStatus => {
+    const upper = state.toUpperCase();
+    if (upper === 'BAM') return 'BANNED';
+    if (upper === 'PAUSE') return 'PAUSED';
+    return upper as UserStatus;
+  };
 
   // 낙관적 업데이트 적용
   const onChangeStatus = async (state: States) => {

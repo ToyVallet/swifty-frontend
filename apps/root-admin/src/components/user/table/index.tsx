@@ -40,7 +40,7 @@ const columns: TableProps<User>['columns'] = [
     key: 'userFormId',
   },
   {
-    title: 'Birth Of Date',
+    title: 'Date of Birth',
     dataIndex: 'bod',
     key: 'bod',
   },
