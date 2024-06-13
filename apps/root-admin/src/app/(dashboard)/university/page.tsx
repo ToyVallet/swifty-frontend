@@ -1,4 +1,5 @@
-import { UniversityTable } from '@components/university';
+import { DrawerButton } from '@components/ui';
+import { UniversityCreateForm, UniversityTable } from '@components/university';
 import { API_UNIVERSITY } from '@lib/constant/api';
 import { customFetch } from '@swifty/shared-lib';
 import type { Paginaiton } from '@type/api';
@@ -20,7 +21,12 @@ export default async function UniversityPage() {
 
   return (
     <main>
-      <h2 className={styles.heading}>학교 관리</h2>
+      <div className={styles.header}>
+        <h2 className={styles.heading}>대학 관리</h2>
+        <DrawerButton variant="university-create">
+          <UniversityCreateForm />
+        </DrawerButton>
+      </div>
       <UniversityTable
         data={data.content}
         pageSize={data.size}
