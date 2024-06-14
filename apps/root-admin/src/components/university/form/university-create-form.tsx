@@ -30,7 +30,8 @@ export default function UniversityCreateForm({ onClose, form }: Props) {
 
     formData.append('name', values.name);
     formData.append('addr', values.addr);
-    if (values.logo.length > 1) {
+
+    if (values.logo.length > 0) {
       const imageFile = values.logo[0]!;
       formData.append(
         'logo',
