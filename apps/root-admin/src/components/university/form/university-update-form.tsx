@@ -1,5 +1,6 @@
 'use client';
 
+import { SearchUniversity } from '@components/ui';
 import { API_UNIVERSITY } from '@lib/constant/api';
 import { customFetch, revalidate } from '@swifty/shared-lib';
 import type { University } from '@type/university';
@@ -22,7 +23,7 @@ export default function UniversityUpdateForm({
   form,
   university,
 }: Props) {
-  form?.setFieldValue('name', university.name);
+  const initialValue = { name: university.name, addr: '' };
 
   const onFinish: FormProps<FieldType>['onFinish'] = async (
     values: FieldType,
@@ -35,15 +36,21 @@ export default function UniversityUpdateForm({
     onClose?.();
   };
   return (
-    <Form layout="vertical" form={form} onFinish={onFinish}>
+    <Form
+      layout="vertical"
+      form={form}
+      onFinish={onFinish}
+      initialValues={initialValue}
+    >
       <Row gutter={16}>
         <Col span={12}>
+          <SearchUniversity form={form} />
           <Form.Item
             name="name"
             label="University"
             rules={[{ required: true, message: '대학명을 필수 기재해주세요' }]}
           >
-            <Input placeholder="OO대학교" />
+            <Input placeholder="OO대학교" readOnly />
           </Form.Item>
         </Col>
       </Row>
@@ -56,7 +63,7 @@ export default function UniversityUpdateForm({
               { required: false, message: '대학 위치 주소 명을 기입해주세요' },
             ]}
           >
-            <Input placeholder="서울특별시 마포구" />
+            <Input placeholder="서울특별시 마포구" readOnly />
           </Form.Item>
         </Col>
       </Row>

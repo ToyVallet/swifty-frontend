@@ -30,7 +30,7 @@ export default async function UniversityPage() {
       <UniversityTable
         data={data.content}
         pageSize={data.size}
-        total={data.totalPages}
+        total={data.totalElements}
       />
     </main>
   );

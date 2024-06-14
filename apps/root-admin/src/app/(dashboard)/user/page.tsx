@@ -10,12 +10,15 @@ export default async function Page() {
   const data = await customFetch<Paginaiton<User>>(API_CLIENT.users(), {
     cache: 'no-cache',
     next: { tags: ['users'] },
-    credentials: 'include',
   });
   return (
     <main>
       <h2 className={styles.heading}>계정 관리</h2>
-      <Table data={data.content} pageSize={data.size} total={data.totalPages} />
+      <Table
+        data={data.content}
+        pageSize={data.size}
+        total={data.totalElements}
+      />
     </main>
   );
 }

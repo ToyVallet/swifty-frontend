@@ -11,7 +11,7 @@ import type { University } from '@type/university';
 import type { TableProps } from 'antd';
 import { Button, Popconfirm, Table } from 'antd';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import usePagination from 'src/hook/usePagination';
 
 interface Props {
@@ -91,6 +91,10 @@ function UniversityTable({ data, pageSize, total }: Props) {
     api: API_UNIVERSITY.get_univiresity,
   });
 
+  useEffect(() => {
+    setTableData(data);
+  }, [data]);
+
   return (
     <section>
       <Table
@@ -106,7 +110,7 @@ function UniversityTable({ data, pageSize, total }: Props) {
           onChange: (page, pageSize) => handleTableChange(page, pageSize),
         }}
         loading={loading}
-        rowKey="userSubId"
+        rowKey="subId"
       />
     </section>
   );
