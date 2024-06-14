@@ -10,7 +10,8 @@
       "@api/*": ["src/api/*"],
       "@store/*": ["./src/store/*"],
       "@type/*": ["./src/types/*"],
-      "@styles/*": ["./src/styles/*"]
+      "@styles/*": ["./src/styles/*"],
+      "@icons/*": ["./public/icons/*"]
     }
   },
   "include": [

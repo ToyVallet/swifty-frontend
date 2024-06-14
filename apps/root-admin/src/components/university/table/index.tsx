@@ -5,11 +5,13 @@ import {
   UniversityLogoUpdateForm,
   UniversityUpdateForm,
 } from '@components/university';
+import School from '@icons/school.svg';
 import { API_UNIVERSITY } from '@lib/constant/api';
 import { customFetch, revalidate } from '@swifty/shared-lib';
 import type { University } from '@type/university';
 import type { TableProps } from 'antd';
-import { Button, Popconfirm, Table } from 'antd';
+import { Avatar, Button, Popconfirm, Table } from 'antd';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import usePagination from 'src/hook/usePagination';
@@ -22,10 +24,31 @@ interface Props {
 
 const columns: TableProps<University>['columns'] = [
   {
+    title: '로고',
+    dataIndex: 'logo',
+    key: 'logo',
+    render: (_, record) => (
+      <Avatar
+        src={
+          record.logo && (
+            <Image src={record.logo} alt="avatar" width={50} height={50} />
+          )
+        }
+        icon={!record.logo && <School />}
+      />
+    ),
+  },
+  {
     title: '이름',
     dataIndex: 'name',
     key: 'name',
   },
+  {
+    title: '주소',
+    dataIndex: 'addr',
+    key: 'addr',
+  },
+
   {
     title: '대학 정보 수정',
     dataIndex: 'patch',
