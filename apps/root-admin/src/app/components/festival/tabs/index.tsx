@@ -30,7 +30,10 @@ export default function Tabs({
         />
       </Flex>
       {concertInfo &&
-        <ConcertPanel festivalSubId={festivalSubId} {...concertInfo} />
+        <ConcertPanel
+          festivalSubId={festivalSubId}
+          {...concertInfo}
+        />
       }
     </>
   );

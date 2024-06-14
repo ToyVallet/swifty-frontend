@@ -33,7 +33,6 @@ export default function Upload({
 
   const handleChange: UploadProps['onChange'] = ({ fileList: newFileList }) => {
     setFileList(newFileList);
-    console.log(fileList[0]);
   }
 
   const uploadButton = (
@@ -46,13 +45,12 @@ export default function Upload({
   return (
     <>
       <AntdUpload
-        action="https://660d2bd96ddfa2943b33731c.mockapi.io/api/upload"
         listType="picture-card"
         fileList={fileList}
         onPreview={handlePreview}
         onChange={handleChange}
       >
-        {fileList.length >= 8 ? null : uploadButton}
+        {fileList.length >= 1 ? null : uploadButton}
       </AntdUpload>
       {previewImage && (
         <Image

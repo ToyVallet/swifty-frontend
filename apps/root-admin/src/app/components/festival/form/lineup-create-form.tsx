@@ -1,27 +1,27 @@
 'use client';
 
+import { useState } from 'react';
 import { useLineupCRUD } from '@app/hooks/festival';
 import { Upload } from '@components/festival';
 import { Col, DatePicker, Form, Input, Row } from 'antd';
 import type { DatePickerProps, FormProps, UploadFile } from 'antd';
-import { useState } from 'react';
+import locale from 'antd/es/date-picker/locale/ko_KR';
 
 type FieldType = {
   title: string;
   description: string;
   performanceTime: string;
-  newFile: UploadFile;
 }
 
 export default function LineupCreateForm({
   concertSubId
 }: { concertSubId: string }) {
   const [form] = Form.useForm();
-  // const { isLoading, createLineup } = useLineupCRUD(concertSubId);
+  const { isLoading, createLineup } = useLineupCRUD();
   const [fileList, setFileList] = useState<UploadFile[]>([]);
   const onChange: DatePickerProps['onChange'] = (date, dateString) => { };
   const onFinish: FormProps<FieldType>['onFinish'] = async (values) => {
-    // await createLineup({ ...values, newFile: fileList[0] });
+    await createLineup(concertSubId, values, fileList[0] as UploadFile);
   };
 
   return (
@@ -35,7 +35,7 @@ export default function LineupCreateForm({
         <Col span={12}>
           <Form.Item
             name="title"
-            label="Title"
+            label="라인업 이름"
             rules={[{ required: true, message: 'Please enter user name' }]}
           >
             <Input placeholder="아이유" />
@@ -46,7 +46,7 @@ export default function LineupCreateForm({
         <Col span={24}>
           <Form.Item
             name="description"
-            label="Description"
+            label="라인업에 대한 설명"
             rules={[
               {
                 required: true,
@@ -65,10 +65,10 @@ export default function LineupCreateForm({
         <Col span={12}>
           <Form.Item
             name="performanceTime"
-            label="PeformanceTime"
+            label="라인업의 공연이 시작되는 시각"
             rules={[{ required: true, message: 'Please choose the dateTime' }]}
           >
-            <DatePicker onChange={onChange} placeholder="2024-05-28" />
+            <DatePicker onChange={onChange} locale={locale} />
           </Form.Item>
         </Col>
       </Row>
@@ -76,10 +76,12 @@ export default function LineupCreateForm({
         <Col span={12}>
           <Form.Item
             name="newFile"
-            label="NewFile"
-          // rules={[{ required: true, message: 'Please choose the picutre' }]}
+            label="라인업 이미지"
           >
-            <Upload fileList={fileList} setFileList={setFileList} />
+            <Upload
+              fileList={fileList}
+              setFileList={setFileList}
+            />
           </Form.Item>
         </Col>
       </Row>

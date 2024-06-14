@@ -20,7 +20,7 @@ export type FestivalDetailResponse = {
   adminFestivalInfoResponse: {
     revealStartDate: string;
     revealEndDate: string;
-    festivalStatus: 'OPEN' | 'HIDDEN';
+    festivalStatus: 'OPENED' | 'HIDDEN';
     thumbnail: string;
     poster: string;
     logo: string;

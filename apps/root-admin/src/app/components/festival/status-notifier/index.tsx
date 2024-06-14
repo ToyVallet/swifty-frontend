@@ -8,7 +8,7 @@ export default function StatusNotifier({
   className,
   isPale = false,
   status,
-}: { status: ConcertStatus; isPale?: boolean } & PropsWithClassName) {
+}: { status: 'OPENED' | 'HIDDEN'; isPale?: boolean } & PropsWithClassName) {
   return (
     <>
       <div className={clsx(styles.notifier,
