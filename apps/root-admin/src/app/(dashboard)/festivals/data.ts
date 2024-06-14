@@ -1,6 +1,6 @@
 'use server';
 
-import { FestivalInfoResponse } from '@type/festival';
+import type { FestivalInfoResponse } from '@type';
 
 type ResponseType = {
   subId: string;

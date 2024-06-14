@@ -1,6 +1,6 @@
 'use client';
 
-import type { User } from '@type/user';
+import type { User } from '@type';
 
 import UserStateButtonList from './user-state-button-list';
 import styles from './userInfo.module.css';

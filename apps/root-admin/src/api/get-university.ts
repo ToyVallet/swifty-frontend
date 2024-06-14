@@ -1,4 +1,4 @@
-import type { UniversityApi } from '@type/api';
+import type { UniversityApi } from '@type';
 
 export default async function getUniversity(searchSchulNm: string) {
   const url = 'https://www.career.go.kr/cnet/openapi/getOpenApi';

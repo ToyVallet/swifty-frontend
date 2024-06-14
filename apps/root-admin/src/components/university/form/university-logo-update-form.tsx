@@ -1,9 +1,9 @@
 'use client';
 
-import { Upload } from '@components/festival';
-import { API_UNIVERSITY } from '@lib/constant/api';
-import { customFetch } from '@swifty/shared-lib';
-import type { University } from '@type/university';
+import { Upload } from '@components';
+import { API_UNIVERSITY } from '@lib';
+import { customFetch, revalidate } from '@swifty/shared-lib';
+import type { University } from '@type';
 import { Col, Form, Row } from 'antd';
 import type { UploadFile } from 'antd/lib';
 import type { FormInstance, FormProps } from 'antd/lib/form';
@@ -25,7 +25,11 @@ export default function UniversityLogoUpdateForm({
   form,
   university,
 }: Props) {
-  const [fileList, setFileList] = useState<UploadFile[]>([]);
+  const [fileList, setFileList] = useState<UploadFile[]>(() => {
+    if (university.logo)
+      return [{ uid: 'prevLogo', url: university.logo, name: 'prevImage' }];
+    return [];
+  });
   form?.setFieldValue('logo', fileList);
 
   const onFinish: FormProps<FieldType>['onFinish'] = async (
@@ -41,6 +45,7 @@ export default function UniversityLogoUpdateForm({
       body: formData,
     });
     form?.resetFields(['logo']);
+    await revalidate('university');
     onClose?.();
   };
 

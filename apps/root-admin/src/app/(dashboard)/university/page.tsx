@@ -1,9 +1,11 @@
-import { DrawerButton } from '@components/ui';
-import { UniversityCreateForm, UniversityTable } from '@components/university';
-import { API_UNIVERSITY } from '@lib/constant/api';
+import {
+  DrawerButton,
+  UniversityCreateForm,
+  UniversityTable,
+} from '@components';
+import { API_UNIVERSITY } from '@lib';
 import { customFetch } from '@swifty/shared-lib';
-import type { Paginaiton } from '@type/api';
-import type { University } from '@type/university';
+import type { Paginaiton, University } from '@type';
 
 import styles from './university.module.css';
 

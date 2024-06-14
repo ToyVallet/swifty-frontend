@@ -1,8 +1,8 @@
 'use client';
 
-import { API_CLIENT } from '@lib/constant/api';
+import { API_CLIENT } from '@lib';
 import { customFetch, revalidate } from '@swifty/shared-lib';
-import type { UserStatus } from '@type/user';
+import type { UserStatus } from '@type';
 import { Button, Popconfirm } from 'antd';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';

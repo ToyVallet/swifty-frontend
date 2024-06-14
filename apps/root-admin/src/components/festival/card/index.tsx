@@ -1,7 +1,6 @@
-import { ConcertUpdateForm, StatusNotifier } from '@components/festival';
-import { DrawerButton } from '@components/ui';
-import formatDate from '@lib/util/formatDate';
-import type { ConcertsResponse } from '@type/concert';
+import { ConcertUpdateForm, DrawerButton, StatusNotifier } from '@components';
+import { formatDate } from '@lib';
+import type { ConcertsResponse } from '@type';
 import { Button } from 'antd';
 import type { PropsWithChildren } from 'react';
 

@@ -1,8 +1,7 @@
 'use client';
 
-import getUniversity from '@api/get-university';
-import type { UniversityInfo } from '@type/api';
-import type { UploadFile } from 'antd';
+import { getUniversity } from '@api';
+import type { UniversityInfo } from '@type';
 import { Button, Card, Input, List, Modal } from 'antd';
 import type { SearchProps } from 'antd/es/input/Search';
 import type { FormInstance } from 'antd/lib';

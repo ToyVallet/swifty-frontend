@@ -6,8 +6,8 @@ import {
   UploadOutlined,
   UserOutlined,
 } from '@ant-design/icons';
-import { Logo } from '@components/ui';
-import { Button, Layout, Menu, theme } from 'antd';
+import { Logo } from '@components';
+import { Button, Layout, Menu } from 'antd';
 import Link from 'next/link';
 import React, { type PropsWithChildren, useState } from 'react';
 
@@ -17,9 +17,6 @@ const { Header, Sider, Content } = Layout;
 
 export default function Navigation({ children }: PropsWithChildren) {
   const [collapsed, setCollapsed] = useState(false);
-  const {
-    token: { colorBgContainer },
-  } = theme.useToken();
 
   return (
     <Layout className={styles.navigation}>

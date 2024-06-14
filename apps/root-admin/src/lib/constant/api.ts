@@ -1,4 +1,4 @@
-import type { UserRole } from '@type/user';
+import type { UserRole } from '@type';
 
 export const API_LINEUP = {
   lineup: (id?: string) =>

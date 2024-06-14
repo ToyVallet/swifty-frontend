@@ -1,8 +1,7 @@
-import { Table } from '@components/user';
-import { API_CLIENT } from '@lib/constant/api';
+import { Table } from '@components';
+import { API_CLIENT } from '@lib';
 import { customFetch } from '@swifty/shared-lib';
-import type { Paginaiton } from '@type/api';
-import type { User } from '@type/user';
+import type { Paginaiton, User } from '@type';
 
 import styles from './user.module.css';
 

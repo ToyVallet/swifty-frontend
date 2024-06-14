@@ -1,8 +1,7 @@
 'use client';
 
-import { Card, ConcertCreateForm } from '@components/festival';
-import { DrawerButton } from '@components/ui';
-import type { ConcertsResponse } from '@type/concert';
+import { Card, ConcertCreateForm, DrawerButton } from '@components';
+import type { ConcertsResponse } from '@type';
 import type { TabsProps } from 'antd';
 import { Tabs as AntdTabs } from 'antd';
 import React, { useRef } from 'react';

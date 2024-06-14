@@ -4,12 +4,11 @@
     "baseUrl": ".",
     "paths": {
       "@app/*": ["./src/app/*"],
-      "@components/*": ["./src/components/*"],
-      "@lib/*": ["./src/lib/*"],
+      "@components": ["./src/components"],
+      "@lib": ["./src/lib"],
       "@hooks/*": ["./src/hooks/*"],
-      "@api/*": ["src/api/*"],
-      "@store/*": ["./src/store/*"],
-      "@type/*": ["./src/types/*"],
+      "@api": ["src/api"],
+      "@type": ["./src/types"],
       "@styles/*": ["./src/styles/*"],
       "@icons/*": ["./public/icons/*"]
     }

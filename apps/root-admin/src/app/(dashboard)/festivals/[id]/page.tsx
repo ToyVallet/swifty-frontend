@@ -1,4 +1,4 @@
-import { StatusNotifier, TableBoard } from '@components/festival';
+import { StatusNotifier, TableBoard } from '@components';
 import type { Params } from '@swifty/shared-lib';
 
 import { getMockFestivalDetail } from './data';

@@ -1,13 +1,13 @@
 'use client';
 
 import {
+  DrawerButton,
   LineupCreateForm,
   LineupUpdateForm,
   StatusNotifier,
   Tabs,
-} from '@components/festival';
-import { DrawerButton } from '@components/ui';
-import type { ConcertsResponse } from '@type/concert';
+} from '@components';
+import type { ConcertsResponse } from '@type';
 import { Button, Table } from 'antd';
 import { useState } from 'react';
 
@@ -73,8 +73,6 @@ export default function TableBoard({
       remove(targetKey);
     }
   };
-
-  const add = () => {};
 
   const remove = (targetKey: TargetKey) => {
     const targetIndex = items.findIndex((pane) => pane.key === targetKey);

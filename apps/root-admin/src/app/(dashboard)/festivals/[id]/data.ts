@@ -1,6 +1,6 @@
 'use server';
 
-import type { FestivalDetailResponse } from '@type/festival';
+import type { FestivalDetailResponse } from '@type';
 
 export async function getFestivalDetail(subId: string) {
   const res = await fetch(`/admin/festival/detail/${subId}`, {

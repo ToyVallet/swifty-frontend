@@ -1,9 +1,9 @@
 'use client';
 
-import { SearchUniversity } from '@components/ui';
-import { API_UNIVERSITY } from '@lib/constant/api';
+import { SearchUniversity } from '@components';
+import { API_UNIVERSITY } from '@lib';
 import { customFetch, revalidate } from '@swifty/shared-lib';
-import type { University } from '@type/university';
+import type { University } from '@type';
 import { Col, Form, Input, Row } from 'antd';
 import type { FormInstance, FormProps } from 'antd/lib/form';
 
@@ -23,7 +23,7 @@ export default function UniversityUpdateForm({
   form,
   university,
 }: Props) {
-  const initialValue = { name: university.name, addr: '' };
+  const initialValue = { name: university.name, addr: university.addr };
 
   const onFinish: FormProps<FieldType>['onFinish'] = async (
     values: FieldType,

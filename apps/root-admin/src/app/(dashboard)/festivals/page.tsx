@@ -1,5 +1,5 @@
-import { Card, CardList } from '@components/festival';
-import getFestivalStatus from '@lib/util/getFestivalStatus';
+import { Card, CardList } from '@components';
+import { getFestivalStatus } from '@lib';
 import Link from 'next/link';
 
 import { getMockAllFestivals } from './data';

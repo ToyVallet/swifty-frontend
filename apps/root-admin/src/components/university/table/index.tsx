@@ -1,14 +1,14 @@
 'use client';
 
-import { DrawerButton } from '@components/ui';
 import {
+  DrawerButton,
   UniversityLogoUpdateForm,
   UniversityUpdateForm,
-} from '@components/university';
+} from '@components';
 import School from '@icons/school.svg';
-import { API_UNIVERSITY } from '@lib/constant/api';
+import { API_UNIVERSITY } from '@lib';
 import { customFetch, revalidate } from '@swifty/shared-lib';
-import type { University } from '@type/university';
+import type { University } from '@type';
 import type { TableProps } from 'antd';
 import { Avatar, Button, Popconfirm, Table } from 'antd';
 import Image from 'next/image';

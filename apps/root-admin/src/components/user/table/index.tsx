@@ -1,8 +1,8 @@
 'use client';
 
-import { DefaultTag, GenderTag, LoginTag, StatusTag } from '@components/ui/tag';
-import { API_CLIENT } from '@lib/constant/api';
-import type { User, UserEnrolled, UserGender, UserStatus } from '@type/user';
+import { DefaultTag, GenderTag, LoginTag, StatusTag } from '@components';
+import { API_CLIENT } from '@lib';
+import type { User, UserEnrolled, UserGender, UserStatus } from '@type';
 import type { TableProps } from 'antd';
 import { Table } from 'antd';
 import { useRouter } from 'next/navigation';

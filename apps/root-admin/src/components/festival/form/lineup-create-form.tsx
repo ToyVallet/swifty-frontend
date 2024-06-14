@@ -1,11 +1,14 @@
 'use client';
 
-import { Upload } from '@components/festival';
+import { Upload } from '@components';
 import type { DatePickerProps } from 'antd';
 import { Col, DatePicker, Form, Input, Row } from 'antd';
+import type { UploadFile } from 'antd/lib';
+import { useState } from 'react';
 
 export default function LineupCreateForm() {
   const onChange: DatePickerProps['onChange'] = (date, dateString) => {};
+  const [fileList, setFileList] = useState<UploadFile[]>([]);
   return (
     <Form layout="vertical">
       <Row gutter={16}>
@@ -56,7 +59,7 @@ export default function LineupCreateForm() {
             label="NewFile"
             rules={[{ required: true, message: 'Please choose the dateTime' }]}
           >
-            <Upload />
+            <Upload fileList={fileList} setFileList={setFileList} />
           </Form.Item>
         </Col>
       </Row>

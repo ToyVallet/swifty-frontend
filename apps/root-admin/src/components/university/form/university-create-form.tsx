@@ -1,8 +1,7 @@
 'use client';
 
-import { Upload } from '@components/festival';
-import { SearchUniversity } from '@components/ui';
-import { API_UNIVERSITY } from '@lib/constant/api';
+import { SearchUniversity, Upload } from '@components';
+import { API_UNIVERSITY } from '@lib';
 import { customFetch, revalidate } from '@swifty/shared-lib';
 import type { UploadFile } from 'antd';
 import { Col, Form, Input, Row } from 'antd';
