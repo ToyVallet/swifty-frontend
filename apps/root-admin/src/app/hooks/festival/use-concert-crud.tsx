@@ -105,7 +105,6 @@ export default function useConcertCRUD() {
     setError(null);
     try {
       await customFetch(API_CONCERT.concert(id), {
-        headers: {},
         method: 'DELETE'
       });
       await clearServerCache('festival-detail');

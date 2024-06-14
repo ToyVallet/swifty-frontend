@@ -37,7 +37,7 @@ export default function ConcertPanel({
       <span className={styles.content}>{formatDate(startDate)}</span>
       <span className={styles.content}>{formatDate(endDate)}</span>
       <div className={styles.content}>
-        <StatusNotifier status={optimisticConcertStatus} />
+        <StatusNotifier status={concertStatus} />
       </div>
       <div className={styles.content}>
         <DrawerButton variant="concert-update" isLock={isLock} lock={lock}>

@@ -36,8 +36,8 @@ interface IConcertUpdateForm extends Omit<ConcertsResponse, 'lineUpInfoResponses
   festivalSubId: string;
   isLock: boolean;
   toggleLock: () => void;
-  open: () => void;
-  hidden: () => void;
+  open: (id: string) => void;
+  hidden: (id: string) => void;
 }
 
 const CONCERT_STATUS = ['OPENED', 'HIDDEN'] as const;
@@ -67,25 +67,20 @@ export default function ConcertUpdateForm({
     description: description,
   };
 
-  useEffect(() => {
-    console.log('hi', concertStatus);
-  }, [concertStatus]);
-
   const onFinish: FormProps<FieldType>['onFinish'] = async (values) => {
     await updateConcert(festivalSubId, subId, { ...values });
   };
 
   const onChangeStatus = (status: ConcertStatus) => {
     if (concertStatus === 'HIDDEN' && status === 'OPENED') {
-      open();
+      open(subId);
       return;
     }
     if (concertStatus === 'OPENED' && status === 'HIDDEN')
-      hidden();
+      hidden(subId);
   }
 
   useEffect(() => {
-    console.log(concertStatus)
     if (!isLock) return;
     form.setFieldsValue({
       name: name,
