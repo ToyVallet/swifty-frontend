@@ -6,7 +6,7 @@ export type LineUpInfoResponse = {
   subId: string;
   title: string;
   description: string;
-  performanceDate: string;
+  performanceTime: string;
   lineUpImagePath: string;
   lineUpStatus: LineUpStatus;
 };

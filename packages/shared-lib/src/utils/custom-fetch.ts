@@ -8,7 +8,7 @@ export async function customFetch<Res>(
   options: RequestInit = {},
 ): Promise<Res> {
   options.headers = {
-    'Content-Type': 'application/json',
+    // 'Content-Type': 'application/json',
     ...options.headers,
   };
 

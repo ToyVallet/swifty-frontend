@@ -1,18 +1,19 @@
 'use client';
 
-import type { LineUpInfoResponse, LineUpStatus } from '@app/types/lineup';
-import { Button, Col, DatePicker, Flex, Form, FormProps, Input, Row, UploadFile } from 'antd';
+import type { LineUpInfoResponse, LineUpStatus } from '@type/lineup';
+import { Button, Col, Flex, Form, Input, Row, TimePicker } from 'antd';
+import type { FormProps, UploadFile } from 'antd';
 import locale from 'antd/es/date-picker/locale/ko_KR';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ko';
 import updateLocale from 'dayjs/plugin/updateLocale';
 import { useEffect, useState } from 'react';
 import { LockFilled, UnlockOutlined } from '@ant-design/icons';
-import Upload from '../upload';
-import { useLineupCRUD } from '@app/hooks/festival';
+import { Upload } from '@components/festival';
+import { useLineupCRUD } from '@hooks/festival';
 
 dayjs.extend(updateLocale);
-dayjs.updateLocale('ko_KR', { weekStart: 0 })
+dayjs.updateLocale('ko_KR', { weekStart: 0 });
 
 interface ILineupUpdateForm extends LineUpInfoResponse {
   isLock: boolean;
@@ -31,7 +32,7 @@ export default function LineupUpdateForm({
   subId,
   title,
   description,
-  performanceDate,
+  performanceTime,
   lineUpImagePath,
   lineUpStatus,
   isLock,
@@ -44,14 +45,15 @@ export default function LineupUpdateForm({
       uid: '-1',
       name: '',
       status: 'done',
-      url: lineUpImagePath
+      url: lineUpImagePath,
     },
   ]);
+
   const initialValues = {
     title: title,
     description: description,
-    performanceTime: dayjs(performanceDate),
-  }
+    performanceTime: dayjs(performanceTime, 'HH:mm:ss'),
+  };
 
   const onFinish: FormProps<FieldType>['onFinish'] = async (values) => {
     await updateLineup(subId, values, fileList[0] as UploadFile, lineUpImagePath);
@@ -64,28 +66,30 @@ export default function LineupUpdateForm({
     }
     // if (lineUpStatus === 'OPENED' && status === 'HIDDEN')
     // hidden(subId);
-  }
+  };
 
   useEffect(() => {
     if (!isLock) return;
     form.setFieldsValue({
       title: title,
       description: description,
-      performanceTime: dayjs(performanceDate),
+      performanceTime: dayjs(performanceTime, 'HH:mm:ss'),
     });
-    setFileList([{
-      uid: '-1',
-      name: '',
-      status: 'done',
-      url: lineUpImagePath
-    }]);
+    setFileList([
+      {
+        uid: '-1',
+        name: '',
+        status: 'done',
+        url: lineUpImagePath,
+      },
+    ]);
   }, [isLock]);
 
   return (
     <>
       <Form
         form={form}
-        id='lineup-update'
+        id="lineup-update"
         layout="vertical"
         initialValues={initialValues}
         disabled={isLock}
@@ -96,7 +100,7 @@ export default function LineupUpdateForm({
             <Form.Item
               name="title"
               label="라인업 이름"
-              rules={[{ required: true, message: 'Please enter user name' }]}
+              rules={[{ required: true, message: 'Please enter the lineup name' }]}
             >
               <Input placeholder="아이유" />
             </Form.Item>
@@ -108,10 +112,7 @@ export default function LineupUpdateForm({
               name="description"
               label="라인업에 대한 설명"
               rules={[
-                {
-                  required: true,
-                  message: 'please enter url description',
-                },
+                { required: true, message: 'Please enter a description' },
               ]}
             >
               <Input.TextArea
@@ -126,30 +127,21 @@ export default function LineupUpdateForm({
             <Form.Item
               name="performanceTime"
               label="라인업의 공연이 시작되는 시각"
-              rules={[{ required: true, message: 'Please choose the dateTime' }]}
+              rules={[{ required: true, message: 'Please choose the performance time' }]}
             >
-              <DatePicker
-                locale={locale}
-              />
+              <TimePicker locale={locale} format="HH:mm:ss" />
             </Form.Item>
           </Col>
         </Row>
         <Row gutter={16}>
           <Col span={12}>
-            <Form.Item
-              name="newFile"
-              label="라인업 이미지"
-            >
-              <Upload
-                fileList={fileList}
-                setFileList={setFileList}
-              />
+            <Form.Item name="newFile" label="라인업 이미지">
+              <Upload fileList={fileList} setFileList={setFileList} />
             </Form.Item>
           </Col>
         </Row>
-
       </Form>
-      <Flex justify='end'>
+      <Flex justify="end">
         <Button onClick={toggleLock}>
           {isLock ? <LockFilled /> : <UnlockOutlined />}
         </Button>
@@ -157,13 +149,12 @@ export default function LineupUpdateForm({
       <Form layout="vertical">
         <Row gutter={16}>
           <Col span={12}>
-            <Form.Item
-              label="라인업 상태"
-            >
-              <Flex justify='start' gap={24}>
-                {LINEUP_STATUS.map((status) => (
+            <Form.Item label="라인업 상태">
+              <Flex justify="start" gap={24}>
+                {LINEUP_STATUS.map((status, idx) => (
                   <Button
-                    size='large'
+                    key={idx}
+                    size="large"
                     onClick={() => onChangeStatus(status)}
                     type={status === lineUpStatus ? 'primary' : 'dashed'}
                   >
@@ -175,7 +166,7 @@ export default function LineupUpdateForm({
           </Col>
         </Row>
       </Form>
-
     </>
   );
 }
+

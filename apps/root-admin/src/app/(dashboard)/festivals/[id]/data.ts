@@ -2,14 +2,13 @@
 
 import { customFetch } from '@swifty/shared-lib';
 import { API_FESTIVAL } from '@lib/constant/api';
-import type { FestivalDetailResponse } from '@app/types/festival';
-import insertCookieInRequest from '@app/lib/util/insert-cookie-in-request';
+import type { FestivalDetailResponse } from '@type/festival';
 
 export async function getDetailFestival(id: string) {
-  const requestOption = await insertCookieInRequest({
+  return await customFetch<FestivalDetailResponse>(API_FESTIVAL.detail(id), {
     cache: 'no-cache',
-    next: { tags: ['festival-detail'] }
+    next: { tags: ['festival-detail'] },
+    credentials: 'include'
   });
-  return await customFetch<FestivalDetailResponse>(API_FESTIVAL.detail(id), requestOption);
 }
 

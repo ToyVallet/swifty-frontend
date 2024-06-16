@@ -1,9 +1,9 @@
 'use client';
 
 import { useState } from 'react';
-import { useLineupCRUD } from '@app/hooks/festival';
+import { useLineupCRUD } from '@hooks/festival';
 import { Upload } from '@components/festival';
-import { Col, DatePicker, Form, Input, Row } from 'antd';
+import { Col, Form, Input, Row, TimePicker } from 'antd';
 import type { DatePickerProps, FormProps, UploadFile } from 'antd';
 import locale from 'antd/es/date-picker/locale/ko_KR';
 
@@ -68,7 +68,7 @@ export default function LineupCreateForm({
             label="라인업의 공연이 시작되는 시각"
             rules={[{ required: true, message: 'Please choose the dateTime' }]}
           >
-            <DatePicker onChange={onChange} locale={locale} />
+            <TimePicker onChange={onChange} locale={locale} />
           </Form.Item>
         </Col>
       </Row>

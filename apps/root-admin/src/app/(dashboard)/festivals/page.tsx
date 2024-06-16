@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { FestivalPanel, PanelList } from '@components/festival';
 import { getAllFestivals } from './data';
-import type { FestivalInfoResponse } from "@app/types/festival";
+import type { FestivalInfoResponse } from "@type/festival";
 
 import styles from './page.module.css';
 

@@ -7,12 +7,11 @@ import {
   StatusNotifier,
 } from '@components/festival';
 import formatDate from '@lib/util/formatDate';
-import type { ConcertStatus, ConcertsResponse } from "@app/types/concert";
+import type { ConcertsResponse } from "@type/concert";
 import type { PropsWithClassName } from '@swifty/shared-lib';
 import clsx from "clsx";
 
 import styles from './panel.module.css';
-import { useConcertStatusToggle } from "@app/hooks/festival";
 
 export default function ConcertPanel({
   className,
@@ -24,11 +23,16 @@ export default function ConcertPanel({
   endDate,
   description,
   concertStatus,
-}: ConcertsResponse & { festivalSubId: string } & PropsWithClassName) {
+  open,
+  hide,
+}: ConcertsResponse & {
+  festivalSubId: string
+  open: (id: string) => Promise<void>;
+  hide: (id: string) => Promise<void>;
+} & PropsWithClassName) {
   const [isLock, setIsLock] = useState<boolean>(true);
   const toggleLock = () => { setIsLock(prev => !prev) }
   const lock = () => { setIsLock(true) }
-  const { optimisticConcertStatus, open, hidden } = useConcertStatusToggle(subId, concertStatus);
 
   return (
     <li className={clsx(styles.description, className)}>
@@ -49,11 +53,11 @@ export default function ConcertPanel({
             startDate={startDate}
             endDate={endDate}
             description={description}
-            concertStatus={optimisticConcertStatus}
+            concertStatus={concertStatus}
             isLock={isLock}
             toggleLock={toggleLock}
             open={open}
-            hidden={hidden}
+            hidden={hide}
           />
         </DrawerButton>
       </div>

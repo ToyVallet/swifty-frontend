@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from 'next/navigation';
-import { useConcertCRUD } from '@app/hooks/festival';
+import { useConcertCRUD } from '@hooks/festival';
 import {
   Col,
   DatePicker,
@@ -13,6 +13,7 @@ import {
 import type { DatePickerProps, FormProps } from 'antd';
 import locale from 'antd/es/date-picker/locale/ko_KR';
 import { Loading3QuartersOutlined } from '@ant-design/icons';
+import type { PropsWithClassName } from '@swifty/shared-lib';
 
 type FieldType = {
   name: string;
@@ -21,7 +22,7 @@ type FieldType = {
   description: string;
 };
 
-export default function ConcertCreateForm({ festivalSubId }: { festivalSubId: string }) {
+export default function ConcertCreateForm({ festivalSubId }: { festivalSubId: string } & PropsWithClassName) {
   const { RangePicker } = DatePicker;
   const { isLoading, error, createConcert } = useConcertCRUD();
   const router = useRouter();

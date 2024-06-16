@@ -12,11 +12,11 @@ import {
   Select,
 } from 'antd';
 import type { FormProps } from 'antd';
-import type { ConcertStatus, ConcertsResponse } from '@app/types/concert';
+import type { ConcertStatus, ConcertsResponse } from '@type/concert';
 import { LockFilled, UnlockOutlined } from '@ant-design/icons';
 import { Loading3QuartersOutlined } from '@ant-design/icons';
 import locale from 'antd/es/date-picker/locale/ko_KR';
-import { useConcertCRUD } from '@app/hooks/festival';
+import { useConcertCRUD } from '@hooks/festival';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ko';
 import updateLocale from 'dayjs/plugin/updateLocale';
@@ -36,14 +36,13 @@ interface IConcertUpdateForm extends Omit<ConcertsResponse, 'lineUpInfoResponses
   festivalSubId: string;
   isLock: boolean;
   toggleLock: () => void;
-  open: (id: string) => void;
-  hidden: (id: string) => void;
+  open: (id: string) => Promise<void>;
+  hidden: (id: string) => Promise<void>;
 }
 
 const CONCERT_STATUS = ['OPENED', 'HIDDEN'] as const;
 
 export default function ConcertUpdateForm({
-  festivalSubId,
   subId,
   name,
   location,
@@ -68,16 +67,16 @@ export default function ConcertUpdateForm({
   };
 
   const onFinish: FormProps<FieldType>['onFinish'] = async (values) => {
-    await updateConcert(festivalSubId, subId, { ...values });
+    await updateConcert(subId, { ...values });
   };
 
-  const onChangeStatus = (status: ConcertStatus) => {
+  const onChangeStatus = async (status: ConcertStatus) => {
     if (concertStatus === 'HIDDEN' && status === 'OPENED') {
-      open(subId);
+      await open(subId);
       return;
     }
     if (concertStatus === 'OPENED' && status === 'HIDDEN')
-      hidden(subId);
+      await hidden(subId);
   }
 
   useEffect(() => {
@@ -185,8 +184,9 @@ export default function ConcertUpdateForm({
               label="콘서트 상태"
             >
               <Flex justify='start' gap={24}>
-                {CONCERT_STATUS.map((status) => (
+                {CONCERT_STATUS.map((status, idx) => (
                   <Button
+                    key={idx}
                     size='large'
                     onClick={() => onChangeStatus(status)}
                     type={status === concertStatus ? 'primary' : 'dashed'}

@@ -2,7 +2,7 @@
 
 import { useCallback, useState } from "react";
 import { customFetch } from "@swifty/shared-lib";
-import { API_LINEUP } from "@app/lib/constant/api";
+import { API_LINEUP } from "@lib/constant/api";
 import type { UploadFile } from "antd";
 import type { RcFile } from "antd/es/upload";
 
@@ -15,7 +15,7 @@ type FieldType = {
 function formatDate(performanceTime: string) {
   const offset = 1000 * 60 * 60 * 9;
   const pt = new Date(performanceTime + offset);
-  return pt.toISOString().slice(0, 10);
+  return pt.toISOString().slice(11, 19);
 }
 
 export default function useLineupCRUD() {
@@ -35,7 +35,6 @@ export default function useLineupCRUD() {
       formData.append('newFile', newFile.originFileObj as RcFile, newFile.name);
     try {
       await customFetch(API_LINEUP.lineup(), {
-        headers: {},
         method: 'POST',
         body: formData
       });
@@ -62,13 +61,10 @@ export default function useLineupCRUD() {
     formData.append('newFile', newFile.originFileObj as RcFile, newFile.name);
     formData.append('previousFile', previousFile);
     try {
-      const result = await customFetch(API_LINEUP.lineup(), {
-        headers: {},
+      await customFetch(API_LINEUP.lineup(), {
         method: 'PATCH',
         body: formData
       });
-      console.log('result: ', JSON.stringify(result));
-      console.log('previousFile: ', previousFile);
     } catch (e) {
       if (e instanceof Error)
         setError(e.message);
