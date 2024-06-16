@@ -21,8 +21,21 @@ const config: StorybookConfig = {
   ],
   framework: {
     name: getAbsolutePath('@storybook/nextjs'),
-    options: {},
+    options: {
+      builder: {
+        useSWC: true,
+      },
+    },
   },
+  swc: () => ({
+    jsc: {
+      transform: {
+        react: {
+          runtime: 'automatic',
+        },
+      },
+    },
+  }),
   core: {
     builder: '@storybook/builder-webpack5',
   },
