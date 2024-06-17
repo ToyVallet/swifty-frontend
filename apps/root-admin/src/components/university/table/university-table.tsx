@@ -1,6 +1,7 @@
 'use client';
 
 import {
+  DeleteButton,
   DrawerButton,
   UniversityLogoUpdateForm,
   UniversityUpdateForm,
@@ -10,7 +11,7 @@ import { API_UNIVERSITY } from '@lib';
 import { customFetch, revalidate } from '@swifty/shared-lib';
 import type { University } from '@type';
 import type { TableProps } from 'antd';
-import { Avatar, Button, Popconfirm, Table } from 'antd';
+import { Avatar, Button, Table } from 'antd';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
@@ -84,12 +85,9 @@ const columns: TableProps<University>['columns'] = [
     dataIndex: 'delete',
     key: 'delete',
     render: (_, record) => (
-      <Popconfirm
+      <DeleteButton
         title="계정 삭제"
         description="해당 계정을 삭제하시겠습니까?"
-        okText="확인"
-        okType="danger"
-        cancelText="취소"
         onConfirm={async () => {
           await customFetch(
             API_UNIVERSITY.patch_delete_universiry(record.subId),
@@ -100,10 +98,8 @@ const columns: TableProps<University>['columns'] = [
           await revalidate('university');
         }}
       >
-        <Button type="primary" danger>
-          대학 삭제
-        </Button>
-      </Popconfirm>
+        삭제
+      </DeleteButton>
     ),
   },
 ];
