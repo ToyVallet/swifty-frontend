@@ -10,3 +10,8 @@
   color: rgba(0, 0, 0, 0.4);
   font-weight: 600;
 }
+
+.section {
+  display: flex;
+  gap: 1rem;
+}

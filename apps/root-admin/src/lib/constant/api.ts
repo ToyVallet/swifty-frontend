@@ -39,3 +39,8 @@ export const API_UNIVERSITY = {
   university_logo: (id: string) => `/root/admin/university/${id}/logo`,
   university_detail: (id: string) => `/host/admin/university/${id}`,
 };
+
+export const API_HSOT = {
+  host: '/root/admin/host',
+  host_detail: (id: string) => `/root/admin/host/${id}`,
+};

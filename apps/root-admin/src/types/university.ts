@@ -16,3 +16,15 @@ export interface UniversityDetail {
   universityAddr: string;
   fileInfoResponse: UniversityLogo;
 }
+
+export interface UniversityHostUser {
+  subId: string;
+  phone: string;
+  subUserId: string;
+  userFormId: string;
+}
+
+export interface UniversityHostCreate {
+  clientLoginId: string;
+  clientPassword: string;
+}

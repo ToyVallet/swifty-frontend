@@ -1,5 +1,5 @@
 import type { BreadcrumbList } from '@components';
-import { BreadCrumbs } from '@components';
+import { BreadCrumbs, UniversityHostUsers } from '@components';
 import School from '@icons/school.svg';
 import { API_UNIVERSITY } from '@lib';
 import { type Params, customFetch } from '@swifty/shared-lib';
@@ -51,8 +51,10 @@ export default async function UniversityDetailPage({
         <BreadCrumbs separator="/" breadcrumbList={breadcrumbList} />
         <span className={styles.addr}>{data.universityAddr}</span>
       </header>
-      <section>
-        <Suspense fallback={<p>Loading Host User</p>}></Suspense>
+      <section className={styles.section}>
+        <Suspense fallback={<p>Loading Host User</p>}>
+          <UniversityHostUsers id={id} />
+        </Suspense>
         <Suspense
           fallback={<p>Loading {data.universityName} Festivals</p>}
         ></Suspense>

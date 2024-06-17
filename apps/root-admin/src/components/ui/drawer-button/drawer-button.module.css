@@ -1,7 +1,7 @@
 .createButton {
   background: red;
-  width: 9.375rem;
-  text-indent: 0.5rem;
+  width: 10rem;
+  text-indent: 1rem;
   position: relative;
 }
 
@@ -10,7 +10,7 @@
   width: 2rem;
   height: 2rem;
   position: absolute;
-  left: 0.4rem;
+  left: 0.5rem;
   top: 50%;
   transform: translateY(-50%);
   border-radius: 9999px;
