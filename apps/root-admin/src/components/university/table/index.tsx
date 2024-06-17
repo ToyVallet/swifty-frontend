@@ -91,9 +91,12 @@ const columns: TableProps<University>['columns'] = [
         okType="danger"
         cancelText="취소"
         onConfirm={async () => {
-          await customFetch(API_UNIVERSITY.detail_universiry(record.subId), {
-            method: 'DELETE',
-          });
+          await customFetch(
+            API_UNIVERSITY.patch_delete_universiry(record.subId),
+            {
+              method: 'DELETE',
+            },
+          );
           await revalidate('university');
         }}
       >

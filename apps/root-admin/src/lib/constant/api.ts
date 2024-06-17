@@ -35,6 +35,7 @@ export const API_UNIVERSITY = {
   get_univiresity: (page = 0, size = 20) =>
     `/root/admin/university?page=${page}&size=${size}`,
   post_university: () => '/root/admin/university',
-  detail_universiry: (id: string) => `/root/admin/university/${id}`,
+  patch_delete_universiry: (id: string) => `/root/admin/university/${id}`,
   university_logo: (id: string) => `/root/admin/university/${id}/logo`,
+  university_detail: (id: string) => `/host/admin/university/${id}`,
 };

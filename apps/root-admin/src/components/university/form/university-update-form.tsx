@@ -28,10 +28,13 @@ export default function UniversityUpdateForm({
   const onFinish: FormProps<FieldType>['onFinish'] = async (
     values: FieldType,
   ) => {
-    await customFetch(API_UNIVERSITY.detail_universiry(university.subId), {
-      method: 'PATCH',
-      body: JSON.stringify(values),
-    });
+    await customFetch(
+      API_UNIVERSITY.patch_delete_universiry(university.subId),
+      {
+        method: 'PATCH',
+        body: JSON.stringify(values),
+      },
+    );
     await revalidate('university');
     onClose?.();
   };
