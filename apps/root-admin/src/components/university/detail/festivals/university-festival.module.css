@@ -1,0 +1,11 @@
+.section {
+  flex: 1;
+}
+
+.heading {
+  margin-top: 2rem;
+}
+
+.cardList {
+  margin-top: 1rem;
+}

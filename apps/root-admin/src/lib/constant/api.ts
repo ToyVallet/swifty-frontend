@@ -38,6 +38,7 @@ export const API_UNIVERSITY = {
   patch_delete_universiry: (id: string) => `/root/admin/university/${id}`,
   university_logo: (id: string) => `/root/admin/university/${id}/logo`,
   university_detail: (id: string) => `/host/admin/university/${id}`,
+  festivals: (id: string) => `/host/admin/festival/${id}/university`,
 };
 
 export const API_HSOT = {
