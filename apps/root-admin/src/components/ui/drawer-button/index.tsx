@@ -16,6 +16,8 @@ const variantButtons = {
   'university-logo-update': '대학 로고 수정',
   'university-update': '대학 수정',
   'host-create': '호스트 생성',
+  'festival-create': '대학 축제 생성',
+  'festival-update': '대학 축제 수정',
 } as const;
 
 interface DrawerButtonProps extends DrawerProps {

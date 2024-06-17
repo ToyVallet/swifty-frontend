@@ -1,4 +1,4 @@
-import { Card, CardList } from '@components';
+import { Card, CardList, DrawerButton, FestivalCreateForm } from '@components';
 import { API_UNIVERSITY, FETCH_TAG, getFestivalStatus } from '@lib';
 import { customFetch } from '@swifty/shared-lib';
 import type { FestivalInfoResponse } from '@type';
@@ -14,9 +14,15 @@ export default async function UniversityFestivals({ id }: { id: string }) {
       next: { tags: [FETCH_TAG.festivals, id] },
     },
   );
+
   return (
     <section className={styles.section}>
-      <h2 className={styles.heading}>축제 관리</h2>
+      <div className={styles.header}>
+        <h2 className={styles.heading}>축제 관리</h2>
+        <DrawerButton variant="festival-create">
+          <FestivalCreateForm id={id} />
+        </DrawerButton>
+      </div>
       <CardList className={styles.cardList}>
         {data.map(({ subId, name, addr, description, startDate, endDate }) => (
           <Link href={`/festivals/${subId}`} key={subId}>
