@@ -38,7 +38,7 @@ export default async function UniversityFestivals({ id }: { id: string }) {
             startDate,
             endDate,
           }: FestivalInfoResponse) => (
-            <Link href={`festivals/${subId}`} key={subId}>
+            <Link href={`/festivals/${subId}`} key={subId}>
               <FestivalPanel
                 className={styles.panel}
                 name={name}

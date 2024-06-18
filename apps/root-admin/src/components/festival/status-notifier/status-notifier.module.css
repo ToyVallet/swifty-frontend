@@ -23,21 +23,21 @@
 }
 
 .notifier.open:not(.pale)::before {
-  background: #33D69F;
+  background: #33d69f;
 }
 
 .notifier.hidden:not(.pale)::before {
-  background: #373B53;
+  background: #373b53;
 }
 
 .open {
-  color: #33D69F;
-  background: #E6F9F0;
+  color: #33d69f;
+  background: #e6f9f0;
 }
 
 .hidden {
-  color: #373B53;
-  background: #F1F1F4;
+  color: #f2f3f8;
+  background: #a9a9ab;
 }
 
 .pale {

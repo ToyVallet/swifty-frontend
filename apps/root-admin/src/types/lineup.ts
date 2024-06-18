@@ -1,12 +1,10 @@
-export type LineUpStatus =
-  | 'OPENED'
-  | 'HIDDEN';
+import { type Status } from './festival';
 
 export type LineUpInfoResponse = {
   subId: string;
   title: string;
   description: string;
   performanceTime: string;
-  lineUpImagePath: string;
-  lineUpStatus: LineUpStatus;
+  lineUpImagePath: string | null;
+  lineUpStatus: Status;
 };

@@ -1,5 +1,5 @@
 import type { PropsWithClassName } from '@swifty/shared-lib';
-import type { ConcertStatus } from '@type';
+import type { Status } from '@type';
 import clsx from 'clsx';
 
 import styles from './status-notifier.module.css';
@@ -8,7 +8,10 @@ export default function StatusNotifier({
   className,
   isPale = false,
   status,
-}: { status: ConcertStatus; isPale?: boolean } & PropsWithClassName) {
+}: {
+  status: Status;
+  isPale?: boolean;
+} & PropsWithClassName) {
   return (
     <>
       <div

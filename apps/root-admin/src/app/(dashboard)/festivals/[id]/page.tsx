@@ -9,7 +9,7 @@ import {
 import type { Params } from '@swifty/shared-lib';
 import { Flex } from 'antd';
 
-import { getDetailFestival } from '../../get-detail-festival';
+import { getDetailFestival } from './get-detail-festival';
 import styles from './page.module.css';
 
 export default async function Page({ params: { id } }: Params<{ id: string }>) {

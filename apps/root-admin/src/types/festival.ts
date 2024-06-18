@@ -1,5 +1,7 @@
 import type { ConcertsResponse } from './concert';
 
+export type Status = 'OPENED' | 'HIDDEN';
+
 export type FestivalRequest = {
   sort: 'updated' | 'recently' | 'popular';
   count: number;
@@ -20,7 +22,7 @@ export type FestivalDetailResponse = {
   adminFestivalInfoResponse: {
     revealStartDate: string;
     revealEndDate: string;
-    festivalStatus: 'OPENED' | 'HIDDEN';
+    festivalStatus: Status;
     thumbnail: string;
     poster: string;
     logo: string;

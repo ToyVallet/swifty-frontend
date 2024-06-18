@@ -2,9 +2,12 @@
 
 import { Upload } from '@components';
 import { useLineupCRUD } from '@hooks';
+import { FETCH_TAG } from '@lib';
+import { revalidate } from '@swifty/shared-lib';
 import { Col, Form, Input, Row, TimePicker } from 'antd';
-import type { DatePickerProps, FormProps, UploadFile } from 'antd';
-import locale from 'antd/es/date-picker/locale/ko_KR';
+import type { FormProps, UploadFile } from 'antd';
+import type { FormInstance } from 'antd/lib';
+import dayjs from 'dayjs';
 import { useState } from 'react';
 
 type FieldType = {
@@ -13,17 +16,27 @@ type FieldType = {
   performanceTime: string;
 };
 
+interface Props {
+  concertSubId: string;
+  festivalId: string;
+  form?: FormInstance<FieldType>;
+  onClose?: () => void;
+}
+
 export default function LineupCreateForm({
   concertSubId,
-}: {
-  concertSubId: string;
-}) {
-  const [form] = Form.useForm();
-  const { isLoading, createLineup } = useLineupCRUD();
+  festivalId,
+  form,
+  onClose,
+}: Props) {
+  const { createLineup, error } = useLineupCRUD();
   const [fileList, setFileList] = useState<UploadFile[]>([]);
-  const onChange: DatePickerProps['onChange'] = (date, dateString) => {};
   const onFinish: FormProps<FieldType>['onFinish'] = async (values) => {
     await createLineup(concertSubId, values, fileList[0] as UploadFile);
+    if (!error) {
+      await revalidate(FETCH_TAG.festivalsDetail(festivalId));
+      onClose?.();
+    }
   };
 
   return (
@@ -65,7 +78,7 @@ export default function LineupCreateForm({
             label="라인업의 공연이 시작되는 시각"
             rules={[{ required: true, message: 'Please choose the dateTime' }]}
           >
-            <TimePicker onChange={onChange} locale={locale} />
+            <TimePicker defaultValue={dayjs('00:00:00', 'HH:mm:ss')} />
           </Form.Item>
         </Col>
       </Row>

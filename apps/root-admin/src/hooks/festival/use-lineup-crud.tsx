@@ -27,20 +27,24 @@ export default function useLineupCRUD() {
       const { title, description, performanceTime } = values;
       setIsLoading(true);
       setError(null);
+
       const formData = new FormData();
       formData.append('concertSubId', concertSubId);
       formData.append('title', title);
       formData.append('description', description);
       formData.append('performanceTime', formatDate(performanceTime));
+
       if (newFile)
         formData.append(
           'newFile',
           newFile.originFileObj as RcFile,
           newFile.name,
         );
+
       try {
         await customFetch(API_LINEUP.lineup(), {
           method: 'POST',
+          headers: {},
           body: formData,
         });
       } catch (e) {
@@ -105,6 +109,7 @@ export default function useLineupCRUD() {
 
   return {
     isLoading,
+    error,
     createLineup,
     updateLineup,
     deleteLineup,
