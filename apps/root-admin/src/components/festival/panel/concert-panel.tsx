@@ -4,8 +4,9 @@ import { ConcertUpdateForm, DrawerButton, StatusNotifier } from '@components';
 import { formatDate } from '@lib';
 import type { PropsWithClassName } from '@swifty/shared-lib';
 import type { ConcertsResponse } from '@type';
+import { Button } from 'antd';
 import clsx from 'clsx';
-import { useState } from 'react';
+import Link from 'next/link';
 
 import styles from './panel.module.css';
 
@@ -19,21 +20,9 @@ export default function ConcertPanel({
   endDate,
   description,
   concertStatus,
-  open,
-  hide,
 }: ConcertsResponse & {
   festivalSubId: string;
-  open: (id: string) => Promise<void>;
-  hide: (id: string) => Promise<void>;
 } & PropsWithClassName) {
-  const [isLock, setIsLock] = useState<boolean>(true);
-  const toggleLock = () => {
-    setIsLock((prev) => !prev);
-  };
-  const lock = () => {
-    setIsLock(true);
-  };
-
   return (
     <li className={clsx(styles.description, className)}>
       <h3 className={styles.heading}>{location}</h3>
@@ -43,8 +32,13 @@ export default function ConcertPanel({
       <div className={styles.content}>
         <StatusNotifier status={concertStatus} />
       </div>
+      <div>
+        <Button>
+          <Link href={`/concert/${subId}`}>콘서트 상세 정보 확인</Link>
+        </Button>
+      </div>
       <div className={styles.content}>
-        <DrawerButton variant="concert-update" isLock={isLock} lock={lock}>
+        <DrawerButton variant="concert-update">
           <ConcertUpdateForm
             festivalSubId={festivalSubId}
             subId={subId}
@@ -54,10 +48,6 @@ export default function ConcertPanel({
             endDate={endDate}
             description={description}
             concertStatus={concertStatus}
-            isLock={isLock}
-            toggleLock={toggleLock}
-            open={open}
-            hidden={hide}
           />
         </DrawerButton>
       </div>

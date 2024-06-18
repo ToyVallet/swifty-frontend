@@ -1,8 +1,12 @@
 'use client';
 
-import { API_CONCERT } from '@lib';
+import { API_CONCERT, changeDateFormat } from '@lib';
 import { customFetch, revalidate } from '@swifty/shared-lib';
+import dayjs from 'dayjs';
+import 'dayjs/locale/ko';
 import { useCallback, useState } from 'react';
+
+const FORMAT = 'YYYY-MM-DDTHH:mm:ss';
 
 type FieldType = {
   name: string;
@@ -13,23 +17,11 @@ type FieldType = {
 
 type UpdateFieldType = {
   name: string;
-  startDate: string;
-  endDate: string;
+  startDate: Date;
+  endDate: Date;
   location: string;
   description: string;
 };
-
-function formatDates(rangeDateTime: string[]) {
-  const offset = 1000 * 60 * 60 * 9;
-  const startDate = new Date((rangeDateTime[0] as string) + offset);
-  const endDate = new Date((rangeDateTime[1] as string) + offset);
-  const startDateStr = startDate.toISOString().slice(0, 19);
-  const endDateStr = endDate.toISOString().slice(0, 19);
-  return {
-    startDate: startDateStr,
-    endDate: endDateStr,
-  };
-}
 
 export default function useConcertCRUD() {
   const [isLoading, setIsLoading] = useState(false);
@@ -41,11 +33,11 @@ export default function useConcertCRUD() {
       setIsLoading(true);
       setError(null);
       const formData = new FormData();
-      const { startDate, endDate } = formatDates(rangeDateTime);
+
       formData.append('name', name);
       formData.append('festivalSubId', festivalSubId);
-      formData.append('startDate', startDate);
-      formData.append('endDate', endDate);
+      formData.append('startDate', changeDateFormat(rangeDateTime[0]));
+      formData.append('endDate', changeDateFormat(rangeDateTime[1]));
       formData.append('location', location);
       formData.append('description', description);
 
@@ -67,27 +59,22 @@ export default function useConcertCRUD() {
 
   const updateConcert = useCallback(
     async (id: string, values: UpdateFieldType) => {
-      const {
-        name,
-        location,
-        description,
-        startDate: sd,
-        endDate: ed,
-      } = values;
+      const { name, location, description, startDate, endDate } = values;
       setIsLoading(true);
       setError(null);
       const formData = new FormData();
-      const { startDate, endDate } = formatDates([sd, ed]);
+
       formData.append('name', name);
       formData.append('concertSubId', id);
-      formData.append('startDate', startDate);
-      formData.append('endDate', endDate);
+      formData.append('startDate', dayjs(startDate).format(FORMAT));
+      formData.append('endDate', dayjs(endDate).format(FORMAT));
       formData.append('location', location);
       formData.append('description', description);
 
       try {
         await customFetch(API_CONCERT.concert(), {
           method: 'PATCH',
+          headers: {},
           body: formData,
         });
         await revalidate('festival-detail');

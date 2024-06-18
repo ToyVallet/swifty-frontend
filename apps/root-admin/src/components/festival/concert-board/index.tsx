@@ -126,7 +126,7 @@ export default function ConcertBoard({
         open={open}
         hide={hide}
       />
-      {activeConcert && (
+      {/*       {activeConcert && (
         <>
           <Flex justify="end">
             <DrawerButton
@@ -142,7 +142,7 @@ export default function ConcertBoard({
             pagination={false}
           />
         </>
-      )}
+      )} */}
     </>
   );
 }

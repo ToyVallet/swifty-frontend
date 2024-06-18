@@ -33,7 +33,9 @@ export default function DrawerButton({
   const [form] = Form.useForm();
   const [open, setOpen] = useState(false);
 
-  const showDrawer = () => {
+  const showDrawer = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    e.preventDefault();
     setOpen(true);
   };
 

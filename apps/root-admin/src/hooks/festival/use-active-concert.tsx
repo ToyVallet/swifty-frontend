@@ -15,6 +15,7 @@ export default function useActiveConcert(
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  // optimstic update change Status
   const open = useCallback(
     async (id: string) => {
       const prevConcerts = concerts;
@@ -37,6 +38,7 @@ export default function useActiveConcert(
     [concerts, activeKey],
   );
 
+  // optimstic update change Status
   const hide = useCallback(
     async (id: string) => {
       const prevConcerts = concerts;

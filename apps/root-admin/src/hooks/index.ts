@@ -1,2 +1,3 @@
 export { default as usePagination } from './use-pagination';
-export * from '../hook/festival';
+export { default as useLock } from './use-lock';
+export * from './festival';
