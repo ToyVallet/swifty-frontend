@@ -1,7 +1,7 @@
 'use client';
 
 import { Upload } from '@components';
-import { useLineupCRUD } from '@hooks/festival';
+import { useLineupCRUD } from '@hooks';
 import { Col, Form, Input, Row, TimePicker } from 'antd';
 import type { DatePickerProps, FormProps, UploadFile } from 'antd';
 import locale from 'antd/es/date-picker/locale/ko_KR';

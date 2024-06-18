@@ -1,4 +1,4 @@
-import { ConcertBoard, StatusNotifier } from '@components/festival';
+import { ConcertBoard, StatusNotifier } from '@components';
 import type { Params } from '@swifty/shared-lib';
 import { Flex } from 'antd';
 

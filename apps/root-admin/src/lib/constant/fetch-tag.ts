@@ -3,4 +3,5 @@ export const FETCH_TAG = {
   users: 'users',
   hostUsers: 'university-host-user',
   festivals: 'festivals',
+  festivalsDetail: (id: string) => `festival-detail-${id}`,
 } as const;

@@ -1,8 +1,8 @@
 'use client';
 
 import { customFetch } from '@swifty/shared-lib';
-import type { Paginaiton } from '@type/api';
-import type { UserRole } from '@type/user';
+import type { Paginaiton } from '@type';
+import type { UserRole } from '@type';
 import { useState } from 'react';
 
 interface Prop<T> {

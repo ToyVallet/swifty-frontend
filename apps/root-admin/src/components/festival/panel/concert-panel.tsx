@@ -1,15 +1,11 @@
 'use client';
 
-import { useState } from "react";
-import {
-  ConcertUpdateForm,
-  DrawerButton,
-  StatusNotifier,
-} from '@components/festival';
-import formatDate from '@lib/util/formatDate';
-import type { ConcertsResponse } from "@type/concert";
+import { ConcertUpdateForm, DrawerButton, StatusNotifier } from '@components';
+import { formatDate } from '@lib';
 import type { PropsWithClassName } from '@swifty/shared-lib';
-import clsx from "clsx";
+import type { ConcertsResponse } from '@type';
+import clsx from 'clsx';
+import { useState } from 'react';
 
 import styles from './panel.module.css';
 
@@ -26,13 +22,17 @@ export default function ConcertPanel({
   open,
   hide,
 }: ConcertsResponse & {
-  festivalSubId: string
+  festivalSubId: string;
   open: (id: string) => Promise<void>;
   hide: (id: string) => Promise<void>;
 } & PropsWithClassName) {
   const [isLock, setIsLock] = useState<boolean>(true);
-  const toggleLock = () => { setIsLock(prev => !prev) }
-  const lock = () => { setIsLock(true) }
+  const toggleLock = () => {
+    setIsLock((prev) => !prev);
+  };
+  const lock = () => {
+    setIsLock(true);
+  };
 
   return (
     <li className={clsx(styles.description, className)}>

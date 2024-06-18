@@ -2,18 +2,17 @@
 
 import { Loading3QuartersOutlined } from '@ant-design/icons';
 import {
+  DeleteButton,
   DrawerButton,
   LineupCreateForm,
   LineupUpdateForm,
   Tabs,
 } from '@components';
-import {
-  useActiveConcert,
-  useConcertCRUD,
-  useLineupCRUD,
-} from '@hooks/festival';
+import { useActiveConcert, useConcertCRUD, useLineupCRUD } from '@hooks';
+import { FETCH_TAG } from '@lib';
+import { revalidate } from '@swifty/shared-lib';
 import type { ConcertsResponse } from '@type';
-import { Button, Flex, Table } from 'antd';
+import { Flex, Table } from 'antd';
 import { useState } from 'react';
 import FestivalDrawerButton from 'src/components/festival/festival-drawer-button';
 
@@ -79,12 +78,21 @@ export default function ConcertBoard({
           />
         </FestivalDrawerButton>
       ),
-      delete: <Button onClick={() => removeLineup(subId)}>삭제</Button>,
+      delete: (
+        <DeleteButton
+          title="콘서트 삭제"
+          description="해당 콘서트를 정말로 삭제하시겠습니까?"
+          onConfirm={() => removeLineup(subId)}
+        >
+          삭제
+        </DeleteButton>
+      ),
     }),
   );
 
   const removeLineup = async (subId: string) => {
-    if (confirm('정말로 삭제하시겠습니까?')) await deleteLineup(subId);
+    await deleteLineup(subId);
+    await revalidate(FETCH_TAG.festivalsDetail(subId));
   };
 
   const { isLoading, deleteConcert } = useConcertCRUD();

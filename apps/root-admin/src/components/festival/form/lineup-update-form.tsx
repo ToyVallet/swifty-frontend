@@ -2,7 +2,7 @@
 
 import { LockFilled, UnlockOutlined } from '@ant-design/icons';
 import { Upload } from '@components';
-import { useLineupCRUD } from '@hooks/festival';
+import { useLineupCRUD } from '@hooks';
 import type { LineUpInfoResponse, LineUpStatus } from '@type';
 import { Button, Col, Flex, Form, Input, Row, TimePicker } from 'antd';
 import type { FormProps, UploadFile } from 'antd';

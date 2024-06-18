@@ -6,6 +6,7 @@ import {
   UniversityLogoUpdateForm,
   UniversityUpdateForm,
 } from '@components';
+import { usePagination } from '@hooks';
 import School from '@icons/school.svg';
 import { API_UNIVERSITY } from '@lib';
 import { customFetch, revalidate } from '@swifty/shared-lib';
@@ -15,7 +16,6 @@ import { Avatar, Button, Table } from 'antd';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import usePagination from 'src/hook/usePagination';
 
 interface Props {
   data: University[];

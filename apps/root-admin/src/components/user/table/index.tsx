@@ -1,13 +1,13 @@
 'use client';
 
 import { DefaultTag, GenderTag, LoginTag, StatusTag } from '@components';
+import { usePagination } from '@hooks';
 import { API_CLIENT } from '@lib';
 import type { User, UserEnrolled, UserGender, UserStatus } from '@type';
 import type { TableProps } from 'antd';
 import { Table } from 'antd';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import usePagination from 'src/hook/usePagination';
 
 import styles from './table.module.css';
 

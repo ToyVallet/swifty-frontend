@@ -1,5 +1,5 @@
-import formatDate from '@lib/util/formatDate';
-import type { PropsWithClassName } from "@swifty/shared-lib";
+import { formatDate } from '@lib';
+import type { PropsWithClassName } from '@swifty/shared-lib';
 import clsx from 'clsx';
 
 import styles from './panel.module.css';
@@ -28,4 +28,3 @@ export default function FestivalPanel({
     </li>
   );
 }
-

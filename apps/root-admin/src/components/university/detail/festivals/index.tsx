@@ -1,5 +1,10 @@
-import { Card, CardList, DrawerButton, FestivalCreateForm } from '@components';
-import { API_UNIVERSITY, FETCH_TAG, getFestivalStatus } from '@lib';
+import {
+  DrawerButton,
+  FestivalCreateForm,
+  FestivalPanel,
+  PanelList,
+} from '@components';
+import { API_UNIVERSITY, FETCH_TAG } from '@lib';
 import { customFetch } from '@swifty/shared-lib';
 import type { FestivalInfoResponse } from '@type';
 import Link from 'next/link';
@@ -23,22 +28,29 @@ export default async function UniversityFestivals({ id }: { id: string }) {
           <FestivalCreateForm id={id} />
         </DrawerButton>
       </div>
-      <CardList className={styles.cardList}>
-        {data.map(({ subId, name, addr, description, startDate, endDate }) => (
-          <Link href={`/festivals/${subId}`} key={subId}>
-            <Card>
-              <Card.FestvialDescription
+      <PanelList className={styles.panelList}>
+        {data.map(
+          ({
+            subId,
+            name,
+            addr,
+            description,
+            startDate,
+            endDate,
+          }: FestivalInfoResponse) => (
+            <Link href={`festivals/${subId}`} key={subId}>
+              <FestivalPanel
+                className={styles.panel}
                 name={name}
                 addr={addr}
                 description={description}
                 startDate={startDate}
                 endDate={endDate}
-                status={getFestivalStatus(startDate, endDate)}
               />
-            </Card>
-          </Link>
-        ))}
-      </CardList>
+            </Link>
+          ),
+        )}
+      </PanelList>
     </section>
   );
 }

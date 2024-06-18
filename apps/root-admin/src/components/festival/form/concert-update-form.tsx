@@ -2,7 +2,7 @@
 
 import { LockFilled, UnlockOutlined } from '@ant-design/icons';
 import { Loading3QuartersOutlined } from '@ant-design/icons';
-import { useConcertCRUD } from '@hooks/festival';
+import { useConcertCRUD } from '@hooks';
 import type { ConcertStatus, ConcertsResponse } from '@type';
 import { Button, Col, DatePicker, Flex, Form, Input, Row, Select } from 'antd';
 import type { FormProps } from 'antd';

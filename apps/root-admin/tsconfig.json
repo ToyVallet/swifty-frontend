@@ -6,20 +6,13 @@
       "@app/*": ["./src/app/*"],
       "@components": ["./src/components"],
       "@lib": ["./src/lib"],
-      "@hooks/*": ["./src/hooks/*"],
+      "@hooks": ["./src/hooks/"],
       "@api": ["src/api"],
       "@type": ["./src/types"],
       "@styles/*": ["./src/styles/*"],
       "@icons/*": ["./public/icons/*"]
     }
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    ".next/types/**/*.ts",
-    "tailwind.config.js",
-    "postcss.config.js"
-  ],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
   "exclude": ["node_modules", "server.js"]
 }

@@ -1,12 +1,7 @@
 .createButton {
-<<<<<<< HEAD:apps/root-admin/src/components/festival/drawer-button/drawer-button.module.css
-  width: 9.375rem;
-  text-indent: 1.25rem;
-=======
   background: red;
   width: 10rem;
   text-indent: 1rem;
->>>>>>> feature(root-admin)/199-detail-university-festivals:apps/root-admin/src/components/ui/button/drawer-button/drawer-button.module.css
   position: relative;
 }
 
