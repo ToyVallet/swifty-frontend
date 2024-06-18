@@ -1,36 +1,33 @@
 'use client';
 
-import { useState } from 'react';
+import { Upload } from '@components';
 import { useLineupCRUD } from '@hooks/festival';
-import { Upload } from '@components/festival';
 import { Col, Form, Input, Row, TimePicker } from 'antd';
 import type { DatePickerProps, FormProps, UploadFile } from 'antd';
 import locale from 'antd/es/date-picker/locale/ko_KR';
+import { useState } from 'react';
 
 type FieldType = {
   title: string;
   description: string;
   performanceTime: string;
-}
+};
 
 export default function LineupCreateForm({
-  concertSubId
-}: { concertSubId: string }) {
+  concertSubId,
+}: {
+  concertSubId: string;
+}) {
   const [form] = Form.useForm();
   const { isLoading, createLineup } = useLineupCRUD();
   const [fileList, setFileList] = useState<UploadFile[]>([]);
-  const onChange: DatePickerProps['onChange'] = (date, dateString) => { };
+  const onChange: DatePickerProps['onChange'] = (date, dateString) => {};
   const onFinish: FormProps<FieldType>['onFinish'] = async (values) => {
     await createLineup(concertSubId, values, fileList[0] as UploadFile);
   };
 
   return (
-    <Form
-      form={form}
-      id="lineup-create"
-      layout="vertical"
-      onFinish={onFinish}
-    >
+    <Form form={form} id="lineup-create" layout="vertical" onFinish={onFinish}>
       <Row gutter={16}>
         <Col span={12}>
           <Form.Item
@@ -74,14 +71,8 @@ export default function LineupCreateForm({
       </Row>
       <Row gutter={16}>
         <Col span={12}>
-          <Form.Item
-            name="newFile"
-            label="라인업 이미지"
-          >
-            <Upload
-              fileList={fileList}
-              setFileList={setFileList}
-            />
+          <Form.Item name="newFile" label="라인업 이미지">
+            <Upload fileList={fileList} setFileList={setFileList} />
           </Form.Item>
         </Col>
       </Row>

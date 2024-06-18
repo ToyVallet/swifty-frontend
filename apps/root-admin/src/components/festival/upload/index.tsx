@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { PlusOutlined } from '@ant-design/icons';
 import { Upload as AntdUpload, Image } from 'antd';
@@ -18,7 +18,10 @@ const getBase64 = (file: FileType): Promise<string> =>
 export default function Upload({
   fileList,
   setFileList,
-}: { fileList: UploadFile[]; setFileList: (files: UploadFile[]) => void }) {
+}: {
+  fileList: UploadFile[];
+  setFileList: (files: UploadFile[]) => void;
+}) {
   const [previewOpen, setPreviewOpen] = useState(false);
   const [previewImage, setPreviewImage] = useState('');
 
@@ -33,7 +36,7 @@ export default function Upload({
 
   const handleChange: UploadProps['onChange'] = ({ fileList: newFileList }) => {
     setFileList(newFileList);
-  }
+  };
 
   const uploadButton = (
     <button style={{ border: 0, background: 'none' }} type="button">

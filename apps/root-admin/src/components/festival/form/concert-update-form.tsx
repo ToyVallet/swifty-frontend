@@ -1,28 +1,19 @@
-"use client";
+'use client';
 
-import { useEffect } from 'react';
-import {
-  Button,
-  Col,
-  DatePicker,
-  Form,
-  Input,
-  Row,
-  Flex,
-  Select,
-} from 'antd';
-import type { FormProps } from 'antd';
-import type { ConcertStatus, ConcertsResponse } from '@type/concert';
 import { LockFilled, UnlockOutlined } from '@ant-design/icons';
 import { Loading3QuartersOutlined } from '@ant-design/icons';
-import locale from 'antd/es/date-picker/locale/ko_KR';
 import { useConcertCRUD } from '@hooks/festival';
+import type { ConcertStatus, ConcertsResponse } from '@type';
+import { Button, Col, DatePicker, Flex, Form, Input, Row, Select } from 'antd';
+import type { FormProps } from 'antd';
+import locale from 'antd/es/date-picker/locale/ko_KR';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ko';
 import updateLocale from 'dayjs/plugin/updateLocale';
+import { useEffect } from 'react';
 
 dayjs.extend(updateLocale);
-dayjs.updateLocale('ko_KR', { weekStart: 0 })
+dayjs.updateLocale('ko_KR', { weekStart: 0 });
 
 type FieldType = {
   name: string;
@@ -32,7 +23,8 @@ type FieldType = {
   description: string;
 };
 
-interface IConcertUpdateForm extends Omit<ConcertsResponse, 'lineUpInfoResponses'> {
+interface IConcertUpdateForm
+  extends Omit<ConcertsResponse, 'lineUpInfoResponses'> {
   festivalSubId: string;
   isLock: boolean;
   toggleLock: () => void;
@@ -53,7 +45,7 @@ export default function ConcertUpdateForm({
   isLock,
   toggleLock,
   open,
-  hidden
+  hidden,
 }: IConcertUpdateForm) {
   const { isLoading, updateConcert } = useConcertCRUD();
   const [form] = Form.useForm();
@@ -75,9 +67,8 @@ export default function ConcertUpdateForm({
       await open(subId);
       return;
     }
-    if (concertStatus === 'OPENED' && status === 'HIDDEN')
-      await hidden(subId);
-  }
+    if (concertStatus === 'OPENED' && status === 'HIDDEN') await hidden(subId);
+  };
 
   useEffect(() => {
     if (!isLock) return;
@@ -90,7 +81,7 @@ export default function ConcertUpdateForm({
     });
   }, [isLock]);
 
-  if (isLoading) return <Loading3QuartersOutlined spin />
+  if (isLoading) return <Loading3QuartersOutlined spin />;
 
   return (
     <>
@@ -109,14 +100,13 @@ export default function ConcertUpdateForm({
               label="콘서트 이름"
               rules={[{ required: true }]}
             >
-              <Select placeholder='콘서트 이름을 선택해주세요.'>
+              <Select placeholder="콘서트 이름을 선택해주세요.">
                 <Select.Option value="1일차">1일차</Select.Option>
                 <Select.Option value="2일차">2일차</Select.Option>
                 <Select.Option value="3일차">3일차</Select.Option>
                 <Select.Option value="4일차">4일차</Select.Option>
               </Select>
             </Form.Item>
-
           </Col>
         </Row>
         <Row gutter={16}>
@@ -124,7 +114,8 @@ export default function ConcertUpdateForm({
             <Form.Item
               name="startDate"
               label="콘서트 시작 시점"
-              rules={[{ required: true }]}>
+              rules={[{ required: true }]}
+            >
               <DatePicker
                 showTime
                 format="YYYY-MM-DD HH:mm:ss"
@@ -139,7 +130,8 @@ export default function ConcertUpdateForm({
             <Form.Item
               name="endDate"
               label="콘서트 종료 시점"
-              rules={[{ required: true }]}>
+              rules={[{ required: true }]}
+            >
               <DatePicker
                 showTime
                 format="YYYY-MM-DD HH:mm:ss"
@@ -154,7 +146,9 @@ export default function ConcertUpdateForm({
             <Form.Item
               name="location"
               label="콘서트 장소"
-              rules={[{ required: true, message: 'Please enter concert location' }]}
+              rules={[
+                { required: true, message: 'Please enter concert location' },
+              ]}
             >
               <Input placeholder="ex) 강당" />
             </Form.Item>
@@ -165,14 +159,19 @@ export default function ConcertUpdateForm({
             <Form.Item
               name="description"
               label="콘서트 설명"
-              rules={[{ required: true, message: 'please enter concert description' }]}
+              rules={[
+                { required: true, message: 'please enter concert description' },
+              ]}
             >
-              <Input.TextArea rows={4} placeholder="ex) 물을 지참해 주시기 바랍니다." />
+              <Input.TextArea
+                rows={4}
+                placeholder="ex) 물을 지참해 주시기 바랍니다."
+              />
             </Form.Item>
           </Col>
         </Row>
       </Form>
-      <Flex justify='end'>
+      <Flex justify="end">
         <Button onClick={toggleLock}>
           {isLock ? <LockFilled /> : <UnlockOutlined />}
         </Button>
@@ -180,14 +179,12 @@ export default function ConcertUpdateForm({
       <Form layout="vertical">
         <Row gutter={16}>
           <Col span={12}>
-            <Form.Item
-              label="콘서트 상태"
-            >
-              <Flex justify='start' gap={24}>
+            <Form.Item label="콘서트 상태">
+              <Flex justify="start" gap={24}>
                 {CONCERT_STATUS.map((status, idx) => (
                   <Button
                     key={idx}
-                    size='large'
+                    size="large"
                     onClick={() => onChangeStatus(status)}
                     type={status === concertStatus ? 'primary' : 'dashed'}
                   >
@@ -202,4 +199,3 @@ export default function ConcertUpdateForm({
     </>
   );
 }
-

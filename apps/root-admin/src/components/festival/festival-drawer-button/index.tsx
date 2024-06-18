@@ -1,11 +1,11 @@
 'use client';
 
-import React, { useState } from 'react';
 import { Button, Drawer, Space } from 'antd';
 import type { DrawerProps } from 'antd';
 import clsx from 'clsx';
+import React, { useState } from 'react';
 
-import styles from './drawer-button.module.css';
+import styles from './festival-drawer-button.module.css';
 
 const variantButtons = {
   'concert-create': '콘서트 추가',
@@ -21,7 +21,7 @@ interface DrawerButtonProps extends DrawerProps {
   children: React.ReactNode;
 }
 
-export default function DrawerButton({
+export default function FestivalDrawerButton({
   className,
   variant,
   isLock = false,
@@ -35,14 +35,16 @@ export default function DrawerButton({
   };
   const onClose = () => {
     setOpen(false);
-    if (lock)
-      lock();
+    if (lock) lock();
   };
 
   return (
     <>
       <Button
-        className={clsx({ [styles.createButton as string]: variant.includes('create') }, className)}
+        className={clsx(
+          { [styles.createButton as string]: variant.includes('create') },
+          className,
+        )}
         type={variant.includes('create') ? 'primary' : 'default'}
         style={
           variant.includes('create')
@@ -83,4 +85,3 @@ export default function DrawerButton({
     </>
   );
 }
-

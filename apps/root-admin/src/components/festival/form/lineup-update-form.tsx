@@ -1,6 +1,9 @@
 'use client';
 
-import type { LineUpInfoResponse, LineUpStatus } from '@type/lineup';
+import { LockFilled, UnlockOutlined } from '@ant-design/icons';
+import { Upload } from '@components';
+import { useLineupCRUD } from '@hooks/festival';
+import type { LineUpInfoResponse, LineUpStatus } from '@type';
 import { Button, Col, Flex, Form, Input, Row, TimePicker } from 'antd';
 import type { FormProps, UploadFile } from 'antd';
 import locale from 'antd/es/date-picker/locale/ko_KR';
@@ -8,9 +11,6 @@ import dayjs from 'dayjs';
 import 'dayjs/locale/ko';
 import updateLocale from 'dayjs/plugin/updateLocale';
 import { useEffect, useState } from 'react';
-import { LockFilled, UnlockOutlined } from '@ant-design/icons';
-import { Upload } from '@components/festival';
-import { useLineupCRUD } from '@hooks/festival';
 
 dayjs.extend(updateLocale);
 dayjs.updateLocale('ko_KR', { weekStart: 0 });
@@ -56,7 +56,12 @@ export default function LineupUpdateForm({
   };
 
   const onFinish: FormProps<FieldType>['onFinish'] = async (values) => {
-    await updateLineup(subId, values, fileList[0] as UploadFile, lineUpImagePath);
+    await updateLineup(
+      subId,
+      values,
+      fileList[0] as UploadFile,
+      lineUpImagePath,
+    );
   };
 
   const onChangeStatus = (status: LineUpStatus) => {
@@ -100,7 +105,9 @@ export default function LineupUpdateForm({
             <Form.Item
               name="title"
               label="라인업 이름"
-              rules={[{ required: true, message: 'Please enter the lineup name' }]}
+              rules={[
+                { required: true, message: 'Please enter the lineup name' },
+              ]}
             >
               <Input placeholder="아이유" />
             </Form.Item>
@@ -127,7 +134,12 @@ export default function LineupUpdateForm({
             <Form.Item
               name="performanceTime"
               label="라인업의 공연이 시작되는 시각"
-              rules={[{ required: true, message: 'Please choose the performance time' }]}
+              rules={[
+                {
+                  required: true,
+                  message: 'Please choose the performance time',
+                },
+              ]}
             >
               <TimePicker locale={locale} format="HH:mm:ss" />
             </Form.Item>
@@ -169,4 +181,3 @@ export default function LineupUpdateForm({
     </>
   );
 }
-
