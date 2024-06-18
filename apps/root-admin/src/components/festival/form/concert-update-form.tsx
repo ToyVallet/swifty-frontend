@@ -98,12 +98,7 @@ export default function ConcertUpdateForm({
               label="콘서트 이름"
               rules={[{ required: true }]}
             >
-              <Select placeholder="콘서트 이름을 선택해주세요.">
-                <Select.Option value="1일차">1일차</Select.Option>
-                <Select.Option value="2일차">2일차</Select.Option>
-                <Select.Option value="3일차">3일차</Select.Option>
-                <Select.Option value="4일차">4일차</Select.Option>
-              </Select>
+              <Input placeholder="콘서트 이름을 작성해주세요" />
             </Form.Item>
           </Col>
         </Row>

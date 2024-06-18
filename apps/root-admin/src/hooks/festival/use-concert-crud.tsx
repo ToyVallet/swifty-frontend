@@ -1,6 +1,6 @@
 'use client';
 
-import { API_CONCERT, changeDateFormat } from '@lib';
+import { API_CONCERT, FETCH_TAG, changeDateFormat } from '@lib';
 import { customFetch, revalidate } from '@swifty/shared-lib';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ko';
@@ -44,9 +44,10 @@ export default function useConcertCRUD() {
       try {
         await customFetch(API_CONCERT.concert(), {
           method: 'POST',
+          headers: {},
           body: formData,
         });
-        await revalidate('festival-detail');
+        await revalidate(FETCH_TAG.festivalsDetail(festivalSubId));
       } catch (e) {
         if (e instanceof Error) setError(e.message);
         else setError('예상치 못한 오류가 발생했습니다.');

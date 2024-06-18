@@ -2,11 +2,11 @@
 
 import { Loading3QuartersOutlined } from '@ant-design/icons';
 import { useConcertCRUD } from '@hooks';
-import type { PropsWithClassName } from '@swifty/shared-lib';
-import { Col, DatePicker, Form, Input, Row, Select } from 'antd';
-import type { DatePickerProps, FormProps } from 'antd';
+import { overCurrentDay } from '@lib';
+import { Col, DatePicker, Form, Input, Row } from 'antd';
+import type { FormProps } from 'antd';
 import locale from 'antd/es/date-picker/locale/ko_KR';
-import { useRouter } from 'next/navigation';
+import type { FormInstance } from 'antd/lib';
 
 type FieldType = {
   name: string;
@@ -14,18 +14,25 @@ type FieldType = {
   location: string;
   description: string;
 };
+interface Props {
+  festivalSubId: string;
+  form?: FormInstance<FieldType>;
+  onClose?: () => void;
+}
 
 export default function ConcertCreateForm({
   festivalSubId,
-}: { festivalSubId: string } & PropsWithClassName) {
+  form,
+  onClose,
+}: Props) {
   const { RangePicker } = DatePicker;
   const { isLoading, error, createConcert } = useConcertCRUD();
-  const router = useRouter();
-  const onChange: DatePickerProps['onChange'] = (date, dateString) => {};
-  const [form] = Form.useForm();
 
   const onFinish: FormProps<FieldType>['onFinish'] = async (values) => {
     await createConcert(festivalSubId, values);
+    if (!error) {
+      onClose?.();
+    }
   };
 
   if (isLoading) return <Loading3QuartersOutlined spin />;
@@ -37,14 +44,9 @@ export default function ConcertCreateForm({
           <Form.Item
             name="name"
             label="콘서트 이름"
-            rules={[{ required: true }]}
+            rules={[{ required: true, message: '콘서트 명을 작성해주세요!' }]}
           >
-            <Select placeholder="콘서트 이름을 선택해주세요.">
-              <Select.Option value="1일차">1일차</Select.Option>
-              <Select.Option value="2일차">2일차</Select.Option>
-              <Select.Option value="3일차">3일차</Select.Option>
-              <Select.Option value="4일차">4일차</Select.Option>
-            </Select>
+            <Input placeholder="콘서트" />
           </Form.Item>
         </Col>
       </Row>
@@ -59,6 +61,7 @@ export default function ConcertCreateForm({
               showTime
               format="YYYY-MM-DD HH:mm:ss"
               locale={locale}
+              disabledDate={overCurrentDay}
             />
           </Form.Item>
         </Col>

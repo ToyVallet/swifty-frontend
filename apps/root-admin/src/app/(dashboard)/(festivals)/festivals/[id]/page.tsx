@@ -7,8 +7,7 @@ import {
   StatusNotifier,
 } from '@components';
 import type { Params } from '@swifty/shared-lib';
-import { Flex, Tabs } from 'antd';
-import Link from 'next/link';
+import { Flex } from 'antd';
 
 import { getDetailFestival } from '../../get-detail-festival';
 import styles from './page.module.css';
@@ -40,14 +39,16 @@ export default async function Page({ params: { id } }: Params<{ id: string }>) {
           <ConcertCreateForm festivalSubId={subId} />
         </DrawerButton>
       </Flex>
-      {adminConcertInfoResponses.map((item) => (
-        <ConcertPanel
-          key={item.subId}
-          className={styles.panel}
-          festivalSubId={subId}
-          {...item}
-        />
-      ))}
+      <Flex className={styles.wrapper} vertical gap={'1rem'}>
+        {adminConcertInfoResponses.map((item) => (
+          <ConcertPanel
+            key={item.subId}
+            className={styles.panel}
+            festivalSubId={subId}
+            {...item}
+          />
+        ))}
+      </Flex>
     </main>
   );
 }
