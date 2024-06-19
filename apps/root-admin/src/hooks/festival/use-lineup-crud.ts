@@ -8,7 +8,7 @@ import dayjs from 'dayjs';
 import 'dayjs/locale/ko';
 import { useCallback, useState } from 'react';
 
-const FORMAT = 'hh:mm:ss';
+const FORMAT = 'HH:mm:ss';
 
 type FieldType = {
   title: string;

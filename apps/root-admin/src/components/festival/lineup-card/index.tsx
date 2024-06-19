@@ -57,8 +57,9 @@ export default function LineupCard(props: Props) {
           alt="poster"
           src={lineUpImagePath ? lineUpImagePath : '/icons/swifty-logo.svg'}
           width={150}
-          height={120}
+          height={150}
           style={{ objectFit: 'contain' }}
+          priority
         />
       }
       actions={[

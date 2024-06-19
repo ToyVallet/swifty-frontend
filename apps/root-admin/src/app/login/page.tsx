@@ -28,9 +28,7 @@ export default function Page() {
 
   const onFinishFailed: FormProps<FieldType>['onFinishFailed'] = async (
     errorInfo,
-  ) => {
-    console.log('Failed:', errorInfo);
-  };
+  ) => {};
 
   return (
     <main className={styles.main}>

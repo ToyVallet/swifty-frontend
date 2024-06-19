@@ -1,14 +1,13 @@
 import type { BreadcrumbList } from '@components';
 import {
   BreadCrumbs,
-  ConcertCreateForm,
   ConcertPanel,
-  DrawerButton,
   FestivalButtonList,
   OpenHiddenToggle,
 } from '@components';
 import type { Params } from '@swifty/shared-lib';
-import { Flex } from 'antd';
+import type { FestivalDetail } from '@type';
+import { Descriptions, Flex } from 'antd';
 
 import { getDetailFestival } from './get-detail-festival';
 import styles from './page.module.css';
@@ -23,6 +22,21 @@ export default async function Page({ params: { id } }: Params<{ id: string }>) {
     { path: '/festivals', title: 'Festival' },
     { title: `${name} (${addr})` },
   ];
+
+  const description = (
+    [
+      'description',
+      'startDate',
+      'endDate',
+      'addr',
+      'revealStartDate',
+      'revealEndDate',
+    ] as (keyof FestivalDetail)[]
+  ).map((item) => ({
+    key: item,
+    label: item,
+    children: adminFestivalInfoResponse[item],
+  }));
   return (
     <main className={styles.main}>
       <Flex align="center" gap={'1rem'} className={styles.headerWrapper}>
@@ -34,6 +48,9 @@ export default async function Page({ params: { id } }: Params<{ id: string }>) {
           festivalId={id}
           size="large"
         />
+      </Flex>
+      <Flex align="center" gap={'1rem'} className={styles.headerWrapper}>
+        <Descriptions items={description} />
       </Flex>
       <FestivalButtonList
         {...adminFestivalInfoResponse}
