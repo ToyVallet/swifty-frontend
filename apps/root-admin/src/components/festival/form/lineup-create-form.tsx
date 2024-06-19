@@ -13,7 +13,8 @@ import { useState } from 'react';
 type FieldType = {
   title: string;
   description: string;
-  performanceTime: string;
+  performanceTime: Date;
+  newFile: UploadFile[];
 };
 
 interface Props {
@@ -35,6 +36,8 @@ export default function LineupCreateForm({
     await createLineup(concertSubId, values, fileList[0] as UploadFile);
     if (!error) {
       await revalidate(FETCH_TAG.festivalsDetail(festivalId));
+      form?.resetFields(Object.keys(values));
+      setFileList([]);
       onClose?.();
     }
   };

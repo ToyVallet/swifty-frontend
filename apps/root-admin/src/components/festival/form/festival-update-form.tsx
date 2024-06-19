@@ -123,13 +123,14 @@ export default function FestivalUpdateForm({
       formData.append('previousThumbnail', thumbnailFile.url!);
     }
 
-    await customFetch(API_FESTIVAL.update(), {
+    await customFetch(API_FESTIVAL.updateOrCreate(), {
       method: 'PATCH',
       headers: {},
       body: formData,
     });
-    form?.resetFields();
+
     await revalidate(FETCH_TAG.festivalsDetail(subId));
+    toggleLock();
     onClose?.();
   };
 

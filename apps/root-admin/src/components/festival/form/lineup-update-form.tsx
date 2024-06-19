@@ -66,6 +66,7 @@ export default function LineupUpdateForm({
     );
     if (!error) {
       await revalidate(FETCH_TAG.festivalsDetail(festivalSubId));
+      toggleLock();
       onClose?.();
     }
   };

@@ -76,15 +76,19 @@ export default function FestivalForm({ id, form, onClose }: Props) {
       thumbnailFile.originFileObj as RcFile,
       thumbnailFile.name,
     );
+    try {
+      await customFetch(API_FESTIVAL.updateOrCreate(), {
+        method: 'POST',
+        headers: {},
+        body: formData,
+      });
 
-    await customFetch(API_FESTIVAL.festival(), {
-      method: 'POST',
-      headers: {},
-      body: formData,
-    });
-    form?.resetFields();
-    await revalidate(FETCH_TAG.festivals);
-    onClose?.();
+      await revalidate(FETCH_TAG.festivals);
+      setPoster([]);
+      setThumbnail([]);
+      form?.resetFields();
+      onClose?.();
+    } catch (err) {}
   };
   return (
     <Form layout="vertical" form={form} onFinish={onFinish}>

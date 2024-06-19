@@ -30,7 +30,7 @@ export const API_FESTIVAL = {
   festival: (id?: string) =>
     id ? `/root/admin/festival/${id}` : '/root/admin/festival',
   delete: (id: string) => `/host/admin/festival/${id}`,
-  update: () => '/host/admin/festival',
+  updateOrCreate: () => '/host/admin/festival',
   detail: (id: string) => `/host/admin/festival/${id}/detail`,
   hidden: (id: string) => `/host/admin/festival/${id}/hidden`,
   open: (id: string) => `/host/admin/festival/${id}/open`,
