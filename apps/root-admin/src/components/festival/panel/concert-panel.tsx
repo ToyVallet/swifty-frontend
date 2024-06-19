@@ -10,6 +10,10 @@ import Link from 'next/link';
 
 import styles from './panel.module.css';
 
+interface Props extends ConcertsResponse, PropsWithClassName {
+  festivalSubId: string;
+}
+
 export default function ConcertPanel({
   className,
   festivalSubId,
@@ -20,9 +24,7 @@ export default function ConcertPanel({
   endDate,
   description,
   concertStatus,
-}: ConcertsResponse & {
-  festivalSubId: string;
-} & PropsWithClassName) {
+}: Props) {
   return (
     <li className={clsx(styles.description, className)}>
       <h3 className={styles.heading}>{`${name}`}</h3>
@@ -45,7 +47,7 @@ export default function ConcertPanel({
       <div className={styles.content}>
         <DrawerButton variant="concert-update">
           <ConcertUpdateForm
-            festivalSubId={festivalSubId}
+            festivalId={festivalSubId}
             subId={subId}
             name={name}
             location={location}

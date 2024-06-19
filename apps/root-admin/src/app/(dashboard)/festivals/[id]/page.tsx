@@ -4,8 +4,7 @@ import {
   ConcertCreateForm,
   ConcertPanel,
   DrawerButton,
-  FestivalStatusButton,
-  StatusNotifier,
+  OpenHiddenToggle,
 } from '@components';
 import type { Params } from '@swifty/shared-lib';
 import { Flex } from 'antd';
@@ -27,7 +26,7 @@ export default async function Page({ params: { id } }: Params<{ id: string }>) {
     <main className={styles.main}>
       <Flex align="center" gap={'1rem'} className={styles.headerWrapper}>
         <BreadCrumbs breadcrumbList={breadcrumbList} />
-        <FestivalStatusButton
+        <OpenHiddenToggle
           apiTarget="FESTIVAL"
           status={festivalStatus}
           subId={id}

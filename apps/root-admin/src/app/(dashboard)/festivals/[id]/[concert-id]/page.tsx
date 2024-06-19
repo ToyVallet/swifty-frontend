@@ -1,10 +1,12 @@
 import {
   BreadCrumbs,
   type BreadcrumbList,
+  ConcertButtonList,
+  ConcertUpdateForm,
   DrawerButton,
-  FestivalStatusButton,
   LineUpCard,
   LineupCreateForm,
+  OpenHiddenToggle,
 } from '@components';
 import { type Params, cn } from '@swifty/shared-lib';
 import { Flex } from 'antd';
@@ -39,7 +41,7 @@ export default async function ConcertPage({
     <main className={styles.main}>
       <Flex align="center" gap={'1rem'} className={styles.headerWrapper}>
         <BreadCrumbs breadcrumbList={breadcrumbList} />
-        <FestivalStatusButton
+        <OpenHiddenToggle
           apiTarget="CONCERT"
           status={concertInfo.concertStatus}
           subId={consetId}
@@ -47,14 +49,8 @@ export default async function ConcertPage({
           size="large"
         />
       </Flex>
-      <Flex className={styles.wrapper} vertical align="end">
-        <DrawerButton
-          className={styles.concertCreateButton}
-          variant="lineup-create"
-        >
-          <LineupCreateForm concertSubId={consetId} festivalId={festivalId} />
-        </DrawerButton>
-      </Flex>
+      <ConcertButtonList {...concertInfo} festivalId={festivalId} />
+
       <div className={cn(styles.wrapper, styles.gridContainer)}>
         {lineUp.map((item) => (
           <LineUpCard key={item.subId} festivalSubId={festivalId} {...item} />

@@ -26,7 +26,7 @@ type FieldType = {
 
 interface IConcertUpdateForm
   extends Omit<ConcertsResponse, 'lineUpInfoResponses'> {
-  festivalSubId: string;
+  festivalId: string;
   form?: FormInstance<FieldType>;
   onClose?: () => void;
 }
@@ -43,7 +43,7 @@ export default function ConcertUpdateForm({
 }: IConcertUpdateForm) {
   const { isLoading, updateConcert } = useConcertCRUD();
 
-  const [isLock, toggleLock] = useLock(false);
+  const [isLock, toggleLock] = useLock(true);
 
   const initialValues = {
     name: name,

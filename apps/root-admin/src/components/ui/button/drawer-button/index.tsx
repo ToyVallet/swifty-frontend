@@ -9,9 +9,9 @@ import styles from './drawer-button.module.css';
 
 const variantButtons = {
   'concert-create': '콘서트 추가',
-  'concert-update': '수정',
+  'concert-update': '콘서트 수정',
   'lineup-create': '라인업 추가',
-  'lineup-update': '수정',
+  'lineup-update': '라인업 수정',
   'university-create': '대학교 추가',
   'university-logo-update': '대학 로고 수정',
   'university-update': '대학 수정',

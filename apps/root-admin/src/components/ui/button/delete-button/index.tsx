@@ -1,5 +1,6 @@
 'use client';
 
+import type { ButtonProps} from 'antd';
 import { Button, Popconfirm } from 'antd';
 import type { PropsWithChildren } from 'react';
 
@@ -7,7 +8,7 @@ interface Props extends PropsWithChildren {
   title: string;
   description: string;
   onConfirm: () => void | Promise<void>;
-  size?: 'small' | 'large';
+  size?: ButtonProps['size'];
 }
 
 export default function DeleteButton({

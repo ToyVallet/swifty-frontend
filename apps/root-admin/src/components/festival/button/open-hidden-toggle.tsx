@@ -5,7 +5,7 @@ import { customFetch, revalidate } from '@swifty/shared-lib';
 import type { Status } from '@type';
 import type { SegmentedProps } from 'antd';
 import { ConfigProvider, Segmented } from 'antd';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 interface Props {
   apiTarget: 'FESTIVAL' | 'CONCERT' | 'LINEUP';
@@ -15,7 +15,7 @@ interface Props {
   size?: SegmentedProps['size'];
 }
 
-export default function FestivalStatusButton({
+export default function OpenHiddenToggle({
   apiTarget,
   status,
   subId,

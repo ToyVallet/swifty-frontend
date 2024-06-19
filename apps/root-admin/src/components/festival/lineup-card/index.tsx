@@ -3,8 +3,8 @@
 import {
   DeleteButton,
   DrawerButton,
-  FestivalStatusButton,
   LineupUpdateForm,
+  OpenHiddenToggle,
 } from '@components';
 import { FETCH_TAG } from '@lib';
 import { revalidate } from '@swifty/shared-lib';
@@ -45,7 +45,7 @@ export default function LineupCard(props: Props) {
       style={{ width: '100%' }}
       title={title}
       extra={
-        <FestivalStatusButton
+        <OpenHiddenToggle
           apiTarget="LINEUP"
           status={lineUpStatus}
           subId={subId}
