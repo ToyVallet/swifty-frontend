@@ -1,7 +1,9 @@
 'use client';
 
 import { EditOutlined, SettingOutlined } from '@ant-design/icons';
-import { DrawerButton, LineupUpdateForm } from '@components';
+import { DeleteButton, DrawerButton, LineupUpdateForm } from '@components';
+import { API_LINEUP, FETCH_TAG } from '@lib';
+import { customFetch, revalidate } from '@swifty/shared-lib';
 import type { LineUpInfoResponse } from '@type';
 import { Card } from 'antd';
 import Meta from 'antd/es/card/Meta';
@@ -40,7 +42,16 @@ export default function LineupCard(props: Props) {
         <DrawerButton variant="lineup-update">
           <LineupUpdateForm {...props} />
         </DrawerButton>,
-        <EditOutlined key="edit" style={{ fontSize: 24 }} />,
+        <DeleteButton
+          title="라인업 삭제"
+          description="해당 라인업을 삭제하시겠습니까?"
+          onConfirm={async () => {
+            await customFetch(API_LINEUP.lineup(subId), { method: 'DELETE' });
+            await revalidate(FETCH_TAG.festivalsDetail(festivalSubId));
+          }}
+        >
+          삭제
+        </DeleteButton>,
       ]}
     >
       <Meta
