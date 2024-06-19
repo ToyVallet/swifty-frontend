@@ -3,6 +3,7 @@
 import { PlusOutlined } from '@ant-design/icons';
 import { Upload as AntdUpload, Image } from 'antd';
 import type { GetProp, UploadFile, UploadProps } from 'antd';
+import type { Dispatch, SetStateAction} from 'react';
 import React, { useState } from 'react';
 
 type FileType = Parameters<GetProp<UploadProps, 'beforeUpload'>>[0];
@@ -20,7 +21,7 @@ export default function Upload({
   setFileList,
 }: {
   fileList: UploadFile[];
-  setFileList: (files: UploadFile[]) => void;
+  setFileList: Dispatch<SetStateAction<UploadFile<any>[]>>;
 }) {
   const [previewOpen, setPreviewOpen] = useState(false);
   const [previewImage, setPreviewImage] = useState('');

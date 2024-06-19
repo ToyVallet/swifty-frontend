@@ -74,6 +74,9 @@ export default function FestivalUpdateForm({
   const [posterFile, setPosterFile] = useState<UploadFile[]>([]);
   const [thumbnailFile, setThumbnailFile] = useState<UploadFile[]>([]);
 
+  form?.setFieldValue('poster', posterFile);
+  form?.setFieldValue('thumbnail', thumbnailFile);
+
   const onFinish: FormProps<FieldType>['onFinish'] = async (
     values: FieldType,
   ) => {
@@ -141,8 +144,6 @@ export default function FestivalUpdateForm({
       date: [dayjs(startDate), dayjs(endDate)],
       revealDate: [dayjs(revealStartDate), dayjs(revealEndDate)],
       description,
-      poster: posterFile,
-      thumbnail: thumbnailFile,
     });
   }, [isLock]);
 
