@@ -2,11 +2,14 @@
 
 import { LockFilled, UnlockOutlined } from '@ant-design/icons';
 import { Upload } from '@components';
-import { useLineupCRUD } from '@hooks';
-import type { LineUpInfoResponse, LineUpStatus } from '@type';
+import { useLineupCRUD, useLock } from '@hooks';
+import { FETCH_TAG } from '@lib';
+import { revalidate } from '@swifty/shared-lib';
+import type { LineUpInfoResponse } from '@type';
 import { Button, Col, Flex, Form, Input, Row, TimePicker } from 'antd';
 import type { FormProps, UploadFile } from 'antd';
 import locale from 'antd/es/date-picker/locale/ko_KR';
+import type { FormInstance } from 'antd/lib';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ko';
 import updateLocale from 'dayjs/plugin/updateLocale';
@@ -15,18 +18,21 @@ import { useEffect, useState } from 'react';
 dayjs.extend(updateLocale);
 dayjs.updateLocale('ko_KR', { weekStart: 0 });
 
-interface ILineupUpdateForm extends LineUpInfoResponse {
-  isLock: boolean;
-  toggleLock: () => void;
-}
-
 type FieldType = {
   title: string;
   description: string;
   performanceTime: string;
+  newFile: any;
+  previousFile: string;
 };
 
 const LINEUP_STATUS = ['OPENED', 'HIDDEN'] as const;
+
+interface Props extends LineUpInfoResponse {
+  festivalSubId: string;
+  form?: FormInstance<FieldType>;
+  onClose?: () => void;
+}
 
 export default function LineupUpdateForm({
   subId,
@@ -35,19 +41,26 @@ export default function LineupUpdateForm({
   performanceTime,
   lineUpImagePath,
   lineUpStatus,
-  isLock,
-  toggleLock,
-}: ILineupUpdateForm) {
-  const { isLoading, updateLineup } = useLineupCRUD();
-  const [form] = Form.useForm();
-  const [fileList, setFileList] = useState<UploadFile[]>([
-    {
-      uid: '-1',
-      name: '',
-      status: 'done',
-      url: lineUpImagePath,
-    },
-  ]);
+  festivalSubId,
+  form,
+  onClose,
+}: Props) {
+  const [lock, toggleLock] = useLock();
+  const { isLoading, updateLineup, error } = useLineupCRUD();
+
+  const [fileList, setFileList] = useState<UploadFile[]>(() =>
+    lineUpImagePath
+      ? [
+          {
+            uid: '-1',
+            name: '',
+            status: 'done',
+            url: lineUpImagePath,
+          },
+        ]
+      : [],
+  );
+  form?.setFieldValue('newFile', fileList);
 
   const initialValues = {
     title: title,
@@ -60,35 +73,13 @@ export default function LineupUpdateForm({
       subId,
       values,
       fileList[0] as UploadFile,
-      lineUpImagePath,
+      lineUpImagePath ? lineUpImagePath : '',
     );
-  };
-
-  const onChangeStatus = (status: LineUpStatus) => {
-    if (lineUpStatus === 'HIDDEN' && status === 'OPENED') {
-      // open(subId);
-      return;
+    if (!error) {
+      await revalidate(FETCH_TAG.festivalsDetail(festivalSubId));
+      onClose?.();
     }
-    // if (lineUpStatus === 'OPENED' && status === 'HIDDEN')
-    // hidden(subId);
   };
-
-  useEffect(() => {
-    if (!isLock) return;
-    form.setFieldsValue({
-      title: title,
-      description: description,
-      performanceTime: dayjs(performanceTime, 'HH:mm:ss'),
-    });
-    setFileList([
-      {
-        uid: '-1',
-        name: '',
-        status: 'done',
-        url: lineUpImagePath,
-      },
-    ]);
-  }, [isLock]);
 
   return (
     <>
@@ -97,7 +88,7 @@ export default function LineupUpdateForm({
         id="lineup-update"
         layout="vertical"
         initialValues={initialValues}
-        disabled={isLock}
+        disabled={lock}
         onFinish={onFinish}
       >
         <Row gutter={16}>
@@ -155,29 +146,9 @@ export default function LineupUpdateForm({
       </Form>
       <Flex justify="end">
         <Button onClick={toggleLock}>
-          {isLock ? <LockFilled /> : <UnlockOutlined />}
+          {lock ? <LockFilled /> : <UnlockOutlined />}
         </Button>
       </Flex>
-      <Form layout="vertical">
-        <Row gutter={16}>
-          <Col span={12}>
-            <Form.Item label="라인업 상태">
-              <Flex justify="start" gap={24}>
-                {LINEUP_STATUS.map((status, idx) => (
-                  <Button
-                    key={idx}
-                    size="large"
-                    onClick={() => onChangeStatus(status)}
-                    type={status === lineUpStatus ? 'primary' : 'dashed'}
-                  >
-                    {status}
-                  </Button>
-                ))}
-              </Flex>
-            </Form.Item>
-          </Col>
-        </Row>
-      </Form>
     </>
   );
 }

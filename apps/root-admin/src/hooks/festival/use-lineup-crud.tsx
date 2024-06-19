@@ -34,12 +34,13 @@ export default function useLineupCRUD() {
       formData.append('description', description);
       formData.append('performanceTime', formatDate(performanceTime));
 
-      if (newFile)
+      if (newFile.originFileObj) {
         formData.append(
           'newFile',
           newFile.originFileObj as RcFile,
           newFile.name,
         );
+      }
 
       try {
         await customFetch(API_LINEUP.lineup(), {
@@ -75,11 +76,23 @@ export default function useLineupCRUD() {
       formData.append('title', title);
       formData.append('description', description);
       formData.append('performanceTime', formatDate(performanceTime));
-      formData.append('newFile', newFile.originFileObj as RcFile, newFile.name);
       formData.append('previousFile', previousFile);
+
+      // 이미지 파일 변경 있는지 확인
+      if (newFile.originFileObj) {
+        formData.append(
+          'newFile',
+          newFile.originFileObj as RcFile,
+          newFile.name,
+        );
+      } else {
+        formData.append('previousFile', newFile.url!);
+      }
+
       try {
         await customFetch(API_LINEUP.lineup(), {
           method: 'PATCH',
+          headers: {},
           body: formData,
         });
       } catch (e) {

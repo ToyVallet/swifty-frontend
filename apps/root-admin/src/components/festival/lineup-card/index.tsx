@@ -1,6 +1,7 @@
 'use client';
 
 import { EditOutlined, SettingOutlined } from '@ant-design/icons';
+import { DrawerButton, LineupUpdateForm } from '@components';
 import type { LineUpInfoResponse } from '@type';
 import { Card } from 'antd';
 import Meta from 'antd/es/card/Meta';
@@ -12,14 +13,15 @@ interface Props extends LineUpInfoResponse {
   festivalSubId: string;
 }
 
-export default function LineupCard({
-  subId,
-  title,
-  description,
-  performanceTime,
-  lineUpImagePath,
-  festivalSubId,
-}: Props) {
+export default function LineupCard(props: Props) {
+  const {
+    subId,
+    title,
+    description,
+    performanceTime,
+    lineUpImagePath,
+    festivalSubId,
+  } = props;
   const onClick = () => {
     console.log(subId, festivalSubId);
   };
@@ -35,11 +37,9 @@ export default function LineupCard({
         />
       }
       actions={[
-        <SettingOutlined
-          key="setting"
-          onClick={onClick}
-          style={{ fontSize: 24 }}
-        />,
+        <DrawerButton variant="lineup-update">
+          <LineupUpdateForm {...props} />
+        </DrawerButton>,
         <EditOutlined key="edit" style={{ fontSize: 24 }} />,
       ]}
     >

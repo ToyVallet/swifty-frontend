@@ -3,7 +3,7 @@
 import { useState } from 'react';
 
 export default function useLock(
-  state = false,
+  state = true,
 ): [boolean, () => void, () => void] {
   const [isLock, setIsLock] = useState<boolean>(state);
   const toggleLock = () => {
