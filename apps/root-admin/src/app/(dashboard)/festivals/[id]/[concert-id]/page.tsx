@@ -2,12 +2,12 @@ import {
   BreadCrumbs,
   type BreadcrumbList,
   DrawerButton,
+  FestivalStatusButton,
   LineUpCard,
   LineupCreateForm,
-  StatusNotifier,
 } from '@components';
 import { type Params, cn } from '@swifty/shared-lib';
-import { Col, Flex, Row } from 'antd';
+import { Flex } from 'antd';
 
 import { getDetailFestival } from '../get-detail-festival';
 import styles from './concert-page.module.css';
@@ -39,7 +39,13 @@ export default async function ConcertPage({
     <main className={styles.main}>
       <Flex align="center" gap={'1rem'} className={styles.headerWrapper}>
         <BreadCrumbs breadcrumbList={breadcrumbList} />
-        <StatusNotifier status={concertInfo.concertStatus} />
+        <FestivalStatusButton
+          apiTarget="CONCERT"
+          status={concertInfo.concertStatus}
+          subId={consetId}
+          festivalId={festivalId}
+          size="large"
+        />
       </Flex>
       <Flex className={styles.wrapper} vertical align="end">
         <DrawerButton

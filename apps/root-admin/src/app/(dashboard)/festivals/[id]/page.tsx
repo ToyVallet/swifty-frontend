@@ -4,6 +4,7 @@ import {
   ConcertCreateForm,
   ConcertPanel,
   DrawerButton,
+  FestivalStatusButton,
   StatusNotifier,
 } from '@components';
 import type { Params } from '@swifty/shared-lib';
@@ -14,7 +15,7 @@ import styles from './page.module.css';
 
 export default async function Page({ params: { id } }: Params<{ id: string }>) {
   const {
-    adminFestivalInfoResponse: { addr, festivalStatus, name, subId },
+    adminFestivalInfoResponse: { addr, festivalStatus, name },
     adminConcertInfoResponses,
   } = await getDetailFestival(id);
 
@@ -26,9 +27,12 @@ export default async function Page({ params: { id } }: Params<{ id: string }>) {
     <main className={styles.main}>
       <Flex align="center" gap={'1rem'} className={styles.headerWrapper}>
         <BreadCrumbs breadcrumbList={breadcrumbList} />
-        <StatusNotifier
-          className={styles.statusNotifier}
+        <FestivalStatusButton
+          apiTarget="FESTIVAL"
           status={festivalStatus}
+          subId={id}
+          festivalId={id}
+          size="large"
         />
       </Flex>
       <Flex className={styles.wrapper} vertical align="end">
@@ -36,7 +40,7 @@ export default async function Page({ params: { id } }: Params<{ id: string }>) {
           className={styles.concertCreateButton}
           variant="concert-create"
         >
-          <ConcertCreateForm festivalSubId={subId} />
+          <ConcertCreateForm festivalSubId={id} />
         </DrawerButton>
       </Flex>
       <Flex className={styles.wrapper} vertical gap={'1rem'}>
@@ -44,7 +48,7 @@ export default async function Page({ params: { id } }: Params<{ id: string }>) {
           <ConcertPanel
             key={item.subId}
             className={styles.panel}
-            festivalSubId={subId}
+            festivalSubId={id}
             {...item}
           />
         ))}

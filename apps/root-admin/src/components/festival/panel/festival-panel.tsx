@@ -1,8 +1,11 @@
 import { formatDate } from '@lib';
 import type { PropsWithClassName } from '@swifty/shared-lib';
+import type { FestivalInfoResponse } from '@type';
 import clsx from 'clsx';
 
 import styles from './panel.module.css';
+
+type Props = FestivalInfoResponse & PropsWithClassName;
 
 export default function FestivalPanel({
   className,
@@ -11,13 +14,7 @@ export default function FestivalPanel({
   description,
   startDate,
   endDate,
-}: {
-  name: string;
-  addr: string;
-  description: string;
-  startDate: string;
-  endDate: string;
-} & PropsWithClassName) {
+}: Props) {
   return (
     <li className={clsx(styles.description, className)}>
       <h3 className={styles.heading}>{name}</h3>

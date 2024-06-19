@@ -12,7 +12,7 @@ import Link from 'next/link';
 import styles from './university-festival.module.css';
 
 export default async function UniversityFestivals({ id }: { id: string }) {
-  const data = await customFetch<FestivalInfoResponse[]>(
+  const datas = await customFetch<FestivalInfoResponse[]>(
     API_UNIVERSITY.festivals(id),
     {
       method: 'GET',
@@ -29,27 +29,11 @@ export default async function UniversityFestivals({ id }: { id: string }) {
         </DrawerButton>
       </div>
       <PanelList className={styles.panelList}>
-        {data.map(
-          ({
-            subId,
-            name,
-            addr,
-            description,
-            startDate,
-            endDate,
-          }: FestivalInfoResponse) => (
-            <Link href={`/festivals/${subId}`} key={subId}>
-              <FestivalPanel
-                className={styles.panel}
-                name={name}
-                addr={addr}
-                description={description}
-                startDate={startDate}
-                endDate={endDate}
-              />
-            </Link>
-          ),
-        )}
+        {datas.map((data) => (
+          <Link href={`/festivals/${data.subId}`} key={data.subId}>
+            <FestivalPanel {...data} />
+          </Link>
+        ))}
       </PanelList>
     </section>
   );

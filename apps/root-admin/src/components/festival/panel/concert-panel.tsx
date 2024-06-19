@@ -38,7 +38,7 @@ export default function ConcertPanel({
       <div>
         <Button>
           <Link href={`/festivals/${festivalSubId}/${subId}`}>
-            콘서트 상세 정보 확인
+            콘서트 상세 정보
           </Link>
         </Button>
       </div>

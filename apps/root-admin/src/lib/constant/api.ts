@@ -1,9 +1,9 @@
 import type { UserRole } from '@type';
 
-export const API_LINEUP = {
-  lineup: (id?: string) =>
-    id ? `/host/admin/line_up/${id}` : '/host/admin/line_up',
-} as const;
+export const API_HSOT = {
+  host: '/root/admin/host',
+  host_detail: (id: string) => `/root/admin/host/${id}`,
+};
 
 export const API_CLIENT = {
   users: (page: number = 0, size: number = 20, role?: UserRole) =>
@@ -16,28 +16,6 @@ export const API_CLIENT = {
   pause: (id: string) => `/root/admin/user/${id}/pause`,
 } as const;
 
-export const API_FESTIVAL = {
-  festival: (id?: string) =>
-    id ? `/root/admin/festival/${id}` : '/root/admin/festival',
-  detail: (id: string) => `/host/admin/festival/${id}/detail`,
-} as const;
-
-export const API_CONCERT = {
-  concert: (id?: string) =>
-    id ? `/host/admin/concert/${id}` : '/host/admin/concert',
-  open: (id: string) => `/host/admin/concert/${id}/open`,
-  hidden: (id: string) => `/host/admin/concert/${id}/hidden`,
-} as const;
-
-export const API_SEARCH = {
-  search: (q?: string) =>
-    q ? `/festival/search?keyword=${q}` : `festival/search`,
-} as const;
-
-export const API_AUTH = {
-  login: '/user/login',
-} as const;
-
 export const API_UNIVERSITY = {
   get_univiresity: (page = 0, size = 20) =>
     `/root/admin/university?page=${page}&size=${size}`,
@@ -48,7 +26,33 @@ export const API_UNIVERSITY = {
   festivals: (id: string) => `/host/admin/festival/${id}/university`,
 };
 
-export const API_HSOT = {
-  host: '/root/admin/host',
-  host_detail: (id: string) => `/root/admin/host/${id}`,
-};
+export const API_FESTIVAL = {
+  festival: (id?: string) =>
+    id ? `/root/admin/festival/${id}` : '/root/admin/festival',
+  detail: (id: string) => `/host/admin/festival/${id}/detail`,
+  hidden: (id: string) => `/host/admin/festival/${id}/hidden`,
+  open: (id: string) => `/host/admin/festival/${id}/open`,
+} as const;
+
+export const API_CONCERT = {
+  concert: (id?: string) =>
+    id ? `/host/admin/concert/${id}` : '/host/admin/concert',
+  open: (id: string) => `/host/admin/concert/${id}/open`,
+  hidden: (id: string) => `/host/admin/concert/${id}/hidden`,
+} as const;
+
+export const API_LINEUP = {
+  lineup: (id?: string) =>
+    id ? `/host/admin/line_up/${id}` : '/host/admin/line_up',
+  open: (id: string) => `/host/admin/line_up/${id}/open`,
+  hidden: (id: string) => `/host/admin/line_up/${id}/hidden`,
+} as const;
+
+export const API_SEARCH = {
+  search: (q?: string) =>
+    q ? `/festival/search?keyword=${q}` : `festival/search`,
+} as const;
+
+export const API_AUTH = {
+  login: '/user/login',
+} as const;
