@@ -15,6 +15,8 @@ interface Props {
   size?: SegmentedProps['size'];
 }
 
+const STATUS_LIST: Status[] = ['HIDDEN', 'OPENED'];
+
 export default function OpenHiddenToggle({
   apiTarget,
   status,
@@ -22,8 +24,6 @@ export default function OpenHiddenToggle({
   festivalId,
   size = 'small',
 }: Props) {
-  console.log(status);
-  const STATUS_LIST: Status[] = ['HIDDEN', 'OPENED'];
   const [curStatus, setCurStatus] = useState(status);
 
   const API_URL = {

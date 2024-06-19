@@ -1,22 +1,20 @@
 'use client';
 
 import { API_LINEUP } from '@lib';
-import { customFetch, revalidate } from '@swifty/shared-lib';
+import { customFetch } from '@swifty/shared-lib';
 import type { UploadFile } from 'antd';
 import type { RcFile } from 'antd/es/upload';
+import dayjs from 'dayjs';
+import 'dayjs/locale/ko';
 import { useCallback, useState } from 'react';
+
+const FORMAT = 'hh:mm:ss';
 
 type FieldType = {
   title: string;
   description: string;
-  performanceTime: string;
+  performanceTime: Date;
 };
-
-function formatDate(performanceTime: string) {
-  const offset = 1000 * 60 * 60 * 9;
-  const pt = new Date(performanceTime + offset);
-  return pt.toISOString().slice(11, 19);
-}
 
 export default function useLineupCRUD() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -32,7 +30,7 @@ export default function useLineupCRUD() {
       formData.append('concertSubId', concertSubId);
       formData.append('title', title);
       formData.append('description', description);
-      formData.append('performanceTime', formatDate(performanceTime));
+      formData.append('performanceTime', dayjs(performanceTime).format(FORMAT));
 
       if (newFile.originFileObj) {
         formData.append(
@@ -75,7 +73,7 @@ export default function useLineupCRUD() {
       formData.append('lineUpSubId', id);
       formData.append('title', title);
       formData.append('description', description);
-      formData.append('performanceTime', formatDate(performanceTime));
+      formData.append('performanceTime', dayjs(performanceTime).format(FORMAT));
       formData.append('previousFile', previousFile);
 
       // 이미지 파일 변경 있는지 확인

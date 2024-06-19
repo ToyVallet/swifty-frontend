@@ -1,10 +1,10 @@
 'use client';
 
-import { LockFilled, UnlockOutlined } from '@ant-design/icons';
 import { Loading3QuartersOutlined } from '@ant-design/icons';
+import { LockButton } from '@components';
 import { useConcertCRUD, useLock } from '@hooks';
 import type { ConcertsResponse } from '@type';
-import { Button, Col, DatePicker, Flex, Form, Input, Row, Select } from 'antd';
+import { Col, DatePicker, Form, Input, Row } from 'antd';
 import type { FormProps } from 'antd';
 import locale from 'antd/es/date-picker/locale/ko_KR';
 import type { FormInstance } from 'antd/lib';
@@ -41,7 +41,7 @@ export default function ConcertUpdateForm({
   form,
   onClose,
 }: IConcertUpdateForm) {
-  const { isLoading, updateConcert } = useConcertCRUD();
+  const { isLoading, updateConcert, error } = useConcertCRUD();
 
   const [isLock, toggleLock] = useLock(true);
 
@@ -55,19 +55,12 @@ export default function ConcertUpdateForm({
 
   const onFinish: FormProps<FieldType>['onFinish'] = async (values) => {
     await updateConcert(subId, { ...values });
-    toggleLock();
-    onClose?.();
+    if (!error) {
+      toggleLock();
+      onClose?.();
+    }
   };
 
-  /*  const onChangeStatus = async (status: ConcertStatus) => {
-    if (concertStatus === 'HIDDEN' && status === 'OPENED') {
-      await open(subId);
-      return;
-    }
-    if (concertStatus === 'OPENED' && status === 'HIDDEN') await hidden(subId);
-  }; */
-
-  // 초기 콘서트 데이터 세팅
   useEffect(() => {
     if (!isLock) return;
     form?.setFieldsValue({
@@ -164,31 +157,7 @@ export default function ConcertUpdateForm({
           </Col>
         </Row>
       </Form>
-      <Flex justify="end">
-        <Button onClick={toggleLock}>
-          {isLock ? <LockFilled /> : <UnlockOutlined />}
-        </Button>
-      </Flex>
-      {/*       <Form layout="vertical">
-        <Row gutter={16}>
-          <Col span={12}>
-            <Form.Item label="콘서트 상태">
-              <Flex justify="start" gap={24}>
-                {CONCERT_STATUS.map((status, idx) => (
-                  <Button
-                    key={idx}
-                    size="large"
-                    onClick={() => onChangeStatus(status)}
-                    type={status === concertStatus ? 'primary' : 'dashed'}
-                  >
-                    {status}
-                  </Button>
-                ))}
-              </Flex>
-            </Form.Item>
-          </Col>
-        </Row>
-      </Form> */}
+      <LockButton isLock={isLock} toggleLock={toggleLock} />
     </>
   );
 }

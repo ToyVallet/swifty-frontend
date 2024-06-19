@@ -21,12 +21,10 @@ dayjs.updateLocale('ko_KR', { weekStart: 0 });
 type FieldType = {
   title: string;
   description: string;
-  performanceTime: string;
-  newFile: any;
+  performanceTime: Date;
+  newFile: UploadFile[];
   previousFile: string;
 };
-
-const LINEUP_STATUS = ['OPENED', 'HIDDEN'] as const;
 
 interface Props extends LineUpInfoResponse {
   festivalSubId: string;
@@ -40,33 +38,24 @@ export default function LineupUpdateForm({
   description,
   performanceTime,
   lineUpImagePath,
-  lineUpStatus,
   festivalSubId,
   form,
   onClose,
 }: Props) {
   const [lock, toggleLock] = useLock();
-  const { isLoading, updateLineup, error } = useLineupCRUD();
+  const { updateLineup, error } = useLineupCRUD();
+  const fileInitialValue: UploadFile[] = lineUpImagePath
+    ? [
+        {
+          uid: '-1',
+          name: '',
+          status: 'done',
+          url: lineUpImagePath,
+        },
+      ]
+    : [];
 
-  const [fileList, setFileList] = useState<UploadFile[]>(() =>
-    lineUpImagePath
-      ? [
-          {
-            uid: '-1',
-            name: '',
-            status: 'done',
-            url: lineUpImagePath,
-          },
-        ]
-      : [],
-  );
-  form?.setFieldValue('newFile', fileList);
-
-  const initialValues = {
-    title: title,
-    description: description,
-    performanceTime: dayjs(performanceTime, 'HH:mm:ss'),
-  };
+  const [fileList, setFileList] = useState<UploadFile[]>(() => []);
 
   const onFinish: FormProps<FieldType>['onFinish'] = async (values) => {
     await updateLineup(
@@ -81,13 +70,24 @@ export default function LineupUpdateForm({
     }
   };
 
+  // 데이터 초기 상태로 rollback
+  useEffect(() => {
+    if (!lock) return;
+    setFileList(fileInitialValue);
+    form?.setFieldsValue({
+      title,
+      performanceTime: dayjs(performanceTime, 'HH:mm:ss'),
+      description,
+      newFile: fileList,
+    });
+  }, [lock]);
+
   return (
     <>
       <Form
         form={form}
         id="lineup-update"
         layout="vertical"
-        initialValues={initialValues}
         disabled={lock}
         onFinish={onFinish}
       >

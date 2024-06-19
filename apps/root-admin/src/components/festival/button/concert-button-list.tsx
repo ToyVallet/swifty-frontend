@@ -11,6 +11,7 @@ import { customFetch, revalidate } from '@swifty/shared-lib';
 import type { ConcertsResponse } from '@type';
 import { Flex } from 'antd';
 import { useRouter } from 'next/navigation';
+import { useConcertCRUD } from 'src/hooks';
 
 interface Props extends ConcertsResponse {
   festivalId: string;
@@ -18,13 +19,12 @@ interface Props extends ConcertsResponse {
 
 export default function ConcertButtonList({ festivalId, ...props }: Props) {
   const router = useRouter();
+  const { error, deleteConcert } = useConcertCRUD();
   const onDelet = async () => {
-    try {
-      await customFetch(API_CONCERT.concert(props.subId), { method: 'DELETE' });
+    await deleteConcert(props.subId);
+    if (!error) {
       await revalidate(FETCH_TAG.festivalsDetail(festivalId));
       router.replace(`/festivals/${festivalId}`);
-    } catch (err) {
-      console.error(err);
     }
   };
 

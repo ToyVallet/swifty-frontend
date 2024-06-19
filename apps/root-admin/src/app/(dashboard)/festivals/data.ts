@@ -4,7 +4,6 @@ import type { FestivalInfoResponse } from '@type';
 
 export async function getAllFestivals() {
   return await customFetch<FestivalInfoResponse[]>(API_FESTIVAL.festival(), {
-    cache: 'no-cache',
     next: { tags: [FETCH_TAG.festivals] },
   });
 }

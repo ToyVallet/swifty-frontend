@@ -94,9 +94,6 @@ export default function useConcertCRUD() {
     setError(null);
     try {
       await customFetch(API_CONCERT.concert(id), {
-        headers: {
-          'Content-Type': 'application/json',
-        },
         method: 'DELETE',
       });
       await revalidate('festival-detail');

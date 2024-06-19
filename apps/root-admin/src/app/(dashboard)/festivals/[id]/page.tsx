@@ -4,6 +4,7 @@ import {
   ConcertCreateForm,
   ConcertPanel,
   DrawerButton,
+  FestivalButtonList,
   OpenHiddenToggle,
 } from '@components';
 import type { Params } from '@swifty/shared-lib';
@@ -13,10 +14,10 @@ import { getDetailFestival } from './get-detail-festival';
 import styles from './page.module.css';
 
 export default async function Page({ params: { id } }: Params<{ id: string }>) {
-  const {
-    adminFestivalInfoResponse: { addr, festivalStatus, name },
-    adminConcertInfoResponses,
-  } = await getDetailFestival(id);
+  const { adminFestivalInfoResponse, adminConcertInfoResponses } =
+    await getDetailFestival(id);
+
+  const { addr, festivalStatus, name } = adminFestivalInfoResponse;
 
   const breadcrumbList: BreadcrumbList = [
     { path: '/festivals', title: 'Festival' },
@@ -34,14 +35,10 @@ export default async function Page({ params: { id } }: Params<{ id: string }>) {
           size="large"
         />
       </Flex>
-      <Flex className={styles.wrapper} vertical align="end">
-        <DrawerButton
-          className={styles.concertCreateButton}
-          variant="concert-create"
-        >
-          <ConcertCreateForm festivalSubId={id} />
-        </DrawerButton>
-      </Flex>
+      <FestivalButtonList
+        {...adminFestivalInfoResponse}
+        className={styles.wrapper}
+      />
       <Flex className={styles.wrapper} vertical gap={'1rem'}>
         {adminConcertInfoResponses.map((item) => (
           <ConcertPanel

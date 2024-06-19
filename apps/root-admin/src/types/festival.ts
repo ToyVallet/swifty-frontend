@@ -18,14 +18,16 @@ export type FestivalInfoResponse = {
   description: string;
 };
 
+export type FestivalDetail = {
+  revealStartDate: string;
+  revealEndDate: string;
+  festivalStatus: Status;
+  thumbnail: string;
+  poster: string;
+  logo: string;
+} & FestivalInfoResponse;
+
 export type FestivalDetailResponse = {
-  adminFestivalInfoResponse: {
-    revealStartDate: string;
-    revealEndDate: string;
-    festivalStatus: Status;
-    thumbnail: string;
-    poster: string;
-    logo: string;
-  } & FestivalInfoResponse;
+  adminFestivalInfoResponse: FestivalDetail;
   adminConcertInfoResponses: ConcertsResponse[];
 };
