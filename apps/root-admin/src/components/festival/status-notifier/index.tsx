@@ -13,9 +13,9 @@ export default function StatusNotifier({
     <>
       <div
         className={clsx(styles.notifier, className, {
-          [styles.before]: status === 'BEFORE',
-          [styles.pending]: status === 'PROCESS',
-          [styles.end]: status === 'CLOSED',
+          [styles.before as string]: status === 'BEFORE',
+          [styles.pending as string]: status === 'PROCESS',
+          [styles.end as string]: status === 'CLOSED',
         })}
       >
         {status === 'BEFORE' && 'Before'}

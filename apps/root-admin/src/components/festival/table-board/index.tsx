@@ -1,6 +1,5 @@
 'use client';
 
-import type { ConcertsResponse } from '@app/types/concert';
 import {
   DrawerButton,
   LineupCreateForm,
@@ -8,6 +7,7 @@ import {
   StatusNotifier,
   Tabs,
 } from '@components/festival';
+import type { ConcertsResponse } from '@type/concert';
 import { Button, Table } from 'antd';
 import { useState } from 'react';
 
@@ -83,7 +83,7 @@ export default function TableBoard({
       const { key } =
         newPanes[
           targetIndex === newPanes.length ? targetIndex - 1 : targetIndex
-        ];
+        ]!;
       setActiveKey(key);
     }
     setItems(newPanes);

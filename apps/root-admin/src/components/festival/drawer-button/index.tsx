@@ -1,6 +1,6 @@
 'use client';
 
-import type { DrawerProps} from 'antd';
+import type { DrawerProps } from 'antd';
 import { Button, Drawer, Space } from 'antd';
 import clsx from 'clsx';
 import React, { useState } from 'react';
@@ -37,7 +37,7 @@ export default function DrawerButton({
     <>
       <Button
         className={clsx(
-          { [styles.createButton]: variant.includes('create') },
+          { [styles.createButton as string]: variant.includes('create') },
           className,
         )}
         type={variant.includes('create') ? 'primary' : 'default'}

@@ -1,10 +1,10 @@
-import type { ConcertsResponse } from '@app/types/concert';
 import {
   ConcertUpdateForm,
   DrawerButton,
   StatusNotifier,
 } from '@components/festival';
 import formatDate from '@lib/util/formatDate';
+import type { ConcertsResponse } from '@type/concert';
 import { Button } from 'antd';
 import type { PropsWithChildren } from 'react';
 
@@ -41,7 +41,7 @@ function FestivalDescription({
   );
 }
 
-function ConcertDescription({
+export function ConcertDescription({
   name,
   location,
   startDate,
