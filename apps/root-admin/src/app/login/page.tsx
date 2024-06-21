@@ -21,6 +21,7 @@ export default function Page() {
       method: 'POST',
       body: JSON.stringify(values),
     });
+
     form.setFieldValue('formId', '');
     form.setFieldValue('password', '');
     router.replace('/');
