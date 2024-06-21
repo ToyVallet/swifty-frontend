@@ -2,7 +2,6 @@
 
 import { Button } from 'antd';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 
 import styles from './error.module.css';
@@ -14,8 +13,6 @@ export default function GlobalError({
   error: Error & { digest?: string };
   reset: () => void;
 }) {
-  const router = useRouter();
-
   useEffect(() => {
     // Log the error to an error reporting service
     console.error(error);
