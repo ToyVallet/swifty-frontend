@@ -1,50 +1,68 @@
-import type {
-  DatePickerProps} from 'antd';
-import {
-  Col,
-  DatePicker,
-  Form,
-  Input,
-  Row,
-  TimePicker,
-} from 'antd';
+'use client';
 
-export default function ConcertCreateForm() {
-  const onChange: DatePickerProps['onChange'] = (date, dateString) => {};
+import { Loading3QuartersOutlined } from '@ant-design/icons';
+import { useConcertCRUD } from '@hooks';
+import { overCurrentDay } from '@lib';
+import { Col, DatePicker, Form, Input, Row } from 'antd';
+import type { FormProps } from 'antd';
+import locale from 'antd/es/date-picker/locale/ko_KR';
+import type { FormInstance } from 'antd/lib';
+
+type FieldType = {
+  name: string;
+  rangeDateTime: string[];
+  location: string;
+  description: string;
+};
+interface Props {
+  festivalSubId: string;
+  form?: FormInstance<FieldType>;
+  onClose?: () => void;
+}
+
+export default function ConcertCreateForm({
+  festivalSubId,
+  form,
+  onClose,
+}: Props) {
+  const { RangePicker } = DatePicker;
+  const { isLoading, error, createConcert } = useConcertCRUD();
+
+  const onFinish: FormProps<FieldType>['onFinish'] = async (values) => {
+    await createConcert(festivalSubId, values);
+    if (!error) {
+      form?.resetFields(Object.keys(values));
+      onClose?.();
+    }
+  };
+
+  if (isLoading) return <Loading3QuartersOutlined spin />;
+
   return (
-    <Form layout="vertical">
+    <Form form={form} id="concert-create" layout="vertical" onFinish={onFinish}>
       <Row gutter={16}>
         <Col span={12}>
           <Form.Item
             name="name"
-            label="Name"
-            rules={[{ required: true, message: 'Please enter user name' }]}
+            label="콘서트 이름"
+            rules={[{ required: true, message: '콘서트 명을 작성해주세요!' }]}
           >
-            <Input placeholder="ex) 1일차" />
+            <Input placeholder="콘서트" />
           </Form.Item>
         </Col>
       </Row>
       <Row gutter={16}>
-        <Col span={12}>
+        <Col span={16}>
           <Form.Item
-            name="dateTime"
-            label="DateTime"
-            rules={[{ required: true, message: 'Please choose the dateTime' }]}
+            name="rangeDateTime"
+            label="콘서트 시작 시점 - 콘서트 종료 시점"
+            rules={[{ required: true }]}
           >
-            <DatePicker onChange={onChange} />
-          </Form.Item>
-        </Col>
-      </Row>
-      <Row gutter={16}>
-        <Col span={12}>
-          <Form.Item
-            name="time"
-            label="Time"
-            rules={[{ required: true, message: 'Please choose the time' }]}
-          >
-            <TimePicker.RangePicker
-              style={{ width: '100%' }}
-              getPopupContainer={(trigger) => trigger.parentElement!}
+            <RangePicker
+              showTime
+              format="YYYY-MM-DD HH:mm:ss"
+              locale={locale}
+              disabledDate={overCurrentDay}
             />
           </Form.Item>
         </Col>
@@ -53,10 +71,12 @@ export default function ConcertCreateForm() {
         <Col span={12}>
           <Form.Item
             name="location"
-            label="Location"
-            rules={[{ required: true, message: 'Please enter location' }]}
+            label="콘서트 장소"
+            rules={[
+              { required: true, message: 'Please enter concert location' },
+            ]}
           >
-            <Input placeholder="ex) 중앙 운동장" />
+            <Input placeholder="ex) 강당" />
           </Form.Item>
         </Col>
       </Row>
@@ -64,15 +84,18 @@ export default function ConcertCreateForm() {
         <Col span={24}>
           <Form.Item
             name="description"
-            label="Description"
+            label="콘서트 설명"
             rules={[
               {
                 required: true,
-                message: 'please enter url description',
+                message: 'please enter concert description',
               },
             ]}
           >
-            <Input.TextArea rows={4} placeholder="ex) 물 지참" />
+            <Input.TextArea
+              rows={4}
+              placeholder="ex) 물을 지참해 주시기 바랍니다."
+            />
           </Form.Item>
         </Col>
       </Row>

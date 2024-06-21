@@ -1,4 +1,4 @@
-import { test, expect, devices } from '@playwright/test';
+import { devices, test } from '@playwright/test';
 
 test('홈 화면 테스트', async ({ page }) => {
   await page.goto('https://danfesta2024.vercel.app/ko');

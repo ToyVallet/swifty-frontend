@@ -1,8 +1,9 @@
 'use client';
 
-import { API_CLIENT } from '@lib/constant/api';
+import { DeleteButton } from '@components';
+import { API_CLIENT } from '@lib';
 import { customFetch, revalidate } from '@swifty/shared-lib';
-import type { UserStatus } from '@type/user';
+import type { UserStatus } from '@type';
 import { Button, Popconfirm } from 'antd';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
@@ -67,19 +68,14 @@ export default function UserStateButtonList({
           <strong>USER STATUS</strong>
         </h3>
         <div className={styles.buttonSection}>
-          <Popconfirm
-            title="계정 삭제"
-            description="해당 계정을 삭제하시겠습니까?"
-            okText="확인"
-            okType="danger"
-            cancelText="취소"
+          <DeleteButton
+            title="계정삭제"
             onConfirm={deleteUser}
+            description="해당 계정을 삭제하시겠습니까?"
+            size="large"
           >
-            <Button type="primary" danger size="large">
-              Delete
-            </Button>
-          </Popconfirm>
-
+            DELETE
+          </DeleteButton>
           {USER_STATES.map((state) => (
             <Button
               size="large"

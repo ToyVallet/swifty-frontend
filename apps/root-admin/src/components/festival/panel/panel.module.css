@@ -1,0 +1,33 @@
+.panelList {
+  display: flex;
+  flex-flow: column nowrap;
+  row-gap: 1rem;
+}
+
+.description {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 5rem;
+  background: #FFFFFF;
+  border-radius: 8px;
+}
+
+.heading {
+  color: var(--color-12);
+  flex-basis: 25%;
+  display: flex;
+  justify-content: center;
+}
+
+.content {
+  color: var(--color-06);
+  flex-basis: 25%;
+  display: flex;
+  justify-content: center;
+}
+
+.updateButton {
+  outline: 3px solid red;
+}

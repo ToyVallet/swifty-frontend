@@ -1,3 +1,5 @@
+import type { Status } from '@type';
+
 import type { LineUpInfoResponse } from './lineup';
 
 export type ConcertsResponse = {
@@ -8,5 +10,5 @@ export type ConcertsResponse = {
   location: string;
   description: string;
   lineUpInfoResponses: LineUpInfoResponse[];
-  concertStatus: 'BEFORE' | 'PROCESS' | 'CLOSED';
+  concertStatus: Status;
 };

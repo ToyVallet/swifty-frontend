@@ -20,6 +20,14 @@ const nextConfig = {
     fileLoaderRule.exclude = /\.svg$/i;
     return config;
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '2024-mentoring.s3.ap-northeast-2.amazonaws.com',
+      },
+    ],
+  },
 };
 
 export default nextConfig;

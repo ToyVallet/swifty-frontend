@@ -5,7 +5,11 @@ import Link from 'next/link';
 
 import styles from './breadcrumb.module.css';
 
-export type BreadcrumbList = { title: string; path?: string }[];
+export type BreadcrumbList = {
+  title: string | JSX.Element;
+  path?: string;
+  icon?: string | null;
+}[];
 
 interface Props {
   separator?: string;

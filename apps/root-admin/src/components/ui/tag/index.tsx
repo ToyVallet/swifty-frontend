@@ -8,7 +8,7 @@ import {
   MinusCircleOutlined,
   WomanOutlined,
 } from '@ant-design/icons';
-import type { UserEnrolled, UserGender, UserStatus } from '@type/user';
+import type { UserEnrolled, UserGender, UserStatus } from '@type';
 import { Tag } from 'antd';
 
 interface GenderProps {
