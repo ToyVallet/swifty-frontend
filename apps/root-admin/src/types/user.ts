@@ -28,14 +28,3 @@ export interface User {
   enrolled: UserEnrolled;
   status: UserStatus;
 }
-
-export interface UserApi {
-  content: User[];
-  hasNext: boolean;
-  totalPages: number;
-  totalElements: number;
-  page: number;
-  size: number;
-  first: boolean;
-  last: boolean;
-}

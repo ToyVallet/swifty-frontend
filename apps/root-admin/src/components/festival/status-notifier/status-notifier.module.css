@@ -22,30 +22,24 @@
   left: 1rem;
 }
 
-.notifier.before::before {
-  background: #33D69F;
+.notifier.open:not(.pale)::before {
+  background: #33d69f;
 }
 
-.notifier.pending::before {
-  background: #FF8F00;
+.notifier.hidden:not(.pale)::before {
+  background: #373b53;
 }
 
-.notifier.end::before {
-  background: #373B53;
+.open {
+  color: #33d69f;
+  background: #e6f9f0;
 }
 
-.before {
-  color: #33D69F;
-  background: #E6F9F0;
+.hidden {
+  color: #f2f3f8;
+  background: #a9a9ab;
 }
 
-.pending {
-  color: #FF8F00;
-  background: #FFF4E6;
-  text-indent: 1rem;
-}
-
-.end {
-  color: #373B53;
-  background: #F1F1F4;
+.pale {
+  opacity: 0.3;
 }

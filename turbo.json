@@ -24,7 +24,9 @@
       "dependsOn": ["^chromatic"]
     },
     "lint": {
-      "dependsOn": ["^lint"]
+      "dependsOn": [
+        "^lint"
+      ]
     },
     "dev": {
       "inputs": [

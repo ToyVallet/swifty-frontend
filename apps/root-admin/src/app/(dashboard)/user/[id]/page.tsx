@@ -1,16 +1,14 @@
-import { BreadCrumbs, type BreadcrumbList } from '@components/ui';
-import { UserInfo } from '@components/user';
-import { API_CLIENT } from '@lib/constant/api';
+import { BreadCrumbs, type BreadcrumbList, UserInfo } from '@components';
+import { API_CLIENT } from '@lib';
+import type { Params } from '@swifty/shared-lib';
 import { customFetch } from '@swifty/shared-lib';
-import type { User } from '@type/user';
+import type { User } from '@type';
 
 import styles from './user-detail.module.css';
 
-interface Props {
-  params: { id: string };
-}
-
-export default async function UserDetailPage({ params: { id } }: Props) {
+export default async function UserDetailPage({
+  params: { id },
+}: Params<{ id: string }>) {
   const data = await customFetch<User>(API_CLIENT.user(id), {
     cache: 'no-store',
     credentials: 'include',
