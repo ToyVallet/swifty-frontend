@@ -2,13 +2,13 @@
 
 import { notification } from 'antd';
 import type { ArgsProps } from 'antd/lib/notification/interface';
-import type { PropsWithChildren} from 'react';
+import type { PropsWithChildren } from 'react';
 import { createContext, useCallback, useMemo } from 'react';
 
 type NotificationKey = 'success' | 'error' | 'info' | 'warning';
 
 export const NotificationHandlerContext = createContext<
-  (option: ArgsProps, type: NotificationKey) => void
+  (option: ArgsProps, type?: NotificationKey) => void
 >(() => {});
 
 export default function NotificationProvider({ children }: PropsWithChildren) {
