@@ -1,6 +1,6 @@
 'use client';
 
-import { Upload } from '@components';
+import { NotificationHandlerContext, Upload } from '@components';
 import { API_UNIVERSITY } from '@lib';
 import { customFetch, revalidate } from '@swifty/shared-lib';
 import type { University } from '@type';
@@ -8,7 +8,7 @@ import { Col, Form, Row } from 'antd';
 import type { UploadFile } from 'antd/lib';
 import type { FormInstance, FormProps } from 'antd/lib/form';
 import type { RcFile } from 'antd/lib/upload';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 
 type FieldType = {
   logo: UploadFile[];
@@ -32,6 +32,8 @@ export default function UniversityLogoUpdateForm({
   });
   form?.setFieldValue('logo', fileList);
 
+  const handleNotification = useContext(NotificationHandlerContext);
+
   const onFinish: FormProps<FieldType>['onFinish'] = async (
     values: FieldType,
   ) => {
@@ -39,14 +41,25 @@ export default function UniversityLogoUpdateForm({
     const formData = new FormData();
 
     formData.append('logo', imageFile.originFileObj as RcFile, imageFile.name);
-    await customFetch(API_UNIVERSITY.university_logo(university.subId), {
-      method: 'POST',
-      headers: {},
-      body: formData,
-    });
-    form?.resetFields(['logo']);
-    await revalidate('university');
-    onClose?.();
+    try {
+      await customFetch(API_UNIVERSITY.university_logo(university.subId), {
+        method: 'POST',
+        headers: {},
+        body: formData,
+      });
+      form?.resetFields(['logo']);
+      await revalidate('university');
+      onClose?.();
+    } catch (err) {
+      console.error(err);
+      handleNotification(
+        {
+          message: '대학 로고 수정에 실패했습니다.',
+          description: (err as Error).message,
+        },
+        'error',
+      );
+    }
   };
 
   return (
