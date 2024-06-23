@@ -1,10 +1,12 @@
 'use client';
 
+import { NotificationHandlerContext } from '@components';
 import { API_AUTH } from '@lib';
 import { customFetch } from '@swifty/shared-lib';
 import type { FormProps } from 'antd';
 import { Button, Form, Input } from 'antd';
 import { useRouter } from 'next/navigation';
+import { useContext } from 'react';
 
 import styles from './login.module.css';
 
@@ -15,20 +17,29 @@ type FieldType = {
 
 export default function Page() {
   const [form] = Form.useForm();
+  const handleNotification = useContext(NotificationHandlerContext);
   const router = useRouter();
   const onFinish: FormProps<FieldType>['onFinish'] = async (values) => {
-    await customFetch(API_AUTH.login, {
-      method: 'POST',
-      body: JSON.stringify(values),
-    });
-    form.setFieldValue('formId', '');
-    form.setFieldValue('password', '');
-    router.replace('/');
+    try {
+      await customFetch(API_AUTH.login, {
+        method: 'POST',
+        body: JSON.stringify(values),
+      });
+      form.setFieldValue('formId', '');
+      form.setFieldValue('password', '');
+      router.replace('/');
+    } catch (err) {
+      handleNotification(
+        {
+          message: '로그인에 실패하였습니다',
+          description: '다시 시도해주세요!',
+          placement: 'topRight',
+          role: 'alert',
+        },
+        'error',
+      );
+    }
   };
-
-  const onFinishFailed: FormProps<FieldType>['onFinishFailed'] = async (
-    errorInfo,
-  ) => {};
 
   return (
     <main className={styles.main}>
@@ -40,7 +51,6 @@ export default function Page() {
         style={{ maxWidth: 600 }}
         initialValues={{ remember: false }}
         onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
         autoComplete="on"
       >
         <Form.Item<FieldType>
