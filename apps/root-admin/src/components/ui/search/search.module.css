@@ -1,0 +1,12 @@
+.search {
+  margin-bottom: 1rem;
+}
+
+.searchMeta {
+  padding: 0px 10px;
+}
+
+.searchItem:hover {
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.3);
+}

@@ -1,10 +1,8 @@
 .headerWrapper {
   margin-top: 2rem;
-  display: flex;
-  flex-flow: row nowrap;
-  align-items: center;
 }
 
-.statusNotifier {
-  margin-left: 2rem;
+.wrapper {
+  transform: translate(1px, 1rem);
+  margin-top: 1rem;
 }

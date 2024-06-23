@@ -1,20 +1,23 @@
-import { Table } from '@components/user';
-import { API_CLIENT } from '@lib/constant/api';
+import { Table } from '@components';
+import { API_CLIENT } from '@lib';
 import { customFetch } from '@swifty/shared-lib';
-import type { UserApi } from '@type/user';
+import type { Paginaiton, User } from '@type';
 
 import styles from './user.module.css';
 
 export default async function Page() {
-  const data = await customFetch<UserApi>(API_CLIENT.users(), {
+  const data = await customFetch<Paginaiton<User>>(API_CLIENT.users(), {
     cache: 'no-cache',
     next: { tags: ['users'] },
-    credentials: 'include',
   });
   return (
     <main>
       <h2 className={styles.heading}>계정 관리</h2>
-      <Table data={data.content} pageSize={data.size} total={data.totalPages} />
+      <Table
+        data={data.content}
+        pageSize={data.size}
+        total={data.totalElements}
+      />
     </main>
   );
 }

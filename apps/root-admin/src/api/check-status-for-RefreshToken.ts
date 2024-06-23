@@ -1,6 +1,6 @@
 'use server';
 
-import { deleteCookie } from '@lib/cookies';
+import { deleteCookie } from '@lib';
 import { COOKIE_KEYS } from '@swifty/shared-lib';
 import { RedirectType, redirect } from 'next/navigation';
 

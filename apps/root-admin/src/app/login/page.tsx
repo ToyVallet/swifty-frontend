@@ -1,6 +1,6 @@
 'use client';
 
-import { API_AUTH } from '@lib/constant/api';
+import { API_AUTH } from '@lib';
 import { customFetch } from '@swifty/shared-lib';
 import type { FormProps } from 'antd';
 import { Button, Form, Input } from 'antd';
@@ -29,9 +29,7 @@ export default function Page() {
 
   const onFinishFailed: FormProps<FieldType>['onFinishFailed'] = async (
     errorInfo,
-  ) => {
-    console.log('Failed:', errorInfo);
-  };
+  ) => {};
 
   return (
     <main className={styles.main}>

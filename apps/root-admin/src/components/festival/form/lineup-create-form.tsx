@@ -1,18 +1,54 @@
 'use client';
 
-import { Upload } from '@components/festival';
-import type { DatePickerProps } from 'antd';
-import { Col, DatePicker, Form, Input, Row } from 'antd';
+import { Upload } from '@components';
+import { useLineupCRUD } from '@hooks';
+import { FETCH_TAG } from '@lib';
+import { revalidate } from '@swifty/shared-lib';
+import { Col, Form, Input, Row, TimePicker } from 'antd';
+import type { FormProps, UploadFile } from 'antd';
+import type { FormInstance } from 'antd/lib';
+import dayjs from 'dayjs';
+import { useState } from 'react';
 
-export default function LineupCreateForm() {
-  const onChange: DatePickerProps['onChange'] = (date, dateString) => {};
+type FieldType = {
+  title: string;
+  description: string;
+  performanceTime: Date;
+  newFile: UploadFile[];
+};
+
+interface Props {
+  concertSubId: string;
+  festivalId: string;
+  form?: FormInstance<FieldType>;
+  onClose?: () => void;
+}
+
+export default function LineupCreateForm({
+  concertSubId,
+  festivalId,
+  form,
+  onClose,
+}: Props) {
+  const { createLineup, error } = useLineupCRUD();
+  const [fileList, setFileList] = useState<UploadFile[]>([]);
+  const onFinish: FormProps<FieldType>['onFinish'] = async (values) => {
+    await createLineup(concertSubId, values, fileList[0] as UploadFile);
+    if (!error) {
+      await revalidate(FETCH_TAG.festivalsDetail(festivalId));
+      form?.resetFields(Object.keys(values));
+      setFileList([]);
+      onClose?.();
+    }
+  };
+
   return (
-    <Form layout="vertical">
+    <Form form={form} id="lineup-create" layout="vertical" onFinish={onFinish}>
       <Row gutter={16}>
         <Col span={12}>
           <Form.Item
             name="title"
-            label="Title"
+            label="라인업 이름"
             rules={[{ required: true, message: 'Please enter user name' }]}
           >
             <Input placeholder="아이유" />
@@ -23,7 +59,7 @@ export default function LineupCreateForm() {
         <Col span={24}>
           <Form.Item
             name="description"
-            label="Description"
+            label="라인업에 대한 설명"
             rules={[
               {
                 required: true,
@@ -42,21 +78,17 @@ export default function LineupCreateForm() {
         <Col span={12}>
           <Form.Item
             name="performanceTime"
-            label="PeformanceTime"
+            label="라인업의 공연이 시작되는 시각"
             rules={[{ required: true, message: 'Please choose the dateTime' }]}
           >
-            <DatePicker onChange={onChange} placeholder="2024-05-28" />
+            <TimePicker defaultValue={dayjs('00:00:00', 'HH:mm:ss')} />
           </Form.Item>
         </Col>
       </Row>
       <Row gutter={16}>
         <Col span={12}>
-          <Form.Item
-            name="newFile"
-            label="NewFile"
-            rules={[{ required: true, message: 'Please choose the dateTime' }]}
-          >
-            <Upload />
+          <Form.Item name="newFile" label="라인업 이미지">
+            <Upload fileList={fileList} setFileList={setFileList} />
           </Form.Item>
         </Col>
       </Row>
