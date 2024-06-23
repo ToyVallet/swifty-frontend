@@ -1,6 +1,6 @@
 'use client';
 
-import { Upload } from '@components';
+import { NotificationHandlerContext, Upload } from '@components';
 import { API_FESTIVAL, FETCH_TAG } from '@lib';
 import { customFetch, revalidate } from '@swifty/shared-lib';
 import type { UploadFile } from 'antd';
@@ -9,7 +9,7 @@ import type { FormInstance, FormProps } from 'antd/lib/form';
 import type { RcFile } from 'antd/lib/upload';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ko';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import overCurrentDay from 'src/lib/util/over-current-day';
 
 const { RangePicker } = DatePicker;
@@ -36,6 +36,7 @@ interface Props {
 export default function FestivalForm({ id, form, onClose }: Props) {
   const [poster, setPoster] = useState<UploadFile[]>([]);
   const [thumbnail, setThumbnail] = useState<UploadFile[]>([]);
+  const handleNotification = useContext(NotificationHandlerContext);
 
   form?.setFieldValue('poster', poster);
   form?.setFieldValue('thumbnail', thumbnail);
@@ -88,7 +89,15 @@ export default function FestivalForm({ id, form, onClose }: Props) {
       setThumbnail([]);
       form?.resetFields();
       onClose?.();
-    } catch (err) {}
+    } catch (err) {
+      handleNotification(
+        {
+          message: '대학  축제 생성에 실패했습니다!',
+          description: (err as Error).message,
+        },
+        'error',
+      );
+    }
   };
   return (
     <Form layout="vertical" form={form} onFinish={onFinish}>
