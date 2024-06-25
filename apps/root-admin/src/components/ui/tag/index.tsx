@@ -48,14 +48,14 @@ export function StatusTag({ status }: StatusProps) {
     BANNED: 'error',
     ACTIVE: 'processing',
     WITHDRAWAL: 'default',
-    PAUSE: 'warning',
+    PAUSED: 'warning',
   };
 
   const icon: Record<UserStatus, JSX.Element> = {
     BANNED: <CloseCircleOutlined />,
     ACTIVE: <CheckCircleOutlined />,
     WITHDRAWAL: <ClockCircleOutlined />,
-    PAUSE: <MinusCircleOutlined />,
+    PAUSED: <MinusCircleOutlined />,
   };
   return (
     <Tag color={color[status]} icon={icon[status]}>

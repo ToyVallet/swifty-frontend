@@ -1,7 +1,6 @@
 'use client';
 
-import type { ButtonProps} from 'antd';
-import { Button, Popconfirm } from 'antd';
+import { Button, type ButtonProps, Popconfirm } from 'antd';
 import type { PropsWithChildren } from 'react';
 
 interface Props extends PropsWithChildren {
