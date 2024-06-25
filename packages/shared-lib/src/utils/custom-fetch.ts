@@ -7,10 +7,13 @@ export async function customFetch<Res>(
   url: string,
   options: RequestInit = {},
 ): Promise<Res> {
-  options.headers = {
-    'Content-Type': 'application/json',
+  options = {
+    headers: {
+      'Content-Type': 'application/json',
+      ...options.headers,
+    },
     credentials: 'include',
-    ...options.headers,
+    ...options,
   };
 
   if (options.credentials === 'include' && isServer()) {
@@ -21,7 +24,9 @@ export async function customFetch<Res>(
   }
 
   try {
-    const response = await fetch(`${SERVER_URL}${url}`, options);
+    const response = await fetch(`${SERVER_URL}${url}`, {
+      ...options,
+    });
 
     if (!response.ok) {
       const error = await response.json();

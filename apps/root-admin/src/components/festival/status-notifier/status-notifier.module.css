@@ -1,0 +1,45 @@
+.notifier {
+  width: 6.5rem;
+  height: 2.5rem;
+  text-transform: capitalize;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  font-weight: 700;
+  border-radius: 8px;
+  text-indent: 0.5rem;
+}
+
+.notifier::before {
+  content: '';
+  position: absolute;
+  width: 0.5rem;
+  height: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  border-radius: 9999px;
+  left: 1rem;
+}
+
+.notifier.open:not(.pale)::before {
+  background: #33d69f;
+}
+
+.notifier.hidden:not(.pale)::before {
+  background: #373b53;
+}
+
+.open {
+  color: #33d69f;
+  background: #e6f9f0;
+}
+
+.hidden {
+  color: #f2f3f8;
+  background: #a9a9ab;
+}
+
+.pale {
+  opacity: 0.3;
+}

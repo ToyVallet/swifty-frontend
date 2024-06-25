@@ -4,14 +4,15 @@
     "baseUrl": ".",
     "paths": {
       "@app/*": ["./src/app/*"],
-      "@components/*": ["./src/app/components/*"],
-      "@lib/*": ["./src/app/lib/*"],
-      "@hooks/*": ["./src/app/hooks/*"],
-      "@api/*": ["./src/app/api/*"],
-      "@store/*": ["./src/app/store/*"],
-      "@type/*": ["./src/app/types/*"]
+      "@components": ["./src/components"],
+      "@lib": ["./src/lib"],
+      "@hooks": ["./src/hooks/"],
+      "@api": ["src/api"],
+      "@type": ["./src/types"],
+      "@styles/*": ["./src/styles/*"],
+      "@icons/*": ["./public/icons/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "server.js"]
 }

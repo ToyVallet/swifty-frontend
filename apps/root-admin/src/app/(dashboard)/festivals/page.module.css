@@ -2,6 +2,10 @@
   margin-top: 2rem;
 }
 
-.cardList {
+.panelList {
   margin-top: 1rem;
+}
+
+.panel:hover {
+  outline: 3px solid #7C5DFA;
 }

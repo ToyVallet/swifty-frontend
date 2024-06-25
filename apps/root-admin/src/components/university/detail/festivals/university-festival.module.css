@@ -1,0 +1,17 @@
+.section {
+  flex: 1;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.heading {
+  margin-top: 2rem;
+}
+
+.cardList {
+  margin-top: 1rem;
+}
