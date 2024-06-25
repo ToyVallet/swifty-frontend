@@ -12,8 +12,7 @@
       "@images/*": ["./public/images/*"],
       "@icons/*": ["./public/icons/*"]
     },
-    "typeRoots": ["./node_modules/@types", "./src/types", "./node_modules/@testing-library"],
-    "types": ["jest", "jest-dom"]
+    "typeRoots": ["./node_modules/@types", "./src/types"]
   },
   "include": [
     "next-env.d.ts",
