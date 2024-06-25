@@ -1,57 +1,19 @@
 {
+  "extends": "@swifty/typescript-config/nextjs.json",
   "compilerOptions": {
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "strict": true,
-    "noEmit": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "module": "esnext",
-    "moduleResolution": "bundler",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "jsx": "preserve",
-    "incremental": true,
-    "types": [
-      "@testing-library/jest-dom"
-    ],
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ],
+    "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "./src/*"
-      ],
-      "@app/*": [
-        "./src/app/*"
-      ],
-      "@components/*": [
-        "./src/app/components/*"
-      ],
-      "@types/*": [
-        "./src/app/types/*"
-      ],
-      "@util/*": [
-        "./src/app/util/*"
-      ],
-      "@constant": ["./src/constant"]
-    }
+      "@app/*": ["./src/app/*"],
+      "@components": ["./src/components"],
+      "@lib": ["./src/lib"],
+      "@hooks": ["./src/hooks/"],
+      "@api": ["src/api"],
+      "@type": ["./src/types"],
+      "@styles/*": ["./src/styles/*"],
+      "@icons/*": ["./public/icons/*"]
+    },
+    "typeRoots": ["./node_modules/@types", "./src/types"]
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    ".next/types/**/*.ts",
-    "./src/types/svgr.d.ts"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "exclude": ["node_modules", "server.js"]
 }

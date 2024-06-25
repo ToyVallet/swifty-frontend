@@ -1,0 +1,10 @@
+{
+  "extends": "@swifty/typescript-config/base.json",
+  "compilerOptions": {
+    "moduleResolution": "Bundler",
+    "module": "ES6",
+    "paths": {
+      "@swifty/shared-lib": ["./src/index.ts"]
+    }
+  }
+}

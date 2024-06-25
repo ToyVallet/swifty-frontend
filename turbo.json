@@ -1,15 +1,47 @@
 {
   "$schema": "https://turbo.build/schema.json",
   "globalDependencies": ["**/.env.*local"],
-  "pipeline": {
+  "globalEnv": ["NODE_ENV", "SERVER_URL"],
+  "tasks": {
     "build": {
+      "inputs": [
+        "$TURBO_DEFAULT$",
+        ".env.production.local",
+        ".env.local",
+        ".env.production",
+        ".env",
+        "!**/*.stories.{js,jsx,ts,tsx,mdx}"
+      ],
+      "env": ["SERVER_URL"],
       "dependsOn": ["^build"],
       "outputs": [".next/**", "!.next/cache/**"]
     },
+    "build-storybook": {
+      "dependsOn": ["^build-storybook"],
+      "outputs": ["storybook-static/**"]
+    },
+    "chromatic": {
+      "dependsOn": ["^chromatic"]
+    },
     "lint": {
-      "dependsOn": ["^lint"]
+      "dependsOn": [
+        "^lint"
+      ]
     },
     "dev": {
+      "inputs": [
+        "$TURBO_DEFAULT$",
+        ".env.development.local",
+        ".env.local",
+        ".env.development",
+        ".env"
+      ],
+      "env": ["SERVER_URL", "NEXT_PUBLIC_API_URL"],
+      "cache": false,
+      "persistent": true
+    },
+    "test": {},
+    "test:watch": {
       "cache": false,
       "persistent": true
     }

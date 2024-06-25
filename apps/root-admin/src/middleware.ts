@@ -1,6 +1,7 @@
-import { getCookieValue } from '@/app/lib/cookies';
-import { COOKIE_KEYS } from '@/constant';
-import { NextRequest, NextResponse } from 'next/server';
+import { getCookieValue } from '@lib';
+import { COOKIE_KEYS } from '@swifty/shared-lib';
+import type { NextRequest } from 'next/server';
+import { NextResponse } from 'next/server';
 
 export async function middleware(request: NextRequest) {
   const url = request.nextUrl.clone();
