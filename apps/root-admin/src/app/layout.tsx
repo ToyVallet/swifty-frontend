@@ -1,4 +1,5 @@
 import { AntdRegistry } from '@ant-design/nextjs-registry';
+import { NotificationProvider } from '@components';
 import { spaceGrotesk } from '@styles/font';
 import '@styles/global.css';
 import '@styles/theme.css';
@@ -39,7 +40,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={spaceGrotesk.className}>
         <AntdRegistry>
-          <ConfigProvider theme={darkTheme}>{children}</ConfigProvider>
+          <ConfigProvider theme={darkTheme}>
+            <NotificationProvider>{children}</NotificationProvider>
+          </ConfigProvider>
         </AntdRegistry>
       </body>
     </html>

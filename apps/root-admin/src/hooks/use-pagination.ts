@@ -1,9 +1,10 @@
 'use client';
 
+import { NotificationHandlerContext } from '@components';
 import { customFetch } from '@swifty/shared-lib';
 import type { Paginaiton } from '@type';
 import type { UserRole } from '@type';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 
 interface Prop<T> {
   pageSize: number;
@@ -24,18 +25,31 @@ export default function usePagination<T>({
     total,
   });
   const [loading, setLoading] = useState(false);
+  const handleNotification = useContext(NotificationHandlerContext);
 
   // 페이지 변경에 따른 데이터 업데이트
   const handleTableChange = async (page: number, pageSize: number) => {
     setLoading(true);
-    const data = await customFetch<Paginaiton<T>>(api(page - 1, pageSize));
-    setTableData(data.content);
-    setPagination({
-      ...pagination,
-      current: page,
-      pageSize,
-    });
-    setLoading(false);
+    try {
+      const data = await customFetch<Paginaiton<T>>(api(page - 1, pageSize));
+      setTableData(data.content);
+      setPagination({
+        ...pagination,
+        current: page,
+        pageSize,
+      });
+    } catch (err) {
+      handleNotification(
+        {
+          message: 'page를 불러오는 것에 실패했습니다!',
+          description: '다시 시도해주세요!',
+          placement: 'topRight',
+        },
+        'error',
+      );
+    } finally {
+      setLoading(false);
+    }
   };
   return { pagination, loading, handleTableChange };
 }

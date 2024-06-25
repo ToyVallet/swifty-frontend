@@ -1,7 +1,8 @@
 'use client';
 
-import { Button, type ButtonProps, Popconfirm } from 'antd';
-import type { PropsWithChildren } from 'react';
+import { NotificationHandlerContext } from '@components';
+import { type PropsWithChildren, useContext } from 'react';
+
 
 interface Props extends PropsWithChildren {
   title: string;
@@ -17,6 +18,21 @@ export default function DeleteButton({
   children,
   size = 'small',
 }: Props) {
+  const handleNotification = useContext(NotificationHandlerContext);
+  const onDelete = async () => {
+    try {
+      await onConfirm();
+    } catch (err) {
+      handleNotification(
+        {
+          message: '삭제에 실패했습니다.',
+          description: (err as Error).message,
+        },
+        'error',
+      );
+    }
+  };
+
   return (
     <Popconfirm
       title={title}
@@ -24,7 +40,7 @@ export default function DeleteButton({
       okText="확인"
       okType="danger"
       cancelText="취소"
-      onConfirm={onConfirm}
+      onConfirm={onDelete}
     >
       <Button type="primary" danger size={size}>
         {children}

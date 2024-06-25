@@ -1,13 +1,17 @@
 'use client';
 
-import { SearchUniversity, Upload } from '@components';
+import {
+  NotificationHandlerContext,
+  SearchUniversity,
+  Upload,
+} from '@components';
 import { API_UNIVERSITY } from '@lib';
 import { customFetch, revalidate } from '@swifty/shared-lib';
 import type { UploadFile } from 'antd';
 import { Col, Form, Input, Row } from 'antd';
 import type { FormInstance, FormProps } from 'antd/lib/form';
 import type { RcFile } from 'antd/lib/upload';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 
 interface FieldType {
   name: string;
@@ -22,6 +26,7 @@ interface Props {
 
 export default function UniversityCreateForm({ onClose, form }: Props) {
   const [fileList, setFileList] = useState<UploadFile[]>([]);
+  const handleNotification = useContext(NotificationHandlerContext);
   form?.setFieldValue('logo', fileList);
   const onFinish: FormProps<FieldType>['onFinish'] = async (
     values: FieldType,
@@ -39,14 +44,26 @@ export default function UniversityCreateForm({ onClose, form }: Props) {
         imageFile.name,
       );
     }
-    await customFetch(API_UNIVERSITY.post_university(), {
-      method: 'POST',
-      headers: {},
-      body: formData,
-    });
-    form?.resetFields(['name', 'addr', 'logo']);
-    await revalidate('university');
-    onClose?.();
+
+    try {
+      await customFetch(API_UNIVERSITY.post_university(), {
+        method: 'POST',
+        headers: {},
+        body: formData,
+      });
+      form?.resetFields(['name', 'addr', 'logo']);
+      setFileList([]);
+      await revalidate('university');
+      onClose?.();
+    } catch (err) {
+      handleNotification(
+        {
+          message: '대학 생성에 실패하였습니다.',
+          description: (err as Error).message,
+        },
+        'error',
+      );
+    }
   };
   return (
     <>

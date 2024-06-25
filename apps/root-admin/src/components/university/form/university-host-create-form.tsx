@@ -1,12 +1,13 @@
 'use client';
 
+import { NotificationHandlerContext } from '@components';
 import { API_HSOT, FETCH_TAG } from '@lib';
 import { customFetch, revalidate } from '@swifty/shared-lib';
 import type { UniversityHostCreate } from '@type';
 import { Col, Form, Input, Radio, Row } from 'antd';
 import { Modal } from 'antd';
 import type { FormInstance, FormProps } from 'antd/lib/form';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 
 import styles from './university-host-create-form.module.css';
 
@@ -25,6 +26,8 @@ interface Props {
 
 export default function UniversityHostCreateForm({ onClose, form, id }: Props) {
   const [modal, setModal] = useState(false);
+  const handleNotification = useContext(NotificationHandlerContext);
+
   const [hostUserInfo, sethostUserInfo] = useState({
     id: '',
     pw: '',
@@ -56,7 +59,16 @@ export default function UniversityHostCreateForm({ onClose, form, id }: Props) {
       });
       form?.resetFields(['phoneNumber', 'loginId', 'userRole']);
       setModal(true);
-    } catch (err) {}
+    } catch (err) {
+      console.error(err);
+      handleNotification(
+        {
+          message: 'host 유저 생성에 실패하였습니다.',
+          description: (err as Error).message,
+        },
+        'error',
+      );
+    }
   };
   return (
     <>

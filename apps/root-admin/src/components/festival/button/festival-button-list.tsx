@@ -25,13 +25,9 @@ export default function FestivalButtonList({
 
   const router = useRouter();
   const onDelet = async () => {
-    try {
-      await customFetch(API_FESTIVAL.delete(subId), { method: 'DELETE' });
-      await revalidate(FETCH_TAG.festivals);
-      router.replace(`/festivals`);
-    } catch (err) {
-      console.error(err);
-    }
+    await customFetch(API_FESTIVAL.delete(subId), { method: 'DELETE' });
+    await revalidate(FETCH_TAG.festivals);
+    router.replace(`/festivals`);
   };
 
   return (

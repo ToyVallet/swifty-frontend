@@ -1,11 +1,12 @@
 'use client';
 
-import { SearchUniversity } from '@components';
+import { NotificationHandlerContext, SearchUniversity } from '@components';
 import { API_UNIVERSITY } from '@lib';
 import { customFetch, revalidate } from '@swifty/shared-lib';
 import type { University } from '@type';
 import { Col, Form, Input, Row } from 'antd';
 import type { FormInstance, FormProps } from 'antd/lib/form';
+import { useContext } from 'react';
 
 type FieldType = {
   name: string;
@@ -24,19 +25,30 @@ export default function UniversityUpdateForm({
   university,
 }: Props) {
   const initialValue = { name: university.name, addr: university.addr };
+  const handleNotification = useContext(NotificationHandlerContext);
 
   const onFinish: FormProps<FieldType>['onFinish'] = async (
     values: FieldType,
   ) => {
-    await customFetch(
-      API_UNIVERSITY.patch_delete_universiry(university.subId),
-      {
-        method: 'PATCH',
-        body: JSON.stringify(values),
-      },
-    );
-    await revalidate('university');
-    onClose?.();
+    try {
+      await customFetch(
+        API_UNIVERSITY.patch_delete_universiry(university.subId),
+        {
+          method: 'PATCH',
+          body: JSON.stringify(values),
+        },
+      );
+      await revalidate('university');
+      onClose?.();
+    } catch (err) {
+      handleNotification(
+        {
+          message: '대학 정보 수정에 실패하였습니다.',
+          description: (err as Error).message,
+        },
+        'error',
+      );
+    }
   };
   return (
     <Form

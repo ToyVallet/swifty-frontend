@@ -1,6 +1,6 @@
 'use client';
 
-import { LockButton, Upload } from '@components';
+import { LockButton, NotificationHandlerContext, Upload } from '@components';
 import { API_FESTIVAL, FETCH_TAG } from '@lib';
 import { customFetch, revalidate } from '@swifty/shared-lib';
 import type { FestivalDetail } from '@type';
@@ -10,7 +10,7 @@ import type { FormInstance, FormProps } from 'antd/lib/form';
 import type { RcFile } from 'antd/lib/upload';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ko';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useLock } from 'src/hooks';
 import overCurrentDay from 'src/lib/util/over-current-day';
 
@@ -48,6 +48,8 @@ export default function FestivalUpdateForm({
   form,
   onClose,
 }: Props) {
+  const handleNotification = useContext(NotificationHandlerContext);
+
   const initailPoster: UploadFile[] = poster
     ? [
         {
@@ -123,15 +125,25 @@ export default function FestivalUpdateForm({
       formData.append('previousThumbnail', thumbnailFile.url!);
     }
 
-    await customFetch(API_FESTIVAL.updateOrCreate(), {
-      method: 'PATCH',
-      headers: {},
-      body: formData,
-    });
+    try {
+      await customFetch(API_FESTIVAL.updateOrCreate(), {
+        method: 'PATCH',
+        headers: {},
+        body: formData,
+      });
 
-    await revalidate(FETCH_TAG.festivalsDetail(subId));
-    toggleLock();
-    onClose?.();
+      await revalidate(FETCH_TAG.festivalsDetail(subId));
+      toggleLock();
+      onClose?.();
+    } catch (err) {
+      handleNotification(
+        {
+          message: '대학 축제 정보 수정에 실패하였습니다.',
+          description: (err as Error).message,
+        },
+        'error',
+      );
+    }
   };
 
   // 데이터 초기 상태로 rollback

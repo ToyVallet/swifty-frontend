@@ -1,12 +1,13 @@
 'use client';
 
+import { NotificationHandlerContext } from '@components';
 import { API_LINEUP } from '@lib';
 import { customFetch } from '@swifty/shared-lib';
 import type { UploadFile } from 'antd';
 import type { RcFile } from 'antd/es/upload';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ko';
-import { useCallback, useState } from 'react';
+import { useCallback, useContext, useState } from 'react';
 
 const FORMAT = 'HH:mm:ss';
 
@@ -19,6 +20,7 @@ type FieldType = {
 export default function useLineupCRUD() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
+  const handleNotification = useContext(NotificationHandlerContext);
 
   const createLineup = useCallback(
     async (concertSubId: string, values: FieldType, newFile: UploadFile) => {
@@ -52,6 +54,13 @@ export default function useLineupCRUD() {
         } else {
           setError('예상치 못한 오류가 발생했습니다.');
         }
+        handleNotification(
+          {
+            message: '라인업 생성에 실패하였습니다.',
+            description: (e as Error).message,
+          },
+          'error',
+        );
       } finally {
         setIsLoading(false);
       }
@@ -96,6 +105,13 @@ export default function useLineupCRUD() {
       } catch (e) {
         if (e instanceof Error) setError(e.message);
         else setError('예상치 못한 오류가 발생했습니다.');
+        handleNotification(
+          {
+            message: '라인업 수정에 실패하였습니다.',
+            description: (e as Error).message,
+          },
+          'error',
+        );
       } finally {
         setIsLoading(false);
       }
@@ -113,6 +129,13 @@ export default function useLineupCRUD() {
     } catch (e) {
       if (e instanceof Error) setError(e.message);
       else setError('예상치 못한 오류가 발생했습니다.');
+      handleNotification(
+        {
+          message: '라인업 삭제에 실패하였습니다.',
+          description: (e as Error).message,
+        },
+        'error',
+      );
     } finally {
       setIsLoading(false);
     }

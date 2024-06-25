@@ -1,12 +1,12 @@
 'use client';
 
-import { DeleteButton } from '@components';
+import { DeleteButton, NotificationHandlerContext } from '@components';
 import { API_CLIENT } from '@lib';
 import { customFetch, revalidate } from '@swifty/shared-lib';
 import type { UserStatus } from '@type';
 import { Button, Popconfirm } from 'antd';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 
 import styles from './userInfo.module.css';
 
@@ -25,6 +25,7 @@ export default function UserStateButtonList({
   const router = useRouter();
   const [errorMessage, setErrorMessage] = useState<null | string>(null);
   const [userStatus, setUserStatus] = useState<UserStatus>(status);
+  const handleNotification = useContext(NotificationHandlerContext);
 
   const changeStatesToUserStatus = (state: States): UserStatus => {
     const upper = state.toUpperCase();
@@ -50,6 +51,13 @@ export default function UserStateButtonList({
         setErrorMessage(`Change ${state.toUpperCase()} : ${err.message}`);
       }
       setUserStatus(prevStatus);
+      handleNotification(
+        {
+          message: 'Error',
+          description: '사용자 상태 변경에 실패했습니다.',
+        },
+        'error',
+      );
     }
   };
 
