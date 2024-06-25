@@ -23,7 +23,6 @@ export default function GlobalError({
           <Link
             href="/login"
             className="w-full h-full flex items-center justify-center"
-            variant="bottom"
           >
             홈으로
           </Link>

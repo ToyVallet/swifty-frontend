@@ -112,7 +112,7 @@ export const API_ROUTES = {
      * @description 라인업 조회
      * @returns {LineupInfo[]} 라인업 정보
      */
-    list: (date: FestivalDate) => `/line-up?festivalDate=${date}`,
+    list: (date: any) => `/line-up?festivalDate=${date}`,
   },
   stamp: {
     /**

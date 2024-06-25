@@ -15,7 +15,6 @@ export default function NotFound() {
           </span>
 
           <Link
-            variant="bottom"
             href="/"
             className="w-full h-full flex items-center justify-center"
           >

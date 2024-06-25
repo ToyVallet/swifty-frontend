@@ -1,6 +1,6 @@
 'use client';
 
-import { useBottomSheet } from '@/app/hooks';
+import { useBottomSheet } from '@hooks/.';
 import { HiMiniEllipsisHorizontal } from 'react-icons/hi2';
 import { toast } from 'sonner';
 

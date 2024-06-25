@@ -13,7 +13,6 @@ export default async function NeedReverificationTile() {
           <Link
             className="h-auto w-auto p-2 text-primary font-medium dark:text-primary"
             href="/need-reverification"
-            variant="transparent"
           >
             재학생 인증하기
           </Link>

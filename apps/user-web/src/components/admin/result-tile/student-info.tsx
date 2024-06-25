@@ -1,15 +1,15 @@
-import { If } from '@components/util';
 import { type TicketInfo } from '@lib/mock/type';
+import { Choose, Otherwise, When } from '@swifty/ui';
 
 export default function StudentInfo({ info }: { info: TicketInfo | null }) {
   return (
     <div className="w-full flex flex-col p-8">
       <h2 className="text-3xl font-bold mb-6">QR 코드 정보</h2>
-      <If condition={info === null}>
-        <If.Then>
+      <Choose value={info}>
+        <When value={null}>
           <p className="text-neutral-500 w-full text-center">정보 없음</p>
-        </If.Then>
-        <If.Else>
+        </When>
+        <Otherwise>
           <div className="flex flex-col gap-2">
             <Data title="이름" value={info?.name} />
             <Data title="학과" value={info?.major} />
@@ -19,8 +19,8 @@ export default function StudentInfo({ info }: { info: TicketInfo | null }) {
               value={info?.issued ? '발급 완료' : '발급 전'}
             />
           </div>
-        </If.Else>
-      </If>
+        </Otherwise>
+      </Choose>
     </div>
   );
 }
