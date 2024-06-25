@@ -35,17 +35,17 @@ export default function UserStateButtonList({
   };
 
   // 낙관적 업데이트 적용
-  const onChangeStatus = async (state: States) => {
+  const onChangeStatus = (state: States) => {
     if (changeStatesToUserStatus(state) === userStatus) return;
 
     const prevStatus = status;
     setUserStatus(() => changeStatesToUserStatus(state));
     try {
-      await customFetch(API_CLIENT[state](userSubId), {
+      customFetch(API_CLIENT[state](userSubId), {
         method: 'PATCH',
       });
       setErrorMessage(null);
-      await revalidate('users');
+      revalidate('users');
     } catch (err) {
       if (err instanceof Error) {
         setErrorMessage(`Change ${state.toUpperCase()} : ${err.message}`);

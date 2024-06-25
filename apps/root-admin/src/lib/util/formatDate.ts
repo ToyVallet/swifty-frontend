@@ -14,4 +14,3 @@ export default function formatDate(dateStr: string): string {
 
   return `${date.getFullYear()}-${formattedMonth}-${formattedDay} ${formattedHour}:${formattedMinute}:${formattedSecond}`;
 }
-

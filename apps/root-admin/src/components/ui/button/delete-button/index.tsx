@@ -1,9 +1,8 @@
 'use client';
 
 import { NotificationHandlerContext } from '@components';
-import type { ButtonProps } from 'antd';
-import { Button, Popconfirm } from 'antd';
 import { type PropsWithChildren, useContext } from 'react';
+
 
 interface Props extends PropsWithChildren {
   title: string;
