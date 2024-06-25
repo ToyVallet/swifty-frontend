@@ -7,8 +7,11 @@ import {
   FestivalUpdateForm,
 } from '@components';
 import { API_FESTIVAL, FETCH_TAG } from '@lib';
-import type { PropsWithClassName } from '@swifty/shared-lib';
-import { customFetch, revalidate } from '@swifty/shared-lib';
+import {
+  type PropsWithClassName,
+  customFetch,
+  revalidate,
+} from '@swifty/shared-lib';
 import type { FestivalDetail } from '@type';
 import { Flex } from 'antd';
 import { useRouter } from 'next/navigation';
