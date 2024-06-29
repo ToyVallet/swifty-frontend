@@ -1,8 +1,12 @@
 export type LineUp = {
-  id: number;
-  name: string;
-  date?: string;
-  performance_day: 'FIRST_DAY' | 'SECOND_DAY' | 'THIRD_DAY' | 'FOURTH_DAY';
-  festival_id: number;
-  image: string;
+  subId: string;
+  title: string;
+  description: string;
+  lineUpImagePath: string;
+  performanceTime: {
+    hour: number;
+    minute: number;
+    second: number;
+    nano: number;
+  };
 };
