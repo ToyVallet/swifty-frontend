@@ -1,6 +1,9 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
+import { API_ROUTES } from '@lib/constants';
+import { APIError } from '@swifty/shared-lib';
+import { customFetch } from '@swifty/shared-lib';
 import {
   Button,
   Form,
@@ -11,6 +14,7 @@ import {
 } from '@swifty/ui';
 import { Input } from '@swifty/ui';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
@@ -26,6 +30,8 @@ const formSchema = z.object({
 type FormValues = z.infer<typeof formSchema>;
 
 export default function LoginForm() {
+  const router = useRouter();
+
   const form = useForm<FormValues>({
     mode: 'onSubmit',
     resolver: zodResolver(formSchema),
@@ -35,13 +41,26 @@ export default function LoginForm() {
     },
   });
 
-  function onSubmit(data: FormValues) {
-    console.log(data);
-  }
+  const onSubmit = async ({ userId, password }: FormValues) => {
+    try {
+      await customFetch(API_ROUTES.user.login, {
+        method: 'POST',
+        body: JSON.stringify({ formId: userId, password }),
+      });
+      router.push('/');
+    } catch (e) {
+      if (APIError.isAPIError(e)) {
+        form.setError('root', {
+          type: String(e.statusCode),
+        });
+      }
+    }
+  };
 
   return (
     <Form {...form}>
       <form
+        autoComplete="off"
         onSubmit={form.handleSubmit(onSubmit)}
         className="w-full flex flex-col gap-5"
       >
@@ -51,7 +70,7 @@ export default function LoginForm() {
           render={({ field }) => (
             <FormItem>
               <FormControl>
-                <Input placeholder="아이디" autoComplete="off" {...field} />
+                <Input placeholder="아이디" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -66,13 +85,17 @@ export default function LoginForm() {
                 <Input
                   placeholder="비밀번호"
                   type="password"
-                  autoComplete="off"
+                  autoComplete="new-password"
                   {...field}
                 />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
+        />
+        <FormField
+          name="root"
+          render={({ field }) => <FormMessage {...field} />}
         />
         <div className="w-full flex justify-between text-sm">
           <Link href="/forget-id" className="text-white">

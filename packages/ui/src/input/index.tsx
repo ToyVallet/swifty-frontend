@@ -41,7 +41,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function (
   return (
     <div
       className={cn(
-        'w-full relative rounded-xl overflow-hidden bg-neutral-800 transition-all duration-300 ease-in-out',
+        'w-full relative rounded-xl overflow-hidden bg-neutral-800 transition-all duration-200 ease-in-out',
       )}
       style={{
         border: isFocused ? '1px solid #1967FF' : '1px solid transparent',
@@ -66,7 +66,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function (
       <input
         type={type}
         ref={ref}
-        className="w-full bg-transparent text-white text-base px-5 py-3 autofill:bg-in transition-all duration-300 ease-in-out"
+        className="w-full bg-transparent text-white text-base px-5 py-3 transition-all duration-300 ease-in-out autofill:bg-transparent"
         disabled={disabled}
         onFocus={handleFocus}
         onBlur={handleBlur}
