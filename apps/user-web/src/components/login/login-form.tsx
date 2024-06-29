@@ -51,7 +51,7 @@ export default function LoginForm() {
           render={({ field }) => (
             <FormItem>
               <FormControl>
-                <Input placeholder="아이디" {...field} />
+                <Input placeholder="아이디" autoComplete="off" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -63,7 +63,12 @@ export default function LoginForm() {
           render={({ field }) => (
             <FormItem>
               <FormControl>
-                <Input placeholder="비밀번호" type="password" {...field} />
+                <Input
+                  placeholder="비밀번호"
+                  type="password"
+                  autoComplete="off"
+                  {...field}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
