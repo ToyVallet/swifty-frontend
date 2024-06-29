@@ -1,11 +1,10 @@
 'use client';
 
+import { Button } from '@swifty/ui';
 import QrScanner from 'qr-scanner';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { MdOutlineChangeCircle } from 'react-icons/md';
 import { toast } from 'sonner';
-
-import { Button } from '../common';
 
 export type QRScanResult = QrScanner.ScanResult;
 

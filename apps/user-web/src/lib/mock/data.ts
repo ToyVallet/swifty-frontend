@@ -1,6 +1,4 @@
-import type { FestivalInfo } from '@swifty/shared-lib';
-
-export const festivalLinupes: FestivalInfo[] = [
+export const festivalLinupes: any[] = [
   {
     id: '',
     name: 'Danfesta 2024',

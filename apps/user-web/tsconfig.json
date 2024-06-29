@@ -11,7 +11,8 @@
       "@store/*": ["./src/store/*"],
       "@images/*": ["./public/images/*"],
       "@icons/*": ["./public/icons/*"]
-    }
+    },
+    "typeRoots": ["./node_modules/@types", "./src/types"]
   },
   "include": [
     "next-env.d.ts",

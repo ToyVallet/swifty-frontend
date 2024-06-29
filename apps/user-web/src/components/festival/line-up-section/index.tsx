@@ -1,6 +1,5 @@
 'use client';
 
-import { type LineUp } from '@swifty/shared-lib';
 import dayjs, { type Dayjs } from 'dayjs';
 import { useState } from 'react';
 
@@ -8,7 +7,7 @@ import DateSelector from './date-selector';
 import LineUpCard from './line-up-card';
 
 type LineUpSectionProps = {
-  lineups: LineUp[];
+  lineups: any[];
 };
 
 export default function LineUpSection({ lineups }: LineUpSectionProps) {

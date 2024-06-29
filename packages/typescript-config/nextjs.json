@@ -14,12 +14,6 @@
     "allowJs": true,
     "jsx": "preserve",
     "noEmit": true,
-    "types": [
-      "@testing-library/jest-dom"
-    ],
-    "typeRoots": [
-      "./@types"
-    ],
     "paths": {
       "@app/*": [
         "./app/*"

@@ -1,6 +1,6 @@
-import type { MyTicketInfo } from '@/app/lib/mock/type';
 import Logo from '@icons/logo-white.svg';
 import Glass from '@images/glass.jpeg';
+import type { MyTicketInfo } from '@lib/mock/type';
 import Image from 'next/image';
 import { FiClock } from 'react-icons/fi';
 
