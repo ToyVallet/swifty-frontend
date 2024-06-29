@@ -15,29 +15,23 @@ const Input = forwardRef<HTMLInputElement, ComponentPropsWithoutRef<'input'>>(
       disabled,
       type = 'text',
       placeholder,
-      value: _value,
+      onFocus,
+      onBlur,
+      value,
       ...props
     },
     ref,
   ) {
-    const [value, setValue] = useState(_value);
     const [isFocused, setIsFocused] = useState(false);
-
     const handleFocus = useCallback((e: React.FocusEvent<HTMLInputElement>) => {
       setIsFocused(true);
-      props?.onFocus?.(e);
+      onFocus?.(e);
     }, []);
 
     const handleBlur = useCallback((e: React.FocusEvent<HTMLInputElement>) => {
       setIsFocused(false);
+      onBlur?.(e);
     }, []);
-
-    const handleChange = useCallback(
-      (e: React.ChangeEvent<HTMLInputElement>) => {
-        setValue(e.target.value);
-      },
-      [],
-    );
 
     return (
       <div
@@ -53,7 +47,7 @@ const Input = forwardRef<HTMLInputElement, ComponentPropsWithoutRef<'input'>>(
             htmlFor={name}
             className="left-5 text-neutral-400 absolute transition-all duration-300 ease-in-out"
             style={{
-              fontSize: isFocused || value ? '0.875rem' : '1rem',
+              fontSize: isFocused || !!value ? '0.875rem' : '1rem',
               top: '13px',
               color: isFocused ? '#1967FF' : '',
             }}
@@ -68,9 +62,8 @@ const Input = forwardRef<HTMLInputElement, ComponentPropsWithoutRef<'input'>>(
           disabled={disabled}
           onFocus={handleFocus}
           onBlur={handleBlur}
-          onChange={handleChange}
           style={{
-            marginTop: isFocused || value ? '30px' : '',
+            marginTop: isFocused || !!value ? '30px' : '',
           }}
           {...props}
         />
