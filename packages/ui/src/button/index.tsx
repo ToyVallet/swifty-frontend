@@ -7,10 +7,10 @@ import { type MotionProps, motion } from 'framer-motion';
 import React from 'react';
 import PulseLoader from 'react-spinners/PulseLoader';
 
-import { Choose, Otherwise, When, transition } from '../lib';
+import { Choose, Otherwise, When } from '../lib';
 
 const buttonVariants = cva(
-  'flex items-center justify-center whitespace-nowrap rounded-xl h-[50px] font-bold ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 transition-colors duration-200 ease-in-out user-select-none',
+  'flex items-center justify-center whitespace-nowrap rounded-xl h-[50px] font-bold ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 transition-all duration-200 ease-in-out user-select-none',
   {
     variants: {
       variant: {
@@ -81,10 +81,13 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps & MotionProps>(
             whileTap={{
               scale: 0.98,
               backgroundColor:
-                variant === 'outlined' ? 'rgba(255, 255, 255, 1)' : 'auto',
-              color: variant === 'outlined' ? 'rgba(0, 0, 0, 1)' : 'auto',
+                variant === 'outlined' ? 'rgba(255, 255, 255, 1)' : '',
+              color: variant === 'outlined' ? 'rgba(0, 0, 0, 1)' : '',
             }}
-            transition={transition}
+            transition={{
+              duration: 0.1,
+              ease: 'easeInOut',
+            }}
             className={cn(buttonVariants({ variant, size, className }))}
             ref={ref}
             {...props}
