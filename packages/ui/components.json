@@ -3,8 +3,13 @@
   "style": "default",
   "rsc": true,
   "tsx": true,
+  "aliases": {
+    "components": "src",
+    "styles": "src/styles",
+    "utils": "@swifty/shared-lib"
+  },
   "tailwind": {
-    "config": "tailwind.config.cjs",
+    "config": "tailwind.config.js",
     "css": "src/tailwind.css",
     "baseColor": "neutral",
     "cssVariables": true,

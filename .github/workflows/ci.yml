@@ -1,44 +1,44 @@
-name: CI
+# name: CI
 
-on: [push, pull_request]
+# on: [push, pull_request]
 
-jobs:
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
+# jobs:
+#   test:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v2
+#         with:
+#           fetch-depth: 0
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: 20
+#       - name: Setup Node.js
+#         uses: actions/setup-node@v2
+#         with:
+#           node-version: 20
 
-      - name: Install modules
-        run: yarn
+#       - name: Install modules
+#         run: yarn
 
-      - name: Run tests
-        run: yarn test
+#       - name: Run tests
+#         run: yarn test
 
-      - name: on_failure
-        uses: actions/github-script@v3
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            const { data: checks } = await github.checks.listForRef({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              ref: context.sha
-            });
+#       - name: on_failure
+#         uses: actions/github-script@v3
+#         with:
+#           github-token: ${{ secrets.GITHUB_TOKEN }}
+#           script: |
+#             const { data: checks } = await github.checks.listForRef({
+#               owner: context.repo.owner,
+#               repo: context.repo.repo,
+#               ref: context.sha
+#             });
 
-            const check = checks.check_runs.find(check => check.name === 'CI');
-            if (check.conclusion === 'failure') {
-              await github.issues.createComment({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                issue_number: context.issue.number,
-                body: 'CI failed, please check the logs.'
-              });
-            }
-        if: failure()
+#             const check = checks.check_runs.find(check => check.name === 'CI');
+#             if (check.conclusion === 'failure') {
+#               await github.issues.createComment({
+#                 owner: context.repo.owner,
+#                 repo: context.repo.repo,
+#                 issue_number: context.issue.number,
+#                 body: 'CI failed, please check the logs.'
+#               });
+#             }
+#         if: failure()

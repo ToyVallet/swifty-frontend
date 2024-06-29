@@ -3,5 +3,8 @@
   "compilerOptions": {
     "outDir": "dist"
   },
+  "paths": {
+    "@/*": ["src/*"]
+  },
   "exclude": ["node_modules", "dist"]
 }
