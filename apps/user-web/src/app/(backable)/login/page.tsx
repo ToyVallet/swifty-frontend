@@ -1,11 +1,11 @@
 import { LoginForm } from '@components/login';
-import { Input } from '@swifty/ui';
+import Logo from '@images/swifty-text-logo.svg';
 
 export default function LoginPage() {
   return (
-    <div>
-      <h1>Login</h1>
+    <main className="flex flex-col items-center justify-start w-full">
+      <Logo className="mt-20 mb-16" width={169} height={53} />
       <LoginForm />
-    </div>
+    </main>
   );
 }
