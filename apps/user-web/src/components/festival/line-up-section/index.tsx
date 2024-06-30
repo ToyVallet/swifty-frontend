@@ -1,5 +1,6 @@
 'use client';
 
+import type { Concert } from '@lib/types/festival';
 import dayjs, { type Dayjs } from 'dayjs';
 import { useState } from 'react';
 
@@ -7,15 +8,17 @@ import DateSelector from './date-selector';
 import LineUpCard from './line-up-card';
 
 type LineUpSectionProps = {
-  lineups: any[];
+  concerts: Concert[];
 };
 
-export default function LineUpSection({ lineups }: LineUpSectionProps) {
+export default function LineUpSection({ concerts }: LineUpSectionProps) {
   const [currentDate, setCurrentDate] = useState<Dayjs>(
-    dayjs(lineups[0]?.date),
+    dayjs(concerts[0]?.startDate),
   );
   const lineupDates = Array.from(
-    new Set(lineups.map(({ date }) => dayjs(date).format('YYYY-MM-DD'))),
+    new Set(
+      concerts.map(({ startDate }) => dayjs(startDate).format('YYYY-MM-DD')),
+    ),
   );
 
   return (
@@ -27,11 +30,15 @@ export default function LineUpSection({ lineups }: LineUpSectionProps) {
         onSelectDate={setCurrentDate}
       />
       <div className="flex flex-col gap-5">
-        {lineups
-          .filter(({ date }) => dayjs(date).isSame(currentDate, 'day'))
-          .map((lineup) => (
-            <LineUpCard key={lineup.id} lineup={lineup} />
-          ))}
+        {concerts
+          .filter(({ startDate }) =>
+            dayjs(startDate).isSame(currentDate, 'day'),
+          )
+          .map((concert) =>
+            concert.lineUpInfoResponses.map((lineup) => (
+              <LineUpCard key={lineup.subId} lineup={lineup} />
+            )),
+          )}
       </div>
     </section>
   );

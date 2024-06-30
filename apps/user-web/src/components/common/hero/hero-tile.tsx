@@ -1,28 +1,28 @@
 import { FadeOverlay, ImageWithFallback } from '@components/common';
 import { Link } from '@components/common';
 import FallbackHero from '@images/fallback-hero.png';
-import type { FestivalInfo } from '@lib/types';
+import type { Festival } from '@lib/types/festival';
 import formatDate from '@lib/utils/parser/format-date';
 
 export default function HeroTile({
-  id,
+  subId,
   addr,
   name,
-  startdate,
-  enddate,
+  startDate,
+  endDate,
   description,
-  festivalimage,
+  festivalImage,
   priority = false,
-}: FestivalInfo & { priority?: boolean }) {
+}: Festival & { priority?: boolean }) {
   return (
     <Link
-      href={`/festival/${id}`}
+      href={`/festival/${subId}`}
       className="relative flex-[0_0_100%] overflow-hidden"
     >
       <div className="aspect-square relative h-full w-full flex items-center justify-center">
         <ImageWithFallback
           className="object-cover"
-          src={festivalimage}
+          src={festivalImage}
           alt={name}
           quality={100}
           priority={priority}
@@ -44,7 +44,7 @@ export default function HeroTile({
           {description}
         </span>
         <span className="mt-[6px] text-sm tracking-[-0.42px]">
-          {formatDate(startdate, enddate, 'ko')}
+          {formatDate(startDate, endDate, 'ko')}
         </span>
       </div>
     </Link>

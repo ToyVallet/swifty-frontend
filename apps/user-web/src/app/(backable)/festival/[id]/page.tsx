@@ -8,18 +8,23 @@ import {
 import { FadeOverlay } from '@components/common';
 import { LineUpSection, TopCard } from '@components/festival';
 import FallbackHero from '@images/fallback-hero.png';
+import { API_FESTIVALS } from '@lib/constants';
+import type { LineupApi } from '@lib/types/apit';
+import type { Festival } from '@lib/types/festival';
 import formatDate from '@lib/utils/parser/format-date';
-import type { Params } from '@swifty/shared-lib';
+import { type Params, customFetch } from '@swifty/shared-lib';
 import { BsBellFill } from 'react-icons/bs';
 import { TiStarFullOutline } from 'react-icons/ti';
-
-import { getFestivalInfos, getLineups } from './action';
 
 export default async function FestivalHomePage({
   params: { id },
 }: Params<{ id: string }>) {
-  const festivalInfo = await getFestivalInfos(Number(id));
-  const lineups = await getLineups(Number(id));
+  const festivalInfo = await customFetch<Festival>(API_FESTIVALS.festival(id), {
+    method: 'GET',
+  });
+  const lineup = await customFetch<LineupApi>(API_FESTIVALS.lineUp(id), {
+    method: 'GET',
+  });
 
   const tiles: TileInfo[] = [
     {
@@ -32,7 +37,7 @@ export default async function FestivalHomePage({
           인스타그램
         </TileHeader>
       ),
-      link: festivalInfo.url,
+      link: '#',
       icon: <TiStarFullOutline size={17} />,
       bgColor: 'bg-primary text-white border-none',
     },
@@ -50,8 +55,8 @@ export default async function FestivalHomePage({
     <div className="mb-[90px]">
       <Hero variant="image">
         <ImageWithFallback
-          src={festivalInfo.festivalimage}
-          alt={festivalInfo.festivalimag}
+          src={festivalInfo.festivalImage}
+          alt={festivalInfo.name}
           width={500}
           height={500}
           fallback={FallbackHero}
@@ -63,13 +68,13 @@ export default async function FestivalHomePage({
           title={festivalInfo.name}
           description={festivalInfo.description}
           period={formatDate(
-            festivalInfo.startdate,
-            festivalInfo.enddate,
+            festivalInfo.startDate,
+            festivalInfo.endDate,
             'ko',
           )}
         />
         <MenuTiles tiles={tiles} />
-        <LineUpSection lineups={lineups} />
+        <LineUpSection concerts={lineup.concertsResponse} />
       </main>
     </div>
   );

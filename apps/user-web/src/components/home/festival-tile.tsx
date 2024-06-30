@@ -1,12 +1,12 @@
 import Tile from '@components/common/carousel/tile';
-import type { FestivalInfo } from '@lib/types';
+import type { Festival } from '@lib/types/festival';
 import { Choose, When } from '@swifty/ui';
 
 import Carousel from '../common/carousel';
 import TileHeader from './tile-header';
 
 type Props = {
-  festivals: FestivalInfo[];
+  festivals: Festival[];
   variant?: 'carousel' | 'grid';
   headerPosiion?: 'start' | 'center';
 };

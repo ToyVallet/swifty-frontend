@@ -1,6 +1,5 @@
 export { default as BottomSheet } from './bottom-sheet';
 export { default as Navigation } from './navigation';
-export { default as SideNav } from './side-nav';
 export { default as Link } from './link';
 export { default as AdBanner } from './ad-banner';
 export { default as Footer } from './footer';

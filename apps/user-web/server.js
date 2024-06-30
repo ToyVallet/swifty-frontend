@@ -17,24 +17,34 @@ const httpsOptions = {
 };
 
 app.prepare().then(() => {
-  http
-    .createServer((req, res) => {
-      const parsedUrl = parse(req.url, true);
-      handle(req, res, parsedUrl);
-    })
-    .listen(PORT, (err) => {
-      if (err) throw err;
-      console.log(`> Ready on http://localhost:${PORT}`);
-    });
-
-  // https 서버 추가
-  https
-    .createServer(httpsOptions, (req, res) => {
-      const parsedUrl = parse(req.url, true);
-      handle(req, res, parsedUrl);
-    })
-    .listen(PORT + 1, (err) => {
-      if (err) throw err;
-      console.log(`> HTTPS: Ready on https://localhost:${PORT + 1}`);
-    });
+  if (httpsOptions.key && httpsOptions.cert) {
+    https
+      .createServer(httpsOptions, (req, res) => {
+        const parsedUrl = parse(req.url, true);
+        handle(req, res, parsedUrl);
+      })
+      .listen(PORT, (err) => {
+        if (err) {
+          console.error('HTTPS Server Error:', err);
+          throw err;
+        }
+        console.log(`> HTTPS: Ready on https://localhost.swifty.kr:${PORT}`);
+      });
+  } else {
+    http
+      .createServer((req, res) => {
+        const parsedUrl = parse(req.url, true);
+        console.log('HTTP Request:', req.url);
+        handle(req, res, parsedUrl);
+      })
+      .listen(PORT, (err) => {
+        if (err) {
+          console.error('HTTP Server Error:', err);
+          throw err;
+        }
+        console.log(
+          `> Ready on http://localhost:${PORT} or https://localhost.swifty.kr:${PORT}`,
+        );
+      });
+  }
 });
