@@ -1,7 +1,6 @@
 import { FadeOverlay, ImageWithFallback } from '@components/common';
 import { Link } from '@components/common';
 import FallbackHero from '@images/fallback-hero.png';
-import type { FestivalInfo } from '@lib/types';
 import type { Festival } from '@lib/types/festival';
 import formatDate from '@lib/utils/parser/format-date';
 

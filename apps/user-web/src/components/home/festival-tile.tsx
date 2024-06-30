@@ -1,5 +1,4 @@
 import Tile from '@components/common/carousel/tile';
-import type { FestivalInfo } from '@lib/types';
 import type { Festival } from '@lib/types/festival';
 import { Choose, When } from '@swifty/ui';
 

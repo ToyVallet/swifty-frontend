@@ -1,6 +1,5 @@
 import { ImageWithFallback, Link } from '@components/common';
 import FallbackFestival from '@images/fallback-festival.png';
-import { type FestivalInfo } from '@lib/types';
 import type { Festival } from '@lib/types/festival';
 import dayjs from 'dayjs';
 
