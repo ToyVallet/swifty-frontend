@@ -136,6 +136,6 @@ export const API_FESTIVALS = {
     sort: 'updated' | 'recently' | 'popular' = 'updated',
   ) =>
     `/festival?count=${count}&status=${status}&imageType=${imageType}&sort=${sort}`,
-  festival: (id: string) => `/festival//${id}`,
+  festival: (id: string) => `/festival/${id}`,
   lineUp: (id: string) => `/festival/detail/${id}`,
 };

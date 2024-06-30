@@ -3,10 +3,5 @@ export type LineUp = {
   title: string;
   description: string;
   lineUpImagePath: string;
-  performanceTime: {
-    hour: number;
-    minute: number;
-    second: number;
-    nano: number;
-  };
+  performanceTime: string;
 };
