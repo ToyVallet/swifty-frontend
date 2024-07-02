@@ -10,7 +10,7 @@ import {
   AccordionTrigger,
 } from '@components/ui/accordion';
 import CheckIcon from '@icons/chceck.svg';
-import { type MouseEvent, useRef } from 'react';
+import { type MouseEvent } from 'react';
 
 interface Props {
   termAccordion: TermAccordion;

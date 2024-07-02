@@ -1,6 +1,6 @@
 'use client';
 
-import TermOfServiceAccordionItem from '@components/signup/terms-of-service-accordion';
+import TermOfServiceAccordionItem from '@components/signup/terms-of-service-accordion-item';
 import { Accordion } from '@components/ui/accordion';
 import { Button } from '@swifty/ui';
 import { useCallback, useReducer } from 'react';
