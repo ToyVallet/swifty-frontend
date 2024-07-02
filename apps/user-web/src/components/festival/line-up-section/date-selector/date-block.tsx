@@ -34,8 +34,8 @@ export default function DateBlock({
         className,
       )}
     >
-      <div className="text-xl font-bold z-10">{date.date()}</div>
-      <div className="text-xs font-medium z-10">
+      <div className="text-20 font-bold z-10">{date.date()}</div>
+      <div className="text-12 font-medium z-10">
         {date.format('ddd').toUpperCase()}
       </div>
     </motion.div>

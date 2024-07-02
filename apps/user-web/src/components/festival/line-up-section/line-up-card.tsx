@@ -16,8 +16,8 @@ export default function LineUpCard({ lineup }: LineUpCardProps) {
         height={215}
       />
       <div className="flex items-center justify-between">
-        <h2 className="text-lg font-bold">{lineup.title}</h2>
-        <span className="text-xs font-[400] text-gray-400">
+        <h2 className="text-18 font-bold">{lineup.title}</h2>
+        <span className="text-12 font-[400] text-gray-400">
           {lineup.performanceTime}
         </span>
       </div>

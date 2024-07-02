@@ -12,7 +12,7 @@ export default function TileHeader({
         className,
       )}
     >
-      <h3 className="text-2xl font-bold">{children}</h3>
+      <h3 className="text-22 font-bold">{children}</h3>
     </div>
   );
 }

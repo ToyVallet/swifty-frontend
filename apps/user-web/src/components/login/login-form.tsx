@@ -97,7 +97,7 @@ export default function LoginForm() {
           name="root"
           render={({ field }) => <FormMessage {...field} />}
         />
-        <div className="w-full flex justify-between text-sm">
+        <div className="w-full flex justify-between text-14">
           <Link href="/forget-id" className="text-white">
             아이디를 잊으셨나요?
           </Link>

@@ -57,7 +57,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function (
       {label && (
         <label
           htmlFor={name}
-          className="text-xs dark:text-neutral-500 text-neutral-700"
+          className="text-12 dark:text-neutral-500 text-neutral-700"
         >
           {label}
         </label>
@@ -93,7 +93,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function (
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.2 }}
-            className="text-xs text-red-500 dark:text-red-400"
+            className="text-12 text-red-500 dark:text-red-400"
           >
             {errors[name]?.message?.toString() || customError}
           </motion.div>

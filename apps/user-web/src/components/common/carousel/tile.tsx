@@ -35,8 +35,8 @@ export default function Tile({
             <h4>{name}</h4>
             <p className="pt-1 truncate">{description}</p>
           </div>
-          <p className="text-sm mt-[7px]">{addr}</p>
-          <p className="text-gray-400 text-xs mt-[5px] gray-400 tracking-tight">
+          <p className="text-14 mt-[7px]">{addr}</p>
+          <p className="text-gray-400 text-12 mt-[5px] gray-400 tracking-tight">
             {period}
           </p>
         </div>

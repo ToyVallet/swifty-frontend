@@ -111,7 +111,7 @@ export default function Phone({ type, token: tokenParam }: PhoneProps) {
           schema={smsCodeSchema}
         >
           <OTP onSubmit={(v) => handleSMSCodeSubmit({ code: v })} />
-          <span className="text-xs mt-4">
+          <span className="text-12 mt-4">
             휴대폰으로 발송된 6자리 인증번호를 입력해주세요.
           </span>
           <Button type="submit" className="mt-14" isLoading={loading}>

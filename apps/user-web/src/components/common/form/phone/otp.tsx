@@ -33,7 +33,7 @@ export default function OTP({ onSubmit }: OTPProps) {
               <InputOTPSlot key={index} {...slot} />
             ))}
           </InputOTPGroup>
-          <InputOTPSeparator className="text-2xl" />
+          <InputOTPSeparator className="text-22" />
           <InputOTPGroup>
             {slots.slice(3).map((slot, index) => (
               <InputOTPSlot key={index + 3} {...slot} />

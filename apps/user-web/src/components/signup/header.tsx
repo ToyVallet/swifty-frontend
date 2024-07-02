@@ -14,7 +14,7 @@ Header.Title = function Title({ children }: PropsWithChildren) {
 };
 
 Header.Subtitle = function Subtitle({ children }: PropsWithChildren) {
-  return <div className="text-base flex">{children}</div>;
+  return <div className="text-16 flex">{children}</div>;
 };
 
 type TransformerProps = {

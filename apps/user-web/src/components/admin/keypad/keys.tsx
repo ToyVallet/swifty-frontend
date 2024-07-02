@@ -90,7 +90,7 @@ function Key({
   return (
     <motion.button
       type="button"
-      className="w-full h-full text-4xl flex items-center justify-center rounded-xl bg-neutral-100 dark:bg-neutral-900"
+      className="w-full h-full text-40 flex items-center justify-center rounded-xl bg-neutral-100 dark:bg-neutral-900"
       onClick={() => onClick(value)}
       whileTap={{ scale: 0.95, filter: 'brightness(0.8)' }}
     >
