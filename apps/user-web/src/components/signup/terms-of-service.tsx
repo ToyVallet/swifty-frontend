@@ -89,7 +89,12 @@ export default function TermsOfService() {
           ))}
         </Accordion>
       </div>
-      <Button type="button" size="full" onClick={onApprove}>
+      <Button
+        type="button"
+        size="full"
+        onClick={onApprove}
+        className="shadow-[0_-40px_50px_0px_rgba(0,0,0,0.6)]"
+      >
         {createButtonText()}
       </Button>
     </>
