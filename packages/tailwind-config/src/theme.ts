@@ -33,6 +33,22 @@ export const theme = {
     fontFamily: {
       Pretendard: ['Pretendard', 'sans-serif'],
     },
+    fontSize: {
+      '8': [8, { lineHeight: 1.5, letterSpacing: '-0.03em' }],
+      '9': [9, { lineHeight: 1.5, letterSpacing: '-0.03em' }],
+      '10': [10, { lineHeight: 1.5, letterSpacing: '-0.03em' }],
+      '11': [11, { lineHeight: 1.5, letterSpacing: '-0.03em' }],
+      '12': [12, { lineHeight: 1.5, letterSpacing: '-0.03em' }],
+      '13': [13, { lineHeight: 1.5, letterSpacing: '-0.03em' }],
+      '14': [14, { lineHeight: 1.5, letterSpacing: '-0.03em' }],
+      '16': [16, { lineHeight: 1.5, letterSpacing: '-0.03em' }],
+      '18': [18, { lineHeight: 1.5, letterSpacing: '-0.03em' }],
+      '20': [20, { lineHeight: 1.5, letterSpacing: '-0.03em' }],
+      '22': [22, { lineHeight: 1.5, letterSpacing: '-0.03em' }],
+      '26': [26, { lineHeight: 1.5, letterSpacing: '-0.03em' }],
+      '32': [32, { lineHeight: 1.5, letterSpacing: '-0.03em' }],
+      '40': [40, { lineHeight: 1.5, letterSpacing: '-0.03em' }],
+    },
   },
   container: {
     center: true,
