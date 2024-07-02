@@ -1,11 +1,9 @@
 'use client';
 
-import { API_ROUTES } from '@lib/constants';
 import { Button } from '@swifty/ui';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { toast } from 'sonner';
-import { post } from 'src/api';
 import { useBottomSheet } from 'src/hooks';
 import { z } from 'zod';
 
@@ -48,24 +46,15 @@ export default function Phone({ type, token: tokenParam }: PhoneProps) {
 
       switch (type) {
         case 'signup':
-          await post(API_ROUTES.user.signup.sendSMS(token), { phoneNumber });
           open();
           break;
         case 'find-my-id':
-          await post(API_ROUTES.user.findMy.id.sendSMS, { phoneNumber });
-
           router.push('/find-my/id/complete');
           break;
         case 'find-my-password':
-          const { token: newToken } = await post<
-            { phoneNumber: string },
-            { token: string }
-          >(API_ROUTES.user.findMy.password.sendSMS, { phoneNumber });
-          setToken(newToken);
           open();
           break;
       }
-    } catch {
     } finally {
       setLoading(false);
     }
@@ -73,21 +62,8 @@ export default function Phone({ type, token: tokenParam }: PhoneProps) {
 
   const handleSMSCodeSubmit = async ({ code }: SMSCodeSchema) => {
     if (type === 'find-my-id') return;
-
     try {
       setLoading(true);
-
-      switch (type) {
-        case 'signup':
-          await post(API_ROUTES.user.signup.verifySMS(token), { code });
-          break;
-        case 'find-my-password':
-          await post(API_ROUTES.user.findMy.password.verifySMS, {
-            token,
-            code,
-          });
-          break;
-      }
       router.push(`/password?token=${token}&type=${type}`);
     } catch (error) {
       const e = error as Error;
@@ -135,7 +111,7 @@ export default function Phone({ type, token: tokenParam }: PhoneProps) {
           schema={smsCodeSchema}
         >
           <OTP onSubmit={(v) => handleSMSCodeSubmit({ code: v })} />
-          <span className="text-xs mt-4">
+          <span className="text-12 mt-4">
             휴대폰으로 발송된 6자리 인증번호를 입력해주세요.
           </span>
           <Button type="submit" className="mt-14" isLoading={loading}>

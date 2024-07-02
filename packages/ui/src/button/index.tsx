@@ -7,16 +7,15 @@ import { type MotionProps, motion } from 'framer-motion';
 import React from 'react';
 import PulseLoader from 'react-spinners/PulseLoader';
 
-import { Choose, Otherwise, When, transition } from '../lib';
+import { Choose, Otherwise, When } from '../lib';
 
 const buttonVariants = cva(
-  'flex items-center justify-center whitespace-nowrap rounded-xl h-[50px] font-bold ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 transition-colors duration-200 ease-in-out user-select-none',
+  'flex items-center justify-center whitespace-nowrap rounded-xl h-[50px] font-bold ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 transition-all duration-200 ease-in-out user-select-none',
   {
     variants: {
       variant: {
-        default: 'bg-primary text-primary-foreground hover:bg-primary/90',
-        destructive:
-          'bg-destructive text-destructive-foreground hover:bg-destructive/90',
+        default: 'bg-primary text-white hover:bg-primary/90',
+        destructive: 'bg-destructive text-white hover:bg-destructive/90',
         outlined: 'bg-transparent border border-white text-white',
         white: 'bg-white',
         ghost: 'hover:bg-accent hover:text-accent-foreground',
@@ -82,10 +81,13 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps & MotionProps>(
             whileTap={{
               scale: 0.98,
               backgroundColor:
-                variant === 'outlined' ? 'rgba(255, 255, 255, 1)' : 'auto',
-              color: variant === 'outlined' ? 'rgba(0, 0, 0, 1)' : 'auto',
+                variant === 'outlined' ? 'rgba(255, 255, 255, 1)' : '',
+              color: variant === 'outlined' ? 'rgba(0, 0, 0, 1)' : '',
             }}
-            transition={transition}
+            transition={{
+              duration: 0.1,
+              ease: 'easeInOut',
+            }}
             className={cn(buttonVariants({ variant, size, className }))}
             ref={ref}
             {...props}

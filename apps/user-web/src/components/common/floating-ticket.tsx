@@ -5,7 +5,6 @@ import { Choose, Otherwise, When } from '@swifty/ui';
 import { AnimatePresence, motion } from 'framer-motion';
 import { type PropsWithChildren } from 'react';
 import { BsTicketFill } from 'react-icons/bs';
-import { useAuth } from 'src/hooks';
 
 export function FloatingButton({
   children,
@@ -24,8 +23,9 @@ export function FloatingButton({
 }
 
 export default function FloatingTicket() {
-  const { isLoggedIn, isAdmin, userInfo } = useAuth();
-
+  // const { isLoggedIn, isAdmin, userInfo } = useAuth();
+  const [isLoggedIn, isAdmin] = [true, true];
+  const userInfo = 'user';
   return (
     <AnimatePresence>
       {isLoggedIn && userInfo !== null && (

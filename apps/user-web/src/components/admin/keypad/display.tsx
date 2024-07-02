@@ -20,7 +20,7 @@ export default function Display({ value, slot, password }: DisplayProps) {
 
 function Block({ value, password }: { value: string; password?: boolean }) {
   return (
-    <div className="aspect-[3/4] w-full rounded-md bg-neutral-200 dark:bg-neutral-800 flex items-center justify-center text-3xl ">
+    <div className="aspect-[3/4] w-full rounded-md bg-neutral-200 dark:bg-neutral-800 flex items-center justify-center text-32 ">
       <AnimatePresence>
         {value !== undefined && (
           <motion.div

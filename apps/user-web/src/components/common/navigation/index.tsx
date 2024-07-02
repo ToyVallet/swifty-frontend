@@ -17,7 +17,7 @@ type NavigationProps = {
 };
 
 const navigationVariants = cva(
-  'z-30 grid grid-cols-3 w-full px-5 h-[50px] fixed top-0',
+  'z-30 grid grid-cols-3 w-full px-5 h-[50px] fixed top-0 left-0',
   {
     variants: {
       bg: {
@@ -49,9 +49,7 @@ export default function Navigation({
           <When value="back">
             <BackButton className="text-white flex items-center">
               <LeftArrow />
-              {title && (
-                <span className="ml-5 font-bold text-base">{title}</span>
-              )}
+              {title && <span className="ml-5 font-bold text-16">{title}</span>}
             </BackButton>
           </When>
         </Choose>

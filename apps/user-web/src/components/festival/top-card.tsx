@@ -16,10 +16,10 @@ export default function TopCard({
   return (
     <section className="flex justify-between text-white">
       <div className="h-full flex flex-col items-start justify-start font-semibold">
-        <span className="text-xs mb-[3px]">축제 홈</span>
+        <span className="text-12 mb-[3px]">축제 홈</span>
         <h1 className="text-[22px] font-bold mb-[3px] uppercase">{title}</h1>
         <h1 className="text-[22px] font-bold mb-[6px]">{description}</h1>
-        <p className="text-sm">{period}</p>
+        <p className="text-14">{period}</p>
       </div>
       <Avatar className="w-[100px] h-[100px]">
         <AvatarImage src={iconSrc} alt="avatar" />

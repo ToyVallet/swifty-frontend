@@ -1,10 +1,9 @@
-import { getIsLoggedIn } from '@api/.';
-
 import { Link } from '../common';
 import NoticeTile from './notice-tile';
 
 export default async function NeedReverificationTile() {
-  const isLoggedIn = await getIsLoggedIn();
+  //const isLoggedIn = await getIsLoggedIn();
+  const isLoggedIn = true;
   return (
     isLoggedIn && (
       <NoticeTile>

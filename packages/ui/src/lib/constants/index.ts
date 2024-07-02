@@ -1,1 +1,1 @@
-export * from './transistion';
+export * from './transition';

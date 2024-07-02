@@ -60,15 +60,19 @@
     "webpack": "^5.91.0"
   },
   "dependencies": {
+    "@hookform/resolvers": "^3.6.0",
+    "@radix-ui/react-label": "^2.0.2",
     "@radix-ui/react-slot": "^1.0.2",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "lucide-react": "^0.390.0",
     "next": "^14.2.3",
     "react-dom": "^18.3.1",
+    "react-hook-form": "^7.51.5",
     "react-spinners": "^0.13.8",
     "tailwind-merge": "^2.3.0",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "zod": "^3.23.8"
   },
   "jest": {
     "preset": "ts-jest",

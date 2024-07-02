@@ -17,8 +17,8 @@ export default function Tile({
         textColor,
       )}
     >
-      <div className="text-xs font-light flex w-full items-center justify-between lg:text-lg">
-        <span className="text-xs font-medium">{subtitle}</span>
+      <div className="text-12 font-light flex w-full items-center justify-between lg:text-18">
+        <span className="text-12 font-medium">{subtitle}</span>
         {icon}
       </div>
       {title}

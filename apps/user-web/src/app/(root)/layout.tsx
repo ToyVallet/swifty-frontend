@@ -5,12 +5,16 @@ import {
   HeroTile,
   Navigation,
 } from '@components/common';
+import { API_FESTIVALS } from '@lib/constants';
+import type { Festival } from '@lib/types/festival';
+import { customFetch } from '@swifty/shared-lib';
 import type { PropsWithChildren } from 'react';
 
-import { getLineupInfos } from '../action';
-
 export default async function HomeLayout({ children }: PropsWithChildren) {
-  const festivalLineups = await getLineupInfos(1);
+  const festivalLineups = await customFetch<Festival[]>(
+    `${API_FESTIVALS.festivals()}`,
+    { method: 'GET' },
+  );
   return (
     <>
       <Navigation variant="root" bg="gradient" search />
