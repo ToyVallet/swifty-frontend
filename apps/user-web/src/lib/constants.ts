@@ -3,6 +3,12 @@ import type { Festival_status } from '@lib/types/festival';
 export const protectedRoutes = ['/admin'];
 export const privateRoutes = ['/mypage', '/ticketing'];
 
+export const API_ROUTES = {
+  user: {
+    login: '/login',
+  },
+};
+
 export const API_FESTIVALS = {
   festivals: (
     count: number = 10,
