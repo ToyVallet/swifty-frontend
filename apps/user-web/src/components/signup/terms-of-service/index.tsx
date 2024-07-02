@@ -20,7 +20,7 @@ function reducer(state: TermAccordion[], action: TermAction): TermAccordion[] {
   }
 }
 
-const initailData: TermAccordion[] = [
+const initialData: TermAccordion[] = [
   {
     title: '전장금융거래 이동약관 동의(필수)',
     content: '전장금융거래 ',
@@ -49,7 +49,7 @@ const initailData: TermAccordion[] = [
 ];
 
 export default function TermsOfService() {
-  const [termsOfServices, dispatch] = useReducer(reducer, initailData);
+  const [termsOfServices, dispatch] = useReducer(reducer, initialData);
 
   const createButtonText = useCallback(() => {
     const isRequiredApproved = termsOfServices.every(
