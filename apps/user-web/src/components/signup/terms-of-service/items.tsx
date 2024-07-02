@@ -37,7 +37,7 @@ export default function Items({
         {termAccordion.title}
         <CheckIcon
           fill={
-            termAccordion.approve
+            termAccordion.approved
               ? 'rgba(25, 103, 255, 1)'
               : 'rgba(162, 162, 168, 1)'
           }

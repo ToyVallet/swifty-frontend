@@ -1,7 +1,7 @@
 export interface TermAccordion {
   title: string;
   content: string;
-  approve: boolean;
+  approved: boolean;
   required?: boolean;
 }
 
