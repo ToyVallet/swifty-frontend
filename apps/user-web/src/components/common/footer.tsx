@@ -24,7 +24,7 @@ export default function Footer() {
     <footer className="w-full flex flex-col px-9 pt-10 pb-8 lg:max-w-full bg-black text-white">
       <div className="w-full flex justify-between mb-12">
         {footerLinks.map(({ name, href }) => (
-          <Link href={href} key={name} className="font-medium text-xs">
+          <Link href={href} key={name} className="font-medium text-12">
             {name}
           </Link>
         ))}

@@ -16,7 +16,7 @@ function Indicator({ cur, total }: IndicatorProps) {
   const totalIndex = String(total).padStart(2, '0');
 
   return (
-    <div className="absolute bottom-[55px] right-4 bg-black text-white font-bold text-xs px-2.5 h-5 rounded-full flex items-center justify-center">
+    <div className="absolute bottom-[55px] right-4 bg-black text-white font-bold text-12 px-2.5 h-5 rounded-full flex items-center justify-center">
       {`${currentIndex} / ${totalIndex}`}
     </div>
   );

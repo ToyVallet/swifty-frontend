@@ -60,7 +60,7 @@ export default function Terms({
         close();
       }}
     >
-      <Accordion type="single" collapsible className="w-full mb-4 text-sm">
+      <Accordion type="single" collapsible className="w-full mb-4 text-14">
         {terms.map(({ id, title, content }) => (
           <div key={id}>
             <AccordionItem value={id}>

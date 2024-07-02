@@ -19,7 +19,7 @@ export default function GlobalError({
     <html>
       <body>
         <div className="flex h-[100dvh] w-full flex-col items-center justify-center">
-          <h2 className="text-xl">에러!</h2>
+          <h2 className="text-20">에러!</h2>
           <Link
             href="/login"
             className="w-full h-full flex items-center justify-center"

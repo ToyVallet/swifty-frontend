@@ -49,9 +49,7 @@ export default function Navigation({
           <When value="back">
             <BackButton className="text-white flex items-center">
               <LeftArrow />
-              {title && (
-                <span className="ml-5 font-bold text-base">{title}</span>
-              )}
+              {title && <span className="ml-5 font-bold text-16">{title}</span>}
             </BackButton>
           </When>
         </Choose>

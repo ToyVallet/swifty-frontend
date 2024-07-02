@@ -33,8 +33,8 @@ export default function HeroTile({
         <FadeOverlay />
       </div>
 
-      <div className="absolute bottom-[60px] left-5 right-[74px] h-[114px] text-xl font-semibold">
-        <span className="mt-[3px] text-xs leading-[18px] tracking-[-0.36px]">
+      <div className="absolute bottom-[60px] left-5 right-[74px] h-[114px] text-20 font-semibold">
+        <span className="mt-[3px] text-12 leading-[18px] tracking-[-0.36px]">
           {addr}
         </span>
         <h4 className="font-bold text-[22px] leading-[33px] tracking-[-0.66px]">
@@ -43,7 +43,7 @@ export default function HeroTile({
         <span className="block leading-[30px] tracking-[-0.6px] truncate">
           {description}
         </span>
-        <span className="mt-[6px] text-sm tracking-[-0.42px]">
+        <span className="mt-[6px] text-14 tracking-[-0.42px]">
           {formatDate(startDate, endDate, 'ko')}
         </span>
       </div>

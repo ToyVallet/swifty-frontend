@@ -66,7 +66,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function (
       <input
         type={type}
         ref={ref}
-        className="w-full bg-transparent text-white text-base px-5 py-3 transition-all duration-300 ease-in-out autofill:bg-transparent"
+        className="w-full bg-transparent text-white text-16 px-5 py-3 transition-all duration-300 ease-in-out autofill:bg-transparent"
         disabled={disabled}
         onFocus={handleFocus}
         onBlur={handleBlur}

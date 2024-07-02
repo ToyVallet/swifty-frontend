@@ -97,7 +97,7 @@ export default function BottomSheet({
                   animate="animate"
                   variants={variants.bottomSheet.content}
                   transition={transition.content}
-                  className="mb-7 text-xl font-bold text-neutral-900 dark:text-neutral-100"
+                  className="mb-7 text-20 font-bold text-neutral-900 dark:text-neutral-100"
                 >
                   {header}
                 </motion.h2>
