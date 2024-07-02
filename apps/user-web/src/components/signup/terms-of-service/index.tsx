@@ -1,20 +1,11 @@
 'use client';
 
-import TermOfServiceAccordionItem from '@components/signup/terms-of-service-accordion-item';
 import { Accordion } from '@components/ui/accordion';
 import { Button } from '@swifty/ui';
 import { useCallback, useReducer } from 'react';
 
-export interface TermAccordion {
-  title: string;
-  content: string;
-  approve: boolean;
-  required?: boolean;
-}
-
-export type TermAction =
-  | { type: 'singleApprove'; index: number }
-  | { type: 'allApprove' };
+import TermOfServiceAccordionItem from './items';
+import type { TermAccordion, TermAction } from './types';
 
 function reducer(state: TermAccordion[], action: TermAction): TermAccordion[] {
   switch (action.type) {
