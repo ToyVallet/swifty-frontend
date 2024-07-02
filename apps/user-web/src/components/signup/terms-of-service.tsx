@@ -76,7 +76,7 @@ export default function TermsOfService() {
 
   return (
     <>
-      <div className="overflow-y-auto flex-1">
+      <div className="flex-1 overflow-y-scroll scrollbar-hide">
         <Accordion className="flex flex-col gap-2.5" type="single" collapsible>
           {termsOfServices.map((term, index) => (
             <TermOfServiceAccordionItem
@@ -89,14 +89,11 @@ export default function TermsOfService() {
           ))}
         </Accordion>
       </div>
-      <Button
-        type="button"
-        size="full"
-        onClick={onApprove}
-        className="shadow-[0_-40px_50px_0px_rgba(0,0,0,0.6)]"
-      >
-        {createButtonText()}
-      </Button>
+      <div className="bg-black rounded-t-xl shadow-[0_-40px_50px_0px_rgba(0,0,0,0.6)] absolute bottom-0 right-0 left-0">
+        <Button type="button" size="full" onClick={onApprove}>
+          {createButtonText()}
+        </Button>
+      </div>
     </>
   );
 }

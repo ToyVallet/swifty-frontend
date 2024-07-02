@@ -33,7 +33,7 @@ export default function TermOfServiceAccordionItem({
   return (
     <AccordionItem value={value} className="flex flex-col gap-2.5 border-none">
       <AccordionTrigger
-        className="bg-swifty-color-800 px-5 rounded-lg text-white"
+        className="bg-swifty-color-800 p-5 rounded-xl text-16 text-white font-medium"
         datatype="open"
       >
         {termAccordion.title}
@@ -46,7 +46,7 @@ export default function TermOfServiceAccordionItem({
           onClick={handleTermCheck}
         />
       </AccordionTrigger>
-      <AccordionContent className="bg-swifty-color-800 p-5 rounded-lg text-white max-h-[210px] overflow-y-auto">
+      <AccordionContent className="bg-swifty-color-800 px-5 py-[22px] rounded-xl text-13 text-white max-h-[210px] overflow-y-auto ">
         {termAccordion.content}
       </AccordionContent>
     </AccordionItem>
