@@ -1,5 +1,6 @@
 'use client';
 
+import { BottomContainer } from '@components/common';
 import Items from '@components/signup/terms-of-service/items';
 import { Accordion } from '@components/ui/accordion';
 import { Button } from '@swifty/ui';
@@ -45,11 +46,11 @@ export default function Page() {
           ))}
         </Accordion>
       </div>
-      <div className="bg-black rounded-t-xl shadow-[0_-40px_50px_0px_rgba(0,0,0,0.6)] absolute bottom-0 right-0 left-0">
+      <BottomContainer>
         <Button type="button" size="full" onClick={onApprove}>
           {createButtonText()}
         </Button>
-      </div>
+      </BottomContainer>
     </>
   );
 }

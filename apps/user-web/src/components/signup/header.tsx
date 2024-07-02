@@ -6,7 +6,11 @@ import type { PropsWithChildren } from 'react';
 import Funnel, { type StepType } from './funnel';
 
 export default function Header({ children }: PropsWithChildren) {
-  return <header className="flex flex-col gap-2 mb-10">{children}</header>;
+  return (
+    <h1 className="text-white text-center font-bold text-26 my-10">
+      {children}
+    </h1>
+  );
 }
 
 Header.Title = function Title({ children }: PropsWithChildren) {
