@@ -1,16 +1,14 @@
 'use client';
 
-import type {
-  TermAccordion,
-  TermAction,
-} from '@components/signup/terms-of-service';
 import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from '@components/ui/accordion';
-import CheckIcon from '@icons/chceck.svg';
+import CheckIcon from '@icons/check.svg';
 import { type MouseEvent } from 'react';
+
+import type { TermAccordion, TermAction } from './types';
 
 interface Props {
   termAccordion: TermAccordion;
@@ -19,7 +17,7 @@ interface Props {
   dispatch: (action: TermAction) => void;
 }
 
-export default function TermOfServiceAccordionItem({
+export default function Items({
   value,
   index,
   dispatch,
@@ -39,7 +37,7 @@ export default function TermOfServiceAccordionItem({
         {termAccordion.title}
         <CheckIcon
           fill={
-            termAccordion.approve
+            termAccordion.approved
               ? 'rgba(25, 103, 255, 1)'
               : 'rgba(162, 162, 168, 1)'
           }

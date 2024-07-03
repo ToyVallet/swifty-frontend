@@ -1,4 +1,7 @@
+import path from 'path';
 import withBundleAnalyzer from '@next/bundle-analyzer';
+
+const __dirname = path.resolve();
 
 const prod = process.env.NODE_ENV === 'production';
 
@@ -8,6 +11,10 @@ const withBundleAnalyzerConfig = withBundleAnalyzer({
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: "standalone",
+  experimental: {
+    outputFileTracingRoot: path.join(__dirname, '../../'),
+  },
   productionBrowserSourceMaps: !prod,
   crossOrigin: 'use-credentials',
   webpack: (config) => {
