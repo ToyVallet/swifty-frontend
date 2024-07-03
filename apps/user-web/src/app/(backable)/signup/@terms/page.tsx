@@ -6,12 +6,12 @@ import { Accordion } from '@components/ui/accordion';
 import { Button } from '@swifty/ui';
 import { useContext, useReducer } from 'react';
 
-import { StepContext } from '../layout';
+import { StepContext } from '../context';
 import { initialData } from './data';
 import { reducer } from './reducer';
 
-export const APPROVE_ALL = '전체 동의';
-export const APPROVE_COMPLETE = '동의 완료';
+const APPROVE_ALL = '전체 동의';
+const APPROVE_COMPLETE = '동의 완료';
 
 export default function Page() {
   const { nextStep } = useContext(StepContext);
