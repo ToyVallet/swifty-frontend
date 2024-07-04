@@ -7,8 +7,7 @@ import { Button } from '@swifty/ui';
 
 export default async function Home() {
   const festivalLineups = await customFetch<Festival[]>(
-    `${API_FESTIVALS.festivals()}`,
-    { method: 'GET' },
+    API_FESTIVALS.festivals(),
   );
 
   return (
