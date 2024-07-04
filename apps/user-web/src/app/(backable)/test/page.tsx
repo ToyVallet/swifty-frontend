@@ -1,7 +1,6 @@
 'use client';
 
 import { BottomSheet } from '@components/common';
-import { Select, SelectTrigger } from '@components/ui/select';
 import useBottomSheet from '@hooks/use-bottom-sheet';
 import { Input } from '@swifty/ui';
 import cn from 'clsx';

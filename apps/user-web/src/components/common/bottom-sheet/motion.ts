@@ -13,19 +13,16 @@ export const transition = {
 export const variants = {
   overlay: {
     hidden: {
-      opacity: 0,
-      backdropFilter: 'blur(0px)',
-      backgroundColor: 'rgba(0, 0, 0, 0)',
+      opacity: 0.5,
+      backgroundColor: 'rgba(212, 212, 216, 0.5)',
     },
     visible: {
-      opacity: 1,
       backdropFilter: 'blur(10px)',
-      backgroundColor: 'rgba(0, 0, 0, 0.25)',
+      backgroundColor: 'rgba(212, 212, 216, 0.5)',
     },
     darker: {
-      opacity: 1,
       backdropFilter: 'blur(10px)',
-      backgroundColor: 'rgba(0, 0, 0, 0.4)',
+      backgroundColor: 'rgba(212, 212, 216, 0.5)',
     },
   },
   bottomSheet: {

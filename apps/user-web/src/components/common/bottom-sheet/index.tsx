@@ -63,7 +63,7 @@ export default function BottomSheet({
       {isOpen && (
         <div className="fixed top-0 left-0 bottom-0 right-0 touch-none z-[9999]">
           <motion.div
-            drag
+            drag="y"
             dragConstraints={{
               top: 0,
               bottom: 99999,
@@ -80,7 +80,7 @@ export default function BottomSheet({
             variants={variants.bottomSheet.container}
             transition={transition.container}
             className={cn(
-              'z-[999] fixed bg-white dark:bg-neutral-900 rounded-2xl bottom-4 left-4 right-4 box-border px-7 transition-[top] overflow-hidden shadow-xl lg:max-w-[500px] lg:bottom-8 lg:mx-auto',
+              'z-[999] fixed bg-black dark:bg-neutral-900 rounded-t-xl bottom-0 left-0 right-0 box-border px-7 transition-[top] overflow-hidden shadow-xl',
               className,
             )}
           >
