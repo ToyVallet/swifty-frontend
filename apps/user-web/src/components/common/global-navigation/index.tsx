@@ -1,6 +1,6 @@
 'use client';
 
-import { useUser } from '@app/context/user-context';
+// import { useUser } from '@app/context/user-context';
 import Category from '@icons/global-navigation/category.svg';
 import HomeIcon from '@icons/global-navigation/home.svg';
 import LockIcon from '@icons/global-navigation/lock.svg';
@@ -13,7 +13,7 @@ import Link from 'next/link';
 import IconButton from './icon-button';
 
 export default function GlobalNavigation() {
-  const user = useUser();
+  // const user = useUser();
   return (
     <nav className="fixed bottom-0 left-0 right-0 flex items-center justify-evenly bg-black shadow-[0px_-5px_7px_0px_rgba(0, 0, 0, 0.4)]">
       <IconButton label="홈" link="/" Icon={HomeIcon} />
@@ -29,14 +29,14 @@ export default function GlobalNavigation() {
       </div>
 
       <IconButton label="검색" link="/search" Icon={SearchIcon} />
-      <Choose value={user}>
-        <When value={null}>
-          <IconButton label="로그인" link="/login" Icon={LockIcon} />
-        </When>
+      {/* <Choose value={user}>
+        <When value={null}> */}
+      <IconButton label="로그인" link="/login" Icon={LockIcon} />
+      {/* </When>
         <Otherwise>
           <IconButton label="마이페이지" link="/user" Icon={UserIcon} />
         </Otherwise>
-      </Choose>
+      </Choose> */}
     </nav>
   );
 }
