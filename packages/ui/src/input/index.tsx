@@ -34,14 +34,14 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function (
   }, []);
 
   const handleBlur = useCallback((e: React.FocusEvent<HTMLInputElement>) => {
-    setIsFocused(false);
+    if (!e.target.value) setIsFocused(false);
     onBlur?.(e);
   }, []);
 
   return (
     <div
       className={cn(
-        'w-full relative rounded-xl overflow-hidden bg-neutral-800 transition-all duration-200 ease-in-out',
+        'w-full relative rounded-xl bg-neutral-800 transition-all duration-200 ease-in-out',
       )}
       style={{
         border: isFocused ? '1px solid #1967FF' : '1px solid transparent',
@@ -53,10 +53,10 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function (
       {placeholder && (
         <label
           htmlFor={name}
-          className="left-5 text-neutral-400 absolute transition-all duration-300 ease-in-out"
+          className="left-5 text-14 text-neutral-400 absolute transition-all duration-300 ease-in-out"
           style={{
             fontSize: isFocused || !!value ? '0.875rem' : '1rem',
-            top: '13px',
+            top: '10px',
             color: isFocused ? '#1967FF' : '',
           }}
         >
@@ -65,13 +65,22 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function (
       )}
       <input
         type={type}
-        ref={ref}
-        className="w-full bg-transparent text-white text-16 px-5 py-3 transition-all duration-300 ease-in-out autofill:bg-transparent"
+        ref={(element) => {
+          if (ref) {
+            if (typeof ref === 'function') {
+              ref(element);
+            } else {
+              ref.current = element;
+            }
+          }
+        }}
+        id={name}
+        className="w-full bg-transparent text-white text-16 mb-3 px-5 py-3 transition-all duration-300 ease-in-out autofill:bg-transparent"
         disabled={disabled}
         onFocus={handleFocus}
         onBlur={handleBlur}
         style={{
-          marginTop: isFocused || !!value ? '30px' : '',
+          marginTop: '30px',
         }}
         {...props}
       />

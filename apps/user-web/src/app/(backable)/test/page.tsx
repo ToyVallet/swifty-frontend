@@ -5,15 +5,17 @@ import useBottomSheet from '@hooks/use-bottom-sheet';
 import { Input } from '@swifty/ui';
 import cn from 'clsx';
 import type { ComponentPropsWithoutRef } from 'react';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 
 export default function Page() {
   const [isOpen, open, close] = useBottomSheet();
-  const [value, setValue] = useState('asdasd');
+  const [value, setValue] = useState('');
   const sex = ['남성', '여성'] as const;
+  const ref = useRef<HTMLInputElement>(null);
 
   const onOpen = () => {
     open();
+    ref.current?.focus();
   };
 
   const onSelectValue = (value: string) => {
@@ -22,13 +24,16 @@ export default function Page() {
   };
   return (
     <div>
-      <Input
-        name="성별"
-        placeholder="성별"
-        defaultValue={value}
-        type="button"
-        onClick={onOpen}
-      />
+      <div onClick={onOpen}>
+        <Input
+          name="성별"
+          placeholder="성별"
+          defaultValue={value}
+          ref={ref}
+          type="button"
+        />
+      </div>
+
       <BottomSheet isOpen={isOpen} onDismiss={close}>
         {sex.map((item, index) => (
           <Item
