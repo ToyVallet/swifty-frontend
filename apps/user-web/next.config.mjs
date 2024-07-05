@@ -1,5 +1,5 @@
-import path from 'path';
 import withBundleAnalyzer from '@next/bundle-analyzer';
+import path from 'path';
 
 const __dirname = path.resolve();
 
@@ -11,12 +11,13 @@ const withBundleAnalyzerConfig = withBundleAnalyzer({
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: "standalone",
+  output: 'standalone',
   experimental: {
     outputFileTracingRoot: path.join(__dirname, '../../'),
   },
   productionBrowserSourceMaps: !prod,
   crossOrigin: 'use-credentials',
+
   webpack: (config) => {
     config.module.rules.push({
       test: /\.svg$/,

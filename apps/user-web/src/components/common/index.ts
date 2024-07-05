@@ -16,3 +16,4 @@ export { default as FadeOverlay } from './fade-overlay';
 export { default as Overlay } from './overlay';
 export { default as BottomSelect } from './select';
 export * from './container';
+export { default as GlobalNavigation } from './global-navigation';

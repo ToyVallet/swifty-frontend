@@ -6,7 +6,6 @@ import { cva } from 'class-variance-authority';
 
 import Column from './column';
 import LogoLink from './logo-link';
-import SearchButton from './search-button';
 
 type NavigationProps = {
   variant?: 'root' | 'back';
@@ -58,12 +57,6 @@ export default function Navigation({
       <Column>
         <If condition={centerLogo}>
           <LogoLink />
-        </If>
-      </Column>
-
-      <Column>
-        <If condition={search}>
-          <SearchButton />
         </If>
       </Column>
     </nav>

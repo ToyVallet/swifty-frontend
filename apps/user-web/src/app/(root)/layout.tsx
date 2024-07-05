@@ -1,6 +1,7 @@
 import {
   Carousel,
   Footer,
+  GlobalNavigation,
   Hero,
   HeroTile,
   Navigation,
@@ -26,6 +27,7 @@ export default async function HomeLayout({ children }: PropsWithChildren) {
         </Carousel>
       </Hero>
       {children}
+      <GlobalNavigation />
       <Footer />
     </>
   );
