@@ -1,6 +1,5 @@
 'use client';
 
-import { cn } from '@swifty/shared-lib';
 import {
   type ComponentPropsWithoutRef,
   forwardRef,
@@ -40,11 +39,10 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function (
 
   return (
     <div
-      className={cn(
-        'w-full relative rounded-xl bg-neutral-800 transition-all duration-200 ease-in-out',
-      )}
+      className="rounded-xl bg-neutral-800 transition-all duration-200 ease-in-out"
       style={{
         border: isFocused ? '1px solid #1967FF' : '1px solid transparent',
+        padding: '10px 20px',
         boxShadow: isFocused
           ? '0px 2.77px 2.21px 0px rgba(25, 103, 255, 0.0197), 0px 6.65px 5.32px 0px rgba(25, 103, 255, 0.0283), 0px 12.52px 10.02px 0px rgba(25, 103, 255, 0.035), 0px 22.34px 17.87px 0px rgba(25, 103, 255, 0.0417), 0px 41.78px 33.42px 0px rgba(25, 103, 255, 0.0503), 0px 100px 80px 0px rgba(25, 103, 255, 0.07)'
           : '',
@@ -53,11 +51,10 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function (
       {placeholder && (
         <label
           htmlFor={name}
-          className="left-5 text-14 text-neutral-400 absolute transition-all duration-300 ease-in-out"
+          className="text-14 inline-block transition-all duration-300 ease-in-out'"
           style={{
             fontSize: isFocused || !!value ? '0.875rem' : '1rem',
-            top: '10px',
-            color: isFocused ? '#1967FF' : '',
+            color: isFocused ? '#1967FF' : 'rgb(162 162 168)',
           }}
         >
           {placeholder}
@@ -75,13 +72,10 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function (
           }
         }}
         id={name}
-        className="w-full bg-transparent text-white text-16 mb-3 px-5 py-3 transition-all duration-300 ease-in-out autofill:bg-transparent"
+        className="w-full bg-transparent text-white text-16 font-medium transition-all duration-300 ease-in-out autofill:bg-transparent"
         disabled={disabled}
         onFocus={handleFocus}
         onBlur={handleBlur}
-        style={{
-          marginTop: '30px',
-        }}
         {...props}
       />
     </div>
