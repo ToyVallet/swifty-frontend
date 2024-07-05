@@ -1,5 +1,6 @@
 'use client';
 
+import { cn } from '@swifty/shared-lib';
 import {
   type ComponentPropsWithoutRef,
   forwardRef,
@@ -9,19 +10,20 @@ import {
 
 interface InputProps
   extends Omit<ComponentPropsWithoutRef<'input'>, 'name' | 'placeholder'> {
-  name: string;
-  placeholder: string;
+  label: string;
+  placeholder?: string;
 }
 
 const Input = forwardRef<HTMLInputElement, InputProps>(function (
   {
-    name,
+    label,
     disabled,
     type = 'text',
     placeholder,
     onFocus,
     onBlur,
     value,
+    className,
     ...props
   },
   ref,
@@ -42,22 +44,22 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function (
       className="rounded-xl bg-neutral-800 transition-all duration-200 ease-in-out"
       style={{
         border: isFocused ? '1px solid #1967FF' : '1px solid transparent',
-        padding: '10px 20px',
+        padding: '12px 20px',
         boxShadow: isFocused
           ? '0px 2.77px 2.21px 0px rgba(25, 103, 255, 0.0197), 0px 6.65px 5.32px 0px rgba(25, 103, 255, 0.0283), 0px 12.52px 10.02px 0px rgba(25, 103, 255, 0.035), 0px 22.34px 17.87px 0px rgba(25, 103, 255, 0.0417), 0px 41.78px 33.42px 0px rgba(25, 103, 255, 0.0503), 0px 100px 80px 0px rgba(25, 103, 255, 0.07)'
           : '',
       }}
     >
-      {placeholder && (
+      {label && (
         <label
-          htmlFor={name}
+          htmlFor={label}
           className="text-14 inline-block transition-all duration-300 ease-in-out'"
           style={{
             fontSize: isFocused || !!value ? '0.875rem' : '1rem',
             color: isFocused ? '#1967FF' : 'rgb(162 162 168)',
           }}
         >
-          {placeholder}
+          {label}
         </label>
       )}
       <input
@@ -71,11 +73,15 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function (
             }
           }
         }}
-        id={name}
-        className="w-full bg-transparent text-white text-16 font-medium transition-all duration-300 ease-in-out autofill:bg-transparent"
+        id={label}
+        className={cn(
+          'w-full bg-transparent text-white text-16 font-medium transition-all duration-300 ease-in-out autofill:bg-transparent',
+          className,
+        )}
         disabled={disabled}
         onFocus={handleFocus}
         onBlur={handleBlur}
+        placeholder={placeholder}
         {...props}
       />
     </div>
