@@ -4,6 +4,7 @@
   "license": "Proprietary",
   "scripts": {
     "dev": "node server.js",
+    "localhost": "next dev",
     "build": "next build",
     "analyze": "ANALYZE=true yarn build",
     "start": "next start",
