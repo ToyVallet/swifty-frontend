@@ -1,10 +1,18 @@
 'use client';
 
 import ChevronDown from '@icons/bottom-arrow.svg';
+import * as VisuallyHidden from '@radix-ui/react-visually-hidden';
 import { cn } from '@swifty/shared-lib';
 import React, { type ElementRef, useState } from 'react';
 
-import { Drawer, DrawerClose, DrawerContent, DrawerTrigger } from '../drawer';
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerTitle,
+  DrawerTrigger,
+} from '../drawer';
 
 type SelectOption = {
   label: string;
@@ -76,6 +84,11 @@ export default function Select<T extends SelectOption[]>({
             />
           </DrawerClose>
         ))}
+        {/* 웹 접근성을 위한 영역 */}
+        <VisuallyHidden.Root>
+          <DrawerTitle>통신사 선택 드로워</DrawerTitle>
+          <DrawerDescription>통신사를 선택해주세요.</DrawerDescription>
+        </VisuallyHidden.Root>
       </DrawerContent>
     </Drawer>
   );
