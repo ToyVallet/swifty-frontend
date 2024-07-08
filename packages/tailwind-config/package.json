@@ -4,7 +4,7 @@
   "author": "이호연",
   "license": "MIT",
   "exports": {
-    ".": "./src/index.ts"
+    ".": "./tailwind.config.ts"
   },
   "devDependencies": {
     "prettier": "^3.3.1",

@@ -11,6 +11,7 @@ const withBundleAnalyzerConfig = withBundleAnalyzer({
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  transpilePackages: ['@swifty/ui'],
   output: 'standalone',
   experimental: {
     outputFileTracingRoot: path.join(__dirname, '../../'),
