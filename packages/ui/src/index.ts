@@ -1,6 +1,6 @@
 export { default as Button } from './button';
 export { default as Input } from './input';
-export { RadioGroup, RadioGroupItem } from './radio-group';
+export { RadioGroup, RadioOption } from './radio-group';
 export {
   useFormField,
   Form,

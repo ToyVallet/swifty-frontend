@@ -1,11 +1,9 @@
 import type { FormValues } from '@app/(backable)/signup/schema';
 import {
-  FormControl,
   FormField,
   FormItem,
-  FormLabel,
   RadioGroup,
-  RadioGroupItem,
+  RadioOption,
   Select,
 } from '@swifty/ui';
 import { useFormContext } from 'react-hook-form';
@@ -23,7 +21,7 @@ export default function CarrierWithNationality() {
             <Select
               label="통신사"
               placeholder="통신사 선택"
-              onChange={field.onChange}
+              onValueChange={field.onChange}
               options={[
                 { label: 'SKT', value: 'SKT' },
                 { label: 'KT', value: 'KT' },
@@ -40,33 +38,14 @@ export default function CarrierWithNationality() {
         name="nationality"
         render={({ field }) => (
           <FormItem className="space-y-3">
-            <FormControl>
-              <RadioGroup
-                onValueChange={field.onChange}
-                defaultValue={field.value}
-                className="flex w-full gap-5 items-center justify-between"
-              >
-                <FormItem className="flex w-full">
-                  <FormControl>
-                    <RadioGroupItem value="NATIVE">
-                      <FormLabel className="font-bold text-16 z-10">
-                        내국인
-                      </FormLabel>
-                    </RadioGroupItem>
-                  </FormControl>
-                </FormItem>
-
-                <FormItem className="flex w-full">
-                  <FormControl>
-                    <RadioGroupItem value="FOREIGNER">
-                      <FormLabel className="font-bold text-16 z-10">
-                        외국인
-                      </FormLabel>
-                    </RadioGroupItem>
-                  </FormControl>
-                </FormItem>
-              </RadioGroup>
-            </FormControl>
+            <RadioGroup
+              onValueChange={field.onChange}
+              defaultValue={field.value}
+              className="flex w-full gap-5 items-center justify-between"
+            >
+              <RadioOption value="NATIVE" label="내국인" />
+              <RadioOption value="FOREIGNER" label="외국인" />
+            </RadioGroup>
           </FormItem>
         )}
       />

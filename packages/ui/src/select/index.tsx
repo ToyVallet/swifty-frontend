@@ -21,7 +21,7 @@ type SelectOption = {
 
 type SelectProps<T extends SelectOption[]> = {
   options: T;
-  onChange: (value: T[number]['value']) => void;
+  onValueChange: (value: T[number]['value']) => void;
   label: string;
   placeholder?: string;
 };
@@ -29,7 +29,7 @@ type SelectProps<T extends SelectOption[]> = {
 export default function Select<T extends SelectOption[]>({
   options,
   label,
-  onChange,
+  onValueChange,
   placeholder,
 }: SelectProps<T>) {
   const [isOpen, setIsOpen] = useState(false);
@@ -38,7 +38,7 @@ export default function Select<T extends SelectOption[]>({
 
   const onSelectOption = (option: T[number]) => {
     setSelectedOption(option);
-    onChange(option.value);
+    onValueChange(option.value);
   };
 
   return (
