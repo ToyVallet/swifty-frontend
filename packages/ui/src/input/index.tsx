@@ -1,5 +1,7 @@
 'use client';
 
+import EyeCross from '@icons/eye-cross.svg';
+import Eye from '@icons/eye.svg';
 import { cn } from '@swifty/shared-lib';
 import {
   type ComponentPropsWithoutRef,
