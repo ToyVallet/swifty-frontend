@@ -1,4 +1,4 @@
-import '@swifty/ui/styles.css';
+//import '@swifty/ui/styles.css';
 import type { Metadata, Viewport } from 'next';
 import type { PropsWithChildren } from 'react';
 
