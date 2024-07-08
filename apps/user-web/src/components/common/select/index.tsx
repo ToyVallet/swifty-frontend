@@ -3,13 +3,11 @@
 import { BottomSheet } from '@components/common';
 import useBottomSheet from '@hooks/use-bottom-sheet';
 import ChevronDown from '@icons/bottom-arrow.svg';
-import cn from 'clsx';
+import { cn } from '@swifty/shared-lib';
 import { type FocusEvent, useState } from 'react';
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 type Props<T extends readonly string[]> = {
-  data: T;
+  options: T;
   onChange: (value: T[number]) => void;
   defaultValue: string;
   label: string;
@@ -18,7 +16,7 @@ type Props<T extends readonly string[]> = {
 };
 
 export default function Select<T extends readonly string[]>({
-  data,
+  options,
   defaultValue,
   label,
   onChange,
@@ -80,11 +78,11 @@ export default function Select<T extends readonly string[]>({
         <ChevronDown className="absolute top-[30px] right-[31px]" />
       </button>
       <BottomSheet isOpen={isOpen} onDismiss={close}>
-        {data.map((item, index) => (
+        {options.map((item, index) => (
           <Item
             key={item}
             value={item}
-            underline={index !== data.length - 1}
+            underline={index !== options.length - 1}
             onClick={() => onSelectValue(item)}
           />
         ))}
