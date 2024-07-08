@@ -1,15 +1,15 @@
 import { FormField, FormItem, Input } from '@swifty/ui';
 
-export default function DateOfBirth() {
+export default function PhoneNumber() {
   return (
     <FormField
-      name="dateOfBirth"
+      name="phoneNumber"
       render={({ field }) => (
         <FormItem>
           <Input
-            type="number"
-            label="생년월일"
-            placeholder="YYYYMMDD"
+            type="tel"
+            label="전화번호"
+            placeholder="010-1234-5678"
             {...field}
           />
         </FormItem>

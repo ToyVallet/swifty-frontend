@@ -59,7 +59,7 @@ export default function Select<T extends SelectOption[]>({
           <div className="flex flex-col items-start">
             <label
               className={cn(
-                'text-[14px] leading-5',
+                'text-[14px] leading-5 mb-2',
                 isOpen ? 'text-primary' : 'text-swifty-color-400',
               )}
             >
@@ -77,16 +77,18 @@ export default function Select<T extends SelectOption[]>({
           <ChevronDown />
         </button>
       </DrawerTrigger>
-      <DrawerContent className="[&>*:not(:last-child)]:border-b [&>*:not(:last-child)]:border-swifty-color-700 px-[30px]">
-        {options.map(({ label, value }) => (
-          <DrawerClose key={value}>
-            <SelectOption
-              value={value}
-              label={label}
-              onClick={onSelectOption}
-            />
-          </DrawerClose>
-        ))}
+      <DrawerContent className="px-[30px] pb-[40px]">
+        <div className="grid gird-cols-1 divide-y divide-swifty-color-700">
+          {options.map(({ label, value }) => (
+            <DrawerClose key={value} asChild>
+              <SelectOption
+                value={value}
+                label={label}
+                onClick={onSelectOption}
+              />
+            </DrawerClose>
+          ))}
+        </div>
         {/* 웹 접근성을 위한 영역 */}
         <VisuallyHidden.Root>
           <DrawerTitle>통신사 선택 드로워</DrawerTitle>

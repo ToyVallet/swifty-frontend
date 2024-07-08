@@ -1,6 +1,6 @@
 'use client';
 
-import { cn } from '@swifty/shared-lib';
+import { cn, formatPhoneNumber } from '@swifty/shared-lib';
 import {
   type ComponentPropsWithoutRef,
   forwardRef,
@@ -15,6 +15,7 @@ import { Label } from './label';
 
 interface InputProps
   extends Omit<ComponentPropsWithoutRef<'input'>, 'name' | 'placeholder'> {
+  label: string;
   name: string;
   placeholder: string;
 }
@@ -22,6 +23,7 @@ interface InputProps
 const Input = forwardRef<HTMLInputElement, InputProps>(function (
   {
     name,
+    label,
     type = 'text',
     placeholder,
     onFocus,
@@ -56,6 +58,8 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function (
     let sanitizedValue = e.target.value;
     if (type === 'number') {
       sanitizedValue = sanitizedValue.replaceAll(/[^0-9]/g, '');
+    } else if (type === 'tel') {
+      sanitizedValue = formatPhoneNumber(sanitizedValue).slice(0, 13);
     }
     setInputValue(sanitizedValue);
     onChange?.(e);
@@ -68,16 +72,16 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function (
         isFocused ? 'border-primary shadow-input-active' : 'border-transparent',
       )}
     >
-      {placeholder && (
+      {label && (
         <Label
           htmlFor={name}
           className={cn(
             'left-5 absolute top-[14px]',
-            isActive ? 'text-14' : 'text-16',
+            isActive ? 'text-[14px]' : 'text-16',
             isFocused ? 'text-primary' : 'text-swifty-color-400',
           )}
         >
-          {placeholder}
+          {label}
         </Label>
       )}
       <input
@@ -89,10 +93,11 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function (
           'w-full bg-transparent text-white text-16 py-3 px-5 autofill:bg-transparent',
           isActive && 'mt-[30px]',
         )}
-        inputMode={type === 'number' ? 'numeric' : 'text'}
+        inputMode={type === 'number' || type === 'tel' ? 'numeric' : 'text'}
         onFocus={handleFocus}
         onBlur={handleBlur}
         onChange={handleChange}
+        placeholder={isActive ? placeholder : ''}
         {...props}
       />
       <If condition={type === 'password' && isActive}>
