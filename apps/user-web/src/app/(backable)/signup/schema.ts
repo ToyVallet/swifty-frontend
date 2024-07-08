@@ -34,7 +34,7 @@ const nationality = z.enum(['NATIVE', 'FOREIGNER']);
 const sex = z.enum(['MALE', 'FEMALE']);
 
 /** 통신사 */
-const carrier = z.enum(['SKT', 'KT', 'LGU', 'BUDGET']);
+const carrier = z.enum(['SKT', 'KT', 'LGU', 'MVNO']);
 
 /** 전화번호 */
 const phoneNumber = z.string().refine((value) => /^\d{11}$/.test(value));

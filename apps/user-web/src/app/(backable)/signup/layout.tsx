@@ -1,5 +1,6 @@
 'use client';
 
+import { Navigation } from '@components/common';
 import { Header } from '@components/signup';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Choose, Form, When } from '@swifty/ui';
@@ -47,32 +48,35 @@ export default function SignupLayout({
   });
 
   return (
-    <StepContext.Provider value={{ currentStep, nextStep }}>
-      <section className="h-full flex flex-col relative">
-        <Header>{currentStep}</Header>
+    <>
+      <Navigation variant="back" title="회원가입" />
+      <StepContext.Provider value={{ currentStep, nextStep }}>
+        <section className="h-full flex flex-col relative">
+          <Header>{currentStep}</Header>
 
-        <Form {...form}>
-          <form onSubmit={onSubmit} className="text-white">
-            <Choose value={currentStep}>
-              <When value="약관 동의가 필요해요">{terms}</When>
+          <Form {...form}>
+            <form onSubmit={onSubmit} className="text-white">
+              <Choose value={currentStep}>
+                <When value="약관 동의가 필요해요">{terms}</When>
 
-              {identificationSteps.map((step) => (
-                <When key={step} value={step}>
-                  {identification}
-                </When>
-              ))}
+                {identificationSteps.map((step) => (
+                  <When key={step} value={step}>
+                    {identification}
+                  </When>
+                ))}
 
-              {accountSteps.map((step) => (
-                <When key={step} value={step}>
-                  {account}
-                </When>
-              ))}
+                {accountSteps.map((step) => (
+                  <When key={step} value={step}>
+                    {account}
+                  </When>
+                ))}
 
-              <When value="회원가입이 완료되었어요">{complete}</When>
-            </Choose>
-          </form>
-        </Form>
-      </section>
-    </StepContext.Provider>
+                <When value="회원가입이 완료되었어요">{complete}</When>
+              </Choose>
+            </form>
+          </Form>
+        </section>
+      </StepContext.Provider>
+    </>
   );
 }

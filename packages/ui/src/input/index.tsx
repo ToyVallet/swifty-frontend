@@ -8,8 +8,8 @@ import {
   useState,
 } from 'react';
 
-import EyeCross from '../../icon/eye-cross.svg';
-import Eye from '../../icon/eye.svg';
+import EyeCross from '../../icon/input/eye-cross.svg';
+import Eye from '../../icon/input/eye.svg';
 import { Choose, If, Otherwise, When } from '../lib';
 
 const eyeIconStyle = {
