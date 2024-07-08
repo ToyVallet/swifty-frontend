@@ -10,6 +10,7 @@ export default function DateOfBirth() {
             type="number"
             label="생년월일"
             placeholder="YYYYMMDD"
+            maxLength={8}
             {...field}
           />
         </FormItem>

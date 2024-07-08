@@ -1,6 +1,7 @@
 'use client';
 
 import { cn, formatPhoneNumber } from '@swifty/shared-lib';
+import { motion } from 'framer-motion';
 import {
   type ComponentPropsWithoutRef,
   forwardRef,
@@ -10,7 +11,7 @@ import {
 
 import EyeCrossIcon from '../../icon/input/eye-cross.svg';
 import EyeIcon from '../../icon/input/eye.svg';
-import { If } from '../lib';
+import { If, transition } from '../lib';
 import { Label } from './label';
 
 interface InputProps
@@ -19,6 +20,18 @@ interface InputProps
   name: string;
   placeholder: string;
 }
+
+export const variants = {
+  initial: {
+    scale: 1,
+    filter: 'brightness(1)',
+  },
+  active: {
+    scale: 0.99,
+    filter: 'brightness(0.9)',
+  },
+  transition,
+};
 
 const Input = forwardRef<HTMLInputElement, InputProps>(function (
   {
@@ -66,9 +79,12 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function (
   }, []);
 
   return (
-    <div
+    <motion.div
+      variants={variants}
+      whileTap={'active'}
+      initial="initial"
       className={cn(
-        'w-full relative rounded-xl overflow-hidden bg-neutral-800 border *:transition-all *:duration-200 *:ease-in-out',
+        'w-full relative rounded-xl overflow-hidden bg-neutral-800 border transition-colors duration-200 ease-in-out',
         isFocused ? 'border-primary shadow-input-active' : 'border-transparent',
       )}
     >
@@ -76,7 +92,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function (
         <Label
           htmlFor={name}
           className={cn(
-            'left-5 absolute top-[14px]',
+            'left-5 absolute top-[14px] transition-all duration-200 ease-in-out',
             isActive ? 'text-[14px]' : 'text-16',
             isFocused ? 'text-primary' : 'text-swifty-color-400',
           )}
@@ -90,7 +106,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function (
         type={!isVisible && type !== 'number' ? type : 'text'}
         value={inputValue}
         className={cn(
-          'w-full bg-transparent text-white text-16 py-3 px-5 autofill:bg-transparent',
+          'w-full bg-transparent text-white text-16 py-3 px-5 autofill:bg-transparent transition-all duration-200 ease-in-out',
           isActive && 'mt-[30px]',
         )}
         inputMode={type === 'number' || type === 'tel' ? 'numeric' : 'text'}
@@ -103,7 +119,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function (
       <If condition={type === 'password' && isActive}>
         <Eye cross={isVisible} onClick={toggleVisibilty} />
       </If>
-    </div>
+    </motion.div>
   );
 });
 Input.displayName = 'Input';

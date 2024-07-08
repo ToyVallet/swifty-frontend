@@ -3,14 +3,14 @@
 import { cn } from '@swifty/shared-lib';
 import { type NonEmptyArray } from '@swifty/shared-lib';
 import { motion } from 'framer-motion';
-import { Children, isValidElement, useEffect } from 'react';
+import { Children, type ReactElement, isValidElement, useEffect } from 'react';
 
 import { variants } from './motion';
 
 export type StepType = Readonly<NonEmptyArray<string>>;
 
 interface StepProps<Steps extends StepType> {
-  name: Steps[number];
+  step: Steps[number];
   onEnter?: () => void;
   children: React.ReactNode;
   className?: string;
@@ -19,9 +19,7 @@ interface StepProps<Steps extends StepType> {
 interface FunnelProps<Steps extends StepType> {
   steps: Steps;
   step: Steps[number];
-  children:
-    | Array<React.ReactElement<StepProps<Steps>>>
-    | React.ReactElement<StepProps<Steps>>;
+  children: ReactElement<typeof StepComponent>[];
   accumulate?: boolean;
 }
 
@@ -40,25 +38,31 @@ export default function Funnel<Steps extends StepType>({
   const validChildren = Children.toArray(children).filter((child) =>
     isValidElement(child),
   );
+
   if (accumulate) {
     const stepElements = steps
       .slice(0, currentStep + 1)
-      .map((name) => {
+      .map((step) => {
         const child = validChildren.find(
           (child) =>
-            (child as React.ReactElement<StepProps<Steps>>).props.name === name,
+            (child as React.ReactElement<StepProps<Steps>>).props.step === step,
         );
         return child;
       })
       .reverse();
 
-    return stepElements;
+    return <>{stepElements}</>;
   } else {
-    return validChildren[currentStep];
+    return (
+      validChildren.find(
+        (child) =>
+          (child as React.ReactElement<StepProps<Steps>>).props.step === step,
+      ) ?? null
+    );
   }
 }
 
-export const Step = <Steps extends StepType>({
+export const StepComponent = <Steps extends StepType>({
   onEnter,
   children,
   className,
@@ -70,10 +74,10 @@ export const Step = <Steps extends StepType>({
 
   return (
     <motion.div
-      variants={variants}
-      initial="hidden"
-      animate="visible"
-      exit="hidden"
+      // variants={variants}
+      // initial="hidden"
+      // animate="visible"
+      // exit="hidden"
       className={cn('w-full', className)}
     >
       {children}
@@ -81,4 +85,4 @@ export const Step = <Steps extends StepType>({
   );
 };
 
-Funnel.Step = Step;
+Funnel.Step = StepComponent;

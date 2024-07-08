@@ -1,4 +1,4 @@
-import { createContext } from "react";
+import { createContext } from 'react';
 
 export const termsSteps = ['약관 동의가 필요해요'] as const;
 
@@ -6,6 +6,8 @@ export const identificationSteps = [
   '성함을 알려주세요',
   '생년월일을 알려주세요',
   '성별을 알려주세요',
+  '통신사를 선택해주세요',
+  '휴대폰 번호를 알려주세요',
   '휴대폰 번호를 인증할게요',
 ] as const;
 
@@ -21,7 +23,6 @@ export const steps = [
   ...accountSteps,
   '회원가입이 완료되었어요',
 ] as const;
-
 
 export type Step = (typeof steps)[number];
 

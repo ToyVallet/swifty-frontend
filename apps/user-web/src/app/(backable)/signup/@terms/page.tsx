@@ -1,10 +1,9 @@
 'use client';
 
-import { BottomContainer } from '@components/common';
+import { FixedBottomCTA } from '@components/common';
 import Items from '@components/signup/terms-of-service/items';
 import { Accordion } from '@components/ui/accordion';
-import { Button } from '@swifty/ui';
-import { useContext, useReducer } from 'react';
+import { useContext, useMemo, useReducer } from 'react';
 
 import { StepContext } from '../context';
 import { initialData } from './data';
@@ -16,19 +15,15 @@ const APPROVE_COMPLETE = '동의 완료';
 export default function Page() {
   const { nextStep } = useContext(StepContext);
   const [termsOfServices, dispatch] = useReducer(reducer, initialData);
-
-  const createButtonText = () => {
-    const isSomeNotApproved = termsOfServices.some(
-      ({ required, approved }) => required && !approved,
-    );
-    if (isSomeNotApproved) return APPROVE_ALL;
-    return APPROVE_COMPLETE;
-  };
+  const isSomeNotApproved = useMemo(
+    () =>
+      termsOfServices.some(({ required, approved }) => required && !approved),
+    [termsOfServices],
+  );
 
   const onApprove = () => {
-    const buttonText = createButtonText();
-    if (buttonText === APPROVE_ALL) dispatch({ type: 'allApprove' });
-    else if (buttonText === APPROVE_COMPLETE) nextStep();
+    if (isSomeNotApproved) dispatch({ type: 'allApprove' });
+    else nextStep();
   };
 
   return (
@@ -46,11 +41,9 @@ export default function Page() {
           ))}
         </Accordion>
       </div>
-      <BottomContainer>
-        <Button type="button" size="full" onClick={onApprove}>
-          {createButtonText()}
-        </Button>
-      </BottomContainer>
+      <FixedBottomCTA type="button" onClick={onApprove}>
+        {isSomeNotApproved ? APPROVE_ALL : APPROVE_COMPLETE}
+      </FixedBottomCTA>
     </>
   );
 }

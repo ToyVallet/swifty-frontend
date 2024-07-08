@@ -10,5 +10,5 @@ export * from './menu-tiles';
 export { default as MenuTiles } from './menu-tiles';
 export { default as ImageWithFallback } from './image-with-fallback';
 export { default as FadeOverlay } from './fade-overlay';
-export * from './container';
 export { default as GlobalNavigation } from './global-navigation';
+export { default as FixedBottomCTA } from './fixed-bottom-cta';
