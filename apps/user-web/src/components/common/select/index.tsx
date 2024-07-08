@@ -8,17 +8,17 @@ import { type FocusEvent, useState } from 'react';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-type Props = {
+type Props<T extends readonly string[]> = {
   name: string;
-  data: readonly string[];
-  onChange: (value: string[][number]) => void;
+  data: T;
+  onChange: (value: T[number]) => void;
   defaultValue: string;
   label: string;
   onBlur?: (e: FocusEvent<HTMLButtonElement>) => void;
   onFocus?: (e: FocusEvent<HTMLButtonElement>) => void;
 };
 
-export default function Select({
+export default function Select<T extends readonly string[]>({
   data,
   defaultValue,
   label,
@@ -26,12 +26,12 @@ export default function Select({
   onChange,
   onBlur,
   onFocus,
-}: Props) {
+}: Props<T>) {
   const [isOpen, open, close] = useBottomSheet();
   const [isFocused, setIsFocused] = useState(false);
   const [value, setValue] = useState(defaultValue);
 
-  const onSelectValue = (value: string) => {
+  const onSelectValue = (value: T[number]) => {
     setValue(value);
     onChange(value);
     close();
