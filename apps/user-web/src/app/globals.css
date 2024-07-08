@@ -232,11 +232,6 @@ input:-webkit-autofill:active {
   -webkit-text-fill-color: #ffffff !important;
 }
 
-input[type='button'] {
-  text-align: start;
-  width: 100%;
-}
-
 input.password {
   font-family: 'pass', 'Roboto', Helvetica, Arial, sans-serif;
   font-size: 18px;
