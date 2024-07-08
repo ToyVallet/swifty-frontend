@@ -4,8 +4,8 @@
   "compilerOptions": {
     "outDir": "dist",
     "baseUrl": ".",
-    "paths": { "@/*": ["src/*"], "@icons/*": ["icon/*"] }
+    "paths": { "@/*": ["src/*"] }
   },
-  "include": ["svg.d.ts", "./src/*"],
+
   "exclude": ["node_modules", "dist"]
 }

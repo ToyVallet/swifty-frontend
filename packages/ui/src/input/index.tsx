@@ -1,7 +1,5 @@
 'use client';
 
-import EyeCross from '@icons/eye-cross.svg';
-import Eye from '@icons/eye.svg';
 import { cn } from '@swifty/shared-lib';
 import {
   type ComponentPropsWithoutRef,
@@ -9,6 +7,9 @@ import {
   useCallback,
   useState,
 } from 'react';
+
+import EyeCross from '../../icon/eye-cross.svg';
+import Eye from '../../icon/eye.svg';
 
 interface InputProps
   extends Omit<ComponentPropsWithoutRef<'input'>, 'name' | 'placeholder'> {
@@ -30,6 +31,11 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function (
   ref,
 ) {
   const [isFocused, setIsFocused] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+
+  const onVisible = () => {
+    setIsVisible((prev) => !prev);
+  };
   const handleFocus = useCallback((e: React.FocusEvent<HTMLInputElement>) => {
     setIsFocused(true);
     onFocus?.(e);
@@ -66,7 +72,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function (
         </label>
       )}
       <input
-        type={type}
+        type={!isVisible ? type : 'text'}
         ref={ref}
         className="w-full bg-transparent text-white text-16 transition-all duration-300 ease-in-out autofill:bg-transparent"
         disabled={disabled}
@@ -78,6 +84,30 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function (
         }}
         {...props}
       />
+      {type === 'password' && !isVisible && (isFocused || value) && (
+        <EyeCross
+          onClick={onVisible}
+          fill="white"
+          className="absolute"
+          style={{
+            top: '50%',
+            right: '20px',
+            transform: 'translate(-50%, -50%)',
+          }}
+        />
+      )}
+      {type === 'password' && isVisible && (isFocused || value) && (
+        <Eye
+          onClick={onVisible}
+          fill="white"
+          className="absolute"
+          style={{
+            top: '50%',
+            right: '20px',
+            transform: 'translate(-50%, -50%)',
+          }}
+        />
+      )}
     </div>
   );
 });
