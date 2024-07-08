@@ -9,7 +9,6 @@ import { type FocusEvent, useState } from 'react';
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 type Props<T extends readonly string[]> = {
-  name: string;
   data: T;
   onChange: (value: T[number]) => void;
   defaultValue: string;
@@ -22,7 +21,6 @@ export default function Select<T extends readonly string[]>({
   data,
   defaultValue,
   label,
-  name,
   onChange,
   onBlur,
   onFocus,
@@ -51,7 +49,6 @@ export default function Select<T extends readonly string[]>({
     <>
       <button
         className="w-full h-full max-h-[69px] font-medium rounded-xl relative px-5 py-3 overflow-hidden bg-neutral-800 transition-all duration-200 ease-in-out text-start"
-        name={name}
         onFocus={handleFocus}
         onBlur={handleBlur}
         onClick={open}
