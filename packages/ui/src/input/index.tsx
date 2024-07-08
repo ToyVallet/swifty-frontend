@@ -8,6 +8,16 @@ import {
   useState,
 } from 'react';
 
+import EyeCross from '../../icon/eye-cross.svg';
+import Eye from '../../icon/eye.svg';
+import { Choose, If, Otherwise, When } from '../lib';
+
+const eyeIconStyle = {
+  top: '50%',
+  right: '20px',
+  transform: 'translate(-50%, -50%)',
+};
+
 interface InputProps
   extends Omit<ComponentPropsWithoutRef<'input'>, 'name' | 'placeholder'> {
   name: string;
@@ -28,6 +38,13 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function (
   ref,
 ) {
   const [isFocused, setIsFocused] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+
+  const isActive = isFocused || !!value;
+
+  const onVisible = () => {
+    setIsVisible((prev) => !prev);
+  };
   const handleFocus = useCallback((e: React.FocusEvent<HTMLInputElement>) => {
     setIsFocused(true);
     onFocus?.(e);
@@ -55,7 +72,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function (
           htmlFor={name}
           className="left-5 text-neutral-400 absolute transition-all duration-300 ease-in-out"
           style={{
-            fontSize: isFocused || !!value ? '0.875rem' : '1rem',
+            fontSize: isActive ? '0.875rem' : '1rem',
             top: '13px',
             color: isFocused ? '#1967FF' : '',
           }}
@@ -64,18 +81,38 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function (
         </label>
       )}
       <input
-        type={type}
+        type={!isVisible ? type : 'text'}
         ref={ref}
         className="w-full bg-transparent text-white text-16 transition-all duration-300 ease-in-out autofill:bg-transparent"
         disabled={disabled}
         onFocus={handleFocus}
         onBlur={handleBlur}
         style={{
-          marginTop: isFocused || !!value ? '30px' : '',
+          marginTop: isActive ? '30px' : '',
           padding: '0.75rem 1.25rem',
         }}
         {...props}
       />
+      <If condition={type === 'password' && isActive}>
+        <Choose value={isVisible}>
+          <When value={true}>
+            <EyeCross
+              onClick={onVisible}
+              fill="white"
+              className="absolute"
+              style={eyeIconStyle}
+            />
+          </When>
+          <Otherwise>
+            <Eye
+              onClick={onVisible}
+              fill="white"
+              className="absolute"
+              style={eyeIconStyle}
+            />
+          </Otherwise>
+        </Choose>
+      </If>
     </div>
   );
 });
