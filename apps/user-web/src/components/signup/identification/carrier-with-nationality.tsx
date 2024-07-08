@@ -12,7 +12,7 @@ export default function CarrierWithNationality() {
   const { control } = useFormContext<FormValues>();
 
   return (
-    <section className="flex flex-col gap-5">
+    <>
       <FormField
         control={control}
         name="carrier"
@@ -50,6 +50,6 @@ export default function CarrierWithNationality() {
           </FormItem>
         )}
       />
-    </section>
+    </>
   );
 }

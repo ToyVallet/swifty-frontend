@@ -1,7 +1,15 @@
 'use client';
 
-import { CarrierWithNationality } from '@components/signup/identification';
+import {
+  CarrierWithNationality,
+  Name,
+} from '@components/signup/identification';
 
 export default function Identification() {
-  return <CarrierWithNationality />;
+  return (
+    <section className="flex flex-col gap-5">
+      <CarrierWithNationality />
+      <Name />
+    </section>
+  );
 }
