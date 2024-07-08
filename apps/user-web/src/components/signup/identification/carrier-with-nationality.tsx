@@ -22,6 +22,7 @@ export default function CarrierWithNationality() {
               label="통신사"
               placeholder="통신사 선택"
               onValueChange={field.onChange}
+              defaultValue={field.value}
               options={[
                 { label: 'SKT', value: 'SKT' },
                 { label: 'KT', value: 'KT' },
