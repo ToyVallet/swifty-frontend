@@ -38,7 +38,6 @@ export default function Select<T extends SelectOption[]>({
   const [selectedOption, setSelectedOption] = useState<T[number] | null>(
     options.find((option) => option.value === defaultValue) ?? null,
   );
-  const isActive = isOpen || selectedOption;
 
   const onSelectOption = (option: T[number]) => {
     setSelectedOption(option);
@@ -51,7 +50,7 @@ export default function Select<T extends SelectOption[]>({
         <button
           className={cn(
             'w-full h-full flex items-center justify-between border font-medium rounded-xl relative px-5 py-3 overflow-hidden bg-neutral-800 transition-all *:transition-all *:duration-200 *:ease-in-out',
-            isActive
+            isOpen
               ? 'border-primary shadow-input-active'
               : 'border-transparent',
           )}
@@ -61,7 +60,7 @@ export default function Select<T extends SelectOption[]>({
             <label
               className={cn(
                 'text-[14px] leading-5',
-                isActive ? 'text-primary' : 'text-swifty-color-400',
+                isOpen ? 'text-primary' : 'text-swifty-color-400',
               )}
             >
               {label}
