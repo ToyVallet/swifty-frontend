@@ -2,34 +2,35 @@
 
 import ChevronDown from '@icons/bottom-arrow.svg';
 import { cn } from '@swifty/shared-lib';
-import React, { type ElementRef, type FocusEvent, useState } from 'react';
+import React, { type ElementRef, useState } from 'react';
 
 import { Drawer, DrawerClose, DrawerContent, DrawerTrigger } from '../drawer';
 
-type SelectProps<T extends readonly string[]> = {
-  options: T;
-  onChange: (value: T[number]) => void;
-  defaultValue: string;
+type SelectOption = {
   label: string;
-  onBlur?: (e: FocusEvent<HTMLButtonElement>) => void;
-  onFocus?: (e: FocusEvent<HTMLButtonElement>) => void;
+  value: string;
+};
+
+type SelectProps<T extends SelectOption[]> = {
+  options: T;
+  onChange: (value: T[number]['value']) => void;
+  label: string;
   placeholder?: string;
 };
 
-export default function Select<T extends readonly string[]>({
+export default function Select<T extends SelectOption[]>({
   options,
-  defaultValue,
   label,
   onChange,
   placeholder,
 }: SelectProps<T>) {
   const [isOpen, setIsOpen] = useState(false);
-  const [value, setValue] = useState(defaultValue);
-  const isActive = isOpen || value;
+  const [selectedOption, setSelectedOption] = useState<T[number] | null>(null);
+  const isActive = isOpen || selectedOption;
 
-  const onSelectValue = (value: T[number]) => {
-    setValue(value);
-    onChange(value);
+  const onSelectOption = (option: T[number]) => {
+    setSelectedOption(option);
+    onChange(option.value);
   };
 
   return (
@@ -56,19 +57,23 @@ export default function Select<T extends readonly string[]>({
             <span
               className={cn(
                 'text-white text-16 font-medium leading-6',
-                !value && 'text-swifty-color-400',
+                !selectedOption && 'text-swifty-color-400',
               )}
             >
-              {value ?? placeholder}
+              {selectedOption?.label ?? placeholder}
             </span>
           </div>
-          <ChevronDown className="" />
+          <ChevronDown />
         </button>
       </DrawerTrigger>
       <DrawerContent className="[&>*:not(:last-child)]:border-b [&>*:not(:last-child)]:border-swifty-color-700 px-[30px]">
-        {options.map((item) => (
-          <DrawerClose key={item}>
-            <Item value={item} onClick={onSelectValue} />
+        {options.map(({ label, value }) => (
+          <DrawerClose key={value}>
+            <SelectOption
+              value={value}
+              label={label}
+              onClick={onSelectOption}
+            />
           </DrawerClose>
         ))}
       </DrawerContent>
@@ -76,22 +81,23 @@ export default function Select<T extends readonly string[]>({
   );
 }
 
-type ItemProps = {
-  value: string;
-  onClick: (value: string) => void;
-} & Omit<React.HTMLAttributes<HTMLDivElement>, 'onClick'>;
+type SelectOptionProps = {
+  onClick: (option: SelectOption) => void;
+} & Omit<React.HTMLAttributes<HTMLDivElement>, 'onClick'> &
+  SelectOption;
 
-const Item = React.forwardRef<ElementRef<'div'>, ItemProps>(
-  ({ value, onClick, ...props }, ref) => {
+const SelectOption = React.forwardRef<ElementRef<'div'>, SelectOptionProps>(
+  ({ value, label, onClick, ...props }, ref) => {
     return (
       <div
         ref={ref}
         className="bg-black text-white text-center text-16 font-medium py-[22px] hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-swifty-gray-900"
-        onClick={() => onClick(value)}
+        onClick={() => onClick({ value, label })}
         {...props}
       >
-        {value}
+        {label}
       </div>
     );
   },
 );
+SelectOption.displayName = 'SelectOption';

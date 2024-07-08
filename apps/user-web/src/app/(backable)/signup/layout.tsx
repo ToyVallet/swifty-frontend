@@ -47,6 +47,10 @@ export default function SignupLayout({
     console.log(data);
   });
 
+  form.watch((value) => {
+    console.log(value);
+  });
+
   return (
     <>
       <Navigation variant="back" title="회원가입" />
