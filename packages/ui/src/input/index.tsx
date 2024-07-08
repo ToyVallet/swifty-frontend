@@ -22,11 +22,13 @@ interface InputProps
   extends Omit<ComponentPropsWithoutRef<'input'>, 'name' | 'placeholder'> {
   name: string;
   placeholder: string;
+  button?: React.ReactNode;
 }
 
 const Input = forwardRef<HTMLInputElement, InputProps>(function (
   {
     name,
+    button,
     disabled,
     type = 'text',
     placeholder,
@@ -93,6 +95,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function (
         }}
         {...props}
       />
+      <If condition={!!button}>{button}</If>
       <If condition={type === 'password' && isActive}>
         <Choose value={isVisible}>
           <When value={true}>
