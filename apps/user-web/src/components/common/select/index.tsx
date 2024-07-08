@@ -2,48 +2,86 @@
 
 import { BottomSheet } from '@components/common';
 import useBottomSheet from '@hooks/use-bottom-sheet';
-import BottomArrow from '@icons/bottom-arrow.svg';
-import { Input } from '@swifty/ui';
+import ChevronDown from '@icons/bottom-arrow.svg';
 import cn from 'clsx';
-import type { ComponentPropsWithoutRef } from 'react';
-import { useRef, useState } from 'react';
+import { type FocusEvent, useState } from 'react';
+
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 type Props = {
-  data: string[];
-  label: string;
+  name: string;
+  data: readonly string[];
+  onChange: (...event: any[]) => void;
   defaultValue: string;
+  label: string;
+  onBlur?: (e: FocusEvent<HTMLButtonElement>) => void;
+  onFocus?: (e: FocusEvent<HTMLButtonElement>) => void;
 };
 
-export default function BottomSelect({ data, label, defaultValue }: Props) {
+export default function Select({
+  data,
+  defaultValue,
+  label,
+  name,
+  onChange,
+  onBlur,
+  onFocus,
+}: Props) {
   const [isOpen, open, close] = useBottomSheet();
+  const [isFocused, setIsFocused] = useState(false);
   const [value, setValue] = useState(defaultValue);
-  const ref = useRef<HTMLInputElement>(null);
-
-  const onOpen = () => {
-    open();
-    ref.current?.focus();
-  };
 
   const onSelectValue = (value: string) => {
     setValue(value);
+    onChange(value);
     close();
   };
 
-  return (
-    <div>
-      <div onClick={onOpen} className="relative">
-        <Input
-          label={label}
-          defaultValue={value}
-          ref={ref}
-          type="button"
-          className={
-            defaultValue === value ? 'text-swifty-color-500' : 'text-white'
-          }
-        />
-        <BottomArrow className="absolute top-[31px] right-10" />
-      </div>
+  const handleBlur = (e: FocusEvent<HTMLButtonElement>) => {
+    setIsFocused(false);
+    onBlur?.(e);
+  };
 
+  const handleFocus = (e: FocusEvent<HTMLButtonElement>) => {
+    setIsFocused(true);
+    onFocus?.(e);
+  };
+
+  return (
+    <>
+      <button
+        className="w-full h-full max-h-[69px] font-medium rounded-xl relative px-5 py-3 overflow-hidden bg-neutral-800 transition-all duration-200 ease-in-out text-start"
+        name={name}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
+        onClick={open}
+        type="button"
+        style={{
+          border: isFocused ? '1px solid #1967FF' : '1px solid transparent',
+          boxShadow: isFocused
+            ? '0px 2.77px 2.21px 0px rgba(25, 103, 255, 0.0197), 0px 6.65px 5.32px 0px rgba(25, 103, 255, 0.0283), 0px 12.52px 10.02px 0px rgba(25, 103, 255, 0.035), 0px 22.34px 17.87px 0px rgba(25, 103, 255, 0.0417), 0px 41.78px 33.42px 0px rgba(25, 103, 255, 0.0503), 0px 100px 80px 0px rgba(25, 103, 255, 0.07)'
+            : '',
+        }}
+      >
+        <h3
+          className="text-swifty-color-400 text-14 transition-all duration-300 ease-in-out"
+          style={{
+            fontSize: isFocused ? '0.875rem' : '1rem',
+            color: isFocused ? '#1967FF' : '',
+          }}
+        >
+          {label}
+        </h3>
+        <span
+          className={cn(
+            'text-white text-16 font transition-all duration-300 ease-in-out',
+            defaultValue === value && 'text-swifty-color-400',
+          )}
+        >
+          {value}
+        </span>
+        <ChevronDown className="absolute top-[30px] right-[31px]" />
+      </button>
       <BottomSheet isOpen={isOpen} onDismiss={close}>
         {data.map((item, index) => (
           <Item
@@ -54,16 +92,16 @@ export default function BottomSelect({ data, label, defaultValue }: Props) {
           />
         ))}
       </BottomSheet>
-    </div>
+    </>
   );
 }
 
-type Item = {
+type ItemProps = {
   value: string;
   underline?: boolean;
-} & ComponentPropsWithoutRef<'div'>;
+} & React.ComponentPropsWithoutRef<'div'>;
 
-function Item({ value, underline, ...props }: Item) {
+function Item({ value, underline = true, ...props }: ItemProps) {
   return (
     <div
       className={cn(

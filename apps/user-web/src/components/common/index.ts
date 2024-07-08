@@ -14,6 +14,6 @@ export { default as MenuTiles } from './menu-tiles';
 export { default as ImageWithFallback } from './image-with-fallback';
 export { default as FadeOverlay } from './fade-overlay';
 export { default as Overlay } from './overlay';
-export { default as BottomSelect } from './select';
+export { default as Select } from './select';
 export * from './container';
 export { default as GlobalNavigation } from './global-navigation';
