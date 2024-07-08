@@ -1,10 +1,10 @@
 'use client';
 
+import { useBottomSheet } from '@hooks/.';
 import { Button } from '@swifty/ui';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { toast } from 'sonner';
-import { useBottomSheet } from 'src/hooks';
 import { z } from 'zod';
 
 import BottomSheet from '../../bottom-sheet';

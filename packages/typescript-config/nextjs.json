@@ -13,35 +13,6 @@
     "moduleResolution": "Bundler",
     "allowJs": true,
     "jsx": "preserve",
-    "noEmit": true,
-    "paths": {
-      "@app/*": [
-        "./app/*"
-      ],
-      "@components/*": [
-        "./app/components/*"
-      ],
-      "@lib/*": [
-        "./app/lib/*"
-      ],
-      "@hooks/*": [
-        "./app/hooks/*"
-      ],
-      "@api/*": [
-        "./app/api/*"
-      ],
-      "@store/*": [
-        "./app/store/*"
-      ],
-      "@images/*": [
-        "./public/images/*"
-      ],
-      "@icons/*": [
-        "./public/icons/*"
-      ],
-      "@constant/*": [
-        "./constant/*"
-      ],
-    }
+    "noEmit": true
   }
 }
