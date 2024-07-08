@@ -33,7 +33,7 @@ export default function SignupLayout({
     resolver: zodResolver(formSchema),
   });
   const [currentStep, setCurrentStep] =
-    useState<Step>('휴대폰 번호를 인증할게요');
+    useState<Step>('사용하실 아이디를 입력해주세요');
 
   const nextStep = useCallback(() => {
     const nextStepIndex = steps.indexOf(currentStep) + 1;
@@ -55,7 +55,7 @@ export default function SignupLayout({
     <>
       <Navigation variant="back" title="회원가입" />
       <StepContext.Provider value={{ currentStep, nextStep }}>
-        <section className="h-full flex flex-col relative">
+        <main className="h-full flex flex-col relative">
           <Header>{currentStep}</Header>
 
           <Form {...form}>
@@ -79,7 +79,7 @@ export default function SignupLayout({
               </Choose>
             </form>
           </Form>
-        </section>
+        </main>
       </StepContext.Provider>
     </>
   );
