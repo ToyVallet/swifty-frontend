@@ -12,6 +12,9 @@ import { useFormContext } from 'react-hook-form';
 
 export default function CarrierWithNationality() {
   const { control } = useFormContext<FormValues>();
+
+  const options = ['SKT', 'KT', 'LG U+', 'MVNO'] as const;
+
   return (
     <section className="flex flex-col gap-5">
       <FormField
@@ -24,11 +27,7 @@ export default function CarrierWithNationality() {
               placeholder="통신사 선택"
               onChange={field.onChange}
               defaultValue={field.value}
-              options={[
-                { label: 'SKT', value: 'SKT' },
-                { label: 'KT', value: 'KT' },
-                { label: 'LG U+', value: 'LG U+' },
-              ]}
+              options={options}
             />
           </FormItem>
         )}

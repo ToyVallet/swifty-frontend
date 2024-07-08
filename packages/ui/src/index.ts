@@ -12,3 +12,17 @@ export {
   FormField,
 } from './form';
 export * from './lib';
+export { default as Select } from './select';
+export {
+  Drawer,
+  DrawerPortal,
+  DrawerOverlay,
+  DrawerTrigger,
+  DrawerClose,
+  DrawerContent,
+  DrawerHeader,
+  DrawerFooter,
+  DrawerTitle,
+  DrawerDescription,
+} from './drawer';
+export { default as Toast } from './toast';
