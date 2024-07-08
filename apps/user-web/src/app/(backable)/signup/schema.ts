@@ -12,7 +12,7 @@ const name = z.string().min(2, '이름은 2글자 이상이어야 합니다.');
  * * 1월 이후, 12월 이전
  * * 1일 이후, 31일 이전
  */
-const birth = z.date().refine((date) => {
+const dateOfBirth = z.date().refine((date) => {
   const year = date.getFullYear();
   const month = date.getMonth() + 1;
   const day = date.getDate();
@@ -56,7 +56,7 @@ const passwordConfirm = z
 export const formSchema = z.object({
   agreedToMarketing,
   name,
-  birth,
+  dateOfBirth,
   nationality,
   sex,
   carrier,

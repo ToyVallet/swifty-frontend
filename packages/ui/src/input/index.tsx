@@ -22,16 +22,17 @@ interface InputProps
 const Input = forwardRef<HTMLInputElement, InputProps>(function (
   {
     name,
-    disabled,
     type = 'text',
     placeholder,
     onFocus,
     onBlur,
     value,
+    onChange,
     ...props
   },
   ref,
 ) {
+  const [inputValue, setInputValue] = useState(value);
   const [isFocused, setIsFocused] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
 
@@ -49,6 +50,15 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function (
   const handleBlur = useCallback((e: React.FocusEvent<HTMLInputElement>) => {
     setIsFocused(false);
     onBlur?.(e);
+  }, []);
+
+  const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    let sanitizedValue = e.target.value;
+    if (type === 'number') {
+      sanitizedValue = sanitizedValue.replaceAll(/[^0-9]/g, '');
+    }
+    setInputValue(sanitizedValue);
+    onChange?.(e);
   }, []);
 
   return (
@@ -71,16 +81,18 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function (
         </Label>
       )}
       <input
-        type={!isVisible ? type : 'text'}
         ref={ref}
-        className="w-full bg-transparent text-white text-16 autofill:bg-transparent"
-        disabled={disabled}
+        id={name}
+        type={!isVisible && type !== 'number' ? type : 'text'}
+        value={inputValue}
+        className={cn(
+          'w-full bg-transparent text-white text-16 py-3 px-5 autofill:bg-transparent',
+          isActive && 'mt-[30px]',
+        )}
+        inputMode={type === 'number' ? 'numeric' : 'text'}
         onFocus={handleFocus}
         onBlur={handleBlur}
-        style={{
-          marginTop: isActive ? '30px' : '',
-          padding: '0.75rem 1.25rem',
-        }}
+        onChange={handleChange}
         {...props}
       />
       <If condition={type === 'password' && isActive}>
