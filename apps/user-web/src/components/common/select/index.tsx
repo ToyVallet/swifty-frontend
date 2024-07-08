@@ -11,7 +11,7 @@ import { type FocusEvent, useState } from 'react';
 type Props = {
   name: string;
   data: readonly string[];
-  onChange: (...event: any[]) => void;
+  onChange: (value: string[][number]) => void;
   defaultValue: string;
   label: string;
   onBlur?: (e: FocusEvent<HTMLButtonElement>) => void;
