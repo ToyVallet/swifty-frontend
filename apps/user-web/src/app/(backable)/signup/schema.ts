@@ -12,7 +12,7 @@ const name = z.string().min(2, '이름은 2글자 이상이어야 합니다.');
  * * 1월 이후, 12월 이전
  * * 1일 이후, 31일 이전
  */
-const birth = z.date().refine((date) => {
+const dateOfBirth = z.date().refine((date) => {
   const year = date.getFullYear();
   const month = date.getMonth() + 1;
   const day = date.getDate();
@@ -34,7 +34,7 @@ const nationality = z.enum(['NATIVE', 'FOREIGNER']);
 const sex = z.enum(['MALE', 'FEMALE']);
 
 /** 통신사 */
-const carrier = z.enum(['SKT', 'KT', 'LGU', 'BUDGET']);
+const carrier = z.enum(['SKT', 'KT', 'LGU', 'MVNO']);
 
 /** 전화번호 */
 const phoneNumber = z.string().refine((value) => /^\d{11}$/.test(value));
@@ -56,7 +56,7 @@ const passwordConfirm = z
 export const formSchema = z.object({
   agreedToMarketing,
   name,
-  birth,
+  dateOfBirth,
   nationality,
   sex,
   carrier,

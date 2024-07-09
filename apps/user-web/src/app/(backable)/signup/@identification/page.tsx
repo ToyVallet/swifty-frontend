@@ -1,56 +1,60 @@
 'use client';
 
+import { FixedBottomCTA } from '@components/common';
+import { Funnel } from '@components/signup';
 import {
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  RadioGroup,
-  RadioGroupItem,
-} from '@swifty/ui';
-import { useFormContext } from 'react-hook-form';
+  CarrierWithNationality,
+  DateOfBirth,
+  Name,
+  PhoneNumber,
+  Sex,
+  SmsCode,
+} from '@components/signup/identification';
+import { type NonEmptyArray } from '@swifty/shared-lib';
+import { useContext } from 'react';
 
-import { type FormValues } from '../schema';
+import { type Step, StepContext, steps } from '../context';
+
+type StepType = Readonly<NonEmptyArray<Step>>;
 
 export default function Identification() {
-  const form = useFormContext<FormValues>();
+  const { nextStep, currentStep } = useContext(StepContext);
+  const onNext = () => {
+    nextStep();
+  };
 
   return (
-    <FormField
-      control={form.control}
-      defaultValue="NATIVE"
-      name="nationality"
-      render={({ field }) => (
-        <FormItem className="space-y-3">
-          <FormControl>
-            <RadioGroup
-              onValueChange={field.onChange}
-              defaultValue={field.value}
-              className="flex w-full gap-5 items-center justify-between"
-            >
-              <FormItem className="flex w-full">
-                <FormControl>
-                  <RadioGroupItem value="NATIVE">
-                    <FormLabel className="font-bold text-16 z-10">
-                      내국인
-                    </FormLabel>
-                  </RadioGroupItem>
-                </FormControl>
-              </FormItem>
+    <>
+      <section className="flex flex-col gap-5">
+        <Funnel step={currentStep} steps={steps}>
+          <Funnel.Step<StepType> step="휴대폰 번호를 인증할게요">
+            <SmsCode />
+          </Funnel.Step>
 
-              <FormItem className="flex w-full">
-                <FormControl>
-                  <RadioGroupItem value="FOREIGNER">
-                    <FormLabel className="font-bold text-16 z-10">
-                      외국인
-                    </FormLabel>
-                  </RadioGroupItem>
-                </FormControl>
-              </FormItem>
-            </RadioGroup>
-          </FormControl>
-        </FormItem>
-      )}
-    ></FormField>
+          <Funnel.Step<StepType> step="휴대폰 번호를 알려주세요">
+            <PhoneNumber />
+          </Funnel.Step>
+
+          <Funnel.Step<StepType> step="통신사를 선택해주세요">
+            <CarrierWithNationality />
+          </Funnel.Step>
+
+          <Funnel.Step<StepType> step="성별을 알려주세요">
+            <Sex />
+          </Funnel.Step>
+
+          <Funnel.Step<StepType> step="생년월일을 알려주세요">
+            <DateOfBirth />
+          </Funnel.Step>
+
+          <Funnel.Step<StepType> step="성함을 알려주세요">
+            <Name />
+          </Funnel.Step>
+        </Funnel>
+      </section>
+      <FixedBottomCTA type="button" onClick={onNext}>
+        다음
+      </FixedBottomCTA>
+    </>
   );
 }

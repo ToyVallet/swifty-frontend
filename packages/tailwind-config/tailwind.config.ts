@@ -3,6 +3,10 @@ import { type Config } from 'tailwindcss';
 const config: Omit<Config, 'content'> = {
   theme: {
     extend: {
+      boxShadow: {
+        'input-active':
+          '0px 2.77px 2.21px 0px rgba(25, 103, 255, 0.0197), 0px 6.65px 5.32px 0px rgba(25, 103, 255, 0.0283), 0px 12.52px 10.02px 0px rgba(25, 103, 255, 0.035), 0px 22.34px 17.87px 0px rgba(25, 103, 255, 0.0417), 0px 41.78px 33.42px 0px rgba(25, 103, 255, 0.0503), 0px 100px 80px 0px rgba(25, 103, 255, 0.07)',
+      },
       keyframes: {
         'accordion-down': {
           from: { height: '0' },

@@ -1,4 +1,6 @@
-import { BottomContainer } from '@components/common';
+'use client';
+
+import { FixedBottomCTA } from '@components/common';
 import Check from '@images/signup/complete-check.gif';
 import { Button } from '@swifty/ui';
 import Image from 'next/image';
@@ -17,14 +19,15 @@ export default function SignupCompletePage() {
       <span className="text-14 font-medium text-white mx-auto">
         대학 축제 티켓팅 기능은 학적 인증이 필요합니다.
       </span>
-      <BottomContainer>
+      {/* <BottomContainer>
         <Button className="mb-[10px]" variant="white" size="full" asChild>
           <Link href="/">등록 없이 완료</Link>
         </Button>
         <Button variant="default" size="full" asChild>
           <Link href="/signup/identification">학적 인증하기</Link>
         </Button>
-      </BottomContainer>
+      </BottomContainer> */}
+      <FixedBottomCTA type="button" onClick={() => {}} />
     </>
   );
 }

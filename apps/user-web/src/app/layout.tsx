@@ -3,6 +3,7 @@ import type { Metadata, Viewport } from 'next';
 import type { PropsWithChildren } from 'react';
 
 import './globals.css';
+import Providers from './providers';
 
 export const metadata: Metadata = {
   title: '스위프티',
@@ -46,7 +47,9 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang="ko">
-      <body className="font-Pretendard">{children}</body>
+      <body className="font-Pretendard">
+        <Providers>{children}</Providers>
+      </body>
     </html>
   );
 }

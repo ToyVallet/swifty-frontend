@@ -18,7 +18,9 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "tailwind.config.ts",
-    "postcss.config.js"
+    "postcss.config.js",
+    "../../packages/ui/src/drawer/overlay.tsx",
+    "../../packages/ui/src/toast/index.tsx"
   ],
   "exclude": ["node_modules", "./server.js"]
 }

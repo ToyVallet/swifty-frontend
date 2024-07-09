@@ -1,6 +1,7 @@
 'use client';
 
-import { cn } from '@swifty/shared-lib';
+import { cn, formatPhoneNumber } from '@swifty/shared-lib';
+import { motion } from 'framer-motion';
 import {
   type ComponentPropsWithoutRef,
   forwardRef,
@@ -8,43 +9,54 @@ import {
   useState,
 } from 'react';
 
-import EyeCross from '../../icon/eye-cross.svg';
-import Eye from '../../icon/eye.svg';
-import { Choose, If, Otherwise, When } from '../lib';
-
-const eyeIconStyle = {
-  top: '50%',
-  right: '20px',
-  transform: 'translate(-50%, -50%)',
-};
+import EyeCrossIcon from '../../icon/input/eye-cross.svg';
+import EyeIcon from '../../icon/input/eye.svg';
+import { If, transition } from '../lib';
+import { Label } from './label';
 
 interface InputProps
   extends Omit<ComponentPropsWithoutRef<'input'>, 'name' | 'placeholder'> {
+  label: string;
   name: string;
   placeholder: string;
 }
 
+export const variants = {
+  initial: {
+    scale: 1,
+    filter: 'brightness(1)',
+  },
+  active: {
+    scale: 0.99,
+    filter: 'brightness(0.9)',
+  },
+  transition,
+};
+
 const Input = forwardRef<HTMLInputElement, InputProps>(function (
   {
     name,
-    disabled,
+    label,
     type = 'text',
     placeholder,
     onFocus,
     onBlur,
     value,
+    onChange,
     ...props
   },
   ref,
 ) {
+  const [inputValue, setInputValue] = useState(value);
   const [isFocused, setIsFocused] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
 
   const isActive = isFocused || !!value;
 
-  const onVisible = () => {
+  const toggleVisibilty = () => {
     setIsVisible((prev) => !prev);
   };
+
   const handleFocus = useCallback((e: React.FocusEvent<HTMLInputElement>) => {
     setIsFocused(true);
     onFocus?.(e);
@@ -55,68 +67,84 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function (
     onBlur?.(e);
   }, []);
 
+  const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    let sanitizedValue = e.target.value;
+    if (type === 'number') {
+      sanitizedValue = sanitizedValue.replaceAll(/[^0-9]/g, '');
+    } else if (type === 'tel') {
+      sanitizedValue = formatPhoneNumber(sanitizedValue).slice(0, 13);
+    }
+    setInputValue(sanitizedValue);
+    onChange?.(e);
+  }, []);
+
   return (
-    <div
+    <motion.div
+      variants={variants}
+      whileTap={'active'}
+      initial="initial"
       className={cn(
-        'w-full relative rounded-xl overflow-hidden bg-neutral-800 transition-all duration-200 ease-in-out',
+        'w-full relative rounded-xl overflow-hidden bg-neutral-800 border transition-colors duration-200 ease-in-out',
+        isFocused ? 'border-primary shadow-input-active' : 'border-transparent',
       )}
-      style={{
-        border: isFocused ? '1px solid #1967FF' : '1px solid transparent',
-        boxShadow: isFocused
-          ? '0px 2.77px 2.21px 0px rgba(25, 103, 255, 0.0197), 0px 6.65px 5.32px 0px rgba(25, 103, 255, 0.0283), 0px 12.52px 10.02px 0px rgba(25, 103, 255, 0.035), 0px 22.34px 17.87px 0px rgba(25, 103, 255, 0.0417), 0px 41.78px 33.42px 0px rgba(25, 103, 255, 0.0503), 0px 100px 80px 0px rgba(25, 103, 255, 0.07)'
-          : '',
-      }}
     >
-      {placeholder && (
-        <label
+      {label && (
+        <Label
           htmlFor={name}
-          className="left-5 text-neutral-400 absolute transition-all duration-300 ease-in-out"
-          style={{
-            fontSize: isActive ? '0.875rem' : '1rem',
-            top: '13px',
-            color: isFocused ? '#1967FF' : '',
-          }}
+          className={cn(
+            'left-5 absolute top-[14px] transition-all duration-200 ease-in-out',
+            isActive ? 'text-[14px]' : 'text-16',
+            isFocused ? 'text-primary' : 'text-swifty-color-400',
+          )}
         >
-          {placeholder}
-        </label>
+          {label}
+        </Label>
       )}
       <input
-        type={!isVisible ? type : 'text'}
         ref={ref}
-        className="w-full bg-transparent text-white text-16 transition-all duration-300 ease-in-out autofill:bg-transparent"
-        disabled={disabled}
+        id={name}
+        type={!isVisible && type !== 'number' ? type : 'text'}
+        value={inputValue}
+        className={cn(
+          'w-full bg-transparent text-white text-16 py-3 px-5 autofill:bg-transparent transition-all duration-200 ease-in-out',
+          isActive && 'mt-[30px]',
+        )}
+        inputMode={type === 'number' || type === 'tel' ? 'numeric' : 'text'}
         onFocus={handleFocus}
         onBlur={handleBlur}
-        style={{
-          marginTop: isActive ? '30px' : '',
-          padding: '0.75rem 1.25rem',
-        }}
+        onChange={handleChange}
+        placeholder={isActive ? placeholder : ''}
         {...props}
       />
       <If condition={type === 'password' && isActive}>
-        <Choose value={isVisible}>
-          <When value={true}>
-            <EyeCross
-              onClick={onVisible}
-              fill="white"
-              className="absolute"
-              style={eyeIconStyle}
-            />
-          </When>
-          <Otherwise>
-            <Eye
-              onClick={onVisible}
-              fill="white"
-              className="absolute"
-              style={eyeIconStyle}
-            />
-          </Otherwise>
-        </Choose>
+        <Eye cross={isVisible} onClick={toggleVisibilty} />
       </If>
-    </div>
+    </motion.div>
   );
 });
-
 Input.displayName = 'Input';
+
+type EyeProps = React.SVGProps<SVGSVGElement> & {
+  cross?: boolean;
+};
+
+const Eye = forwardRef<SVGSVGElement, EyeProps>(({ cross, ...props }, ref) =>
+  cross ? (
+    <EyeCrossIcon
+      ref={ref}
+      fill="white"
+      className="absolute top-1/2 right-7 translate-x-1/2 -translate-y-1/2 active:bg-swifty-color-800/80"
+      {...props}
+    />
+  ) : (
+    <EyeIcon
+      ref={ref}
+      fill="white"
+      className="absolute top-1/2 right-7 translate-x-1/2 -translate-y-1/2 active:bg-swifty-color-800/80"
+      {...props}
+    />
+  ),
+);
+Eye.displayName = 'Eye';
 
 export default Input;

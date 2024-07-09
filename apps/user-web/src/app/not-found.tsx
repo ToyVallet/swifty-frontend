@@ -1,10 +1,9 @@
 'use client';
 
-import { Link, Navigation } from '@components/common';
+import { Navigation } from '@components/common';
 import Caution from '@icons/caution.svg';
 import { Button } from '@swifty/ui';
-
-export const dynamic = 'force-dynamic';
+import Link from 'next/link';
 
 export default function NotFound() {
   return (

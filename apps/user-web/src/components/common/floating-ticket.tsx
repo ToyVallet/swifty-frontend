@@ -1,8 +1,8 @@
 'use client';
 
-import { Link } from '@components/common';
 import { Choose, Otherwise, When } from '@swifty/ui';
 import { AnimatePresence, motion } from 'framer-motion';
+import Link from 'next/link';
 import { type PropsWithChildren } from 'react';
 import { BsTicketFill } from 'react-icons/bs';
 
