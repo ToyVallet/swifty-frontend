@@ -30,7 +30,7 @@ Header.Transformer = function Transformer({ step, steps }: TransformerProps) {
   return (
     <Funnel step={step} steps={steps} accumulate={false}>
       {steps.map((s) => (
-        <Funnel.Step key={s} name={s} className="w-auto">
+        <Funnel.Step key={s} step={s} className="w-auto">
           <TransformerSubtitle>{s}</TransformerSubtitle>
         </Funnel.Step>
       ))}

@@ -1,9 +1,10 @@
-import { AdBanner, Link } from '@components/common';
+import { AdBanner } from '@components/common';
 import { FestivalTiles } from '@components/home';
 import { API_FESTIVALS } from '@lib/constants';
 import type { Festival } from '@lib/types/festival';
 import { customFetch } from '@swifty/shared-lib';
 import { Button } from '@swifty/ui';
+import Link from 'next/link';
 
 export default async function Home() {
   const festivalLineups = await customFetch<Festival[]>(

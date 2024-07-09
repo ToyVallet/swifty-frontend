@@ -70,7 +70,7 @@ export default function LoginForm() {
           render={({ field }) => (
             <FormItem>
               <FormControl>
-                <Input placeholder="아이디" {...field} />
+                <Input placeholder="아이디" label="1234@swifty.kr" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -84,6 +84,7 @@ export default function LoginForm() {
               <FormControl>
                 <Input
                   placeholder="비밀번호"
+                  label="********"
                   type="password"
                   autoComplete="new-password"
                   {...field}
