@@ -1,7 +1,10 @@
 import { z } from 'zod';
 
+/**제 3자와 정보 제공 동의  여부*/
+const privacyInfoAvaliable = z.boolean();
+
 /** 마켓팅 활용 동의 여부 */
-const isMarketingAvailable = z.boolean();
+const marketingAvailable = z.boolean();
 
 /** 이름 */
 const name = z
@@ -89,7 +92,8 @@ const passwordConfirm = z.string();
 
 export const formSchema = z
   .object({
-    isMarketingAvailable,
+    privacyInfoAvaliable,
+    marketingAvailable,
     name,
     dateOfBirth,
     nationality,

@@ -1,4 +1,5 @@
 export interface TermAccordion {
+  id: string;
   title: string;
   content: string;
   approved: boolean;
