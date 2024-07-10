@@ -1,3 +1,4 @@
+import { FormErrorControl } from '@components/signup';
 import { FormField, Input } from '@swifty/ui';
 
 export default function Id() {
@@ -5,12 +6,14 @@ export default function Id() {
     <FormField
       name="id"
       render={({ field }) => (
-        <Input
-          {...field}
-          label="아이디"
-          placeholder="swifty1234"
-          autoComplete="off"
-        />
+        <FormErrorControl>
+          <Input
+            {...field}
+            label="아이디"
+            placeholder="swifty1234"
+            autoComplete="off"
+          />
+        </FormErrorControl>
       )}
     />
   );

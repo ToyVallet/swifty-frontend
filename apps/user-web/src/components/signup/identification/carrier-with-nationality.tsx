@@ -1,11 +1,6 @@
 import type { FormValues } from '@app/(backable)/signup/schema';
-import {
-  FormField,
-  FormItem,
-  RadioGroup,
-  RadioOption,
-  Select,
-} from '@swifty/ui';
+import { FormErrorControl } from '@components/signup';
+import { FormField, RadioGroup, RadioOption, Select } from '@swifty/ui';
 import { useFormContext } from 'react-hook-form';
 
 export default function CarrierWithNationality() {
@@ -17,7 +12,7 @@ export default function CarrierWithNationality() {
         control={control}
         name="carrier"
         render={({ field }) => (
-          <FormItem>
+          <FormErrorControl>
             <Select
               label="통신사"
               placeholder="통신사 선택"
@@ -30,7 +25,7 @@ export default function CarrierWithNationality() {
                 { label: '알뜰폰', value: 'MVNO' },
               ]}
             />
-          </FormItem>
+          </FormErrorControl>
         )}
       />
       <FormField
@@ -38,7 +33,7 @@ export default function CarrierWithNationality() {
         defaultValue="NATIVE"
         name="nationality"
         render={({ field }) => (
-          <FormItem className="space-y-3">
+          <FormErrorControl className="space-y-3">
             <RadioGroup
               onValueChange={field.onChange}
               defaultValue={field.value}
@@ -47,7 +42,7 @@ export default function CarrierWithNationality() {
               <RadioOption value="NATIVE" label="내국인" />
               <RadioOption value="FOREIGNER" label="외국인" />
             </RadioGroup>
-          </FormItem>
+          </FormErrorControl>
         )}
       />
     </div>

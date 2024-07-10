@@ -1,3 +1,4 @@
+import { FormErrorControl } from '@components/signup';
 import { FormField, Input } from '@swifty/ui';
 
 export default function Name() {
@@ -5,7 +6,9 @@ export default function Name() {
     <FormField
       name="name"
       render={({ field }) => (
-        <Input {...field} label="이름" placeholder="홍길동" />
+        <FormErrorControl>
+          <Input {...field} label="이름" placeholder="홍길동" />
+        </FormErrorControl>
       )}
     />
   );

@@ -12,20 +12,20 @@ const name = z.string().min(2, '이름은 2글자 이상이어야 합니다.');
  * * 1월 이후, 12월 이전
  * * 1일 이후, 31일 이전
  */
-const dateOfBirth = z.date().refine((date) => {
-  const year = date.getFullYear();
-  const month = date.getMonth() + 1;
-  const day = date.getDate();
-
-  return (
-    year >= 1900 &&
-    year <= new Date().getFullYear() &&
-    month >= 1 &&
-    month <= 12 &&
-    day >= 1 &&
-    day <= 31
-  );
-});
+const dateOfBirth = z
+  .string()
+  .regex(/^\d{8}$/, 'Invalid date format, must be YYYYMMDD')
+  .refine((date) => {
+    const year = parseInt(date.slice(0, 4), 10);
+    const month = parseInt(date.slice(4, 6), 10);
+    const day = parseInt(date.slice(6, 8), 10);
+    const dateObject = new Date(year, month - 1, day);
+    return (
+      dateObject.getFullYear() === year &&
+      dateObject.getMonth() + 1 === month &&
+      dateObject.getDate() === day
+    );
+  }, 'Invalid date');
 
 /** 내국인 | 외국인 */
 const nationality = z.enum(['NATIVE', 'FOREIGNER']);
@@ -37,10 +37,12 @@ const sex = z.enum(['MALE', 'FEMALE']);
 const carrier = z.enum(['SKT', 'KT', 'LGU', 'MVNO']);
 
 /** 전화번호 */
-const phoneNumber = z.string().refine((value) => /^\d{11}$/.test(value));
+const phoneNumber = z
+  .string()
+  .refine((value) => /^\d{3}-\d{4}-\d{4}$/.test(value));
 
 /** 인증번호 */
-const verificationCode = z.string().refine((value) => /^\d{6}$/.test(value));
+const SmsCode = z.string().refine((value) => /^\d{6}$/.test(value));
 
 /** 아이디 */
 const id = z.string().min(4, '아이디는 4글자 이상이어야 합니다.');
@@ -61,7 +63,7 @@ export const formSchema = z.object({
   sex,
   carrier,
   phoneNumber,
-  verificationCode,
+  SmsCode,
   id,
   password,
   passwordConfirm,

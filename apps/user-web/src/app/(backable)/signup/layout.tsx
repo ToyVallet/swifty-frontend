@@ -5,7 +5,7 @@ import { Header } from '@components/signup';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Choose, Form, When } from '@swifty/ui';
 import { AnimatePresence } from 'framer-motion';
-import React, { type PropsWithChildren, useCallback, useState } from 'react';
+import React, { type PropsWithChildren, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import {
@@ -31,6 +31,7 @@ export default function SignupLayout({
   complete,
 }: SignupLayoutProps) {
   const form = useForm<FormValues>({
+    mode: 'onTouched',
     resolver: zodResolver(formSchema),
   });
   const [currentStep, setCurrentStep] = useState<Step>(steps[0]);

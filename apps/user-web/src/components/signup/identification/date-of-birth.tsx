@@ -1,11 +1,12 @@
-import { FormField, FormItem, Input } from '@swifty/ui';
+import FormErrorControl from '@components/signup/form-error-control';
+import { FormField, Input } from '@swifty/ui';
 
 export default function DateOfBirth() {
   return (
     <FormField
       name="dateOfBirth"
       render={({ field }) => (
-        <FormItem>
+        <FormErrorControl>
           <Input
             type="number"
             label="생년월일"
@@ -13,7 +14,7 @@ export default function DateOfBirth() {
             maxLength={8}
             {...field}
           />
-        </FormItem>
+        </FormErrorControl>
       )}
     />
   );
