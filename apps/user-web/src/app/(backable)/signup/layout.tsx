@@ -34,7 +34,7 @@ export default function SignupLayout({
     mode: 'onTouched',
     resolver: zodResolver(formSchema),
   });
-  const [currentStep, setCurrentStep] = useState<Step>(steps[1]);
+  const [currentStep, setCurrentStep] = useState<Step>(steps[7]);
 
   const nextStep = () => {
     const nextStepIndex = steps.indexOf(currentStep) + 1;
@@ -47,6 +47,17 @@ export default function SignupLayout({
 
   const onSubmit = form.handleSubmit((data) => {
     console.log(data);
+  });
+
+  const onBlur = form.handleSubmit(async (data) => {
+    if (currentStep === '사용하실 아이디를 입력해주세요') {
+      const id = data.id;
+      // 아이디 중복 체크
+      if (id === 'js9534') {
+        form.setError('id', { message: '중복된 아이디가 있습니다.' });
+        form.setFocus('id');
+      }
+    }
   });
 
   form.watch((value) => {
@@ -62,7 +73,7 @@ export default function SignupLayout({
 
           <AnimatePresence initial={false}>
             <Form {...form}>
-              <form onSubmit={onSubmit} className="text-white">
+              <form onSubmit={onSubmit} className="text-white" onBlur={onBlur}>
                 <Choose value={currentStep}>
                   <When value="약관 동의가 필요해요">{terms}</When>
 
