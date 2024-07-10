@@ -4,7 +4,7 @@ import { FormField, Input } from '@swifty/ui';
 export default function SmsCode() {
   return (
     <FormField
-      name="SmsCode"
+      name="smsCode"
       render={({ field }) => (
         <FormErrorControl>
           <Input

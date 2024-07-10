@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
 /** 마켓팅 활용 동의 여부 */
-const agreedToMarketing = z.boolean();
+const isMarketingAvailable = z.boolean();
 
 /** 이름 */
 const name = z
@@ -51,7 +51,7 @@ const phoneNumber = z
   );
 
 /** 인증번호 */
-const SmsCode = z
+const smsCode = z
   .string()
   .refine((value) => /^\d{6}$/.test(value), '6자리 숫자입니다.');
 
@@ -89,14 +89,14 @@ const passwordConfirm = z.string();
 
 export const formSchema = z
   .object({
-    agreedToMarketing,
+    isMarketingAvailable,
     name,
     dateOfBirth,
     nationality,
     sex,
     carrier,
     phoneNumber,
-    SmsCode,
+    smsCode,
     id,
     password,
     passwordConfirm,
