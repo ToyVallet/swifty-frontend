@@ -25,6 +25,19 @@ export const steps = [
 ] as const;
 
 export type Step = (typeof steps)[number];
+export const stepsWithForm: { [index in Step]: string } = {
+  '약관 동의가 필요해요': 'agreedToMarketing',
+  '성함을 알려주세요': 'name',
+  '생년월일을 알려주세요': 'dateOfBirth',
+  '성별을 알려주세요': 'sex',
+  '통신사를 선택해주세요': 'carrier',
+  '휴대폰 번호를 알려주세요': 'phoneNumber',
+  '휴대폰 번호를 인증할게요': 'SmsCode',
+  '사용하실 아이디를 입력해주세요': 'id',
+  '사용하실 비밀번호를 입력해주세요': 'password',
+  '비밀번호를 한번 더 입력해주세요': 'passwordConfirm',
+  '회원가입이 완료되었어요': '',
+};
 
 export const StepContext = createContext<{
   currentStep: Step;

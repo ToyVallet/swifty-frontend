@@ -12,15 +12,28 @@ import {
 } from '@components/signup/identification';
 import { type NonEmptyArray } from '@swifty/shared-lib';
 import { useContext } from 'react';
+import { useFormContext } from 'react-hook-form';
 
-import { type Step, StepContext, steps } from '../context';
+import { type Step, StepContext, steps, stepsWithForm } from '../context';
 
 type StepType = Readonly<NonEmptyArray<Step>>;
 
 export default function Identification() {
   const { nextStep, currentStep } = useContext(StepContext);
+
+  const form = useFormContext();
+  const {
+    formState: { errors, dirtyFields },
+  } = form;
+
+  const currentStepFormName = stepsWithForm[currentStep];
+  const currentStepError = errors[currentStepFormName];
+  const isCurrentStepDirty = dirtyFields[currentStepFormName];
+
   const onNext = () => {
-    nextStep();
+    if (!currentStepError && isCurrentStepDirty) {
+      nextStep();
+    }
   };
 
   return (
@@ -52,8 +65,12 @@ export default function Identification() {
           </Funnel.Step>
         </Funnel>
       </section>
-      <FixedBottomCTA type="button" onClick={onNext}>
-        다음
+      <FixedBottomCTA
+        type="button"
+        onClick={onNext}
+        disabled={!isCurrentStepDirty || !!currentStepError}
+      >
+        확인
       </FixedBottomCTA>
     </>
   );
