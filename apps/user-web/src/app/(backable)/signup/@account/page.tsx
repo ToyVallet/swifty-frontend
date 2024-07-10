@@ -23,10 +23,20 @@ export default function AccountPage() {
   const currentStepError = errors[currentStepFormName];
   const isCurrentStepDirty = dirtyFields[currentStepFormName];
 
-  const onNext = () => {
-    if (!currentStepError && isCurrentStepDirty) {
-      nextStep();
+  const onNext = async () => {
+    if (currentStepError && !isCurrentStepDirty) return;
+
+    // 아이디 중복 확인
+    if (currentStep === '사용하실 아이디를 입력해주세요') {
+      const id = form.getValues(currentStepFormName);
+      if (id === 'js9534') {
+        form.setError('id', { message: '중복된 아이디가 있습니다.' });
+        form.setFocus(currentStepFormName);
+        return;
+      }
     }
+
+    nextStep();
   };
 
   return (
