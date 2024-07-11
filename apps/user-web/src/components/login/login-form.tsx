@@ -33,7 +33,7 @@ export default function LoginForm() {
   const router = useRouter();
 
   const form = useForm<FormValues>({
-    mode: 'onSubmit',
+    mode: 'onTouched',
     resolver: zodResolver(formSchema),
     defaultValues: {
       userId: '',

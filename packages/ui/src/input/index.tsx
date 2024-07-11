@@ -18,7 +18,7 @@ interface InputProps
   extends Omit<ComponentPropsWithoutRef<'input'>, 'name' | 'placeholder'> {
   label: string;
   name: string;
-  placeholder: string;
+  placeholder?: string;
 }
 
 export const variants = {
@@ -106,7 +106,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function (
         type={!isVisible && type !== 'number' ? type : 'text'}
         value={inputValue}
         className={cn(
-          'w-full bg-transparent text-white text-16 py-3 px-5 autofill:bg-transparent transition-all duration-200 ease-in-out',
+          'w-full bg-transparent text-16 py-3 px-5 autofill:bg-transparent transition-all duration-200 ease-in-out text-white',
           isActive && 'mt-[30px]',
         )}
         inputMode={type === 'number' || type === 'tel' ? 'numeric' : 'text'}
