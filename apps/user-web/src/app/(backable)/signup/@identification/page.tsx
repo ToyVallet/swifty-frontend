@@ -11,7 +11,7 @@ import {
   SmsCode,
 } from '@components/signup/identification';
 import { type NonEmptyArray } from '@swifty/shared-lib';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { useFormContext } from 'react-hook-form';
 
 import { type Step, StepContext, steps, stepsWithForm } from '../context';
@@ -30,11 +30,15 @@ export default function Identification() {
   const currentStepError = errors[currentStepFormName];
   const isCurrentStepDirty = dirtyFields[currentStepFormName];
 
-  const onNext = () => {
+  const onNext = async () => {
     if (!currentStepError && isCurrentStepDirty) {
       nextStep();
     }
   };
+
+  useEffect(() => {
+    form.setFocus(currentStepFormName);
+  }, [currentStepFormName]);
 
   return (
     <>

@@ -35,6 +35,9 @@ export default function AccountPage() {
         return;
       }
     }
+    useEffect(() => {
+      form.setFocus(currentStepFormName);
+    }, [currentStepFormName]);
 
     nextStep();
   };
