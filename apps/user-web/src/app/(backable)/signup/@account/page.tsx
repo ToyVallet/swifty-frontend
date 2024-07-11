@@ -36,6 +36,10 @@ export default function AccountPage() {
       }
     }
 
+    if (currentStep === '비밀번호를 한번 더 입력해주세요') {
+      // 회원가입 요청 전송하기
+    }
+
     nextStep();
   };
 
@@ -62,7 +66,9 @@ export default function AccountPage() {
         onClick={onNext}
         disabled={!isCurrentStepDirty || !!currentStepError}
       >
-        확인
+        {currentStep === '비밀번호를 한번 더 입력해주세요'
+          ? '회원가입'
+          : '확인'}
       </FixedBottomCTA>
     </>
   );

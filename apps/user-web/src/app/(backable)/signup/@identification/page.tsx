@@ -36,8 +36,6 @@ export default function Identification() {
     // 인증 번호 요청
     if (currentStep === '휴대폰 번호를 알려주세요') {
       // 문자 전송 전달 - 인증 요청
-      // 3분의 카운트 다운
-      // 3분 카운트 다운 이후 재요청
     }
 
     // 전화번호 인증 확인
@@ -46,9 +44,7 @@ export default function Identification() {
       // 인증 실패시 다시 시도
     }
 
-    if (!currentStepError && isCurrentStepDirty) {
-      nextStep();
-    }
+    nextStep();
   };
 
   useEffect(() => {
