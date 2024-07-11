@@ -31,6 +31,21 @@ export default function Identification() {
   const isCurrentStepDirty = dirtyFields[currentStepFormName];
 
   const onNext = async () => {
+    if (currentStepError && !isCurrentStepDirty) return;
+
+    // 인증 번호 요청
+    if (currentStep === '휴대폰 번호를 알려주세요') {
+      // 문자 전송 전달 - 인증 요청
+      // 3분의 카운트 다운
+      // 3분 카운트 다운 이후 재요청
+    }
+
+    // 전화번호 인증 확인
+    if (currentStep === '휴대폰 번호를 인증할게요') {
+      // 인증 성공시 nextStep()
+      // 인증 실패시 다시 시도
+    }
+
     if (!currentStepError && isCurrentStepDirty) {
       nextStep();
     }
@@ -74,7 +89,7 @@ export default function Identification() {
         onClick={onNext}
         disabled={!isCurrentStepDirty || !!currentStepError}
       >
-        확인
+        {currentStep === '휴대폰 번호를 알려주세요' ? '인증번호 발송' : '확인'}
       </FixedBottomCTA>
     </>
   );

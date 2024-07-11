@@ -35,13 +35,13 @@ export default function AccountPage() {
         return;
       }
     }
-    useEffect(() => {
-      form.setFocus(currentStepFormName);
-    }, [currentStepFormName]);
 
     nextStep();
   };
 
+  useEffect(() => {
+    form.setFocus(currentStepFormName);
+  }, [currentStepFormName]);
   return (
     <>
       <section className="flex flex-col gap-5">
