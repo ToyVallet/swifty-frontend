@@ -34,7 +34,7 @@ const dateOfBirth = z
       dateObject.getMonth() + 1 === month &&
       dateObject.getDate() === day
     );
-  }, 'Invalid date');
+  }, '유효하지 않은 날짜 형식입니다.');
 
 /** 내국인 | 외국인 */
 const nationality = z.enum(['NATIVE', 'FOREIGNER']);

@@ -1,6 +1,6 @@
 'use client';
 
-import { cn, formatPhoneNumber } from '@swifty/shared-lib';
+import { cn, formatDateOfBirth, formatPhoneNumber } from '@swifty/shared-lib';
 import { motion } from 'framer-motion';
 import {
   type ComponentPropsWithoutRef,
@@ -73,6 +73,9 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function (
       sanitizedValue = sanitizedValue.replaceAll(/[^0-9]/g, '');
     } else if (type === 'tel') {
       sanitizedValue = formatPhoneNumber(sanitizedValue).slice(0, 13);
+    }
+    if (label === '생년월일') {
+      sanitizedValue = formatDateOfBirth(sanitizedValue);
     }
     setInputValue(sanitizedValue);
     onChange?.(e);
