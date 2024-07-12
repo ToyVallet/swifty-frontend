@@ -9,6 +9,7 @@ export default function Sex() {
         <FormErrorControl>
           <Select
             onValueChange={field.onChange}
+            defaultValue={field.value}
             label="성별"
             placeholder="성별 선택"
             options={[

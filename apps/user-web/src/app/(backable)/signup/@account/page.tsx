@@ -3,7 +3,8 @@
 import { FixedBottomCTA } from '@components/common';
 import { Funnel } from '@components/signup';
 import { Id, Password, PasswordConfirm } from '@components/signup/account';
-import { type NonEmptyArray } from '@swifty/shared-lib';
+import { API_SIGNUP } from '@lib/constants';
+import { type NonEmptyArray, customFetch } from '@swifty/shared-lib';
 import { useContext, useEffect } from 'react';
 import { useFormContext } from 'react-hook-form';
 
@@ -29,6 +30,7 @@ export default function AccountPage() {
     // 아이디 중복 확인
     if (currentStep === '사용하실 아이디를 입력해주세요') {
       const id = form.getValues(currentStepFormName);
+      // id 중복 확인 api 필요
       if (id === 'js9534') {
         form.setError('id', { message: '중복된 아이디가 있습니다.' });
         form.setFocus(currentStepFormName);
@@ -38,6 +40,16 @@ export default function AccountPage() {
 
     if (currentStep === '비밀번호를 한번 더 입력해주세요') {
       // 회원가입 요청 전송하기
+      const formData = form.getValues();
+      try {
+        await customFetch(API_SIGNUP.user, {
+          method: 'post',
+          body: JSON.stringify(formData),
+        });
+      } catch (err) {
+        console.error(err);
+        return;
+      }
     }
 
     nextStep();
@@ -46,6 +58,7 @@ export default function AccountPage() {
   useEffect(() => {
     form.setFocus(currentStepFormName);
   }, [currentStepFormName]);
+
   return (
     <>
       <section className="flex flex-col gap-5">

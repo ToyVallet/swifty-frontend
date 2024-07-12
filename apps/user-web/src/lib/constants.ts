@@ -20,3 +20,7 @@ export const API_FESTIVALS = {
   festival: (id: string) => `/festival/${id}`,
   lineUp: (id: string) => `/festival/detail/${id}`,
 };
+
+export const API_SIGNUP = {
+  user: '/user',
+};
