@@ -5,3 +5,4 @@ export type DeepValueOf<T> = T extends object
   : T;
 
 export type NonEmptyArray<T> = [T, ...T[]];
+export type NonEmptyArrayReadOnly<T> = readonly [T, ...T[]];
