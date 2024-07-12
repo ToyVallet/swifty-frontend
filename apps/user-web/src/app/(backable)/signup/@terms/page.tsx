@@ -30,12 +30,10 @@ export default function Page() {
     // form 데이터 최신화
     termsOfServices.forEach(({ id, approved }) => {
       // 마케팅
-      if (id === MARKETING && approved) form.setValue(id, true);
-      if (id === MARKETING && !approved) form.setValue(id, false);
+      if (id === MARKETING) form.setValue(id, approved);
 
       // 제 3자
-      if (id === PRIVACY && approved) form.setValue(id, true);
-      if (id === PRIVACY && !approved) form.setValue(id, false);
+      if (id === PRIVACY) form.setValue(id, approved);
     });
 
     // 버튼 텍스트 및 기능 조작
