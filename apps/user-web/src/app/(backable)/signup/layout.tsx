@@ -5,7 +5,7 @@ import { Header } from '@components/signup';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Choose, Form, When } from '@swifty/ui';
 import { AnimatePresence } from 'framer-motion';
-import React, { type PropsWithChildren, useCallback, useState } from 'react';
+import React, { type PropsWithChildren, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import {
@@ -31,6 +31,7 @@ export default function SignupLayout({
   complete,
 }: SignupLayoutProps) {
   const form = useForm<FormValues>({
+    mode: 'onChange',
     resolver: zodResolver(formSchema),
   });
   const [currentStep, setCurrentStep] = useState<Step>(steps[0]);
@@ -41,16 +42,7 @@ export default function SignupLayout({
     if (steps[nextStepIndex] !== undefined) {
       setCurrentStep(steps[nextStepIndex] as Step);
     }
-    console.log('nextStep: ', nextStepIndex, steps[nextStepIndex]);
   };
-
-  const onSubmit = form.handleSubmit((data) => {
-    console.log(data);
-  });
-
-  form.watch((value) => {
-    console.log(value);
-  });
 
   return (
     <>
@@ -61,7 +53,7 @@ export default function SignupLayout({
 
           <AnimatePresence initial={false}>
             <Form {...form}>
-              <form onSubmit={onSubmit} className="text-white">
+              <form className="text-white">
                 <Choose value={currentStep}>
                   <When value="약관 동의가 필요해요">{terms}</When>
 

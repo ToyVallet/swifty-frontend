@@ -38,5 +38,8 @@ yarn-error.log*
 *storybook.log
 # yarn
 .yarn/*
-apps/root-admin/.yarn/*
-storybook-static
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
