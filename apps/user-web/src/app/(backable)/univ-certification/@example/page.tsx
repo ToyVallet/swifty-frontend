@@ -1,3 +1,9 @@
+import { UnivSearch } from '@components/univ-certification';
+
 export default function ExamplePage() {
-  return <div>example</div>;
+  return (
+    <div>
+      <UnivSearch />
+    </div>
+  );
 }
