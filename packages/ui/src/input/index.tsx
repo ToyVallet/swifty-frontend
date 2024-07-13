@@ -6,6 +6,7 @@ import {
   type ComponentPropsWithoutRef,
   forwardRef,
   useCallback,
+  useEffect,
   useState,
 } from 'react';
 
@@ -66,6 +67,10 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function (
     setIsFocused(false);
     onBlur?.(e);
   }, []);
+
+  useEffect(() => {
+    setInputValue(value);
+  }, [value]);
 
   const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     let sanitizedValue = e.target.value;
