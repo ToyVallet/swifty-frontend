@@ -1,12 +1,14 @@
 'use client';
 
-import type { FormValues } from '@app/(backable)/signup/schema';
-import { formSchema } from '@app/(backable)/signup/schema';
 import {
   type CertificationStep,
   CertificationStepContext,
   certificationsSteps,
 } from '@app/(backable)/univ-certification/context';
+import {
+  type UnivFormValues,
+  univFormSchema,
+} from '@app/(backable)/univ-certification/schema';
 import { Navigation } from '@components/common';
 import { Header } from '@components/signup';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -26,9 +28,9 @@ export default function UnivCertificationLayout({
   complete,
   certification,
 }: UnivCertificationLayoutProps) {
-  const form = useForm<FormValues>({
+  const form = useForm<UnivFormValues>({
     mode: 'onChange',
-    resolver: zodResolver(formSchema),
+    resolver: zodResolver(univFormSchema),
   });
 
   const [currentStep, setCurrentStep] = useState<CertificationStep>(
@@ -49,7 +51,14 @@ export default function UnivCertificationLayout({
       <Navigation variant="back" title="학적 인증" />
       <CertificationStepContext.Provider value={{ currentStep, nextStep }}>
         <main className="h-full flex flex-col relative pb-20 overflow-y-auto scrollbar-hide">
-          <Header>{currentStep}</Header>
+          <Header>
+            {currentStep}
+            {currentStep === '학적 인증을 시작할게요' && (
+              <Header.Subtitle>
+                학적 인증을 위해 아래의 정보를 확인해주세요.
+              </Header.Subtitle>
+            )}
+          </Header>
           <AnimatePresence initial={false}>
             <Form {...form}>
               <form className="text-white">
