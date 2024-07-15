@@ -7,6 +7,8 @@ import {
   StudentCertificationImage,
   StudentStatus,
 } from '@components/univ-certification';
+import { API_CERTIFICATION } from '@lib/constants';
+import { customFetch } from '@swifty/shared-lib';
 import { FormField } from '@swifty/ui';
 import { useContext } from 'react';
 import { useFormContext } from 'react-hook-form';
@@ -17,9 +19,31 @@ export default function CertificationPage() {
   const {
     formState: { isValid },
   } = form;
+
   const { nextStep } = useContext(CertificationStepContext);
   const onNext = async () => {
-    nextStep();
+    try {
+      const formValue = form.getValues();
+      const keys = Object.keys(formValue).filter(
+        (name) => name !== 'exampleImage',
+      );
+
+      const formData = new FormData();
+      keys.forEach((key) => {
+        formData.append(key, formValue[key]);
+      });
+
+      await customFetch(API_CERTIFICATION.certification, {
+        method: 'post',
+        headers: {},
+        credentials: 'include',
+        body: formData,
+      });
+
+      nextStep();
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (
