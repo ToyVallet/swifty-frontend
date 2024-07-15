@@ -4,6 +4,7 @@ import { Search } from '@components/common';
 import Magnifier from '@icons/magnifier.svg';
 import { customFetch } from '@swifty/shared-lib';
 import { motion } from 'framer-motion';
+import { useFormContext } from 'react-hook-form';
 
 const listVariants = {
   hidden: { opacity: 0, height: 0 },
@@ -12,6 +13,8 @@ const listVariants = {
 };
 
 export default function UnivSearch() {
+  const form = useFormContext();
+
   const searchApi = async (term: string) => {
     const result = await customFetch<{ id: string; name: string }[]>(
       `/search?univ=${term}`,
@@ -38,6 +41,7 @@ export default function UnivSearch() {
               key={item.id}
               onClick={() => {
                 selectSearchValue(item.name);
+                form.setValue('universityId', item.id);
               }}
             />
           ))}

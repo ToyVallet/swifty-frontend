@@ -1,21 +1,19 @@
 'use client';
 
+import { Navigation } from '@components/common';
+import { Header } from '@components/signup';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { Choose, Form, When } from '@swifty/ui';
+import { AnimatePresence } from 'framer-motion';
+import { type PropsWithChildren, type ReactNode, useState } from 'react';
+import { useForm } from 'react-hook-form';
+
 import {
   type CertificationStep,
   CertificationStepContext,
   certificationsSteps,
-} from '@app/(backable)/univ-certification/context';
-import {
-  type UnivFormValues,
-  univFormSchema,
-} from '@app/(backable)/univ-certification/schema';
-import { Navigation } from '@components/common';
-import { Header } from '@components/signup';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { Choose, When } from '@swifty/ui';
-import { AnimatePresence } from 'framer-motion';
-import { type PropsWithChildren, type ReactNode, useState } from 'react';
-import { Form, useForm } from 'react-hook-form';
+} from './context';
+import { type UnivFormValues, univFormSchema } from './schema';
 
 type UnivCertificationLayoutProps = PropsWithChildren<{
   example: ReactNode;
@@ -45,6 +43,7 @@ export default function UnivCertificationLayout({
       setCurrentStep(nextStep);
     }
   };
+  console.log(form.watch());
 
   return (
     <>
