@@ -38,7 +38,7 @@ export default function ExampleImage() {
           width={248}
           height={373}
           alt="학적인증 예시"
-          className="mx-auto"
+          className="mx-auto w-auto h-auto"
         />
       </div>
     </section>

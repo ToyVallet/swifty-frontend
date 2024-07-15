@@ -17,7 +17,11 @@ const listVariants = {
   exit: { opacity: 0, height: 0 },
 };
 
-export default function UnivSearch() {
+type Props = {
+  onChange?: (value: string) => void;
+};
+
+export default function UnivSearch({ onChange }: Props) {
   const form = useFormContext();
 
   const searchApi = async (term: string) => {
@@ -51,10 +55,7 @@ export default function UnivSearch() {
               key={item.universityName}
               onClick={() => {
                 selectSearchValue(item.universityName);
-                form.setValue('universityId', item.universityId, {
-                  shouldValidate: true,
-                  shouldDirty: true,
-                });
+                onChange?.(item.universityId);
                 form.setValue('exampleImage', item.exampleImage.url, {
                   shouldValidate: true,
                   shouldDirty: true,
