@@ -19,7 +19,7 @@ export default function CertificationPage() {
   } = form;
   const { nextStep } = useContext(CertificationStepContext);
   const onNext = async () => {
-    //nextStep();
+    nextStep();
   };
 
   return (
