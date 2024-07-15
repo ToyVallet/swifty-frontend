@@ -30,7 +30,6 @@ export default function UnivCertificationLayout({
     mode: 'onChange',
     resolver: zodResolver(univFormSchema),
     defaultValues: {
-      universityId: 'test',
       ocrMajor: '',
       ocrName: '',
       ocrStudenStatus: '',
@@ -39,7 +38,7 @@ export default function UnivCertificationLayout({
   });
 
   const [currentStep, setCurrentStep] = useState<CertificationStep>(
-    certificationsSteps[1],
+    certificationsSteps[0],
   );
 
   const nextStep = () => {

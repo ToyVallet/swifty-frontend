@@ -36,6 +36,8 @@ const image = z
     return ACCEPTED_FILE_TYPES.includes(file.type);
   }, '이미지 파일만 허용합니다. (jpg)');
 
+const exampleImage = z.string();
+
 export const univFormSchema = z.object({
   universityId,
   studentStatus,
@@ -44,6 +46,7 @@ export const univFormSchema = z.object({
   ocrMajor,
   ocrStudenStatus,
   image,
+  exampleImage,
 });
 
 export type UnivFormValues = z.infer<typeof univFormSchema>;

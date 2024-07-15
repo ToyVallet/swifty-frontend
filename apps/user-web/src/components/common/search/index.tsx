@@ -7,19 +7,17 @@ import type { ChangeEvent, ReactNode } from 'react';
 import { useState } from 'react';
 
 // API 함수 타입 정의
-type ApiFunction<T extends { [key in string]: string }> = (
-  term: string,
-) => Promise<T[]>;
+type ApiFunction = (term: string) => Promise<any[]>;
 
 type SearchProps<T extends { [key in string]: string }> = {
-  fetchSearchResults: ApiFunction<T>;
+  fetchSearchResults: ApiFunction;
   children: (
     searchList: T[],
     selectSearchValue: (value: string) => void,
   ) => ReactNode;
 };
 
-export default function Search<T extends { [key in string]: string }>({
+export default function Search<T extends { [key in string]: any }>({
   fetchSearchResults,
   children,
 }: SearchProps<T>) {

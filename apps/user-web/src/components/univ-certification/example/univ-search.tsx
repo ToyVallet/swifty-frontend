@@ -2,6 +2,11 @@
 
 import { Search } from '@components/common';
 import Magnifier from '@icons/magnifier.svg';
+import { API_CERTIFICATION } from '@lib/constants';
+import type {
+  ApiCertification,
+  UniversitySearch,
+} from '@lib/types/certification';
 import { customFetch } from '@swifty/shared-lib';
 import { motion } from 'framer-motion';
 import { useFormContext } from 'react-hook-form';
@@ -16,16 +21,16 @@ export default function UnivSearch() {
   const form = useFormContext();
 
   const searchApi = async (term: string) => {
-    const result = await customFetch<{ id: string; name: string }[]>(
-      `/search?univ=${term}`,
+    const result = await customFetch<ApiCertification>(
+      API_CERTIFICATION.search(encodeURIComponent(term)),
       {
         method: 'get',
       },
     );
-    return result;
+    return result.content;
   };
   return (
-    <Search fetchSearchResults={searchApi}>
+    <Search<UniversitySearch> fetchSearchResults={searchApi}>
       {(searchList, selectSearchValue) => (
         <motion.ul
           variants={listVariants}
@@ -35,13 +40,25 @@ export default function UnivSearch() {
           transition={{ duration: 0.3 }}
           className="w-full h-full flex flex-col rounded-xl bg-swifty-color-800"
         >
+          {searchList.length === 0 && (
+            <div className="text-center text-16 p-5">
+              검색 결과가 존재하지 않습니다.
+            </div>
+          )}
           {searchList.map((item) => (
             <Item
-              value={item.name}
-              key={item.id}
+              value={item.universityName}
+              key={item.universityName}
               onClick={() => {
-                selectSearchValue(item.name);
-                form.setValue('universityId', item.id);
+                selectSearchValue(item.universityName);
+                form.setValue('universityId', item.universityId, {
+                  shouldValidate: true,
+                  shouldDirty: true,
+                });
+                form.setValue('exampleImage', item.exampleImage.url, {
+                  shouldValidate: true,
+                  shouldDirty: true,
+                });
               }}
             />
           ))}

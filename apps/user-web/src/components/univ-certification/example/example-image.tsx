@@ -1,6 +1,9 @@
 import Image from 'next/image';
+import { useFormContext } from 'react-hook-form';
 
 export default function ExampleImage() {
+  const form = useFormContext();
+  const exampleImage = form.getValues('exampleImage');
   const required: readonly { title: string; sub?: string }[] = [
     { title: '성명', sub: '가입자와 동일한 성명' },
     { title: '학번' },
@@ -31,7 +34,7 @@ export default function ExampleImage() {
           예시 이미지
         </span>
         <Image
-          src="/images/cer-example.jpg"
+          src={exampleImage ? exampleImage : '/images/cer-example.jpg'}
           width={248}
           height={373}
           alt="학적인증 예시"
