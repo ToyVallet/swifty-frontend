@@ -50,7 +50,6 @@ export default function UnivCertificationLayout({
       setCurrentStep(nextStep);
     }
   };
-  console.log(form.watch());
 
   return (
     <>
@@ -58,12 +57,18 @@ export default function UnivCertificationLayout({
       <CertificationStepContext.Provider value={{ currentStep, nextStep }}>
         <main className="h-full flex flex-col relative pb-20 overflow-y-auto scrollbar-hide">
           <Header>
-            {currentStep}
-            {currentStep === '학적 인증을 시작할게요' && (
-              <Header.Subtitle>
-                학적 인증을 위해 아래의 정보를 확인해주세요.
-              </Header.Subtitle>
-            )}
+            <Choose value={currentStep}>
+              <When value="학적 인증을 시작할게요">
+                {currentStep}
+                <Header.Subtitle>
+                  학적 인증을 위해 아래의 정보를 확인해주세요.
+                </Header.Subtitle>
+              </When>
+              <When value="인증 이미지를 업로드 해주세요">{currentStep}</When>
+              <When value="학적 인증 신청이 완료되었습니다.">
+                학적 인증 신청이<br></br> 완료 되었습니다
+              </When>
+            </Choose>
           </Header>
           <AnimatePresence initial={false}>
             <Form {...form}>
