@@ -5,7 +5,7 @@ export const privateRoutes = ['/mypage', '/ticketing'];
 
 export const API_ROUTES = {
   user: {
-    login: '/login',
+    login: '/user/login',
   },
 };
 
