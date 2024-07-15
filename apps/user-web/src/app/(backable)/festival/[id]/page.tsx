@@ -2,6 +2,7 @@ import type { TileInfo } from '@components/common';
 import {
   Hero,
   ImageWithFallback,
+  Main,
   MenuTiles,
   TileHeader,
 } from '@components/common';
@@ -63,7 +64,7 @@ export default async function FestivalHomePage({
         />
         <FadeOverlay />
       </Hero>
-      <main className="px-5 flex flex-col gap-10">
+      <Main className="px-5 gap-10">
         <TopCard
           title={festivalInfo.name}
           description={festivalInfo.description}
@@ -75,7 +76,7 @@ export default async function FestivalHomePage({
         />
         <MenuTiles tiles={tiles} />
         <LineUpSection concerts={lineup.concertsResponse} />
-      </main>
+      </Main>
     </div>
   );
 }

@@ -12,3 +12,4 @@ export { default as ImageWithFallback } from './image-with-fallback';
 export { default as FadeOverlay } from './fade-overlay';
 export { default as GlobalNavigation } from './global-navigation';
 export { default as FixedBottomCTA } from './fixed-bottom-cta';
+export { default as Main } from './main';

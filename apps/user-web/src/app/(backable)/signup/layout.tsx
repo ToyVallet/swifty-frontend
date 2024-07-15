@@ -1,6 +1,6 @@
 'use client';
 
-import { Navigation } from '@components/common';
+import { Main, Navigation } from '@components/common';
 import { Header } from '@components/signup';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Choose, Form, When } from '@swifty/ui';
@@ -48,7 +48,7 @@ export default function SignupLayout({
     <>
       <Navigation variant="back" title="회원가입" />
       <StepContext.Provider value={{ currentStep, nextStep }}>
-        <main className="h-full flex flex-col relative pb-20 overflow-y-auto scrollbar-hide">
+        <Main className="relative pb-20 overflow-y-auto scrollbar-hide">
           <Header>{currentStep}</Header>
 
           <AnimatePresence initial={false}>
@@ -74,7 +74,7 @@ export default function SignupLayout({
               </form>
             </Form>
           </AnimatePresence>
-        </main>
+        </Main>
       </StepContext.Provider>
     </>
   );
