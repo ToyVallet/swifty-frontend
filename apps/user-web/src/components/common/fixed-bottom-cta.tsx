@@ -1,12 +1,8 @@
 'use client';
 
 import { Button } from '@swifty/ui';
-import type {
-  ForwardRefExoticComponent} from 'react';
-import {
-  type ComponentPropsWithoutRef,
-  forwardRef,
-} from 'react';
+import type { ForwardRefExoticComponent } from 'react';
+import { type ComponentPropsWithoutRef, forwardRef } from 'react';
 
 import { GlobalPortal } from '../../app/global-portal';
 

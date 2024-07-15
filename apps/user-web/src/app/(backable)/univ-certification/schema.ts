@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
 const MAX_UPLOAD_SIZE = 1024 * 1024 * 5; // 5MB
-const ACCEPTED_FILE_TYPES = ['image/jpg'];
+const ACCEPTED_FILE_TYPES = ['image/jpg', 'image/jpeg'];
 
 /**대학생 고유 아이디 */
 const universityId = z.string();
@@ -27,7 +27,7 @@ const ocrMajor = z.string();
 const ocrStudenStatus = z.string();
 
 /**이미지 */
-const Image = z
+const image = z
   .instanceof(File)
   .refine((file) => {
     return !file || file.size <= MAX_UPLOAD_SIZE;
@@ -43,7 +43,7 @@ export const univFormSchema = z.object({
   ocrStudentId,
   ocrMajor,
   ocrStudenStatus,
-  Image,
+  image,
 });
 
 export type UnivFormValues = z.infer<typeof univFormSchema>;

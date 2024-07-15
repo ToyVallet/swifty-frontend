@@ -29,10 +29,17 @@ export default function UnivCertificationLayout({
   const form = useForm<UnivFormValues>({
     mode: 'onChange',
     resolver: zodResolver(univFormSchema),
+    defaultValues: {
+      universityId: 'test',
+      ocrMajor: '',
+      ocrName: '',
+      ocrStudenStatus: '',
+      ocrStudentId: '',
+    },
   });
 
   const [currentStep, setCurrentStep] = useState<CertificationStep>(
-    certificationsSteps[0],
+    certificationsSteps[1],
   );
 
   const nextStep = () => {
@@ -60,7 +67,7 @@ export default function UnivCertificationLayout({
           </Header>
           <AnimatePresence initial={false}>
             <Form {...form}>
-              <form className="text-white">
+              <form className="text-white w-full h-full">
                 <Choose value={currentStep}>
                   <When value="학적 인증을 시작할게요">{example}</When>
                   <When value="인증 이미지를 업로드 해주세요">
