@@ -1,5 +1,6 @@
-import { FixedBottomCTA } from '@components/common';
+import { FixedBottomCTAGroup } from '@components/common';
 import Check from '@images/signup/complete-check.gif';
+import { Button } from '@swifty/ui';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -26,22 +27,16 @@ export default function CertificationCompletePage() {
           </span>
         </div>
       </section>
-      <FixedBottomCTA
-        type="button"
-        size="full"
-        variant="white"
-        className="bottom-[60px]"
-      >
-        <Link href="/">홈으로</Link>
-      </FixedBottomCTA>
-      <FixedBottomCTA
-        type="button"
-        onClick={() => {}}
-        size="full"
-        shadow={false}
-      >
-        안면 인증 등록
-      </FixedBottomCTA>
+      <FixedBottomCTAGroup
+        buttons={[
+          <Button size="full" variant="white">
+            <Link href="/">홈으로</Link>
+          </Button>,
+          <Button size="full">
+            <Link href="#">안면 인증 등록</Link>
+          </Button>,
+        ]}
+      />
     </>
   );
 }
