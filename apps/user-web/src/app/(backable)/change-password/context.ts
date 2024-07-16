@@ -1,7 +1,6 @@
 'use client';
 
 import { createContext } from 'react';
-import { TypeOf } from 'zod';
 
 export const phoneSteps = [
   '휴대폰 번호를 입력하세요',
