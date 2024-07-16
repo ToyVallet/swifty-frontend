@@ -27,7 +27,7 @@ export default function SearchLayout({ password, phone, complete }: Props) {
     mode: 'onChange',
     resolver: zodResolver(findPasswordSchema),
   });
-  const [currentStep, setCurrentStep] = useState<FindPasswordStep>(steps[0]);
+  const [currentStep, setCurrentStep] = useState<FindPasswordStep>(steps[5]);
 
   const nextStep = () => {
     const nextStepIndex = steps.indexOf(currentStep) + 1;
