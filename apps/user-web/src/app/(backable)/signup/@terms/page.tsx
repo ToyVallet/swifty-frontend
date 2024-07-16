@@ -6,7 +6,7 @@ import { Accordion } from '@components/ui/accordion';
 import { useContext, useMemo, useReducer } from 'react';
 import { useFormContext } from 'react-hook-form';
 
-import { StepContext } from '../context';
+import { SignUpStepContext } from '../context';
 import { initialData } from './data';
 import { reducer } from './reducer';
 
@@ -16,7 +16,7 @@ const MARKETING = 'marketingAvailable';
 const PRIVACY = 'privacyInfoAvaliable';
 
 export default function Page() {
-  const { nextStep } = useContext(StepContext);
+  const { nextStep } = useContext(SignUpStepContext);
   const form = useFormContext();
   const [termsOfServices, dispatch] = useReducer(reducer, initialData);
 

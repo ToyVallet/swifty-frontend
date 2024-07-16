@@ -8,12 +8,12 @@ import { type NonEmptyArray, customFetch } from '@swifty/shared-lib';
 import { useContext, useEffect } from 'react';
 import { useFormContext } from 'react-hook-form';
 
-import { type Step, StepContext, steps, stepsWithForm } from '../context';
+import { SignUpStepContext, type Step, steps, stepsWithForm } from '../context';
 
 type StepType = Readonly<NonEmptyArray<Step>>;
 
 export default function AccountPage() {
-  const { nextStep, currentStep } = useContext(StepContext);
+  const { nextStep, currentStep } = useContext(SignUpStepContext);
 
   const form = useFormContext();
   const {

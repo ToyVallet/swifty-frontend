@@ -1,7 +1,7 @@
 /**
  * @description 서버 URL
  */
-export const SERVER_URL: string = 'http://211.34.229.68/api';
+export const SERVER_URL: string = 'https://dev.swifty.kr/api';
 //export const SERVER_URL: string = 'http://localhost:8000';
 // export const SERVER_URL: string = 'http://dpi.swifty.kr:19889';
 

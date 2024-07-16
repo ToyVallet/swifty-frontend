@@ -1,4 +1,4 @@
-import { createContext } from 'react';
+import createStepContext from '@app/context/step-context';
 
 export const termsSteps = ['약관 동의가 필요해요'] as const;
 
@@ -39,10 +39,4 @@ export const stepsWithForm: { [index in Step]: string } = {
   '회원가입이 완료되었어요': '',
 };
 
-export const StepContext = createContext<{
-  currentStep: Step;
-  nextStep: () => void;
-}>({
-  currentStep: steps[0],
-  nextStep: () => {},
-});
+export const SignUpStepContext = createStepContext(steps);

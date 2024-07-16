@@ -7,18 +7,18 @@ import Funnel, { type StepType } from './funnel';
 
 export default function Header({ children }: PropsWithChildren) {
   return (
-    <h1 className="text-white text-center font-bold text-26 my-10">
+    <h1 className="text-white text-center font-bold text-26 my-10 flex flex-col items-center">
       {children}
     </h1>
   );
 }
 
 Header.Title = function Title({ children }: PropsWithChildren) {
-  return <h1 className="text-[27px] font-bold">{children}</h1>;
+  return <h1 className="text-26 font-bold">{children}</h1>;
 };
 
 Header.Subtitle = function Subtitle({ children }: PropsWithChildren) {
-  return <div className="text-16 flex">{children}</div>;
+  return <div className="text-14 flex text-center font-medium">{children}</div>;
 };
 
 type TransformerProps = {

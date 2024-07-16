@@ -6,6 +6,7 @@ import {
   type ComponentPropsWithoutRef,
   forwardRef,
   useCallback,
+  useEffect,
   useState,
 } from 'react';
 
@@ -67,6 +68,10 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function (
     onBlur?.(e);
   }, []);
 
+  useEffect(() => {
+    setInputValue(value);
+  }, [value]);
+
   const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     let sanitizedValue = e.target.value;
     if (type === 'number') {
@@ -87,7 +92,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function (
       whileTap={'active'}
       initial="initial"
       className={cn(
-        'w-full relative rounded-xl overflow-hidden bg-neutral-800 border transition-colors duration-200 ease-in-out',
+        'w-full relative rounded-xl overflow-hidden bg-swifty-color-800 border transition-colors duration-200 ease-in-out',
         isFocused ? 'border-primary shadow-input-active' : 'border-transparent',
       )}
     >
