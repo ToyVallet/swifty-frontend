@@ -27,7 +27,7 @@ export default function SearchLayout({ password, phone, complete }: Props) {
     mode: 'onChange',
     resolver: zodResolver(findPasswordSchema),
   });
-  const [currentStep, setCurrentStep] = useState<FindPasswordStep>(steps[5]);
+  const [currentStep, setCurrentStep] = useState<FindPasswordStep>(steps[0]);
 
   const nextStep = () => {
     const nextStepIndex = steps.indexOf(currentStep) + 1;
@@ -43,20 +43,20 @@ export default function SearchLayout({ password, phone, complete }: Props) {
       <FindPasswordContext.Provider value={{ currentStep, nextStep }}>
         <Main>
           <Header>{currentStep}</Header>
+          <Form {...form}>
+            <form>
+              <Choose value={currentStep}>
+                {phoneSteps.map((step) => (
+                  <When value={step}>{phone}</When>
+                ))}
+                {passwordSteps.map((step) => (
+                  <When value={step}>{password}</When>
+                ))}
+                <When value={'비밀번호가 재설정 되었습니다.'}>{complete}</When>
+              </Choose>
+            </form>
+          </Form>
         </Main>
-        <Form {...form}>
-          <form>
-            <Choose value={currentStep}>
-              {phoneSteps.map((step) => (
-                <When value={step}>{phone}</When>
-              ))}
-              {passwordSteps.map((step) => (
-                <When value={step}>{password}</When>
-              ))}
-              <When value={'비밀번호가 재설정 되었습니다.'}>{complete}</When>
-            </Choose>
-          </form>
-        </Form>
       </FindPasswordContext.Provider>
     </>
   );
