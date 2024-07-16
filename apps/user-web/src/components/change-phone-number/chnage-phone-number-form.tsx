@@ -40,10 +40,6 @@ export default function ChangePhoneNumberForm() {
   const currentStepError = errors[step];
   const isCurrentStepDirty = dirtyFields[step];
 
-  const handleSubmit = async (data: Schema) => {
-    console.log(data);
-  };
-
   const onNext = () => {
     if (step === 'phoneNumber') {
       setStep(steps[1]);
@@ -54,10 +50,7 @@ export default function ChangePhoneNumberForm() {
   return (
     <>
       <Form {...form}>
-        <form
-          onSubmit={form.handleSubmit(handleSubmit)}
-          className="flex flex-col gap-5"
-        >
+        <form className="flex flex-col gap-5">
           <Funnel step={step} steps={steps}>
             <Funnel.Step<StepType> step="phoneNumber">
               <PhoneNumber />
