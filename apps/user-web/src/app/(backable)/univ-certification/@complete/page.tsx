@@ -1,5 +1,3 @@
-'use client';
-
 import { FixedBottomCTA } from '@components/common';
 import Check from '@images/signup/complete-check.gif';
 import Image from 'next/image';
