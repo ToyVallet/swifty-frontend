@@ -1,7 +1,9 @@
 'use client';
 
-import { FixedBottomCTA } from '@components/common';
+import { FixedBottomCTAGroup } from '@components/common';
 import Check from '@images/signup/complete-check.gif';
+import { Button } from '@swifty/ui';
+import { Link } from 'lucide-react';
 import Image from 'next/image';
 
 export default function SignupCompletePage() {
@@ -19,24 +21,16 @@ export default function SignupCompletePage() {
           대학 축제 티켓팅 기능은 학적 인증이 필요합니다.
         </span>
       </div>
-
-      <FixedBottomCTA
-        type="button"
-        onClick={() => {}}
-        size="full"
-        variant="white"
-        className="bottom-[60px]"
-      >
-        등록 없이 완료
-      </FixedBottomCTA>
-      <FixedBottomCTA
-        type="button"
-        onClick={() => {}}
-        size="full"
-        shadow={false}
-      >
-        학적 인증
-      </FixedBottomCTA>
+      <FixedBottomCTAGroup
+        buttons={[
+          <Button size="full" variant="white">
+            <Link href="/">등록 없이 완료</Link>
+          </Button>,
+          <Button size="full">
+            <Link href="/univ-certification">학적 인증</Link>
+          </Button>,
+        ]}
+      />
     </section>
   );
 }
