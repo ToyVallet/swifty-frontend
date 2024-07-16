@@ -5,6 +5,7 @@ import { Funnel } from '@components/signup';
 import type { StepType } from '@components/signup/funnel';
 import { PhoneNumber, SmsCode } from '@components/signup/identification';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { revalidate } from '@swifty/shared-lib';
 import { Form } from '@swifty/ui';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -40,11 +41,12 @@ export default function ChangePhoneNumberForm() {
   const currentStepError = errors[step];
   const isCurrentStepDirty = dirtyFields[step];
 
-  const onNext = () => {
+  const onNext = async () => {
     if (step === 'phoneNumber') {
       setStep(steps[1]);
     }
     if (step === 'smsCode') {
+      await revalidate('user');
     }
   };
   return (

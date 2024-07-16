@@ -8,8 +8,11 @@ import { customFetch } from '@swifty/shared-lib';
 export default async function Page() {
   const user = await customFetch<UserInfoApi>(API_SIGNUP.user, {
     method: 'get',
+    next: {
+      tags: ['user'],
+    },
   });
-  console.log(user);
+
   return (
     <>
       <Navigation variant="back" title="휴대폰 번호 변경" />
