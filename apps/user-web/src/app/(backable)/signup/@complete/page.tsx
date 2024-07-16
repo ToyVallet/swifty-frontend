@@ -21,16 +21,15 @@ export default function SignupCompletePage() {
           대학 축제 티켓팅 기능은 학적 인증이 필요합니다.
         </span>
       </div>
-      <FixedBottomCTAGroup
-        buttons={[
-          <Button size="full" variant="white">
-            <Link href="/">등록 없이 완료</Link>
-          </Button>,
-          <Button size="full">
-            <Link href="/univ-certification">학적 인증</Link>
-          </Button>,
-        ]}
-      />
+      <FixedBottomCTAGroup>
+        <Button size="full" variant="white">
+          <Link href="/">등록 없이 완료</Link>
+        </Button>
+
+        <Button size="full">
+          <Link href="/univ-certification">학적 인증</Link>
+        </Button>
+      </FixedBottomCTAGroup>
     </section>
   );
 }
