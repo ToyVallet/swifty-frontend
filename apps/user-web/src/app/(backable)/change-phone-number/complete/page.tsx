@@ -18,7 +18,7 @@ export default async function CompleteChangePhoneNumberPage() {
         휴대폰 번호가 변경되었습니다.
         <h1>{`현재 등록된 번호: ${user.phoneNumber}`}</h1>
       </Header>
-      <FixedBottomCTA>
+      <FixedBottomCTA asChild>
         <Link href="/">홈으로</Link>
       </FixedBottomCTA>
     </>

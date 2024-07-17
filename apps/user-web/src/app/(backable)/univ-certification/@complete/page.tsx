@@ -33,10 +33,10 @@ export default function CertificationCompletePage() {
         </div>
       </section>
       <FixedBottomGroup className="gap-2.5">
-        <Button size="full" variant="white">
+        <Button size="full" variant="white" asChild>
           <Link href="/">홈으로</Link>
         </Button>
-        <Button size="full">
+        <Button size="full" asChild>
           <Link href="#">안면 인증 등록</Link>
         </Button>
       </FixedBottomGroup>
