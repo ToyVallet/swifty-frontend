@@ -40,7 +40,7 @@ const dateOfBirth = z
 const nationality = z.enum(['NATIVE', 'FOREIGNER']);
 
 /** 성별 */
-const sex = z.enum(['MALE', 'FEMALE']);
+const gender = z.enum(['MALE', 'FEMALE']);
 
 /** 통신사 */
 const carrier = z.enum(['SKT', 'KT', 'LGU', 'MVNO']);
@@ -97,7 +97,7 @@ export const formSchema = z
     name,
     dateOfBirth,
     nationality,
-    sex,
+    gender,
     carrier,
     phoneNumber,
     smsCode,

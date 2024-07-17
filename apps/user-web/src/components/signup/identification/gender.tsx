@@ -1,10 +1,10 @@
 import { FormErrorControl } from '@components/signup';
 import { FormField, Select } from '@swifty/ui';
 
-export default function Sex() {
+export default function Gender() {
   return (
     <FormField
-      name="sex"
+      name="gender"
       render={({ field }) => (
         <FormErrorControl>
           <Select

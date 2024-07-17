@@ -35,7 +35,7 @@ export default function SignupLayout({
     resolver: zodResolver(formSchema),
   });
 
-  const [currentStep, setCurrentStep] = useState<Step>(steps[10]);
+  const [currentStep, setCurrentStep] = useState<Step>(steps[0]);
 
   const nextStep = () => {
     const nextStepIndex = steps.indexOf(currentStep) + 1;
@@ -45,6 +45,7 @@ export default function SignupLayout({
     }
   };
 
+  console.log(form.watch());
   return (
     <>
       <Navigation variant="back" title="회원가입" />

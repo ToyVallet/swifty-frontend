@@ -29,7 +29,7 @@ export const stepsWithForm: { [index in Step]: string } = {
   '약관 동의가 필요해요': 'isMarketingAvailable',
   '성함을 알려주세요': 'name',
   '생년월일을 알려주세요': 'dateOfBirth',
-  '성별을 알려주세요': 'sex',
+  '성별을 알려주세요': 'gender',
   '통신사를 선택해주세요': 'carrier',
   '휴대폰 번호를 알려주세요': 'phoneNumber',
   '휴대폰 번호를 인증할게요': 'smsCode',

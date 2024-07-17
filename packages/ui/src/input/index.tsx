@@ -69,7 +69,9 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function (
   }, []);
 
   useEffect(() => {
-    setInputValue(value);
+    if (name === 'search') {
+      setInputValue(value);
+    }
   }, [value]);
 
   const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
@@ -78,8 +80,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function (
       sanitizedValue = sanitizedValue.replaceAll(/[^0-9]/g, '');
     } else if (type === 'tel') {
       sanitizedValue = formatPhoneNumber(sanitizedValue).slice(0, 13);
-    }
-    if (label === '생년월일') {
+    } else if (label === '생년월일') {
       sanitizedValue = formatDateOfBirth(sanitizedValue);
     }
     setInputValue(sanitizedValue);

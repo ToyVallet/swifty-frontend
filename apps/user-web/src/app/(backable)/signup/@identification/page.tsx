@@ -5,12 +5,12 @@ import { Funnel } from '@components/signup';
 import {
   CarrierWithNationality,
   DateOfBirth,
+  Gender,
   Name,
   PhoneNumber,
-  Sex,
   SmsCode,
 } from '@components/signup/identification';
-import { type NonEmptyArray } from '@swifty/shared-lib';
+import { type NonEmptyArray, customFetch } from '@swifty/shared-lib';
 import { useContext, useEffect } from 'react';
 import { useFormContext } from 'react-hook-form';
 
@@ -35,6 +35,22 @@ export default function Identification() {
 
     // 인증 번호 요청
     if (currentStep === '휴대폰 번호를 알려주세요') {
+      const phoneNumber = form.getValues(currentStepFormName);
+      try {
+        await customFetch('/sms/code', {
+          method: 'post',
+          body: JSON.stringify({
+            phoneNumber,
+            smsSituationCode: 'SIGN_UP',
+          }),
+        });
+      } catch (err) {
+        form.setError('phoneNumber', {
+          message: '인증 요청에 실패했습니다. 다시 시도해 주세요',
+        });
+        return;
+      }
+
       // 문자 전송 전달 - 인증 요청
     }
 
@@ -68,7 +84,7 @@ export default function Identification() {
           </Funnel.Step>
 
           <Funnel.Step<StepType> step="성별을 알려주세요">
-            <Sex />
+            <Gender />
           </Funnel.Step>
 
           <Funnel.Step<StepType> step="생년월일을 알려주세요">

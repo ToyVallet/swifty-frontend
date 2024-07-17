@@ -8,7 +8,7 @@ export default function DateOfBirth() {
       render={({ field }) => (
         <FormErrorControl>
           <Input
-            type="number"
+            type="text"
             label="생년월일"
             placeholder="YYYYMMDD"
             maxLength={8}
