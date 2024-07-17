@@ -27,14 +27,7 @@ const ocrMajor = z.string();
 const ocrStudenStatus = z.string();
 
 /**이미지 */
-const image = z
-  .instanceof(File)
-  .refine((file) => {
-    return !file || file.size <= MAX_UPLOAD_SIZE;
-  }, '최대 5MB입니다.')
-  .refine((file) => {
-    return ACCEPTED_FILE_TYPES.includes(file.type);
-  }, '이미지 파일만 허용합니다. (jpg)');
+const image = z.any();
 
 const exampleImage = z.string();
 
