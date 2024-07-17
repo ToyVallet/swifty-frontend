@@ -13,7 +13,6 @@ const nextConfig = {
   },
   productionBrowserSourceMaps: !production,
   crossOrigin: 'use-credentials',
-
   webpack: (config) => {
     config.module.rules.push({
       test: /\.svg$/,
