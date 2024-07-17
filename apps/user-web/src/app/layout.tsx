@@ -1,8 +1,9 @@
-// import '@swifty/ui/tailwind.css';
+import '@swifty/ui/styles.css';
 import type { Metadata, Viewport } from 'next';
 import type { PropsWithChildren } from 'react';
 
 import './globals.css';
+import Providers from './providers';
 
 export const metadata: Metadata = {
   title: '스위프티',
@@ -36,17 +37,12 @@ export const metadata: Metadata = {
   },
 };
 
-export const viewport: Viewport = {
-  themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#ffffff' },
-    { media: '(prefers-color-scheme: dark)', color: '#0c0c0c' },
-  ],
-};
-
 export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang="ko">
-      <body className="font-Pretendard">{children}</body>
+      <body className="font-Pretendard">
+        <Providers>{children}</Providers>
+      </body>
     </html>
   );
 }

@@ -1,10 +1,7 @@
-const transition = {
-  duration: 0.75,
-  type: 'spring',
-};
+import { transition } from '@swifty/ui';
 
 export const variants = {
-  hidden: { opacity: 0, height: 0, scale: 0.9 },
-  visible: { opacity: 1, height: 'auto', scale: 1 },
+  hidden: { y: -10, height: 0, scaleY: 0.9 },
+  visible: { y: 0, height: 'auto', scaleY: 1 },
   transition,
 };

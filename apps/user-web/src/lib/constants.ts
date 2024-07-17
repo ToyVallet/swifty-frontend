@@ -5,7 +5,7 @@ export const privateRoutes = ['/mypage', '/ticketing'];
 
 export const API_ROUTES = {
   user: {
-    login: '/login',
+    login: '/user/login',
   },
 };
 
@@ -19,4 +19,14 @@ export const API_FESTIVALS = {
     `/festival?count=${count}&status=${status}&imageType=${imageType}&sort=${sort}`,
   festival: (id: string) => `/festival/${id}`,
   lineUp: (id: string) => `/festival/detail/${id}`,
+};
+
+export const API_SIGNUP = {
+  user: '/user',
+};
+
+export const API_CERTIFICATION = {
+  search: (keyword: string, page: number = 0, size: number = 20) =>
+    `/certification/university?keyword=${keyword}&page=${page}&size=${size}`,
+  certification: '/certification',
 };

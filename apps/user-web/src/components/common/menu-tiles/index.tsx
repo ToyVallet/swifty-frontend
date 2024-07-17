@@ -1,4 +1,4 @@
-import { Link } from '@components/common';
+import Link from 'next/link';
 import type { PropsWithChildren } from 'react';
 
 import Tile from './tile';

@@ -1,7 +1,7 @@
 /**
  * @description 서버 URL
  */
-export const SERVER_URL: string = 'http://dpi.swifty.kr:19889';
+export const SERVER_URL: string = 'http://localhost:8080';
 
 /**
  * @description 쿠키 키값

@@ -3,8 +3,7 @@ version: '3.8'
 services:
   web:
     build: .
-    ports:
-      - '3000:3000'
+    network_mode: 'host'
     environment:
       NODE_ENV: production
-    command: ["node", "apps/user-web/server.js"]
+    command: ['node', 'apps/user-web/server.js']

@@ -1,5 +1,5 @@
-import { Link } from '@components/common';
 import Logo from '@icons/logo.svg';
+import Link from 'next/link';
 
 export default function LogoLink() {
   return (

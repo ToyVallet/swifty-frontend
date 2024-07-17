@@ -1,13 +1,21 @@
 'use client';
 
+import { Navigation } from '@components/common';
 import { Header } from '@components/signup';
-import { Choose, Otherwise, When } from '@swifty/ui';
-import React, {
-  type PropsWithChildren,
-  useCallback,
-  useState,
-} from 'react';
-import { Step, StepContext, accountSteps, identificationSteps, steps } from './context';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { Choose, Form, When } from '@swifty/ui';
+import { AnimatePresence } from 'framer-motion';
+import React, { type PropsWithChildren, useState } from 'react';
+import { useForm } from 'react-hook-form';
+
+import {
+  SignUpStepContext,
+  type Step,
+  accountSteps,
+  identificationSteps,
+  steps,
+} from './context';
+import { type FormValues, formSchema } from './schema';
 
 type SignupLayoutProps = PropsWithChildren<{
   terms: React.ReactNode;
@@ -16,48 +24,59 @@ type SignupLayoutProps = PropsWithChildren<{
   complete: React.ReactNode;
 }>;
 
-
 export default function SignupLayout({
   terms,
   identification,
   account,
   complete,
 }: SignupLayoutProps) {
-  const [currentStep, setCurrentStep] =
-    useState<Step>('회원가입이 완료되었어요');
+  const form = useForm<FormValues>({
+    mode: 'onChange',
+    resolver: zodResolver(formSchema),
+  });
 
-  const nextStep = useCallback(() => {
+  const [currentStep, setCurrentStep] = useState<Step>(steps[10]);
+
+  const nextStep = () => {
     const nextStepIndex = steps.indexOf(currentStep) + 1;
 
-    if (steps[nextStepIndex]) {
+    if (steps[nextStepIndex] !== undefined) {
       setCurrentStep(steps[nextStepIndex] as Step);
     }
-  }, []);
+  };
 
   return (
-    <StepContext.Provider value={{ currentStep, nextStep }}>
-      <section className="h-full flex flex-col relative">
-        <Header>{currentStep}</Header>
+    <>
+      <Navigation variant="back" title="회원가입" />
+      <SignUpStepContext.Provider value={{ currentStep, nextStep }}>
+        <main className="h-full flex flex-col relative pb-20 overflow-y-auto scrollbar-hide">
+          <Header>{currentStep}</Header>
 
-        <Choose value={currentStep}>
-          <When value="약관 동의가 필요해요">{terms}</When>
+          <AnimatePresence initial={false}>
+            <Form {...form}>
+              <form className="text-white">
+                <Choose value={currentStep}>
+                  <When value="약관 동의가 필요해요">{terms}</When>
 
-          {identificationSteps.map((step) => (
-            <When key={step} value={step}>
-              {identification}
-            </When>
-          ))}
+                  {identificationSteps.map((step) => (
+                    <When key={step} value={step}>
+                      {identification}
+                    </When>
+                  ))}
 
-          {accountSteps.map((step) => (
-            <When key={step} value={step}>
-              {account}
-            </When>
-          ))}
+                  {accountSteps.map((step) => (
+                    <When key={step} value={step}>
+                      {account}
+                    </When>
+                  ))}
 
-          <When value="회원가입이 완료되었어요">{complete}</When>
-
-        </Choose>
-      </section>
-    </StepContext.Provider>
+                  <When value="회원가입이 완료되었어요">{complete}</When>
+                </Choose>
+              </form>
+            </Form>
+          </AnimatePresence>
+        </main>
+      </SignUpStepContext.Provider>
+    </>
   );
 }

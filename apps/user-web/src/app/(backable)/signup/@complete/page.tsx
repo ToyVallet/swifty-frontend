@@ -1,12 +1,14 @@
-import { BottomContainer } from '@components/common';
+'use client';
+
+import { FixedBottomCTAGroup } from '@components/common';
 import Check from '@images/signup/complete-check.gif';
 import { Button } from '@swifty/ui';
+import { Link } from 'lucide-react';
 import Image from 'next/image';
-import Link from 'next/link';
 
 export default function SignupCompletePage() {
   return (
-    <>
+    <section>
       <Image
         className="m-[86px_auto_134px_auto]"
         src={Check}
@@ -14,17 +16,20 @@ export default function SignupCompletePage() {
         width={255}
         height={255}
       />
-      <span className="text-14 font-medium text-white mx-auto">
-        대학 축제 티켓팅 기능은 학적 인증이 필요합니다.
-      </span>
-      <BottomContainer>
-        <Button className="mb-[10px]" variant="white" size="full" asChild>
+      <div className="text-center">
+        <span className="text-14 font-medium text-white">
+          대학 축제 티켓팅 기능은 학적 인증이 필요합니다.
+        </span>
+      </div>
+      <FixedBottomCTAGroup>
+        <Button size="full" variant="white">
           <Link href="/">등록 없이 완료</Link>
         </Button>
-        <Button variant="default" size="full" asChild>
-          <Link href="/signup/identification">학적 인증하기</Link>
+
+        <Button size="full">
+          <Link href="/univ-certification">학적 인증</Link>
         </Button>
-      </BottomContainer>
-    </>
+      </FixedBottomCTAGroup>
+    </section>
   );
 }

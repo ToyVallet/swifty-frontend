@@ -2,25 +2,25 @@
   "extends": "@swifty/typescript-config/nextjs.json",
   "compilerOptions": {
     "baseUrl": ".",
+    "plugins": [{ "name": "next" }],
     "paths": {
       "@app/*": ["./src/app/*"],
       "@components/*": ["./src/components/*"],
       "@lib/*": ["./src/lib/*"],
       "@hooks/*": ["./src/hooks/*"],
-      "@api/*": ["./src/api/*"],
-      "@store/*": ["./src/store/*"],
       "@images/*": ["./public/images/*"],
       "@icons/*": ["./public/icons/*"]
-    },
-    "typeRoots": ["./node_modules/@types", "./src/types"]
+    }
   },
   "include": [
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "tailwind.config.js",
-    "postcss.config.js"
+    "tailwind.config.ts",
+    "postcss.config.js",
+    "../../packages/ui/src/drawer/overlay.tsx",
+    "../../packages/ui/src/toast/index.tsx"
   ],
   "exclude": ["node_modules", "./server.js"]
 }

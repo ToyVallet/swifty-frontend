@@ -1,6 +1,5 @@
 'use client';
 
-import { BottomSheet } from '@components/common';
 import useBottomSheet from '@hooks/use-bottom-sheet';
 
 type TicketButtonProps = {
@@ -17,11 +16,7 @@ export default function TicketButton({ label }: TicketButtonProps) {
       >
         {label}
       </button>
-      <div className="absolute">
-        <BottomSheet header="티켓 보기" isOpen={isOpen} onDismiss={close}>
-          아뿔싸! 티켓을 빼앗겼다!
-        </BottomSheet>
-      </div>
+      <div className="absolute"></div>
     </>
   );
 }

@@ -33,7 +33,7 @@ export default function LoginForm() {
   const router = useRouter();
 
   const form = useForm<FormValues>({
-    mode: 'onSubmit',
+    mode: 'onTouched',
     resolver: zodResolver(formSchema),
     defaultValues: {
       userId: '',
@@ -45,7 +45,8 @@ export default function LoginForm() {
     try {
       await customFetch(API_ROUTES.user.login, {
         method: 'POST',
-        body: JSON.stringify({ formId: userId, password }),
+        body: JSON.stringify({ loginId: userId, password }),
+        credentials: 'include',
       });
       router.push('/');
     } catch (e) {
@@ -70,7 +71,7 @@ export default function LoginForm() {
           render={({ field }) => (
             <FormItem>
               <FormControl>
-                <Input placeholder="아이디" {...field} />
+                <Input placeholder="1234@swifty.kr" label="아이디" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -83,7 +84,8 @@ export default function LoginForm() {
             <FormItem>
               <FormControl>
                 <Input
-                  placeholder="비밀번호"
+                  placeholder="********"
+                  label="비밀번호"
                   type="password"
                   autoComplete="new-password"
                   {...field}

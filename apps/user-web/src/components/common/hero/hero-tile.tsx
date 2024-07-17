@@ -1,8 +1,8 @@
 import { FadeOverlay, ImageWithFallback } from '@components/common';
-import { Link } from '@components/common';
 import FallbackHero from '@images/fallback-hero.png';
 import type { Festival } from '@lib/types/festival';
 import formatDate from '@lib/utils/parser/format-date';
+import Link from 'next/link';
 
 export default function HeroTile({
   subId,
