@@ -79,7 +79,7 @@ export default async function FestivalHomePage({
             )}
           />
           <MenuTiles tiles={tiles} />
-          {/* <LineUpSection concerts={lineup.concertsResponse} /> */}
+          <LineUpSection concerts={lineup.concertsResponse} />
         </Main>
       </div>
       <Footer />
