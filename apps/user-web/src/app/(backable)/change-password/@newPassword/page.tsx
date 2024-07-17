@@ -38,10 +38,6 @@ export default function PasswordPage() {
     <>
       <section className="flex flex-col gap-5">
         <Funnel step={currentStep} steps={steps}>
-          <Funnel.Step<StepType> step="현재 비밀번호를 입력하세요">
-            <Password name="currentPassword" label="현재 비밀번호" />
-          </Funnel.Step>
-
           <Funnel.Step<StepType> step="새 비밀번호를 입력하세요">
             <Password name="newPassword" label="새 비밀번호" />
           </Funnel.Step>

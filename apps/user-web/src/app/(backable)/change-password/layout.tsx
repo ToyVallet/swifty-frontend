@@ -10,24 +10,31 @@ import { useForm } from 'react-hook-form';
 import {
   FindPasswordContext,
   type FindPasswordStep,
-  passwordSteps,
+  currentPasswordSteps,
+  newPasswordSteps,
   phoneSteps,
   steps,
 } from './context';
 import { type FindPasswordSchema, findPasswordSchema } from './schema';
 
 type Props = {
-  password: ReactNode;
   phone: ReactNode;
+  currentPassword: ReactNode;
+  newPassword: ReactNode;
   complete: ReactNode;
 };
 
-export default function SearchLayout({ password, phone, complete }: Props) {
+export default function SearchLayout({
+  phone,
+  currentPassword,
+  newPassword,
+  complete,
+}: Props) {
   const form = useForm<FindPasswordSchema>({
     mode: 'onChange',
     resolver: zodResolver(findPasswordSchema),
   });
-  const [currentStep, setCurrentStep] = useState<FindPasswordStep>(steps[0]);
+  const [currentStep, setCurrentStep] = useState<FindPasswordStep>(steps[5]);
 
   const nextStep = () => {
     const nextStepIndex = steps.indexOf(currentStep) + 1;
@@ -47,10 +54,19 @@ export default function SearchLayout({ password, phone, complete }: Props) {
             <form className="w-full">
               <Choose value={currentStep}>
                 {phoneSteps.map((step) => (
-                  <When value={step}>{phone}</When>
+                  <When key={step} value={step}>
+                    {phone}
+                  </When>
                 ))}
-                {passwordSteps.map((step) => (
-                  <When value={step}>{password}</When>
+                {currentPasswordSteps.map((step) => (
+                  <When key={step} value={step}>
+                    {currentPassword}
+                  </When>
+                ))}
+                {newPasswordSteps.map((step) => (
+                  <When key={step} value={step}>
+                    {newPassword}
+                  </When>
                 ))}
                 <When value={'비밀번호가 재설정 되었습니다.'}>{complete}</When>
               </Choose>
