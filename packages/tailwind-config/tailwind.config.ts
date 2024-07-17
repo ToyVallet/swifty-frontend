@@ -47,6 +47,7 @@ const config: Omit<Config, 'content'> = {
           700: '#3F3F45',
           800: '#2E2E33',
           900: '#1D1D20',
+          green: '#34c759',
         },
       },
       fontFamily: {
