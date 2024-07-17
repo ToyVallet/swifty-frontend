@@ -1,4 +1,4 @@
-import createStepContext from '@app/context/step-context';
+import createStepContext from '../../../contexts/step-context';
 
 export const certificationsSteps = [
   '학적 인증을 시작할게요',
