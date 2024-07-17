@@ -9,8 +9,8 @@ import React, { type PropsWithChildren, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import {
+  SignUpStepContext,
   type Step,
-  StepContext,
   accountSteps,
   identificationSteps,
   steps,
@@ -34,7 +34,8 @@ export default function SignupLayout({
     mode: 'onChange',
     resolver: zodResolver(formSchema),
   });
-  const [currentStep, setCurrentStep] = useState<Step>(steps[0]);
+
+  const [currentStep, setCurrentStep] = useState<Step>(steps[10]);
 
   const nextStep = () => {
     const nextStepIndex = steps.indexOf(currentStep) + 1;
@@ -47,7 +48,7 @@ export default function SignupLayout({
   return (
     <>
       <Navigation variant="back" title="회원가입" />
-      <StepContext.Provider value={{ currentStep, nextStep }}>
+      <SignUpStepContext.Provider value={{ currentStep, nextStep }}>
         <Main className="relative pb-20 overflow-y-auto scrollbar-hide">
           <Header>{currentStep}</Header>
 
@@ -75,7 +76,7 @@ export default function SignupLayout({
             </Form>
           </AnimatePresence>
         </Main>
-      </StepContext.Provider>
+      </SignUpStepContext.Provider>
     </>
   );
 }

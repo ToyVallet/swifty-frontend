@@ -13,3 +13,5 @@ export { default as FadeOverlay } from './fade-overlay';
 export { default as GlobalNavigation } from './global-navigation';
 export { default as FixedBottomCTA } from './fixed-bottom-cta';
 export { default as Main } from './main';
+export { default as FixedBottomCTAGroup } from './fixed-bottom-cta-group';
+export { default as Search } from './search';

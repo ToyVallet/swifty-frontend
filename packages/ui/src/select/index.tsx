@@ -49,7 +49,7 @@ export default function Select<T extends SelectOption[]>({
       <DrawerTrigger asChild>
         <button
           className={cn(
-            'w-full h-full flex items-center justify-between border font-medium rounded-xl relative px-5 py-3 overflow-hidden bg-neutral-800 transition-colors duration-200 ease-in-out',
+            'w-full h-full flex items-center justify-between border font-medium rounded-xl relative px-5 py-3 overflow-hidden bg-swifty-color-800 transition-colors duration-200 ease-in-out',
             isOpen
               ? 'border-primary shadow-input-active'
               : 'border-transparent',

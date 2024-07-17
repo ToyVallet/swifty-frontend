@@ -24,3 +24,9 @@ export const API_FESTIVALS = {
 export const API_SIGNUP = {
   user: '/user',
 };
+
+export const API_CERTIFICATION = {
+  search: (keyword: string, page: number = 0, size: number = 20) =>
+    `/certification/university?keyword=${keyword}&page=${page}&size=${size}`,
+  certification: '/certification',
+};

@@ -46,6 +46,7 @@ export default function LoginForm() {
       await customFetch(API_ROUTES.user.login, {
         method: 'POST',
         body: JSON.stringify({ loginId, password }),
+        credentials: 'include',
       });
       router.push('/');
     } catch (e) {
