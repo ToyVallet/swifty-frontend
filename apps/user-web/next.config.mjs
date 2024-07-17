@@ -7,7 +7,7 @@ const production = process.env.NODE_ENV === 'production';
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   transpilePackages: ['@swifty/ui'],
-  output: production && 'standalone',
+  output: production ? 'standalone' : undefined,
   experimental: {
     outputFileTracingRoot: path.join(__dirname, '../../'),
   },

@@ -1,2 +1,2 @@
-export { default as formatPhoneNumber } from './phoneNumber';
-export { default as formatDateOfBirth } from './dateOfBirth';
+export { formatPhoneNumber } from './phone';
+export { formatDate, formatDateRange, formatDateOfBirth } from './date';

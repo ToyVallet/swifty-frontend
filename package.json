@@ -27,7 +27,7 @@
     "lint-staged": "^15.2.5",
     "prettier": "^3.2.5",
     "ts-jest": "^29.1.4",
-    "turbo": "latest",
+    "turbo": "^2.0.7",
     "typescript": "^5.4.5"
   },
   "dependencies": {

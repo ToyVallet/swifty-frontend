@@ -14,8 +14,7 @@ import FallbackHero from '@images/fallback-hero.png';
 import { API_FESTIVALS } from '@lib/constants';
 import type { LineupApi } from '@lib/types/api';
 import type { Festival } from '@lib/types/festival';
-import formatDate from '@lib/utils/parser/format-date';
-import { type Params, customFetch } from '@swifty/shared-lib';
+import { type Params, customFetch, formatDateRange } from '@swifty/shared-lib';
 import { BsBellFill } from 'react-icons/bs';
 import { TiStarFullOutline } from 'react-icons/ti';
 
@@ -72,14 +71,13 @@ export default async function FestivalHomePage({
           <TopCard
             title={festivalInfo.name}
             description={festivalInfo.description}
-            period={formatDate(
+            period={formatDateRange(
               festivalInfo.startDate,
               festivalInfo.endDate,
-              'ko',
             )}
           />
           <MenuTiles tiles={tiles} />
-          {/* <LineUpSection concerts={lineup.concertsResponse} /> */}
+          <LineUpSection concerts={lineup.concertsResponse} />
         </Main>
       </div>
       <Footer />

@@ -9,7 +9,7 @@ import LogoLink from './logo-link';
 
 type NavigationProps = {
   variant?: 'root' | 'back';
-  bg?: 'transparent' | 'gradient' | 'solid';
+  bg?: 'transparent' | 'gradient' | 'solid' | 'blur';
   centerLogo?: boolean;
   title?: string;
 };
@@ -22,6 +22,7 @@ const navigationVariants = cva(
         transparent: 'bg-transparent',
         gradient: 'bg-gradient-to-b from-black to-transparent',
         solid: 'bg-black',
+        blur: 'bg-transparent backdrop-blur-md backdrop-filter',
       },
       centerLogo: {
         true: 'grid-cols-3',
