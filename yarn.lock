@@ -20169,6 +20169,7 @@ __metadata:
     "@svgr/webpack": "npm:^8.1.0"
     "@swifty/eslint-config": "npm:*"
     "@swifty/shared-lib": "npm:*"
+    "@swifty/tailwind-config": "npm:*"
     "@swifty/typescript-config": "npm:*"
     "@swifty/ui": "npm:*"
     "@testing-library/jest-dom": "npm:^6.4.6"
