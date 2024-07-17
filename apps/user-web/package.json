@@ -3,10 +3,9 @@
   "version": "0.1.0",
   "license": "Proprietary",
   "scripts": {
-    "dev": "node server.js",
-    "localhost": "next dev",
+    "dev:server": "node server.js",
+    "dev": "next dev",
     "build": "next build",
-    "analyze": "ANALYZE=true yarn build",
     "start": "next start",
     "lint": "next lint",
     "storybook": "storybook dev -p 6006",

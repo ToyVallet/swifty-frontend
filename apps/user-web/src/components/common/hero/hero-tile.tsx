@@ -17,7 +17,7 @@ export default function HeroTile({
   return (
     <Link
       href={`/festival/${id}`}
-      className="relative flex-[0_0_100%] overflow-hidden"
+      className="relative flex-[0_0_100%] overflow-hidden *:text-white"
     >
       <div className="aspect-square relative h-full w-full flex items-center justify-center">
         <ImageWithFallback

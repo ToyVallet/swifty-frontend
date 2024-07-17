@@ -2,10 +2,12 @@ import path from 'path';
 
 const __dirname = path.resolve();
 
+const production = process.env.NODE_ENV === 'production';
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   transpilePackages: ['@swifty/ui'],
-  output: 'standalone',
+  output: production && 'standalone',
   experimental: {
     outputFileTracingRoot: path.join(__dirname, '../../'),
   },
