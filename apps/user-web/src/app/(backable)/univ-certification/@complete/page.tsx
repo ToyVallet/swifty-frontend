@@ -4,14 +4,6 @@ import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import Link from 'next/link';
 
-const FixedBottomCTAGroup = dynamic(
-  () => import('@components/common/fixed-bottom-cta-group'),
-  {
-    loading: () => <p>Loading...</p>,
-    ssr: false,
-  },
-);
-
 const Button = dynamic(() => import('@swifty/ui').then((mod) => mod.Button), {
   loading: () => <p>Loading...</p>,
   ssr: false,
@@ -40,7 +32,7 @@ export default function CertificationCompletePage() {
           </span>
         </div>
       </section>
-      <FixedBottomGroup>
+      <FixedBottomGroup className="gap-2.5">
         <Button size="full" variant="white">
           <Link href="/">홈으로</Link>
         </Button>

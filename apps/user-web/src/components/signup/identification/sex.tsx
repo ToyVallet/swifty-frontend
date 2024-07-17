@@ -19,6 +19,7 @@ export default function Sex() {
       render={({ field }) => (
         <FormErrorControl>
           <Select
+            options={genderOptions}
             onValueChange={field.onChange}
             defaultValue={field.value}
             label="성별"

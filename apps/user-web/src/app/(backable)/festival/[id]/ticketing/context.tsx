@@ -1,4 +1,4 @@
-import createStepContext from '@app/context/step-context';
+import createStepContext from '@contexts/step-context';
 
 export const ticketingSteps = [
   '날짜를 선택해주세요',

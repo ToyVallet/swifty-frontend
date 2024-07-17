@@ -27,6 +27,7 @@ export default function CarrierWithNationality() {
         render={({ field }) => (
           <FormErrorControl>
             <Select
+              options={carrierOptions}
               label="통신사"
               placeholder="통신사 선택"
               onValueChange={field.onChange}

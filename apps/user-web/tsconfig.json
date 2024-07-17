@@ -8,6 +8,7 @@
       "@components/*": ["./src/components/*"],
       "@lib/*": ["./src/lib/*"],
       "@hooks/*": ["./src/hooks/*"],
+      "@contexts/*": ["./src/contexts/*"],
       "@images/*": ["./public/images/*"],
       "@icons/*": ["./public/icons/*"]
     }

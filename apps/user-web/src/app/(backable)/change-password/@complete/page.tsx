@@ -14,7 +14,7 @@ export default function Page() {
         width={255}
         height={255}
       />
-      <FixedBottomGroup>
+      <FixedBottomGroup className="gap-2.5">
         <Button size="full" variant="white">
           <Link href="/login">로그인하기</Link>
         </Button>
