@@ -17,7 +17,7 @@ export default function UserSection() {
       <div className="flex flex-col gap-[10px]">
         <UserLink label="개인정보 관리" href="/mypage/info" />
         <Logout />
-        <UserLink label="회원 탈퇴" href="#" />
+        <UserLink label="회원 탈퇴" href="/mypage/delete" />
       </div>
     </section>
   );

@@ -1,4 +1,4 @@
-import { Main } from '@components/common';
+import { Main, Navigation } from '@components/common';
 import {
   ScheduleSection,
   UserBar,
@@ -8,11 +8,14 @@ import {
 
 export default function MyPage() {
   return (
-    <Main className="gap-5 pb-32">
-      <UserBar username="사용자" />
-      <ScheduleSection />
-      <VerificationSection />
-      <UserSection />
-    </Main>
+    <>
+      <Navigation variant="back" title="마이페이지" />
+      <Main className="gap-5 pb-32">
+        <UserBar username="사용자" />
+        <ScheduleSection />
+        <VerificationSection />
+        <UserSection />
+      </Main>
+    </>
   );
 }

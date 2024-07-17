@@ -18,7 +18,7 @@ export default async function Page() {
       <Navigation variant="back" title="휴대폰 번호 변경" />
       <Header>
         변경할 휴대폰 번호를 입력해주세요
-        <h1 className="text-14 font-medium">{`현재 등록된 번호: ${user.phoneNumber}`}</h1>
+        <span className="text-14 font-medium">{`현재 등록된 번호: ${user.phoneNumber}`}</span>
       </Header>
       <ChangePhoneNumberForm />
     </>

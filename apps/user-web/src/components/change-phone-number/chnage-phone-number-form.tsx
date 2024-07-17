@@ -99,7 +99,12 @@ export default function ChangePhoneNumberForm() {
   return (
     <>
       <Form {...form}>
-        <form className="flex flex-col gap-5">
+        <form
+          className="flex flex-col gap-5"
+          onSubmit={(e) => {
+            e.preventDefault();
+          }}
+        >
           <Funnel step={step} steps={steps}>
             <Funnel.Step<StepType> step="phoneNumber">
               <PhoneNumber />
