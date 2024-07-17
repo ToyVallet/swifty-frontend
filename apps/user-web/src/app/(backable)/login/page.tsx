@@ -4,7 +4,7 @@ import Logo from '@images/swifty-text-logo.svg';
 
 export default function LoginPage() {
   return (
-    <Main>
+    <Main className="px-5">
       <Logo className="mt-20 mb-16" width={169} height={53} />
       <LoginForm />
     </Main>

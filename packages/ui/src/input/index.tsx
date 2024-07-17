@@ -89,6 +89,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function (
 
   return (
     <motion.div
+      tabIndex={-1}
       variants={variants}
       whileTap={'active'}
       initial="initial"

@@ -2,7 +2,7 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { API_ROUTES } from '@lib/constants';
-import { APIError } from '@swifty/shared-lib';
+import { APIError, http } from '@swifty/shared-lib';
 import { customFetch } from '@swifty/shared-lib';
 import {
   Button,
@@ -43,11 +43,14 @@ export default function LoginForm() {
 
   const onSubmit = async ({ loginId, password }: FormValues) => {
     try {
-      await customFetch(API_ROUTES.user.login, {
-        method: 'POST',
-        body: JSON.stringify({ loginId, password }),
-        credentials: 'include',
-      });
+      // await customFetch(API_ROUTES.user.login, {
+      //   method: 'POST',
+      //   body: JSON.stringify({ loginId, password }),
+      //   credentials: 'include',
+      // });
+
+      await http.post('/user/login', { loginId, password });
+
       router.push('/');
     } catch (e) {
       if (APIError.isAPIError(e)) {
