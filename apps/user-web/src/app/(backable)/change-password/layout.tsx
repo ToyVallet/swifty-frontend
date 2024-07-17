@@ -44,7 +44,7 @@ export default function SearchLayout({ password, phone, complete }: Props) {
         <Main>
           <Header>{currentStep}</Header>
           <Form {...form}>
-            <form>
+            <form className="w-full">
               <Choose value={currentStep}>
                 {phoneSteps.map((step) => (
                   <When value={step}>{phone}</When>

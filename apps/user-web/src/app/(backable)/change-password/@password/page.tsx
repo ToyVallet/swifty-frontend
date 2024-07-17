@@ -27,6 +27,10 @@ export default function PasswordPage() {
   const onNext = async () => {
     if (currentStep === '비밀번호를 확인해주세요') {
       // 비밀번호 변경 요청
+      try {
+      } catch (err) {
+        console.error(err);
+      }
     }
     nextStep();
   };
