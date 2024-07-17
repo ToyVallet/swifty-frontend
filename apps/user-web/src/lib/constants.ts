@@ -21,12 +21,19 @@ export const API_FESTIVALS = {
   lineUp: (id: string) => `/festival/detail/${id}`,
 };
 
-export const API_SIGNUP = {
-  user: '/user',
+export const API_USER = {
+  signup: '/user',
 };
 
 export const API_CERTIFICATION = {
-  search: (keyword: string, page: number = 0, size: number = 20) =>
+  search: (keyword: string, page: number = 0, size: number = 5) =>
     `/certification/university?keyword=${keyword}&page=${page}&size=${size}`,
   certification: '/certification',
+};
+
+export const API_SMS = {
+  sms: '/sms/code',
+  smsCheck: '/sms/code/check',
+  mockSms: '/sms/code/mock',
+  mockSmsCheck: '/sms/code/mock/check',
 };

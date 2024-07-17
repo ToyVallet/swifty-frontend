@@ -3,7 +3,7 @@
 import { FixedBottomCTA } from '@components/common';
 import { Funnel } from '@components/signup';
 import { Id, Password, PasswordConfirm } from '@components/signup/account';
-import { API_SIGNUP } from '@lib/constants';
+import { API_USER } from '@lib/constants';
 import { type NonEmptyArray, customFetch } from '@swifty/shared-lib';
 import { useContext, useEffect } from 'react';
 import { useFormContext } from 'react-hook-form';
@@ -42,7 +42,7 @@ export default function AccountPage() {
       // 회원가입 요청 전송하기
       const formData = form.getValues();
       try {
-        await customFetch(API_SIGNUP.user, {
+        await customFetch(API_USER.signup, {
           method: 'post',
           body: JSON.stringify(formData),
         });

@@ -10,6 +10,7 @@ import {
   PhoneNumber,
   SmsCode,
 } from '@components/signup/identification';
+import { API_SMS } from '@lib/constants';
 import { type NonEmptyArray, customFetch } from '@swifty/shared-lib';
 import { useContext, useEffect } from 'react';
 import { useFormContext } from 'react-hook-form';
@@ -37,7 +38,7 @@ export default function Identification() {
     if (currentStep === '휴대폰 번호를 알려주세요') {
       const phoneNumber = form.getValues(currentStepFormName);
       try {
-        await customFetch('/sms/code', {
+        await customFetch(API_SMS.sms, {
           method: 'post',
           body: JSON.stringify({
             phoneNumber,
@@ -56,8 +57,19 @@ export default function Identification() {
 
     // 전화번호 인증 확인
     if (currentStep === '휴대폰 번호를 인증할게요') {
-      // 인증 성공시 nextStep()
-      // 인증 실패시 다시 시도
+      try {
+        await customFetch(API_SMS.smsCheck, {
+          method: 'post',
+          body: JSON.stringify({
+            code: form.getValues('smsCode'),
+            phoneNumber: form.getValues('phoneNumber'),
+            situationCode: 'SIGN_UP',
+          }),
+        });
+      } catch (err) {
+        console.error(err);
+        return;
+      }
     }
 
     nextStep();

@@ -23,11 +23,12 @@ const name = z
  */
 const dateOfBirth = z
   .string()
-  .regex(/^\d{8}$/, '날짜 형식이 맞지 않습니다. YYYYMMDD')
+  .regex(/^\d{4}-\d{2}-\d{2}$/, '날짜 형식이 맞지 않습니다. YYYYMMDD')
   .refine((date) => {
-    const year = parseInt(date.slice(0, 4), 10);
-    const month = parseInt(date.slice(4, 6), 10);
-    const day = parseInt(date.slice(6, 8), 10);
+    const dateArr = date.split('-') as [string, string, string];
+    const year = parseInt(dateArr[0], 10);
+    const month = parseInt(dateArr[1], 10);
+    const day = parseInt(dateArr[2], 10);
     const dateObject = new Date(year, month - 1, day);
     return (
       dateObject.getFullYear() === year &&

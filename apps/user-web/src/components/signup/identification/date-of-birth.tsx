@@ -11,7 +11,6 @@ export default function DateOfBirth() {
             type="text"
             label="생년월일"
             placeholder="YYYYMMDD"
-            maxLength={8}
             {...field}
           />
         </FormErrorControl>

@@ -81,7 +81,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function (
     } else if (type === 'tel') {
       sanitizedValue = formatPhoneNumber(sanitizedValue).slice(0, 13);
     } else if (label === '생년월일') {
-      sanitizedValue = formatDateOfBirth(sanitizedValue);
+      sanitizedValue = formatDateOfBirth(sanitizedValue).slice(0, 11);
     }
     setInputValue(sanitizedValue);
     onChange?.(e);
@@ -118,7 +118,11 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function (
           'w-full bg-transparent text-16 py-3 px-5 autofill:bg-transparent transition-all duration-200 ease-in-out text-white',
           isActive && 'mt-[30px]',
         )}
-        inputMode={type === 'number' || type === 'tel' ? 'numeric' : 'text'}
+        inputMode={
+          type === 'number' || type === 'tel' || label === '생년월일'
+            ? 'numeric'
+            : 'text'
+        }
         onFocus={handleFocus}
         onBlur={handleBlur}
         onChange={handleChange}

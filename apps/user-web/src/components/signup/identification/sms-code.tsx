@@ -1,7 +1,9 @@
 import { FormErrorControl } from '@components/signup';
 import { useInterval } from '@hooks/index';
+import { API_SMS } from '@lib/constants';
+import { customFetch } from '@swifty/shared-lib';
 import { Button, FormField, Input } from '@swifty/ui';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 
 const COUNT = 180;
@@ -9,6 +11,8 @@ const COUNT = 180;
 export default function SmsCode() {
   const form = useFormContext();
   const [count, setCount] = useState(COUNT);
+  const phone = useRef<string>(form.getValues('phoneNumber'));
+  const phoneNumber = form.getValues('phoneNumber');
 
   useInterval(
     () => {
@@ -23,11 +27,32 @@ export default function SmsCode() {
   const seconds = (count % 60).toString().padStart(2, '0');
 
   const onRequest = async () => {
-    const phoneNumber = form.getValues('phoneNumber');
     // 재 요청 보내기
+    try {
+      await customFetch(API_SMS.sms, {
+        method: 'post',
+        body: JSON.stringify({
+          phoneNumber,
+          smsSituationCode: 'SIGN_UP',
+        }),
+      });
+    } catch (err) {
+      form.setError('phoneNumber', {
+        message: '인증 요청에 실패했습니다. 다시 시도해 주세요',
+      });
+      return;
+    }
     // 재 요청 후 타이머 실행
     setCount(COUNT);
   };
+
+  useEffect(() => {
+    if (phone.current !== phoneNumber) {
+      setCount(0);
+      phone.current = phoneNumber;
+    }
+  }, [phoneNumber]);
+
   return (
     <div className="flex flex-col gap-3">
       <FormField

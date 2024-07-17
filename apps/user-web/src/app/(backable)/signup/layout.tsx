@@ -55,7 +55,12 @@ export default function SignupLayout({
 
           <AnimatePresence initial={false}>
             <Form {...form}>
-              <form className="text-white">
+              <form
+                className="text-white"
+                onSubmit={(e) => {
+                  e.preventDefault();
+                }}
+              >
                 <Choose value={currentStep}>
                   <When value="약관 동의가 필요해요">{terms}</When>
 
