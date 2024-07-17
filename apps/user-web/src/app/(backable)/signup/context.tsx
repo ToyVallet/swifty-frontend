@@ -1,4 +1,4 @@
-import createStepContext from '../../../contexts/step-context';
+import createStepContext from 'src/contexts/step-context';
 
 export const termsSteps = ['약관 동의가 필요해요'] as const;
 
