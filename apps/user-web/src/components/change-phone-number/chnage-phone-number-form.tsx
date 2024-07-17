@@ -5,8 +5,10 @@ import { Funnel } from '@components/signup';
 import type { StepType } from '@components/signup/funnel';
 import { PhoneNumber, SmsCode } from '@components/signup/identification';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { revalidate } from '@swifty/shared-lib';
+import { API_SMS, API_USER } from '@lib/constants';
+import { customFetch, revalidate } from '@swifty/shared-lib';
 import { Form } from '@swifty/ui';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
@@ -28,6 +30,7 @@ type Schema = z.infer<typeof schema>;
 const steps = ['phoneNumber', 'smsCode'] as const;
 
 export default function ChangePhoneNumberForm() {
+  const router = useRouter();
   const [step, setStep] = useState<(typeof steps)[number]>(steps[0]);
   const form = useForm<Schema>({
     mode: 'onChange',
@@ -42,11 +45,55 @@ export default function ChangePhoneNumberForm() {
   const isCurrentStepDirty = dirtyFields[step];
 
   const onNext = async () => {
+    const phoneNumber = form.getValues('phoneNumber');
     if (step === 'phoneNumber') {
-      setStep(steps[1]);
+      // 인증 번호 요청 api
+      try {
+        await customFetch(API_SMS.sms, {
+          method: 'post',
+          body: JSON.stringify({
+            phoneNumber,
+            smsSituationCode: 'CHANGE_PHONE_NUMBER',
+          }),
+          credentials: 'include',
+        });
+        setStep(steps[1]);
+      } catch (err) {
+        form.setError('phoneNumber', {
+          message: '인증 요청에 실패했습니다. 다시 시도해 주세요',
+        });
+        return;
+      }
     }
     if (step === 'smsCode') {
-      await revalidate('user');
+      try {
+        await customFetch(API_SMS.smsCheck, {
+          method: 'post',
+          body: JSON.stringify({
+            code: form.getValues('smsCode'),
+            phoneNumber: form.getValues('phoneNumber'),
+            situationCode: 'CHANGE_PHONE_NUMBER',
+          }),
+          credentials: 'include',
+        });
+
+        await customFetch(API_USER.changePhone, {
+          method: 'patch',
+          credentials: 'include',
+          body: JSON.stringify({
+            phoneNumber,
+          }),
+        });
+
+        await revalidate('user');
+        router.push('/change-phone-number/complete');
+      } catch (err) {
+        console.error(err);
+        form.setError('smsCode', {
+          message: '인증 번호가 올바르지 않습니다.',
+        });
+        return;
+      }
     }
   };
   return (

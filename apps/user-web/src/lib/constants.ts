@@ -25,6 +25,7 @@ export const API_USER = {
   signup: '/user',
   checkId: '/user/id',
   info: '/user',
+  changePhone: '/user/phone',
 };
 
 export const API_CERTIFICATION = {

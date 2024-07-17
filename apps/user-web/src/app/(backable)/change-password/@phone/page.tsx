@@ -28,7 +28,7 @@ export default function PhonePage() {
 
   const onNext = async () => {
     if (currentStep === '휴대폰 번호를 입력하세요') {
-      const phoneNumber = form.getValues('phonNumber');
+      const phoneNumber = form.getValues('phoneNumber');
       // 인증 번호 요청 api
       try {
         await customFetch(API_SMS.sms, {
@@ -54,7 +54,7 @@ export default function PhonePage() {
           body: JSON.stringify({
             code: form.getValues('smsCode'),
             phoneNumber: form.getValues('phoneNumber'),
-            situationCode: 'SIGN_UP',
+            situationCode: 'RESET_PWD',
           }),
         });
       } catch (err) {
