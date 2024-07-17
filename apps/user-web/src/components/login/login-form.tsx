@@ -19,7 +19,7 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
 const formSchema = z.object({
-  userId: z.string().min(2, {
+  loginId: z.string().min(2, {
     message: '아이디는 최소 2자 이상이어야 합니다.',
   }),
   password: z.string().min(8, {
@@ -36,16 +36,16 @@ export default function LoginForm() {
     mode: 'onTouched',
     resolver: zodResolver(formSchema),
     defaultValues: {
-      userId: '',
+      loginId: '',
       password: '',
     },
   });
 
-  const onSubmit = async ({ userId, password }: FormValues) => {
+  const onSubmit = async ({ loginId, password }: FormValues) => {
     try {
       await customFetch(API_ROUTES.user.login, {
         method: 'POST',
-        body: JSON.stringify({ loginId: userId, password }),
+        body: JSON.stringify({ loginId, password }),
         credentials: 'include',
       });
       router.push('/');
@@ -67,11 +67,11 @@ export default function LoginForm() {
       >
         <FormField
           control={form.control}
-          name="userId"
+          name="loginId"
           render={({ field }) => (
             <FormItem>
               <FormControl>
-                <Input placeholder="1234@swifty.kr" label="아이디" {...field} />
+                <Input placeholder="ID" label="아이디" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>

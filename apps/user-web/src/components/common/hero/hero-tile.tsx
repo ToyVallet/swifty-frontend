@@ -5,7 +5,7 @@ import formatDate from '@lib/utils/parser/format-date';
 import Link from 'next/link';
 
 export default function HeroTile({
-  subId,
+  id,
   addr,
   name,
   startDate,
@@ -16,7 +16,7 @@ export default function HeroTile({
 }: Festival & { priority?: boolean }) {
   return (
     <Link
-      href={`/festival/${subId}`}
+      href={`/festival/${id}`}
       className="relative flex-[0_0_100%] overflow-hidden"
     >
       <div className="aspect-square relative h-full w-full flex items-center justify-center">

@@ -8,6 +8,7 @@
       "@components/*": ["./src/components/*"],
       "@lib/*": ["./src/lib/*"],
       "@hooks/*": ["./src/hooks/*"],
+      "@contexts/*": ["./src/contexts/*"],
       "@images/*": ["./public/images/*"],
       "@icons/*": ["./public/icons/*"]
     }
@@ -20,7 +21,8 @@
     "tailwind.config.ts",
     "postcss.config.js",
     "../../packages/ui/src/drawer/overlay.tsx",
-    "../../packages/ui/src/toast/index.tsx"
+    "../../packages/ui/src/toast/index.tsx",
+    "../../packages/shared-lib/src/utils/convertNewlineToJSX.tsx"
   ],
   "exclude": ["node_modules", "./server.js"]
 }

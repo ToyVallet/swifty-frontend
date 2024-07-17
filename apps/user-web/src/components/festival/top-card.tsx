@@ -14,7 +14,7 @@ export default function TopCard({
   iconSrc,
 }: TopCardProps) {
   return (
-    <section className="flex justify-between text-white">
+    <section className="flex justify-between text-white w-full">
       <div className="h-full flex flex-col items-start justify-start font-semibold">
         <span className="text-12 mb-[3px]">축제 홈</span>
         <h1 className="text-[22px] font-bold mb-[3px] uppercase">{title}</h1>

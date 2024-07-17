@@ -40,5 +40,8 @@
       "prettier --write",
       "eslint --fix"
     ]
+  },
+  "dependencies": {
+    "@toss/react": "^1.7.0"
   }
 }

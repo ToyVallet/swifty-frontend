@@ -1,5 +1,6 @@
 'use client';
 
+import { convertNewlineToJSX } from '@toss/react';
 import { motion } from 'framer-motion';
 import type { PropsWithChildren } from 'react';
 
@@ -8,7 +9,7 @@ import Funnel, { type StepType } from './funnel';
 export default function Header({ children }: PropsWithChildren) {
   return (
     <h1 className="text-white text-center font-bold text-26 my-10 flex flex-col items-center">
-      {children}
+      {typeof children === 'string' ? convertNewlineToJSX(children) : children}
     </h1>
   );
 }
