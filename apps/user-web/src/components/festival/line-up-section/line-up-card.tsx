@@ -1,5 +1,6 @@
+import { ImageWithFallback } from '@components/common';
+import FallbackHero from '@images/fallback-hero.png';
 import type { LineUp } from '@lib/types';
-import Image from 'next/image';
 
 type LineUpCardProps = {
   lineup: LineUp;
@@ -8,7 +9,8 @@ type LineUpCardProps = {
 export default function LineUpCard({ lineup }: LineUpCardProps) {
   return (
     <div className="flex flex-col gap-[10px] aspect-[7/4] w-full">
-      <Image
+      <ImageWithFallback
+        fallback={FallbackHero}
         src={lineup.lineUpImagePath}
         alt={lineup.title}
         className="object-cover rounded-xl aspect-[7/4] w-full"

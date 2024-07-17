@@ -1,5 +1,4 @@
-import { getCookieValue } from '@lib';
-import { COOKIE_KEYS } from '@swifty/shared-lib';
+import { COOKIE_KEYS, getCookieValue } from '@swifty/shared-lib';
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 

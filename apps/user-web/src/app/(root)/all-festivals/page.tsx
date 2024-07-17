@@ -9,6 +9,7 @@ export default async function AllFestivalsPage() {
     API_FESTIVALS.festivals(),
     { method: 'GET' },
   );
+
   return (
     <section className="mb-20 w-full flex flex-col gap-5 px-5 lg:mx-auto">
       <FestivalTiles

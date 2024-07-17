@@ -12,10 +12,10 @@ const genderOptions: SelectOptionType[] = [
   },
 ];
 
-export default function Sex() {
+export default function Gender() {
   return (
     <FormField
-      name="sex"
+      name="gender"
       render={({ field }) => (
         <FormErrorControl>
           <Select

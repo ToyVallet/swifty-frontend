@@ -58,7 +58,7 @@ export default function Search<T extends { [key in string]: any }>({
       <Input
         label="학교명"
         placeholder="OO대학교"
-        name="universityId"
+        name="search"
         value={value}
         onChange={handleChange}
       />

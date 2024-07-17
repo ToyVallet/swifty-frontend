@@ -16,6 +16,7 @@ export default async function HomeLayout({ children }: PropsWithChildren) {
     `${API_FESTIVALS.festivals()}`,
     { method: 'GET' },
   );
+
   return (
     <>
       <Navigation variant="root" bg="gradient" />

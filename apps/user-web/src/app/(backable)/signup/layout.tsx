@@ -35,7 +35,7 @@ export default function SignupLayout({
     resolver: zodResolver(formSchema),
   });
 
-  const [currentStep, setCurrentStep] = useState<Step>(steps[10]);
+  const [currentStep, setCurrentStep] = useState<Step>(steps[0]);
 
   const nextStep = () => {
     const nextStepIndex = steps.indexOf(currentStep) + 1;
@@ -54,7 +54,12 @@ export default function SignupLayout({
 
           <AnimatePresence initial={false}>
             <Form {...form}>
-              <form className="text-white">
+              <form
+                className="text-white"
+                onSubmit={(e) => {
+                  e.preventDefault();
+                }}
+              >
                 <Choose value={currentStep}>
                   <When value="약관 동의가 필요해요">{terms}</When>
 

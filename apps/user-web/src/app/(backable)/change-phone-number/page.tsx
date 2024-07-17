@@ -1,12 +1,12 @@
 import { ChangePhoneNumberForm } from '@components/change-phone-number';
 import { Navigation } from '@components/common';
 import { Header } from '@components/signup';
-import { API_SIGNUP } from '@lib/constants';
+import { API_USER } from '@lib/constants';
 import type { UserInfoApi } from '@lib/types';
 import { customFetch } from '@swifty/shared-lib';
 
 export default async function Page() {
-  const user = await customFetch<UserInfoApi>(API_SIGNUP.user, {
+  const user = await customFetch<UserInfoApi>(API_USER.info, {
     method: 'get',
     next: {
       tags: ['user'],
