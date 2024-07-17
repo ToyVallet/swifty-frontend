@@ -2340,6 +2340,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/runtime@npm:^7.14.8, @babel/runtime@npm:^7.19.0":
+  version: 7.24.8
+  resolution: "@babel/runtime@npm:7.24.8"
+  dependencies:
+    regenerator-runtime: "npm:^0.14.0"
+  checksum: 10c0/f24b30af6b3ecae19165b3b032f9bc37b2d1769677bd63b69a6f81061967cfc847aa822518402ea6616b1d301d7eb46986b99c9f69cdb5880834fca2e6b34881
+  languageName: node
+  linkType: hard
+
 "@babel/template@npm:^7.24.7, @babel/template@npm:^7.3.3":
   version: 7.24.7
   resolution: "@babel/template@npm:7.24.7"
@@ -7191,6 +7200,41 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@toss/react@npm:^1.7.0":
+  version: 1.7.0
+  resolution: "@toss/react@npm:1.7.0"
+  dependencies:
+    "@babel/runtime": "npm:^7.14.8"
+    "@toss/storage": "npm:^1.4.0"
+    "@toss/utils": "npm:^1.5.0"
+    classnames: "npm:^2.3.1"
+    lodash.debounce: "npm:^4.0.8"
+    lodash.throttle: "npm:^4.1.1"
+  peerDependencies:
+    react: ^16.0.0 || ^17.0.0 || ^18
+  checksum: 10c0/393348e57774cf72e659978b4d4b174075aa54d0f2af2c7088727aed5b0debffd9b8593df0f503c97534dfa423b083fae14136634aab71ddb08449ebfabe4e7b
+  languageName: node
+  linkType: hard
+
+"@toss/storage@npm:^1.4.0":
+  version: 1.4.0
+  resolution: "@toss/storage@npm:1.4.0"
+  dependencies:
+    "@babel/runtime": "npm:^7.19.0"
+  checksum: 10c0/907e8e022fb39fd0e351796c139dfd3b8d52acaca006498f7bfdb5e0e05a37502964543641facb754b811249e0f7047d28091fc2c9a6ef22364dfc3f7496ba4a
+  languageName: node
+  linkType: hard
+
+"@toss/utils@npm:^1.5.0":
+  version: 1.5.0
+  resolution: "@toss/utils@npm:1.5.0"
+  dependencies:
+    "@babel/runtime": "npm:^7.14.8"
+    date-fns: "npm:^2.25.0"
+  checksum: 10c0/558ee614d86f6024de0ca6887f79db5ec42ed4b25c405a581c266e783801dd35d71017baa90ea1d9e7ad69dd4387c6896ae7c72e860e3b97d078a8ac5fef36a7
+  languageName: node
+  linkType: hard
+
 "@trivago/prettier-plugin-sort-imports@npm:^4.3.0":
   version: 4.3.0
   resolution: "@trivago/prettier-plugin-sort-imports@npm:4.3.0"
@@ -11003,6 +11047,15 @@ __metadata:
     es-errors: "npm:^1.3.0"
     is-data-view: "npm:^1.0.1"
   checksum: 10c0/21b0d2e53fd6e20cc4257c873bf6d36d77bd6185624b84076c0a1ddaa757b49aaf076254006341d35568e89f52eecd1ccb1a502cfb620f2beca04f48a6a62a8f
+  languageName: node
+  linkType: hard
+
+"date-fns@npm:^2.25.0":
+  version: 2.30.0
+  resolution: "date-fns@npm:2.30.0"
+  dependencies:
+    "@babel/runtime": "npm:^7.21.0"
+  checksum: 10c0/e4b521fbf22bc8c3db332bbfb7b094fd3e7627de0259a9d17c7551e2d2702608a7307a449206065916538e384f37b181565447ce2637ae09828427aed9cb5581
   languageName: node
   linkType: hard
 
@@ -16009,6 +16062,13 @@ __metadata:
   version: 4.7.0
   resolution: "lodash.sortby@npm:4.7.0"
   checksum: 10c0/fc48fb54ff7669f33bb32997cab9460757ee99fafaf72400b261c3e10fde21538e47d8cfcbe6a25a31bcb5b7b727c27d52626386fc2de24eb059a6d64a89cdf5
+  languageName: node
+  linkType: hard
+
+"lodash.throttle@npm:^4.1.1":
+  version: 4.1.1
+  resolution: "lodash.throttle@npm:4.1.1"
+  checksum: 10c0/14628013e9e7f65ac904fc82fd8ecb0e55a9c4c2416434b1dd9cf64ae70a8937f0b15376a39a68248530adc64887ed0fe2b75204b2c9ec3eea1cb2d66ddd125d
   languageName: node
   linkType: hard
 
@@ -21394,6 +21454,7 @@ __metadata:
     "@jest/globals": "npm:^29.7.0"
     "@swifty/eslint-config": "npm:*"
     "@swifty/typescript-config": "npm:*"
+    "@toss/react": "npm:^1.7.0"
     "@types/jest": "npm:^29.5.12"
     husky: "npm:^7.0.2"
     jest: "npm:^29.7.0"

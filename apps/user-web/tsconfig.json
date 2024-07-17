@@ -20,7 +20,8 @@
     "tailwind.config.ts",
     "postcss.config.js",
     "../../packages/ui/src/drawer/overlay.tsx",
-    "../../packages/ui/src/toast/index.tsx"
+    "../../packages/ui/src/toast/index.tsx",
+    "../../packages/shared-lib/src/utils/convertNewlineToJSX.tsx"
   ],
   "exclude": ["node_modules", "./server.js"]
 }
