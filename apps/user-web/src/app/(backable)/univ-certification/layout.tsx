@@ -50,6 +50,8 @@ export default function UnivCertificationLayout({
     }
   };
 
+  console.log(form.watch());
+
   return (
     <>
       <Navigation variant="back" title="학적 인증" />
