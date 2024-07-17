@@ -6,3 +6,11 @@ export type LineupApi = {
   logoImage: string;
   concertsResponse: Concert[];
 };
+
+export type UserInfoApi = {
+  name: string;
+  phoneNumber: string;
+  dob: string;
+  gender: 'FEMALE' | 'MALE';
+  enrolled: string;
+};

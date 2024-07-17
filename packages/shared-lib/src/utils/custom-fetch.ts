@@ -22,7 +22,7 @@ export async function customFetch<Res>(
       Cookie: await getServerSideCookies(),
     };
   }
- 
+
   try {
     const response = await fetch(`${SERVER_URL}${url}`, {
       ...options,

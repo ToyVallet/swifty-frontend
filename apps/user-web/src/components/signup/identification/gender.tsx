@@ -1,5 +1,16 @@
 import { FormErrorControl } from '@components/signup';
-import { FormField, Select } from '@swifty/ui';
+import { FormField, Select, type SelectOptionType } from '@swifty/ui';
+
+const genderOptions: SelectOptionType[] = [
+  {
+    label: '남성',
+    value: 'MALE',
+  },
+  {
+    label: '여성',
+    value: 'FEMALE',
+  },
+];
 
 export default function Gender() {
   return (
@@ -8,20 +19,11 @@ export default function Gender() {
       render={({ field }) => (
         <FormErrorControl>
           <Select
+            options={genderOptions}
             onValueChange={field.onChange}
             defaultValue={field.value}
             label="성별"
             placeholder="성별 선택"
-            options={[
-              {
-                label: '남성',
-                value: 'MALE',
-              },
-              {
-                label: '여성',
-                value: 'FEMALE',
-              },
-            ]}
           />
         </FormErrorControl>
       )}

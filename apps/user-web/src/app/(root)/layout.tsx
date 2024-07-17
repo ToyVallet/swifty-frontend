@@ -19,7 +19,7 @@ export default async function HomeLayout({ children }: PropsWithChildren) {
 
   return (
     <>
-      <Navigation variant="root" bg="gradient" search />
+      <Navigation variant="root" bg="gradient" />
       <Hero>
         <Carousel hasIndicator autoplay>
           {festivalLineups.map((festival) => (
