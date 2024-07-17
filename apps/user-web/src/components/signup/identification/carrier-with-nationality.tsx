@@ -31,11 +31,7 @@ export default function CarrierWithNationality() {
               label="통신사"
               placeholder="통신사 선택"
               onValueChange={field.onChange}
-            >
-              {carrierOptions.map((option) => (
-                <SelectOption value={option.value}>{option.label}</SelectOption>
-              ))}
-            </Select>
+            />
           </FormErrorControl>
         )}
       />

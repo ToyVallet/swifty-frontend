@@ -3,12 +3,7 @@
 import ChevronDown from '@icons/bottom-arrow.svg';
 import * as VisuallyHidden from '@radix-ui/react-visually-hidden';
 import { cn } from '@swifty/shared-lib';
-import {
-  type ElementRef,
-  type PropsWithChildren,
-  forwardRef,
-  useState,
-} from 'react';
+import { type ElementRef, forwardRef, useState } from 'react';
 
 import {
   Drawer,
@@ -18,19 +13,21 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from '../drawer';
+import { Choose, Otherwise, When } from '../lib';
 
 export type SelectOptionType = {
   label: string;
   value: string;
 };
 
-type SelectProps<T extends SelectOptionType[]> = PropsWithChildren<{
+type SelectProps<T extends SelectOptionType[]> = {
   options: T;
   onValueChange: (value: T[number]['value']) => void;
   defaultValue?: T[number]['value'];
   label: string;
   placeholder?: string;
-}>;
+  render?: (options: T) => JSX.Element;
+};
 
 export default function Select<T extends SelectOptionType[]>({
   options,
@@ -38,7 +35,7 @@ export default function Select<T extends SelectOptionType[]>({
   onValueChange,
   defaultValue,
   placeholder,
-  children,
+  render,
 }: SelectProps<T>) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState<T[number]['value'] | ''>(
@@ -51,8 +48,6 @@ export default function Select<T extends SelectOptionType[]>({
   const handleSelect = (event: React.MouseEvent<HTMLDivElement>) => {
     const target = event.target as HTMLDivElement;
     const value = target.getAttribute('data-value');
-
-    console.log(target, value);
 
     if (value) {
       onValueChange?.(value);
@@ -99,7 +94,16 @@ export default function Select<T extends SelectOptionType[]>({
           className="grid gird-cols-1 divide-y divide-swifty-color-700"
           onClick={handleSelect}
         >
-          {children}
+          <Choose value={render}>
+            <When value={undefined}>
+              {options.map((option) => (
+                <SelectOption key={option.value} value={option.value}>
+                  {option.label}
+                </SelectOption>
+              ))}
+            </When>
+            <Otherwise>{render?.(options)}</Otherwise>
+          </Choose>
         </div>
         {/* 웹 접근성을 위한 영역 */}
         <VisuallyHidden.Root>

@@ -1,7 +1,7 @@
 'use client';
 
 import { type TicketingDate } from '@app/(backable)/festival/[id]/ticketing/@date/page';
-import { FormField, Select, SelectOption } from '@swifty/ui';
+import { FormField, Select } from '@swifty/ui';
 
 type DateSelectProps = {
   options: TicketingDate[];
@@ -24,19 +24,7 @@ export default function DateSelect({ options }: DateSelectProps) {
           label="날짜 선택"
           defaultValue={options[0]?.ticketingId}
           onValueChange={field.onChange}
-        >
-          {options.map((option) => (
-            <SelectOption value={option.ticketingId} key={option.ticketingId}>
-              {/* <div className="flex flex-col gap-x-10">
-                <span className="text-22 font-semibold">{option.name}</span>
-                <span className="text-16 font-medium">
-                  {new Date(option.ticketingStartDateTime).toLocaleDateString()}
-                </span>
-              </div> */}
-              {option.name}
-            </SelectOption>
-          ))}
-        </Select>
+        />
       )}
     />
   );
