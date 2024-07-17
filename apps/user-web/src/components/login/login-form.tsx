@@ -2,7 +2,7 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { API_ROUTES } from '@lib/constants';
-import { APIError } from '@swifty/shared-lib';
+import { APIError, revalidatePath } from '@swifty/shared-lib';
 import { customFetch } from '@swifty/shared-lib';
 import {
   Button,
@@ -48,6 +48,7 @@ export default function LoginForm() {
         body: JSON.stringify({ loginId, password }),
         credentials: 'include',
       });
+      await revalidatePath('/', 'layout');
       router.push('/');
     } catch (e) {
       if (APIError.isAPIError(e)) {
