@@ -1,3 +1,4 @@
+import Logout from '@components/mypage/logout';
 import LeftChevron from '@icons/mypage/left-chevron.svg';
 import { cn } from '@swifty/shared-lib';
 import Link from 'next/link';
@@ -15,7 +16,7 @@ export default function UserSection() {
       <Header>계정 관리</Header>
       <div className="flex flex-col gap-[10px]">
         <UserLink label="개인정보 관리" href="/mypage/info" />
-        <UserLink label="로그아웃" href="#" />
+        <Logout />
         <UserLink label="회원 탈퇴" href="#" />
       </div>
     </section>
