@@ -1,9 +1,9 @@
 /* eslint-disable no-console */
-import http from 'http';
-import next from 'next';
-import { parse } from 'url';
+const http = require('http');
+const next = require('next');
+const { parse } = require('url');
 
-const dev = process.env.NODE_ENV !== 'development';
+const dev = process.env.NODE_ENV === 'development';
 const PORT = process.env.PORT || 3000;
 const app = next({ dev, port: PORT });
 const handle = app.getRequestHandler();
