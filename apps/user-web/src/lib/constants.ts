@@ -24,6 +24,7 @@ export const API_FESTIVALS = {
 export const API_USER = {
   signup: '/user',
   checkId: '/user/id',
+  info: '/user',
 };
 
 export const API_CERTIFICATION = {
