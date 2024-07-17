@@ -24,8 +24,10 @@ export const API_FESTIVALS = {
 export const API_USER = {
   signup: '/user',
   checkId: '/user/id',
+  checkPassword: '/user/check/pwd',
   info: '/user',
   changePhone: '/user/phone',
+  changePassword: '/user/change/pwd',
 };
 
 export const API_CERTIFICATION = {

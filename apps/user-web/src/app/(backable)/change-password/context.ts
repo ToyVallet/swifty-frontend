@@ -1,6 +1,4 @@
-'use client';
-
-import { createContext } from 'react';
+import createStepContext from '@contexts/step-context';
 
 export const phoneSteps = [
   '휴대폰 번호를 입력하세요',
@@ -31,10 +29,4 @@ export const stepsWithForm = {
 };
 
 export type FindPasswordStep = (typeof steps)[number];
-export const FindPasswordContext = createContext<{
-  currentStep: FindPasswordStep;
-  nextStep: () => void;
-}>({
-  currentStep: steps[0],
-  nextStep: () => {},
-});
+export const FindPasswordContext = createStepContext(steps);

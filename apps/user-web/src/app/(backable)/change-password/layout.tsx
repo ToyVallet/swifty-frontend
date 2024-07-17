@@ -34,7 +34,7 @@ export default function SearchLayout({
     mode: 'onChange',
     resolver: zodResolver(findPasswordSchema),
   });
-  const [currentStep, setCurrentStep] = useState<FindPasswordStep>(steps[5]);
+  const [currentStep, setCurrentStep] = useState<FindPasswordStep>(steps[0]);
 
   const nextStep = () => {
     const nextStepIndex = steps.indexOf(currentStep) + 1;
@@ -45,13 +45,18 @@ export default function SearchLayout({
     }
   };
   return (
-    <>
+    <div className="w-full px-5">
       <Navigation variant="back" title="비밀번호 재설정" />
       <FindPasswordContext.Provider value={{ currentStep, nextStep }}>
         <Main>
           <Header>{currentStep}</Header>
           <Form {...form}>
-            <form className="w-full">
+            <form
+              className="w-full"
+              onSubmit={(e) => {
+                e.preventDefault();
+              }}
+            >
               <Choose value={currentStep}>
                 {phoneSteps.map((step) => (
                   <When key={step} value={step}>
@@ -74,6 +79,6 @@ export default function SearchLayout({
           </Form>
         </Main>
       </FindPasswordContext.Provider>
-    </>
+    </div>
   );
 }
