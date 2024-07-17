@@ -8,7 +8,6 @@ import Providers from './providers';
 export const metadata: Metadata = {
   title: '스위프티',
   description: '스위프티 - 전국 대학 축제 종합 플랫폼',
-  manifest: '/manifest.json',
   applicationName: '스위프티',
   keywords: [],
   viewport:
@@ -37,12 +36,12 @@ export const metadata: Metadata = {
   },
 };
 
-export const viewport: Viewport = {
-  themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#ffffff' },
-    { media: '(prefers-color-scheme: dark)', color: '#0c0c0c' },
-  ],
-};
+// export const viewport: Viewport = {
+//   themeColor: [
+//     { media: '(prefers-color-scheme: light)', color: '#ffffff' },
+//     { media: '(prefers-color-scheme: dark)', color: '#0c0c0c' },
+//   ],
+// };
 
 export default function RootLayout({ children }: PropsWithChildren) {
   return (

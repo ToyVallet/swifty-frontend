@@ -1,16 +1,18 @@
 import type { TileInfo } from '@components/common';
 import {
+  Footer,
   Hero,
   ImageWithFallback,
   Main,
   MenuTiles,
+  Navigation,
   TileHeader,
 } from '@components/common';
 import { FadeOverlay } from '@components/common';
 import { LineUpSection, TopCard } from '@components/festival';
 import FallbackHero from '@images/fallback-hero.png';
 import { API_FESTIVALS } from '@lib/constants';
-import type { LineupApi } from '@lib/types/apit';
+import type { LineupApi } from '@lib/types/api';
 import type { Festival } from '@lib/types/festival';
 import formatDate from '@lib/utils/parser/format-date';
 import { type Params, customFetch } from '@swifty/shared-lib';
@@ -44,39 +46,43 @@ export default async function FestivalHomePage({
     },
     {
       id: 2,
-      subtitle: 'Line-up',
-      title: <TileHeader>라인업</TileHeader>,
-      link: `/festival/${id}#line-up`,
+      subtitle: 'Ticketing',
+      title: <TileHeader>티켓 예매하기</TileHeader>,
+      link: `/festival/${id}/ticketing`,
       icon: <BsBellFill size={17} />,
       bgColor: 'bg-white text-black',
     },
   ];
 
   return (
-    <div className="mb-[90px]">
-      <Hero variant="image">
-        <ImageWithFallback
-          src={festivalInfo.festivalImage}
-          alt={festivalInfo.name}
-          width={500}
-          height={500}
-          fallback={FallbackHero}
-        />
-        <FadeOverlay />
-      </Hero>
-      <Main className="px-5 gap-10">
-        <TopCard
-          title={festivalInfo.name}
-          description={festivalInfo.description}
-          period={formatDate(
-            festivalInfo.startDate,
-            festivalInfo.endDate,
-            'ko',
-          )}
-        />
-        <MenuTiles tiles={tiles} />
-        <LineUpSection concerts={lineup.concertsResponse} />
-      </Main>
-    </div>
+    <>
+      <Navigation variant="back" bg="gradient" centerLogo />
+      <div className="mb-[90px]">
+        <Hero variant="image">
+          <ImageWithFallback
+            src={festivalInfo.festivalImage}
+            alt={festivalInfo.name}
+            width={500}
+            height={500}
+            fallback={FallbackHero}
+          />
+          <FadeOverlay />
+        </Hero>
+        <Main className="px-5 gap-10">
+          <TopCard
+            title={festivalInfo.name}
+            description={festivalInfo.description}
+            period={formatDate(
+              festivalInfo.startDate,
+              festivalInfo.endDate,
+              'ko',
+            )}
+          />
+          <MenuTiles tiles={tiles} />
+          {/* <LineUpSection concerts={lineup.concertsResponse} /> */}
+        </Main>
+      </div>
+      <Footer />
+    </>
   );
 }

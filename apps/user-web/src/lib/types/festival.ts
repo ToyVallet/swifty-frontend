@@ -3,7 +3,7 @@ import type { LineUp } from '@lib/types/line-up';
 export type Festival_status = 'all' | 'available' | 'active' | 'end' | 'before';
 
 export type Festival = {
-  subId: string;
+  id: string;
   name: string;
   addr: string;
   startDate: string;
@@ -13,7 +13,7 @@ export type Festival = {
 };
 
 export type Concert = {
-  subId: string;
+  id: string;
   name: string;
   startDate: string;
   endDate: string;

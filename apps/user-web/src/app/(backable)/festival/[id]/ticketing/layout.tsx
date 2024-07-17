@@ -32,7 +32,7 @@ export default function TicketingLayout({
     defaultValues: {
       festivalId: '',
       festivalDate: '',
-      area: '',
+      area: 'A', // 구역선택 기능 활성화되면 변경
     },
   });
 
@@ -51,7 +51,7 @@ export default function TicketingLayout({
 
   return (
     <>
-      <Navigation variant="back" title="학적 인증" />
+      <Navigation variant="back" title="티켓 예매하기" />
       <TicketingStepContext.Provider value={{ currentStep, nextStep }}>
         <main className="h-full flex flex-col relative pb-20 overflow-y-auto scrollbar-hide">
           <Choose value={currentStep}>
@@ -63,7 +63,7 @@ export default function TicketingLayout({
                   <Form {...form}>
                     <form className="text-white w-full h-full">
                       <Choose value={currentStep}>
-                        <When value="날짜을 선택해주세요">{date}</When>
+                        <When value="날짜를 선택해주세요">{date}</When>
                         <When value="구역을 선택해주세요">{area}</When>
                       </Choose>
                     </form>

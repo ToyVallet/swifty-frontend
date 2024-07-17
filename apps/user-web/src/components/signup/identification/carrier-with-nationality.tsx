@@ -1,7 +1,20 @@
 import type { FormValues } from '@app/(backable)/signup/schema';
 import { FormErrorControl } from '@components/signup';
-import { FormField, RadioGroup, RadioOption, Select } from '@swifty/ui';
+import {
+  FormField,
+  RadioGroup,
+  RadioOption,
+  Select,
+  SelectOption,
+} from '@swifty/ui';
 import { useFormContext } from 'react-hook-form';
+
+const carrierOptions = [
+  { label: 'SKT', value: 'SKT' },
+  { label: 'KT', value: 'KT' },
+  { label: 'LG U+', value: 'LG U+' },
+  { label: '알뜰폰', value: 'MVNO' },
+];
 
 export default function CarrierWithNationality() {
   const { control } = useFormContext<FormValues>();
@@ -17,14 +30,11 @@ export default function CarrierWithNationality() {
               label="통신사"
               placeholder="통신사 선택"
               onValueChange={field.onChange}
-              defaultValue={field.value}
-              options={[
-                { label: 'SKT', value: 'SKT' },
-                { label: 'KT', value: 'KT' },
-                { label: 'LG U+', value: 'LG U+' },
-                { label: '알뜰폰', value: 'MVNO' },
-              ]}
-            />
+            >
+              {carrierOptions.map((option) => (
+                <SelectOption value={option.value}>{option.label}</SelectOption>
+              ))}
+            </Select>
           </FormErrorControl>
         )}
       />

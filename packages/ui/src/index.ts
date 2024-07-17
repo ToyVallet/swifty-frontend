@@ -12,7 +12,11 @@ export {
   FormField,
 } from './form';
 export * from './lib';
-export { default as Select } from './select';
+export {
+  default as Select,
+  SelectOption,
+  type SelectOptionType,
+} from './select';
 export {
   Drawer,
   DrawerPortal,

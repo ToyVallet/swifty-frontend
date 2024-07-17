@@ -1,4 +1,4 @@
-import { FixedBottomCTAGroup } from '@components/common';
+import { FixedBottomGroup } from '@components/common';
 import Check from '@images/signup/complete-check.gif';
 import { Button } from '@swifty/ui';
 import Image from 'next/image';
@@ -14,16 +14,14 @@ export default function Page() {
         width={255}
         height={255}
       />
-      <FixedBottomCTAGroup
-        buttons={[
-          <Button size="full" variant="white">
-            <Link href="/login">로그인하기</Link>
-          </Button>,
-          <Button size="full">
-            <Link href="/">홈으로 가기</Link>
-          </Button>,
-        ]}
-      />
+      <FixedBottomGroup>
+        <Button size="full" variant="white">
+          <Link href="/login">로그인하기</Link>
+        </Button>
+        <Button size="full">
+          <Link href="/">홈으로 가기</Link>
+        </Button>
+      </FixedBottomGroup>
     </section>
   );
 }

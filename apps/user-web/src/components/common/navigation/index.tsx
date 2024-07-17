@@ -10,19 +10,22 @@ import LogoLink from './logo-link';
 type NavigationProps = {
   variant?: 'root' | 'back';
   bg?: 'transparent' | 'gradient' | 'solid';
-  search?: boolean;
   centerLogo?: boolean;
   title?: string;
 };
 
 const navigationVariants = cva(
-  'z-30 grid grid-cols-3 w-full px-5 h-[50px] fixed top-0 left-0',
+  'z-30 grid w-full px-5 h-[50px] fixed top-0 left-0',
   {
     variants: {
       bg: {
         transparent: 'bg-transparent',
         gradient: 'bg-gradient-to-b from-black to-transparent',
         solid: 'bg-black',
+      },
+      centerLogo: {
+        true: 'grid-cols-3',
+        false: 'grid-cols-2',
       },
     },
     defaultVariants: {
@@ -35,11 +38,10 @@ export default function Navigation({
   title,
   variant = 'back',
   bg = 'transparent',
-  search = false,
   centerLogo = false,
 }: NavigationProps) {
   return (
-    <nav className={cn(navigationVariants({ bg }))}>
+    <nav className={cn(navigationVariants({ bg, centerLogo }))}>
       <Column>
         <Choose value={variant}>
           <When value="root">
@@ -54,11 +56,11 @@ export default function Navigation({
         </Choose>
       </Column>
 
-      <Column>
-        <If condition={centerLogo}>
+      <If condition={centerLogo}>
+        <Column>
           <LogoLink />
-        </If>
-      </Column>
+        </Column>
+      </If>
     </nav>
   );
 }
