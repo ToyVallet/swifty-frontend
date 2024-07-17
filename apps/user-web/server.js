@@ -1,15 +1,12 @@
-const http = require('http');
-const { parse } = require('url');
-const next = require('next');
+/* eslint-disable no-console */
+import http from 'http';
+import next from 'next';
+import { parse } from 'url';
 
-const https = require('https');
-const fs = require('fs');
-
-const dev = process.env.NODE_ENV !== 'production';
-const app = next({ dev });
-const handle = app.getRequestHandler();
-
+const dev = process.env.NODE_ENV !== 'development';
 const PORT = process.env.PORT || 3000;
+const app = next({ dev, port: PORT });
+const handle = app.getRequestHandler();
 
 app.prepare().then(() => {
   http
@@ -23,8 +20,6 @@ app.prepare().then(() => {
         console.error('HTTP Server Error:', err);
         throw err;
       }
-      console.log(
-        `> Ready on http://localhost:${PORT} or https://localhost.swifty.kr:${PORT}`,
-      );
+      console.log(`> Ready on http://localhost:${PORT}`);
     });
 });
