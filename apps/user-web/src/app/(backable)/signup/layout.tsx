@@ -45,7 +45,6 @@ export default function SignupLayout({
     }
   };
 
-  console.log(form.watch());
   return (
     <>
       <Navigation variant="back" title="회원가입" />

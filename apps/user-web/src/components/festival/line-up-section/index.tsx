@@ -15,6 +15,7 @@ export default function LineUpSection({ concerts }: LineUpSectionProps) {
   const [currentDate, setCurrentDate] = useState<Dayjs>(
     dayjs(concerts[0]?.startDate),
   );
+
   const lineupDates = Array.from(
     new Set(
       concerts.map(({ startDate }) => dayjs(startDate).format('YYYY-MM-DD')),

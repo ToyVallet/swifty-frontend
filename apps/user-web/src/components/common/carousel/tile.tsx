@@ -5,7 +5,7 @@ import dayjs from 'dayjs';
 import Link from 'next/link';
 
 export default function Tile({
-  subId,
+  id,
   name,
   addr,
   startDate,
@@ -16,7 +16,7 @@ export default function Tile({
 }: Festival & { priority?: boolean }) {
   const period = `${dayjs(startDate).format('YYYY.MM.DD')} - ${dayjs(endDate).format('YYYY.MM.DD')}`;
   return (
-    <Link href={`/festival/${subId}`}>
+    <Link href={`/festival/${id}`}>
       <div className="bg-black w-full max-w-[150px] text-white">
         <figure className="relative aspect-[3/4]">
           <ImageWithFallback
