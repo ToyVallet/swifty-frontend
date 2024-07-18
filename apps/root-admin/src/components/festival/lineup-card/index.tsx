@@ -17,26 +17,26 @@ import { useLineupCRUD } from 'src/hooks';
 import styles from './lineup-card.module.css';
 
 interface Props extends LineUpInfoResponse {
-  festivalSubId: string;
+  festivalId: string;
 }
 
 export default function LineupCard(props: Props) {
   const {
-    subId,
+    id,
     title,
     description,
     performanceTime,
     lineUpImagePath,
-    festivalSubId,
+    festivalId,
     lineUpStatus,
   } = props;
 
   const { error, deleteLineup } = useLineupCRUD();
 
   const onDelete = async () => {
-    await deleteLineup(subId);
+    await deleteLineup(id);
     if (!error) {
-      await revalidate(FETCH_TAG.festivalsDetail(festivalSubId));
+      await revalidate(FETCH_TAG.festivalsDetail(festivalId));
     }
   };
 
@@ -46,10 +46,10 @@ export default function LineupCard(props: Props) {
       title={title}
       extra={
         <OpenHiddenToggle
+          id={id}
           apiTarget="LINEUP"
           status={lineUpStatus}
-          subId={subId}
-          festivalId={festivalSubId}
+          festivalId={festivalId}
         />
       }
       cover={

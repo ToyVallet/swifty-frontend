@@ -23,13 +23,13 @@ export default function useLineupCRUD() {
   const handleNotification = useContext(NotificationHandlerContext);
 
   const createLineup = useCallback(
-    async (concertSubId: string, values: FieldType, newFile: UploadFile) => {
+    async (concertId: string, values: FieldType, newFile: UploadFile) => {
       const { title, description, performanceTime } = values;
       setIsLoading(true);
       setError(null);
 
       const formData = new FormData();
-      formData.append('concertSubId', concertSubId);
+      formData.append('concertId', concertId);
       formData.append('title', title);
       formData.append('description', description);
       formData.append('performanceTime', dayjs(performanceTime).format(FORMAT));
@@ -79,7 +79,7 @@ export default function useLineupCRUD() {
       setIsLoading(true);
       setError(null);
       const formData = new FormData();
-      formData.append('lineUpSubId', id);
+      formData.append('lineUpId', id);
       formData.append('title', title);
       formData.append('description', description);
       formData.append('performanceTime', dayjs(performanceTime).format(FORMAT));

@@ -15,7 +15,10 @@ import type { TableProps } from 'antd';
 import { Avatar, Button, Table } from 'antd';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
+
+import styles from './university-table.module.css';
 
 interface Props {
   data: University[];
@@ -76,7 +79,7 @@ const columns: TableProps<University>['columns'] = [
     key: 'detail',
     render: (_, record) => (
       <Button>
-        <Link href={`/university/${record.subId}`}>상세 페이지</Link>
+        <Link href={`/university/${record.id}`}>상세 페이지</Link>
       </Button>
     ),
   },
@@ -89,12 +92,9 @@ const columns: TableProps<University>['columns'] = [
         title="계정 삭제"
         description="해당 계정을 삭제하시겠습니까?"
         onConfirm={async () => {
-          await customFetch(
-            API_UNIVERSITY.patch_delete_universiry(record.subId),
-            {
-              method: 'DELETE',
-            },
-          );
+          await customFetch(API_UNIVERSITY.patch_delete_universiry(record.id), {
+            method: 'DELETE',
+          });
           await revalidate('university');
         }}
       >
@@ -105,6 +105,7 @@ const columns: TableProps<University>['columns'] = [
 ];
 
 function UniversityTable({ data, pageSize, total }: Props) {
+  const router = useRouter();
   const [tableData, setTableData] = useState<University[]>(data);
   const { pagination, loading, handleTableChange } = usePagination<University>({
     pageSize,
@@ -112,6 +113,9 @@ function UniversityTable({ data, pageSize, total }: Props) {
     setTableData,
     api: API_UNIVERSITY.get_univiresity,
   });
+  const onClickRow = (record: University) => {
+    router.push(`/university/${record.id}`);
+  };
 
   useEffect(() => {
     setTableData(data);
@@ -120,6 +124,7 @@ function UniversityTable({ data, pageSize, total }: Props) {
   return (
     <section>
       <Table
+        rowClassName={styles.row}
         columns={columns}
         dataSource={tableData}
         pagination={{
@@ -132,7 +137,10 @@ function UniversityTable({ data, pageSize, total }: Props) {
           onChange: (page, pageSize) => handleTableChange(page, pageSize),
         }}
         loading={loading}
-        rowKey="subId"
+        onRow={(record) => ({
+          onClick: () => onClickRow(record),
+        })}
+        rowKey="id"
       />
     </section>
   );

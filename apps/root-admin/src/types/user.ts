@@ -9,16 +9,12 @@ export type UserRole =
 
 export type UserStatus = 'ACTIVE' | 'WITHDRAWAL' | 'PAUSED' | 'BANNED';
 
-export type UserGender =
-  | 'OLD_MALE'
-  | 'OLE_FEMALE'
-  | 'YOUNG_MALE'
-  | 'YOUNG_FEMALE';
+export type UserGender = 'MALE' | 'FEMALE';
 
 export type UserEnrolled = 'FORM' | 'KAKAO';
 
 export interface User {
-  userSubId: string;
+  userId: string;
   name: string;
   phoneNumber: string;
   userFormId: string;

@@ -15,7 +15,7 @@ interface FieldType {
   phoneNumber: string;
   loginId: string;
   userRole: 'MANAGER' | 'SUB_MANAGER' | 'CLIENT';
-  universitySubId: string;
+  universityId: string;
 }
 
 interface Props {
@@ -44,7 +44,7 @@ export default function UniversityHostCreateForm({ onClose, form, id }: Props) {
   const onFinish: FormProps<FieldType>['onFinish'] = async (
     values: FieldType,
   ) => {
-    values.universitySubId = id;
+    values.universityId = id;
     try {
       const data = await customFetch<UniversityHostCreate>(API_HSOT.host, {
         method: 'POST',

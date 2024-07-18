@@ -19,7 +19,7 @@ const { TextArea } = Input;
 const FORMAT = 'YYYY-MM-DDTHH:mm:ss';
 
 interface FieldType {
-  festivalSubId: string;
+  festivalId: string;
   name: string;
   addr: string;
   date: Date[];
@@ -35,7 +35,7 @@ interface Props extends FestivalDetail {
 }
 
 export default function FestivalUpdateForm({
-  subId,
+  id,
   name,
   addr,
   startDate,
@@ -98,7 +98,7 @@ export default function FestivalUpdateForm({
 
     formData.append('name', values.name);
     formData.append('addr', values.addr);
-    formData.append('festivalSubId', subId);
+    formData.append('festivalId', id);
     formData.append('description', values.description);
 
     // poster
@@ -132,7 +132,7 @@ export default function FestivalUpdateForm({
         body: formData,
       });
 
-      await revalidate(FETCH_TAG.festivalsDetail(subId));
+      await revalidate(FETCH_TAG.festivalsDetail(id));
       toggleLock();
       onClose?.();
     } catch (err) {

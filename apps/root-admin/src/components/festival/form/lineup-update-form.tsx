@@ -27,18 +27,18 @@ type FieldType = {
 };
 
 interface Props extends LineUpInfoResponse {
-  festivalSubId: string;
+  festivalId: string;
   form?: FormInstance<FieldType>;
   onClose?: () => void;
 }
 
 export default function LineupUpdateForm({
-  subId,
+  id,
   title,
   description,
   performanceTime,
   lineUpImagePath,
-  festivalSubId,
+  festivalId,
   form,
   onClose,
 }: Props) {
@@ -59,13 +59,13 @@ export default function LineupUpdateForm({
 
   const onFinish: FormProps<FieldType>['onFinish'] = async (values) => {
     await updateLineup(
-      subId,
+      id,
       values,
       fileList[0] as UploadFile,
       lineUpImagePath ? lineUpImagePath : '',
     );
     if (!error) {
-      await revalidate(FETCH_TAG.festivalsDetail(festivalSubId));
+      await revalidate(FETCH_TAG.festivalsDetail(festivalId));
       toggleLock();
       onClose?.();
     }

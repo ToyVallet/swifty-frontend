@@ -10,7 +10,7 @@ import { useState } from 'react';
 interface Props {
   apiTarget: 'FESTIVAL' | 'CONCERT' | 'LINEUP';
   status: Status;
-  subId: string;
+  id: string;
   festivalId: string;
   size?: SegmentedProps['size'];
 }
@@ -20,7 +20,7 @@ const STATUS_LIST: Status[] = ['HIDDEN', 'OPENED'];
 export default function OpenHiddenToggle({
   apiTarget,
   status,
-  subId,
+  id,
   festivalId,
   size = 'small',
 }: Props) {
@@ -28,16 +28,16 @@ export default function OpenHiddenToggle({
 
   const API_URL = {
     FESTIVAL: {
-      HIDDEN: API_FESTIVAL.hidden(subId),
-      OPENED: API_FESTIVAL.open(subId),
+      HIDDEN: API_FESTIVAL.hidden(id),
+      OPENED: API_FESTIVAL.open(id),
     },
     CONCERT: {
-      HIDDEN: API_CONCERT.hidden(subId),
-      OPENED: API_CONCERT.open(subId),
+      HIDDEN: API_CONCERT.hidden(id),
+      OPENED: API_CONCERT.open(id),
     },
     LINEUP: {
-      HIDDEN: API_LINEUP.hidden(subId),
-      OPENED: API_LINEUP.open(subId),
+      HIDDEN: API_LINEUP.hidden(id),
+      OPENED: API_LINEUP.open(id),
     },
   };
 

@@ -30,7 +30,7 @@ export default async function UniversityFestivals({ id }: { id: string }) {
       </div>
       <PanelList className={styles.panelList}>
         {datas.map((data) => (
-          <Link href={`/festivals/${data.subId}`} key={data.subId}>
+          <Link href={`/festivals/${data.id}`} key={data.id}>
             <FestivalPanel {...data} />
           </Link>
         ))}

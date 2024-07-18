@@ -39,7 +39,7 @@ export default function LineUpSection({ concerts }: LineUpSectionProps) {
           )
           .map((concert) =>
             concert.lineUpInfoResponses.map((lineup) => (
-              <LineUpCard key={lineup.subId} lineup={lineup} />
+              <LineUpCard key={lineup.id} lineup={lineup} />
             )),
           )}
       </div>

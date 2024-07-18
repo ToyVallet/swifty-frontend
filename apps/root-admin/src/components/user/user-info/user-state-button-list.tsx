@@ -4,14 +4,14 @@ import { DeleteButton, NotificationHandlerContext } from '@components';
 import { API_CLIENT } from '@lib';
 import { customFetch, revalidate } from '@swifty/shared-lib';
 import type { UserStatus } from '@type';
-import { Button, Popconfirm } from 'antd';
+import { Button } from 'antd';
 import { useRouter } from 'next/navigation';
 import { useContext, useState } from 'react';
 
 import styles from './userInfo.module.css';
 
 interface UserActionsProps {
-  userSubId: string;
+  userId: string;
   status: UserStatus;
 }
 
@@ -19,7 +19,7 @@ type States = 'active' | 'ban' | 'pause';
 const USER_STATES = ['active', 'ban', 'pause'] as const;
 
 export default function UserStateButtonList({
-  userSubId,
+  userId,
   status,
 }: UserActionsProps) {
   const router = useRouter();
@@ -41,7 +41,7 @@ export default function UserStateButtonList({
     const prevStatus = status;
     setUserStatus(() => changeStatesToUserStatus(state));
     try {
-      customFetch(API_CLIENT[state](userSubId), {
+      customFetch(API_CLIENT[state](userId), {
         method: 'PATCH',
       });
       setErrorMessage(null);
@@ -62,7 +62,7 @@ export default function UserStateButtonList({
   };
 
   const deleteUser = async () => {
-    await customFetch(API_CLIENT.user(userSubId), {
+    await customFetch(API_CLIENT.user(userId), {
       method: 'DELETE',
     });
     await revalidate('users');

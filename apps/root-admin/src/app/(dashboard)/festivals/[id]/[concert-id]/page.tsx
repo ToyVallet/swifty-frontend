@@ -14,7 +14,7 @@ import styles from './concert-page.module.css';
 export default async function ConcertPage({
   params,
 }: Params<{ 'concert-id': string; id: string }>) {
-  const consetId = params['concert-id'];
+  const consertId = params['concert-id'];
   const festivalId = params['id'];
 
   const {
@@ -23,7 +23,7 @@ export default async function ConcertPage({
   } = await getDetailFestival(festivalId);
 
   const concertInfo = adminConcertInfoResponses.find(
-    (concert) => concert.subId === consetId,
+    (concert) => concert.id === consertId,
   )!;
 
   const lineUp = concertInfo.lineUpInfoResponses;
@@ -41,7 +41,7 @@ export default async function ConcertPage({
         <OpenHiddenToggle
           apiTarget="CONCERT"
           status={concertInfo.concertStatus}
-          subId={consetId}
+          id={consertId}
           festivalId={festivalId}
           size="large"
         />
@@ -50,7 +50,7 @@ export default async function ConcertPage({
 
       <div className={cn(styles.wrapper, styles.gridContainer)}>
         {lineUp.map((item) => (
-          <LineUpCard key={item.subId} festivalSubId={festivalId} {...item} />
+          <LineUpCard key={item.id} festivalId={festivalId} {...item} />
         ))}
       </div>
     </main>

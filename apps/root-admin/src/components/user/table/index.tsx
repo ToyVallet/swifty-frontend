@@ -19,45 +19,45 @@ interface Props {
 
 const columns: TableProps<User>['columns'] = [
   {
-    title: 'Name',
+    title: '이름',
     dataIndex: 'name',
     key: 'name',
   },
   {
-    title: 'Phone',
+    title: '전화번호',
     dataIndex: 'phoneNumber',
     key: 'phoneNumber',
   },
   {
-    title: 'ID',
+    title: '아이디',
     dataIndex: 'userFormId',
     key: 'userFormId',
   },
   {
-    title: 'Date of Birth',
+    title: '생일',
     dataIndex: 'bod',
     key: 'bod',
   },
   {
-    title: 'Gender',
+    title: '성별',
     dataIndex: 'gender',
     key: 'gender',
     render: (value: UserGender) => <GenderTag gender={value} />,
   },
   {
-    title: 'User Role',
+    title: '권한',
     dataIndex: 'userRole',
     key: 'userRole',
     render: (value: string) => <DefaultTag value={value} />,
   },
   {
-    title: 'Login Type',
+    title: '로그인 타입',
     dataIndex: 'enrolled',
     key: 'enrolled',
     render: (value: UserEnrolled) => <LoginTag type={value} />,
   },
   {
-    title: 'User Status',
+    title: '유저 상태',
     dataIndex: 'status',
     key: 'status',
     render: (value: UserStatus) => <StatusTag status={value} />,
@@ -75,7 +75,7 @@ function UserTable({ data, pageSize, total }: Props) {
   });
 
   const onClickRow = (record: User) => {
-    router.push(`user/${record.userSubId}`);
+    router.push(`user/${record.userId}`);
   };
 
   return (
@@ -97,7 +97,7 @@ function UserTable({ data, pageSize, total }: Props) {
           onClick: () => onClickRow(record),
         })}
         rowClassName={styles.row}
-        rowKey="userSubId"
+        rowKey="userId"
       />
     </section>
   );

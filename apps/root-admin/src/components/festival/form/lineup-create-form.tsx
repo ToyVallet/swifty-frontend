@@ -18,14 +18,14 @@ type FieldType = {
 };
 
 interface Props {
-  concertSubId: string;
+  concertId: string;
   festivalId: string;
   form?: FormInstance<FieldType>;
   onClose?: () => void;
 }
 
 export default function LineupCreateForm({
-  concertSubId,
+  concertId,
   festivalId,
   form,
   onClose,
@@ -33,7 +33,7 @@ export default function LineupCreateForm({
   const { createLineup, error } = useLineupCRUD();
   const [fileList, setFileList] = useState<UploadFile[]>([]);
   const onFinish: FormProps<FieldType>['onFinish'] = async (values) => {
-    await createLineup(concertSubId, values, fileList[0] as UploadFile);
+    await createLineup(concertId, values, fileList[0] as UploadFile);
     if (!error) {
       await revalidate(FETCH_TAG.festivalsDetail(festivalId));
       form?.resetFields(Object.keys(values));

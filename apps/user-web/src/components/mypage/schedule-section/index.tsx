@@ -25,7 +25,7 @@ export default function ScheduleCard() {
             backgroundImage={TestBG}
             lineups={[
               {
-                subId: '1',
+                id: '1',
                 title: '아이유',
                 description: '아이유의 노래를 들으며 행복한 시간을 보내세요.',
                 lineUpImagePath: '/images/line-up/1.jpg',

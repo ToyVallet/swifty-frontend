@@ -11,7 +11,7 @@ export default async function Page() {
       <h2 className={styles.heading}>축제 관리</h2>
       <PanelList className={styles.panelList}>
         {datas.map((data) => (
-          <Link href={`festivals/${data.subId}`} key={data.subId}>
+          <Link href={`festivals/${data.id}`} key={data.id}>
             <FestivalPanel className={styles.panel} {...data} />
           </Link>
         ))}

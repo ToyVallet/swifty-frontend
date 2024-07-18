@@ -6,8 +6,8 @@ import {
   DrawerButton,
   LineupCreateForm,
 } from '@components';
-import { API_CONCERT, FETCH_TAG } from '@lib';
-import { customFetch, revalidate } from '@swifty/shared-lib';
+import { FETCH_TAG } from '@lib';
+import { revalidate } from '@swifty/shared-lib';
 import type { ConcertsResponse } from '@type';
 import { Flex } from 'antd';
 import { useRouter } from 'next/navigation';
@@ -21,7 +21,7 @@ export default function ConcertButtonList({ festivalId, ...props }: Props) {
   const router = useRouter();
   const { error, deleteConcert } = useConcertCRUD();
   const onDelet = async () => {
-    await deleteConcert(props.subId);
+    await deleteConcert(props.id);
     if (!error) {
       await revalidate(FETCH_TAG.festivalsDetail(festivalId));
       router.replace(`/festivals/${festivalId}`);
@@ -44,7 +44,7 @@ export default function ConcertButtonList({ festivalId, ...props }: Props) {
         </DeleteButton>
       </Flex>
       <DrawerButton variant="lineup-create">
-        <LineupCreateForm concertSubId={props.subId} festivalId={festivalId} />
+        <LineupCreateForm concertId={props.id} festivalId={festivalId} />
       </DrawerButton>
     </Flex>
   );

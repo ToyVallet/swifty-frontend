@@ -10,7 +10,7 @@ export type FestivalRequest = {
 };
 
 export type FestivalInfoResponse = {
-  subId: string;
+  id: string;
   name: string;
   addr: string;
   startDate: string;

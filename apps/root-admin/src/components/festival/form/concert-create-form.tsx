@@ -15,13 +15,13 @@ type FieldType = {
   description: string;
 };
 interface Props {
-  festivalSubId: string;
+  festivalId: string;
   form?: FormInstance<FieldType>;
   onClose?: () => void;
 }
 
 export default function ConcertCreateForm({
-  festivalSubId,
+  festivalId,
   form,
   onClose,
 }: Props) {
@@ -29,7 +29,7 @@ export default function ConcertCreateForm({
   const { isLoading, error, createConcert } = useConcertCRUD();
 
   const onFinish: FormProps<FieldType>['onFinish'] = async (values) => {
-    await createConcert(festivalSubId, values);
+    await createConcert(festivalId, values);
     if (!error) {
       form?.resetFields(Object.keys(values));
       onClose?.();

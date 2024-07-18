@@ -15,12 +15,21 @@ interface GenderProps {
   gender: UserGender;
 }
 
+function ParseGender(value: UserGender) {
+  if (value === 'FEMALE') {
+    return '여성';
+  } else if (value === 'MALE') {
+    return '남성';
+  }
+  return '';
+}
+
 export function GenderTag({ gender }: GenderProps) {
   const Icon = gender.includes('FEMALE') ? WomanOutlined : ManOutlined;
   const color = gender.includes('FEMALE') ? 'red' : 'blue';
   return (
     <Tag icon={<Icon />} color={color}>
-      {gender}
+      {ParseGender(gender)}
     </Tag>
   );
 }

@@ -42,9 +42,9 @@ export default async function Page({ params: { id } }: Params<{ id: string }>) {
       <Flex align="center" gap={'1rem'} className={styles.headerWrapper}>
         <BreadCrumbs breadcrumbList={breadcrumbList} />
         <OpenHiddenToggle
+          id={id}
           apiTarget="FESTIVAL"
           status={festivalStatus}
-          subId={id}
           festivalId={id}
           size="large"
         />
@@ -59,9 +59,9 @@ export default async function Page({ params: { id } }: Params<{ id: string }>) {
       <Flex className={styles.wrapper} vertical gap={'1rem'}>
         {adminConcertInfoResponses.map((item) => (
           <ConcertPanel
-            key={item.subId}
+            key={item.id}
             className={styles.panel}
-            festivalSubId={id}
+            festivalId={id}
             {...item}
           />
         ))}
