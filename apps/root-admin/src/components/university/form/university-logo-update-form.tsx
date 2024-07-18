@@ -42,7 +42,7 @@ export default function UniversityLogoUpdateForm({
 
     formData.append('logo', imageFile.originFileObj as RcFile, imageFile.name);
     try {
-      await customFetch(API_UNIVERSITY.university_logo(university.subId), {
+      await customFetch(API_UNIVERSITY.university_logo(university.id), {
         method: 'POST',
         headers: {},
         body: formData,

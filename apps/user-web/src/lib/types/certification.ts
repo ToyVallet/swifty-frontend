@@ -3,7 +3,7 @@ export type UniversitySearch = {
   universityName: string;
   exampleImage: {
     url: string;
-    subId: string;
+    id: string;
   };
 };
 

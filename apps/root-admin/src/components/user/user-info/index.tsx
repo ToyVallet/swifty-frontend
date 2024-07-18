@@ -7,12 +7,12 @@ import styles from './userInfo.module.css';
 
 export default function UserInfo(props: User) {
   const keys = Object.keys(props).filter(
-    (name) => name !== 'userSubId' && name !== 'status',
+    (name) => name !== 'userId' && name !== 'status',
   ) as (keyof User)[];
 
   return (
     <div className={styles.container}>
-      <UserStateButtonList userSubId={props.userSubId} status={props.status} />
+      <UserStateButtonList userId={props.userId} status={props.status} />
       <ul className={styles.list}>
         {keys.map((key) => (
           <li key={key}>

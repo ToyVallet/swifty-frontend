@@ -42,7 +42,7 @@ function HostUserTable({ data }: Props) {
       <Table
         columns={columns}
         dataSource={tableData}
-        rowKey="subId"
+        rowKey="id"
         onRow={(record) => ({
           onClick: () => onClickRow(record),
         })}

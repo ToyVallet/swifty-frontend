@@ -1,5 +1,5 @@
 export type LineUp = {
-  subId: string;
+  id: string;
   title: string;
   description: string;
   lineUpImagePath: string;

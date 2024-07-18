@@ -30,14 +30,14 @@ export default function useConcertCRUD() {
   const handleNotification = useContext(NotificationHandlerContext);
 
   const createConcert = useCallback(
-    async (festivalSubId: string, values: FieldType) => {
+    async (festivalId: string, values: FieldType) => {
       const { name, location, description, rangeDateTime } = values;
       setIsLoading(true);
       setError(null);
       const formData = new FormData();
 
       formData.append('name', name);
-      formData.append('festivalSubId', festivalSubId);
+      formData.append('festivalId', festivalId);
       formData.append('startDate', changeDateFormat(rangeDateTime[0]));
       formData.append('endDate', changeDateFormat(rangeDateTime[1]));
       formData.append('location', location);
@@ -49,7 +49,7 @@ export default function useConcertCRUD() {
           headers: {},
           body: formData,
         });
-        await revalidate(FETCH_TAG.festivalsDetail(festivalSubId));
+        await revalidate(FETCH_TAG.festivalsDetail(festivalId));
       } catch (e) {
         if (e instanceof Error) setError(e.message);
         else setError('예상치 못한 오류가 발생했습니다.');
@@ -75,7 +75,7 @@ export default function useConcertCRUD() {
       const formData = new FormData();
 
       formData.append('name', name);
-      formData.append('concertSubId', id);
+      formData.append('concertId', id);
       formData.append('startDate', dayjs(startDate).format(FORMAT));
       formData.append('endDate', dayjs(endDate).format(FORMAT));
       formData.append('location', location);

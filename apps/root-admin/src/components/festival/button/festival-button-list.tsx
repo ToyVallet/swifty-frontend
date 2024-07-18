@@ -18,14 +18,12 @@ import { useRouter } from 'next/navigation';
 
 export default function FestivalButtonList({
   className,
-  children,
+  id,
   ...props
 }: FestivalDetail & PropsWithClassName) {
-  const { subId } = props;
-
   const router = useRouter();
   const onDelet = async () => {
-    await customFetch(API_FESTIVAL.delete(subId), { method: 'DELETE' });
+    await customFetch(API_FESTIVAL.delete(id), { method: 'DELETE' });
     await revalidate(FETCH_TAG.festivals);
     router.replace(`/festivals`);
   };
@@ -34,7 +32,7 @@ export default function FestivalButtonList({
     <Flex align="center" justify="space-between" className={className}>
       <Flex align="center" gap={'1rem'}>
         <DrawerButton variant="festival-update">
-          <FestivalUpdateForm {...props} />
+          <FestivalUpdateForm id={id} {...props} />
         </DrawerButton>
         <DeleteButton
           title={`${props.name} 삭제`}
@@ -46,7 +44,7 @@ export default function FestivalButtonList({
         </DeleteButton>
       </Flex>
       <DrawerButton variant="concert-create">
-        <ConcertCreateForm festivalSubId={subId} />
+        <ConcertCreateForm festivalId={id} />
       </DrawerButton>
     </Flex>
   );

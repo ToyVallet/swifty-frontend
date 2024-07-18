@@ -32,7 +32,7 @@ interface IConcertUpdateForm
 }
 
 export default function ConcertUpdateForm({
-  subId,
+  id,
   name,
   location,
   startDate,
@@ -54,7 +54,7 @@ export default function ConcertUpdateForm({
   };
 
   const onFinish: FormProps<FieldType>['onFinish'] = async (values) => {
-    await updateConcert(subId, { ...values });
+    await updateConcert(id, { ...values });
     if (!error) {
       toggleLock();
       onClose?.();

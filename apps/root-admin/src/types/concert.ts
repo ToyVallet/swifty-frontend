@@ -3,7 +3,7 @@ import type { Status } from '@type';
 import type { LineUpInfoResponse } from './lineup';
 
 export type ConcertsResponse = {
-  subId: string;
+  id: string;
   name: string;
   startDate: string;
   endDate: string;

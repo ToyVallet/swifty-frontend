@@ -11,13 +11,13 @@ import Link from 'next/link';
 import styles from './panel.module.css';
 
 interface Props extends ConcertsResponse, PropsWithClassName {
-  festivalSubId: string;
+  festivalId: string;
 }
 
 export default function ConcertPanel({
   className,
-  festivalSubId,
-  subId,
+  festivalId,
+  id,
   name,
   location,
   startDate,
@@ -39,16 +39,14 @@ export default function ConcertPanel({
       </div>
       <div>
         <Button>
-          <Link href={`/festivals/${festivalSubId}/${subId}`}>
-            콘서트 상세 정보
-          </Link>
+          <Link href={`/festivals/${festivalId}/${id}`}>콘서트 상세 정보</Link>
         </Button>
       </div>
       <div className={styles.content}>
         <DrawerButton variant="concert-update">
           <ConcertUpdateForm
-            festivalId={festivalSubId}
-            subId={subId}
+            festivalId={festivalId}
+            id={id}
             name={name}
             location={location}
             startDate={startDate}

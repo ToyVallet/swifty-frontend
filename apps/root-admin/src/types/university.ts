@@ -1,5 +1,5 @@
 export interface University {
-  subId: string;
+  id: string;
   name: string;
   addr: string;
   logo: string;
@@ -7,18 +7,18 @@ export interface University {
 
 export interface UniversityLogo {
   url: string | null;
-  subId: string | null;
+  id: string | null;
 }
 
 export interface UniversityDetail {
-  universitySubId: string;
+  universityId: string;
   universityName: string;
   universityAddr: string;
   fileInfoResponse: UniversityLogo;
 }
 
 export interface UniversityHostUser {
-  subId: string;
+  id: string;
   phone: string;
   subUserId: string;
   userFormId: string;

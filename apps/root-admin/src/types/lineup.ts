@@ -1,7 +1,7 @@
 import { type Status } from './festival';
 
 export type LineUpInfoResponse = {
-  subId: string;
+  id: string;
   title: string;
   description: string;
   performanceTime: string;

@@ -31,13 +31,10 @@ export default function UniversityUpdateForm({
     values: FieldType,
   ) => {
     try {
-      await customFetch(
-        API_UNIVERSITY.patch_delete_universiry(university.subId),
-        {
-          method: 'PATCH',
-          body: JSON.stringify(values),
-        },
-      );
+      await customFetch(API_UNIVERSITY.patch_delete_universiry(university.id), {
+        method: 'PATCH',
+        body: JSON.stringify(values),
+      });
       await revalidate('university');
       onClose?.();
     } catch (err) {
