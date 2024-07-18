@@ -10,7 +10,7 @@ import { Password } from '@components/find-password';
 import { Funnel } from '@components/signup';
 import type { StepType } from '@components/signup/funnel';
 import { API_USER } from '@lib/constants';
-import { customFetch } from '@swifty/shared-lib';
+import { APIError, customFetch } from '@swifty/shared-lib';
 import { useContext } from 'react';
 import { useFormContext } from 'react-hook-form';
 
@@ -37,11 +37,13 @@ export default function PasswordPage() {
             newPwd: form.getValues('newPassword'),
           }),
         });
-      } catch (err) {
-        form.setError('confirmNewPassword', {
-          message: '비밀번호 재설정에 실패했습니다.',
-        });
-        console.error(err);
+      } catch (e) {
+        if (APIError.isAPIError(e)) {
+          form.setError('newPassword', {
+            type: String(e.statusCode),
+            message: e.message[0],
+          });
+        }
         return;
       }
     }

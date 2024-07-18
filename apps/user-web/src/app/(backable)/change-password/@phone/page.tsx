@@ -10,7 +10,7 @@ import { Funnel } from '@components/signup';
 import type { StepType } from '@components/signup/funnel';
 import { PhoneNumber, SmsCode } from '@components/signup/identification';
 import { API_SMS } from '@lib/constants';
-import { customFetch } from '@swifty/shared-lib';
+import { APIError, customFetch } from '@swifty/shared-lib';
 import { useContext } from 'react';
 import { useFormContext } from 'react-hook-form';
 
@@ -39,10 +39,13 @@ export default function PhonePage() {
           }),
           credentials: 'include',
         });
-      } catch (err) {
-        form.setError('phoneNumber', {
-          message: '인증 요청에 실패했습니다. 다시 시도해 주세요',
-        });
+      } catch (e) {
+        if (APIError.isAPIError(e)) {
+          form.setError('phoneNumber', {
+            type: String(e.statusCode),
+            message: e.message[0],
+          });
+        }
         return;
       }
     }
@@ -57,11 +60,13 @@ export default function PhonePage() {
             situationCode: 'RESET_PWD',
           }),
         });
-      } catch (err) {
-        console.error(err);
-        form.setError('smsCode', {
-          message: '인증 요청에 실패했습니다. 다시 시도해 주세요',
-        });
+      } catch (e) {
+        if (APIError.isAPIError(e)) {
+          form.setError('smsCode', {
+            type: String(e.statusCode),
+            message: e.message[0],
+          });
+        }
         return;
       }
     }

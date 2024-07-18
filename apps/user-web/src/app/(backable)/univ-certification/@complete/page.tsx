@@ -1,13 +1,8 @@
 import { FixedBottomGroup } from '@components/common';
 import Check from '@images/signup/complete-check.gif';
-import dynamic from 'next/dynamic';
+import { Button } from '@swifty/ui';
 import Image from 'next/image';
 import Link from 'next/link';
-
-const Button = dynamic(() => import('@swifty/ui').then((mod) => mod.Button), {
-  loading: () => <p>Loading...</p>,
-  ssr: false,
-});
 
 export default function CertificationCompletePage() {
   return (

@@ -7,7 +7,7 @@ import {
 import { FixedBottomCTA } from '@components/common';
 import { Password } from '@components/find-password';
 import { API_USER } from '@lib/constants';
-import { customFetch } from '@swifty/shared-lib';
+import { APIError, customFetch } from '@swifty/shared-lib';
 import { useContext } from 'react';
 import { useFormContext } from 'react-hook-form';
 
@@ -34,11 +34,13 @@ export default function PhonePage() {
         }),
       });
       nextStep();
-    } catch (err) {
-      console.error(err);
-      form.setError('currentPassword', {
-        message: '비밀번호가 일치하지 않습니다.',
-      });
+    } catch (e) {
+      if (APIError.isAPIError(e)) {
+        form.setError('currentPassword', {
+          type: String(e.statusCode),
+          message: e.message[0],
+        });
+      }
     }
   };
   return (

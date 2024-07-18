@@ -3,7 +3,7 @@
 import { CertificationStepContext } from '@app/(backable)/univ-certification/context';
 import { FixedBottomCTA } from '@components/common';
 import { API_CERTIFICATION } from '@lib/constants';
-import { customFetch } from '@swifty/shared-lib';
+import { APIError, customFetch } from '@swifty/shared-lib';
 import {
   Button,
   Drawer,
@@ -46,8 +46,13 @@ export default function OcrDrawer() {
       });
 
       nextStep();
-    } catch (err) {
-      console.error(err);
+    } catch (e) {
+      if (APIError.isAPIError(e)) {
+        form.setError('root', {
+          type: String(e.statusCode),
+          message: e.message[0],
+        });
+      }
     }
   };
 

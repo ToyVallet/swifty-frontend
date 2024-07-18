@@ -4,7 +4,7 @@ import { FixedBottomCTA } from '@components/common';
 import { Funnel } from '@components/signup';
 import { Id, Password, PasswordConfirm } from '@components/signup/account';
 import { API_USER } from '@lib/constants';
-import { type NonEmptyArray, customFetch } from '@swifty/shared-lib';
+import { APIError, type NonEmptyArray, customFetch } from '@swifty/shared-lib';
 import { useContext, useEffect } from 'react';
 import { useFormContext } from 'react-hook-form';
 
@@ -56,8 +56,13 @@ export default function AccountPage() {
           method: 'post',
           body: JSON.stringify(body),
         });
-      } catch (err) {
-        console.error(err);
+      } catch (e) {
+        if (APIError.isAPIError(e)) {
+          form.setError('passwordConfirm', {
+            type: String(e.statusCode),
+            message: e.message[0],
+          });
+        }
         return;
       }
     }

@@ -1,7 +1,7 @@
 import { FormErrorControl } from '@components/signup';
 import { useInterval } from '@hooks/index';
 import { API_SMS } from '@lib/constants';
-import { customFetch } from '@swifty/shared-lib';
+import { APIError, customFetch } from '@swifty/shared-lib';
 import { Button, FormField, Input } from '@swifty/ui';
 import { useEffect, useRef, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
@@ -36,10 +36,13 @@ export default function SmsCode() {
           smsSituationCode: 'SIGN_UP',
         }),
       });
-    } catch (err) {
-      form.setError('phoneNumber', {
-        message: '인증 요청에 실패했습니다. 다시 시도해 주세요',
-      });
+    } catch (e) {
+      if (APIError.isAPIError(e)) {
+        form.setError('smsCode', {
+          type: String(e.statusCode),
+          message: e.message[0],
+        });
+      }
       return;
     }
     // 재 요청 후 타이머 실행

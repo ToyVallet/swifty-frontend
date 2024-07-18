@@ -6,7 +6,7 @@ import type { StepType } from '@components/signup/funnel';
 import { PhoneNumber, SmsCode } from '@components/signup/identification';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { API_SMS, API_USER } from '@lib/constants';
-import { customFetch, revalidate } from '@swifty/shared-lib';
+import { APIError, customFetch, revalidate } from '@swifty/shared-lib';
 import { Form } from '@swifty/ui';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
@@ -58,10 +58,13 @@ export default function ChangePhoneNumberForm() {
           credentials: 'include',
         });
         setStep(steps[1]);
-      } catch (err) {
-        form.setError('phoneNumber', {
-          message: '인증 요청에 실패했습니다. 다시 시도해 주세요',
-        });
+      } catch (e) {
+        if (APIError.isAPIError(e)) {
+          form.setError('phoneNumber', {
+            type: String(e.statusCode),
+            message: e.message[0],
+          });
+        }
         return;
       }
     }
@@ -87,11 +90,13 @@ export default function ChangePhoneNumberForm() {
 
         await revalidate('user');
         router.push('/change-phone-number/complete');
-      } catch (err) {
-        console.error(err);
-        form.setError('smsCode', {
-          message: '인증 번호가 올바르지 않습니다.',
-        });
+      } catch (e) {
+        if (APIError.isAPIError(e)) {
+          form.setError('smsCode', {
+            type: String(e.statusCode),
+            message: e.message[0],
+          });
+        }
         return;
       }
     }
