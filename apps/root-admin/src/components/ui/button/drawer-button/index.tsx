@@ -58,8 +58,8 @@ export default function DrawerButton({
         style={
           variant.includes('create')
             ? {
-                height: '3rem',
-                borderRadius: '1.5rem',
+                height: '32px',
+                borderRadius: 8,
                 fontSize: '14px',
                 fontWeight: '700',
               }

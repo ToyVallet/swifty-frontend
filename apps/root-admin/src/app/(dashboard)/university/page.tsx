@@ -1,5 +1,6 @@
 import {
   DrawerButton,
+  RefetchButton,
   UniversityCreateForm,
   UniversityTable,
 } from '@components';
@@ -14,7 +15,6 @@ export default async function UniversityPage() {
     API_UNIVERSITY.get_univiresity(),
     {
       method: 'GET',
-      cache: 'no-cache',
       next: {
         tags: ['university'],
       },
@@ -25,9 +25,12 @@ export default async function UniversityPage() {
     <main>
       <div className={styles.header}>
         <h2 className={styles.heading}>대학 관리</h2>
-        <DrawerButton variant="university-create">
-          <UniversityCreateForm />
-        </DrawerButton>
+        <div className={styles.buttonContainer}>
+          <RefetchButton />
+          <DrawerButton variant="university-create">
+            <UniversityCreateForm />
+          </DrawerButton>
+        </div>
       </div>
       <UniversityTable
         data={data.content}
