@@ -1,12 +1,6 @@
 import type { FormValues } from '@app/(backable)/signup/schema';
 import { FormErrorControl } from '@components/signup';
-import {
-  FormField,
-  RadioGroup,
-  RadioOption,
-  Select,
-  SelectOption,
-} from '@swifty/ui';
+import { FormField, RadioGroup, RadioOption, Select } from '@swifty/ui';
 import { useFormContext } from 'react-hook-form';
 
 const carrierOptions = [
@@ -31,6 +25,7 @@ export default function CarrierWithNationality() {
               label="통신사"
               placeholder="통신사 선택"
               onValueChange={field.onChange}
+              defaultValue={field.value}
             />
           </FormErrorControl>
         )}
