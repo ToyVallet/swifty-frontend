@@ -5,7 +5,7 @@ import {
   OcrDrawer,
   StudentCertificationImage,
   StudentStatus,
-} from '@components/univ-certification';
+} from '@components/verification';
 import { FormField } from '@swifty/ui';
 
 export default function CertificationPage() {

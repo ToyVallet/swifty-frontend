@@ -1,6 +1,6 @@
 'use client';
 
-import { CertificationStepContext } from '@app/(backable)/univ-certification/context';
+import { CertificationStepContext } from '@app/(backable)/verification/student/context';
 import { FixedBottomCTA } from '@components/common';
 import { API_CERTIFICATION } from '@lib/constants';
 import { APIError, customFetch } from '@swifty/shared-lib';

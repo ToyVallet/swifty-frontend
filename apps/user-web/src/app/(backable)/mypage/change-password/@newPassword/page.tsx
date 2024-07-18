@@ -1,18 +1,15 @@
 'use client';
 
-import {
-  FindPasswordContext,
-  steps,
-  stepsWithForm,
-} from '@app/(backable)/change-password/context';
 import { FixedBottomCTA } from '@components/common';
-import { Password } from '@components/find-password';
+import { Password } from '@components/mypage';
 import { Funnel } from '@components/signup';
 import type { StepType } from '@components/signup/funnel';
 import { API_USER } from '@lib/constants';
 import { APIError, customFetch } from '@swifty/shared-lib';
 import { useContext } from 'react';
 import { useFormContext } from 'react-hook-form';
+
+import { FindPasswordContext, steps, stepsWithForm } from '../context';
 
 export default function PasswordPage() {
   const { currentStep, nextStep } = useContext(FindPasswordContext);

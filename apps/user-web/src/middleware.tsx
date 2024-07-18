@@ -10,7 +10,7 @@ export async function middleware(request: NextRequest) {
   const token = cookies().get(COOKIE_KEYS.accessToken);
 
   const pathRequiredLogin = [
-    'univ-certification',
+    'verification',
     'mypage',
     'ticketing',
     'change-password',

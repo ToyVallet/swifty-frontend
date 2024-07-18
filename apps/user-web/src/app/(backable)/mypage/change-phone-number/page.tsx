@@ -1,5 +1,5 @@
-import { ChangePhoneNumberForm } from '@components/change-phone-number';
 import { Main, Navigation } from '@components/common';
+import { ChangePhoneNumberForm } from '@components/mypage';
 import { Header } from '@components/signup';
 import { API_USER } from '@lib/constants';
 import type { UserInfoApi } from '@lib/types';

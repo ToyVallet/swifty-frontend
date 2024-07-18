@@ -26,7 +26,7 @@ export default function SignupCompletePage() {
           <Link href="/">등록 없이 완료</Link>
         </Button>
         <Button size="full" asChild>
-          <Link href="/univ-certification">학적 인증</Link>
+          <Link href="/verification/student">학적 인증</Link>
         </Button>
       </FixedBottomGroup>
     </section>

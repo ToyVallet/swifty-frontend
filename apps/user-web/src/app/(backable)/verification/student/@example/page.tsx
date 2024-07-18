@@ -1,12 +1,13 @@
 'use client';
 
-import { CertificationStepContext } from '@app/(backable)/univ-certification/context';
 import { FixedBottomCTA } from '@components/common';
 import { FormErrorControl } from '@components/signup';
-import { ExampleImage, UnivSearch } from '@components/univ-certification';
+import { ExampleImage, UnivSearch } from '@components/verification';
 import { FormField } from '@swifty/ui';
 import { useContext } from 'react';
 import { useFormContext } from 'react-hook-form';
+
+import { CertificationStepContext } from '../context';
 
 export default function ExamplePage() {
   const { nextStep } = useContext(CertificationStepContext);

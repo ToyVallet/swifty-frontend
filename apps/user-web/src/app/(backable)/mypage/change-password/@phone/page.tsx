@@ -1,10 +1,5 @@
 'use client';
 
-import {
-  FindPasswordContext,
-  steps,
-  stepsWithForm,
-} from '@app/(backable)/change-password/context';
 import { FixedBottomCTA } from '@components/common';
 import { Funnel } from '@components/signup';
 import type { StepType } from '@components/signup/funnel';
@@ -13,6 +8,8 @@ import { API_SMS } from '@lib/constants';
 import { APIError, customFetch } from '@swifty/shared-lib';
 import { useContext } from 'react';
 import { useFormContext } from 'react-hook-form';
+
+import { FindPasswordContext, steps, stepsWithForm } from '../context';
 
 export default function PhonePage() {
   const { currentStep, nextStep } = useContext(FindPasswordContext);

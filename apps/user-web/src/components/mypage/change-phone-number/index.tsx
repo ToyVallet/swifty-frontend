@@ -89,7 +89,7 @@ export default function ChangePhoneNumberForm() {
         });
 
         await revalidate('user');
-        router.push('/change-phone-number/complete');
+        router.push('/mypage/change-phone-number/complete');
       } catch (e) {
         if (APIError.isAPIError(e)) {
           form.setError('smsCode', {
