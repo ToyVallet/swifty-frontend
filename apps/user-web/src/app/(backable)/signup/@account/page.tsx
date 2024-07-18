@@ -30,10 +30,17 @@ export default function AccountPage() {
     // 아이디 중복 확인
     if (currentStep === '사용하실 아이디를 입력해주세요') {
       const id = form.getValues(currentStepFormName);
-
-      if (id === 'js9534') {
-        form.setError('id', { message: '중복된 아이디가 있습니다.' });
-        form.setFocus(currentStepFormName);
+      try {
+        await customFetch(`${API_USER.checkDuplicateId}?loginId=${id}`, {
+          method: 'get',
+        });
+      } catch (e) {
+        if (APIError.isAPIError(e)) {
+          form.setError('id', {
+            type: String(e.statusCode),
+            message: e.message[0],
+          });
+        }
         return;
       }
     }

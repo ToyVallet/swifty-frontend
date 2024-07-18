@@ -54,7 +54,7 @@ export default function UnivCertificationLayout({
     <>
       <Navigation variant="back" title="학적 인증" />
       <CertificationStepContext.Provider value={{ currentStep, nextStep }}>
-        <Main className="h-full px-5 scrollbar-hide">
+        <Main className="h-full scrollbar-hide">
           <Header>
             <Choose value={currentStep}>
               <When value="학적 인증을 시작할게요">

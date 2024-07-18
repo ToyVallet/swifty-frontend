@@ -10,7 +10,7 @@ import { useRouter } from 'next/navigation';
 export default function Page() {
   const router = useRouter();
   const onClick = async () => {
-    await deleteCookie(COOKIE_KEYS.accessToken);
+    await deleteCookie('swifty-access');
     await deleteCookie(COOKIE_KEYS.refreshToken);
     router.replace('/');
   };
