@@ -6,7 +6,7 @@ import {
   UploadOutlined,
   UserOutlined,
 } from '@ant-design/icons';
-import { Logo } from '@components';
+import { Logo, LogoutButton } from '@components';
 import { Button, Layout, Menu } from 'antd';
 import Link from 'next/link';
 import React, { type PropsWithChildren, useState } from 'react';
@@ -75,6 +75,7 @@ export default function Navigation({ children }: PropsWithChildren) {
           >
             {collapsed ? '펼치기' : '접기'}
           </Button>
+          <LogoutButton />
         </Header>
         <Content className={styles.content}>{children}</Content>
       </Layout>
