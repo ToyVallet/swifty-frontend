@@ -53,55 +53,45 @@ const columns: TableProps<University>['columns'] = [
     key: 'addr',
   },
 
-  {
-    title: '대학 정보 수정',
-    dataIndex: 'patch',
-    key: 'patch',
-    render: (_, record) => (
-      <DrawerButton variant="university-update">
-        <UniversityUpdateForm university={record} />
-      </DrawerButton>
-    ),
-  },
-  {
-    title: '대학 로고 수정',
-    dataIndex: 'logo_patch',
-    key: 'logo_patch',
-    render: (_, record) => (
-      <DrawerButton variant="university-logo-update">
-        <UniversityLogoUpdateForm university={record} />
-      </DrawerButton>
-    ),
-  },
-  {
-    title: '상세 페이지',
-    dataIndex: 'detail',
-    key: 'detail',
-    render: (_, record) => (
-      <Button>
-        <Link href={`/university/${record.id}`}>상세 페이지</Link>
-      </Button>
-    ),
-  },
-  {
-    title: '삭제',
-    dataIndex: 'delete',
-    key: 'delete',
-    render: (_, record) => (
-      <DeleteButton
-        title="계정 삭제"
-        description="해당 계정을 삭제하시겠습니까?"
-        onConfirm={async () => {
-          await customFetch(API_UNIVERSITY.patch_delete_universiry(record.id), {
-            method: 'DELETE',
-          });
-          await revalidate('university');
-        }}
-      >
-        삭제
-      </DeleteButton>
-    ),
-  },
+  // {
+  //   title: '대학 정보 수정',
+  //   dataIndex: 'patch',
+  //   key: 'patch',
+  //   render: (_, record) => (
+  //     <DrawerButton variant="university-update">
+  //       <UniversityUpdateForm university={record} />
+  //     </DrawerButton>
+  //   ),
+  // },
+  // {
+  //   title: '대학 로고 수정',
+  //   dataIndex: 'logo_patch',
+  //   key: 'logo_patch',
+  //   render: (_, record) => (
+  //     <DrawerButton variant="university-logo-update">
+  //       <UniversityLogoUpdateForm university={record} />
+  //     </DrawerButton>
+  //   ),
+  // },
+  // {
+  //   title: '삭제',
+  //   dataIndex: 'delete',
+  //   key: 'delete',
+  //   render: (_, record) => (
+  //     <DeleteButton
+  //       title="계정 삭제"
+  //       description="해당 계정을 삭제하시겠습니까?"
+  //       onConfirm={async () => {
+  //         await customFetch(API_UNIVERSITY.patch_delete_universiry(record.id), {
+  //           method: 'DELETE',
+  //         });
+  //         await revalidate('university');
+  //       }}
+  //     >
+  //       삭제
+  //     </DeleteButton>
+  //   ),
+  // },
 ];
 
 function UniversityTable({ data, pageSize, total }: Props) {
