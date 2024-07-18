@@ -23,7 +23,7 @@ export default function LineUpSection({ concerts }: LineUpSectionProps) {
   );
 
   return (
-    <section id="line-up" className="flex flex-col gap-5">
+    <section id="line-up" className="flex flex-col gap-5 w-full">
       <h1 className="w-full text-center text-20 font-bold text-white">
         라인업
       </h1>
