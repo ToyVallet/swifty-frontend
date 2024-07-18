@@ -9,7 +9,9 @@ export default function LogoutButton() {
   const router = useRouter();
   const logout = async () => {
     try {
-      await customFetch('/user/logout');
+      await customFetch('/user/logout', {
+        credentials: 'include',
+      });
       router.replace('/login');
     } catch {
       console.error('로그아웃 중 오류가 발생했습니다.');

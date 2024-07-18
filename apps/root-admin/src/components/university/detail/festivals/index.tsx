@@ -16,7 +16,6 @@ export default async function UniversityFestivals({ id }: { id: string }) {
     API_UNIVERSITY.festivals(id),
     {
       method: 'GET',
-      next: { tags: [FETCH_TAG.festivals, id] },
     },
   );
 
