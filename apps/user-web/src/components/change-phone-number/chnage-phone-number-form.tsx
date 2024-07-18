@@ -100,7 +100,7 @@ export default function ChangePhoneNumberForm() {
     <>
       <Form {...form}>
         <form
-          className="flex flex-col gap-5"
+          className="w-full flex flex-col gap-5"
           onSubmit={(e) => {
             e.preventDefault();
           }}

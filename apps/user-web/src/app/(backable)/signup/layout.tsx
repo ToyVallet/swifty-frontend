@@ -49,7 +49,7 @@ export default function SignupLayout({
     <>
       <Navigation variant="back" title="회원가입" />
       <SignUpStepContext.Provider value={{ currentStep, nextStep }}>
-        <Main className="relative pb-20 overflow-y-auto scrollbar-hide">
+        <Main className="relative pb-20 scrollbar-hide">
           <Header>{currentStep}</Header>
 
           <AnimatePresence initial={false}>

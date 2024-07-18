@@ -13,7 +13,7 @@ type VerificationLink = {
 
 const verificationLinks: ReadonlyArray<VerificationLink> = [
   {
-    href: '/verification/student',
+    href: '/univ-certification',
     title: '재학생 인증',
     icon: <ShieldIcon className="w-[70px] h-[70px]" />,
   },

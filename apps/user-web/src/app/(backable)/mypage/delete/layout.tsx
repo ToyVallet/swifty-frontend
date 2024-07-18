@@ -36,9 +36,9 @@ export default function UserDelteLayout({
 
   return (
     <>
-      <Navigation variant="back" title="회원 탈퇴" />
+      <Navigation variant="back" title="회원 탈퇴" bg="blur" />
       <DeleteUserContext.Provider value={{ currentStep, nextStep }}>
-        <Main className="relative pb-20 overflow-y-auto scrollbar-hide">
+        <Main className="relative pb-20 scrollbar-hide w-full px-5">
           <Header>{currentStep}</Header>
 
           <AnimatePresence initial={false}>

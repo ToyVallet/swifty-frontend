@@ -1,6 +1,7 @@
 'use client';
 
 import useDebounce from '@hooks/use-debounce';
+import { APIError } from '@swifty/shared-lib';
 import { Input } from '@swifty/ui';
 import { AnimatePresence } from 'framer-motion';
 import type { ChangeEvent, ReactNode } from 'react';
@@ -30,8 +31,10 @@ export default function Search<T extends { [key in string]: any }>({
       const results = await fetchSearchResults(term);
       setSearchList(results);
       setOpen(true);
-    } catch (err) {
-      console.error(err);
+    } catch (e) {
+      if (APIError.isAPIError(e)) {
+        console.log(e.statusCode, e.message);
+      }
     }
   }, 500);
 

@@ -1,6 +1,6 @@
 'use client';
 
-import { Navigation } from '@components/common';
+import { Main, Navigation } from '@components/common';
 import { Header } from '@components/signup';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Choose, Form, When } from '@swifty/ui';
@@ -50,13 +50,11 @@ export default function UnivCertificationLayout({
     }
   };
 
-  console.log(form.watch());
-
   return (
     <>
       <Navigation variant="back" title="학적 인증" />
       <CertificationStepContext.Provider value={{ currentStep, nextStep }}>
-        <main className="h-full flex flex-col relative pb-20 overflow-y-auto scrollbar-hide">
+        <Main className="h-full px-5 scrollbar-hide">
           <Header>
             <Choose value={currentStep}>
               <When value="학적 인증을 시작할게요">
@@ -86,7 +84,7 @@ export default function UnivCertificationLayout({
               </form>
             </Form>
           </AnimatePresence>
-        </main>
+        </Main>
       </CertificationStepContext.Provider>
     </>
   );
