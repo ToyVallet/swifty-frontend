@@ -10,7 +10,6 @@ import { type Params, customFetch } from '@swifty/shared-lib';
 import type { UniversityDetail } from '@type';
 import { Avatar } from 'antd';
 import Image from 'next/image';
-import { Suspense } from 'react';
 
 import styles from './university-detail.module.css';
 
@@ -56,12 +55,8 @@ export default async function UniversityDetailPage({
         <span className={styles.addr}>{data.universityAddr}</span>
       </header>
       <section className={styles.section}>
-        <Suspense fallback={<p>Loading Host User</p>}>
-          <UniversityHostUsers id={id} />
-        </Suspense>
-        <Suspense fallback={<p>Loading {data.universityName} Festivals</p>}>
-          <UniversityFestivals id={id} />
-        </Suspense>
+        <UniversityHostUsers id={id} />
+        <UniversityFestivals id={id} />
       </section>
     </main>
   );
