@@ -1,4 +1,4 @@
-import { SERVER_URL } from '../constants';
+import { SERVER_EXTERNAL_URL, SERVER_URL } from '../constants';
 import APIError from '../error';
 import { isServer } from './device';
 import getServerSideCookies from './server/get-serverside-cookies';
@@ -7,6 +7,9 @@ export async function customFetch<Res>(
   url: string,
   options: RequestInit = {},
 ): Promise<Res> {
+  console.log('요청: ', url, options);
+
+  const root = isServer() ? SERVER_URL : SERVER_EXTERNAL_URL;
   options = {
     headers: {
       'Content-Type': 'application/json',
@@ -24,7 +27,7 @@ export async function customFetch<Res>(
   }
 
   try {
-    const response = await fetch(`${SERVER_URL}${url}`, {
+    const response = await fetch(`${root}${url}`, {
       ...options,
     });
 

@@ -1,5 +1,6 @@
 'use client';
 
+import { login } from '@app/(backable)/login/action';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { API_ROUTES } from '@lib/constants';
 import { APIError, http } from '@swifty/shared-lib';
@@ -43,13 +44,11 @@ export default function LoginForm() {
 
   const onSubmit = async ({ loginId, password }: FormValues) => {
     try {
-      // await customFetch(API_ROUTES.user.login, {
-      //   method: 'POST',
-      //   body: JSON.stringify({ loginId, password }),
-      //   credentials: 'include',
-      // });
-
-      await http.post('/user/login', { loginId, password });
+      await customFetch(API_ROUTES.user.login, {
+        method: 'POST',
+        body: JSON.stringify({ loginId, password }),
+        credentials: 'include',
+      });
 
       router.push('/');
     } catch (e) {
