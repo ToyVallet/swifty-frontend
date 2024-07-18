@@ -1,7 +1,7 @@
 import { FadeOverlay, ImageWithFallback } from '@components/common';
 import FallbackHero from '@images/fallback-hero.png';
 import type { Festival } from '@lib/types/festival';
-import formatDate from '@lib/utils/parser/format-date';
+import { formatDateRange } from '@swifty/shared-lib';
 import Link from 'next/link';
 
 export default function HeroTile({
@@ -17,7 +17,7 @@ export default function HeroTile({
   return (
     <Link
       href={`/festival/${id}`}
-      className="relative flex-[0_0_100%] overflow-hidden"
+      className="relative flex-[0_0_100%] overflow-hidden *:text-white"
     >
       <div className="aspect-square relative h-full w-full flex items-center justify-center">
         <ImageWithFallback
@@ -33,18 +33,14 @@ export default function HeroTile({
         <FadeOverlay />
       </div>
 
-      <div className="absolute bottom-[60px] left-5 right-[74px] h-[114px] text-20 font-semibold">
-        <span className="mt-[3px] text-12 leading-[18px] tracking-[-0.36px]">
-          {addr}
-        </span>
-        <h4 className="font-bold text-[22px] leading-[33px] tracking-[-0.66px]">
-          {name}
-        </h4>
-        <span className="block leading-[30px] tracking-[-0.6px] truncate">
+      <div className="absolute bottom-[60px] left-5 right-[74px] h-[114px]">
+        <span className="text-12">{addr}</span>
+        <h4 className="font-bold text-22 mt-[3px]">{name}</h4>
+        <span className="block truncate text-20 font-semibold">
           {description}
         </span>
-        <span className="mt-[6px] text-14 tracking-[-0.42px]">
-          {formatDate(startDate, endDate, 'ko')}
+        <span className="mt-[6px] text-14">
+          {formatDateRange(startDate, endDate)}
         </span>
       </div>
     </Link>

@@ -1,4 +1,4 @@
-import { formatDate } from '@lib';
+import { formatDate } from '@swifty/shared-lib';
 import type { PropsWithClassName } from '@swifty/shared-lib';
 import type { FestivalInfoResponse } from '@type';
 import clsx from 'clsx';
@@ -20,8 +20,12 @@ export default function FestivalPanel({
       <h3 className={styles.heading}>{name}</h3>
       <span className={styles.content}>{addr}</span>
       <span className={styles.content}>{description}</span>
-      <span className={styles.content}>{formatDate(startDate)}</span>
-      <span className={styles.content}>{formatDate(endDate)}</span>
+      <span className={styles.content}>
+        {formatDate(new Date(startDate), 'YYYY년 MM월 DD일')}
+      </span>
+      <span className={styles.content}>
+        {formatDate(new Date(endDate), 'YYYY년 MM월 DD일')}
+      </span>
     </li>
   );
 }

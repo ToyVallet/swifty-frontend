@@ -6,5 +6,5 @@ export default function MyPageLayout({ children }: PropsWithChildren) {
   /*   const headersList = headers();
   const path = headersList.get('x-pathname') || ''; */
 
-  return <div className="w-full px-5">{children}</div>;
+  return <>{children}</>;
 }

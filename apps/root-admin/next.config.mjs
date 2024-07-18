@@ -1,5 +1,16 @@
+import path from 'path';
+
+const __dirname = path.resolve();
+
+const production = process.env.NODE_ENV === 'production';
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  transpilePackages: ['@swifty/ui'],
+  output: production ? 'standalone' : undefined,
+  experimental: {
+    outputFileTracingRoot: path.join(__dirname, '../../'),
+  },
   webpack(config) {
     const fileLoaderRule = config.module.rules.find((rule) =>
       rule.test?.test?.('.svg'),

@@ -11,7 +11,7 @@ import { useContext } from 'react';
 import styles from './login.module.css';
 
 type FieldType = {
-  formId?: string;
+  loginId?: string;
   password?: string;
 };
 
@@ -25,7 +25,7 @@ export default function Page() {
         method: 'POST',
         body: JSON.stringify(values),
       });
-      form.setFieldValue('formId', '');
+      form.setFieldValue('loginId', '');
       form.setFieldValue('password', '');
       router.replace('/');
     } catch (err) {
@@ -55,7 +55,7 @@ export default function Page() {
       >
         <Form.Item<FieldType>
           label="아이디"
-          name="formId"
+          name="loginId"
           rules={[{ required: true, message: '아이디를 입력하세요' }]}
         >
           <Input />

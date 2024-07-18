@@ -1,7 +1,7 @@
 {
   "$schema": "https://turbo.build/schema.json",
   "globalDependencies": ["**/.env.*local"],
-  "globalEnv": ["NODE_ENV", "SERVER_URL"],
+  "globalEnv": ["NODE_ENV", "SERVER_URL", "PORT"],
   "tasks": {
     "build": {
       "inputs": [
@@ -12,7 +12,7 @@
         ".env",
         "!**/*.stories.{js,jsx,ts,tsx,mdx}"
       ],
-      "env": ["SERVER_URL"],
+      "env": ["SERVER_URL", "PORT"],
       "dependsOn": ["^build"],
       "outputs": [".next/**", "!.next/cache/**"]
     },
@@ -24,9 +24,7 @@
       "dependsOn": ["^chromatic"]
     },
     "lint": {
-      "dependsOn": [
-        "^lint"
-      ]
+      "dependsOn": ["^lint"]
     },
     "dev": {
       "inputs": [

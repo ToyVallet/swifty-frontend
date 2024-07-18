@@ -1,12 +1,12 @@
 import '@swifty/ui/styles.css';
-import type { Metadata, Viewport } from 'next';
+import type { Metadata } from 'next';
 import type { PropsWithChildren } from 'react';
 
 import './globals.css';
 import Providers from './providers';
 
 export const metadata: Metadata = {
-  title: '스위프티',
+  title: '스위프티 - 전국 대학 축제 종합 플랫폼',
   description: '스위프티 - 전국 대학 축제 종합 플랫폼',
   applicationName: '스위프티',
   keywords: [],
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang="ko">
-      <body className="font-Pretendard overflow-y-auto scrollbar-hide">
+      <body className="font-Pretendard scrollbar-hide">
         <Providers>{children}</Providers>
       </body>
     </html>

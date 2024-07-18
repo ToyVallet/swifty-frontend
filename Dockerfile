@@ -13,6 +13,7 @@ COPY . .
 # Generate a partial monorepo with a pruned lockfile for a target workspace.
 # Assuming "web" is the name entered in the project's package.json: { name: "web" }
 RUN turbo prune user-web --docker
+RUN turbo prune root-admin --docker
  
 # Add lockfile and package.json's of isolated subworkspace
 FROM base AS installer
@@ -28,7 +29,7 @@ RUN yarn install
  
 # Build the project
 COPY --from=builder /app/out/full/ .
-RUN yarn turbo run build --filter=user-web...
+RUN yarn turbo run build
  
 FROM base AS runner
 WORKDIR /app
@@ -47,4 +48,12 @@ COPY --from=installer --chown=nextjs:nodejs /app/apps/user-web/.next/standalone 
 COPY --from=installer --chown=nextjs:nodejs /app/apps/user-web/.next/static ./apps/user-web/.next/static
 COPY --from=installer --chown=nextjs:nodejs /app/apps/user-web/public ./apps/user-web/public
  
-CMD node apps/user-web/server.js
+
+COPY --from=installer /app/apps/root-admin/next.config.mjs .
+COPY --from=installer /app/apps/root-admin/package.json .
+
+# Automatically leverage output traces to reduce image size
+# https://nextjs.org/docs/advanced-features/output-file-tracing
+COPY --from=installer --chown=nextjs:nodejs /app/apps/root-admin/.next/standalone ./
+COPY --from=installer --chown=nextjs:nodejs /app/apps/root-admin/.next/static ./apps/root-admin/.next/static
+COPY --from=installer --chown=nextjs:nodejs /app/apps/root-admin/public ./apps/root-admin/public

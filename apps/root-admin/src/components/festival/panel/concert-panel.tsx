@@ -1,7 +1,7 @@
 'use client';
 
 import { ConcertUpdateForm, DrawerButton, StatusNotifier } from '@components';
-import { formatDate } from '@lib';
+import { formatDateRange } from '@swifty/shared-lib';
 import type { PropsWithClassName } from '@swifty/shared-lib';
 import type { ConcertsResponse } from '@type';
 import { Button } from 'antd';
@@ -31,7 +31,7 @@ export default function ConcertPanel({
       <span className={styles.content}>{`${location}`}</span>
       <span className={styles.content}>{description}</span>
       <span className={styles.content}>
-        {`${formatDate(startDate)} - ${formatDate(endDate)}`}
+        {formatDateRange(startDate, endDate)}
       </span>
 
       <div className={styles.content}>
