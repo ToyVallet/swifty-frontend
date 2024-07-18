@@ -1,8 +1,8 @@
 import { AntdRegistry } from '@ant-design/nextjs-registry';
 import { NotificationProvider } from '@components';
-import { spaceGrotesk } from '@styles/font';
 import '@styles/global.css';
 import '@styles/theme.css';
+import '@swifty/ui/styles.css';
 import { ConfigProvider } from 'antd';
 import type { Metadata } from 'next';
 
@@ -13,20 +13,21 @@ export const metadata: Metadata = {
 
 const darkTheme = {
   token: {
-    colorPrimary: '#7C5DFA',
+    colorPrimary: '#1967FF',
   },
   components: {
     Button: {},
     Menu: {
       colorPrimary: '#F8F8F8',
-      itemHoverColor: '#DFE3FA',
+      itemHoverColor: '#F8F8F8',
       itemColor: '#DFE3FA',
-      itemHoverBg: '#252945',
-      itemSelectedBg: '#252945',
-      colorBgContainer: '#373B53',
+      itemSelectedBg: '#1452cc',
+      itemSelectedColor: '#F8F8F8',
+      colorBgContainer: '#1967ff',
     },
     Layout: {
-      siderBg: '#373B53',
+      siderBg: '#1967ff',
+      headerPadding: '0 24px',
     },
   },
 };
@@ -37,8 +38,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={spaceGrotesk.className}>
+    <html lang="ko">
+      <body className="font-Pretendard">
         <AntdRegistry>
           <ConfigProvider theme={darkTheme}>
             <NotificationProvider>{children}</NotificationProvider>
