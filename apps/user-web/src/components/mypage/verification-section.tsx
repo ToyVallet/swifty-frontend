@@ -1,6 +1,4 @@
-import FaceId from '@icons/mypage/face-id.svg';
-import RunnerIncon from '@icons/mypage/runner.svg';
-import ShieldIcon from '@icons/mypage/shield.svg';
+import { Icon } from '@swifty/assets';
 import NextLink from 'next/link';
 
 import Header from './header';
@@ -15,17 +13,17 @@ const verificationLinks: ReadonlyArray<VerificationLink> = [
   {
     href: '/verification/student',
     title: '재학생 인증',
-    icon: <ShieldIcon className="w-[70px] h-[70px]" />,
+    icon: <Icon name="user-web/mypage/shield" width={70} height={70} />,
   },
   {
     href: '/verification/status',
     title: '재학생 인증 상태',
-    icon: <RunnerIncon className="w-[70px] h-[70px]" />,
+    icon: <Icon name="user-web/mypage/runner" width={70} height={70} />,
   },
   {
     href: '/verification/face',
     title: '안면 인증 관리',
-    icon: <FaceId className="w-[70px] h-[70px]" />,
+    icon: <Icon name="user-web/mypage/face-id" width={70} height={70} />,
   },
 ] as const;
 

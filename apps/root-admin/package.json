@@ -3,14 +3,15 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "dev:server": "node server.js",
-    "build": "next build",
-    "start": "next start",
+    "dev": "NODE_ENV=development node server.js",
+    "dev:local": "NODE_ENV=development next dev",
+    "build": "NODE_ENV=production next build",
+    "start": "NODE_ENV=production next start",
     "lint": "next lint"
   },
   "dependencies": {
     "@ant-design/nextjs-registry": "^1.0.0",
+    "@swifty/assets": "*",
     "@swifty/eslint-config": "*",
     "@swifty/shared-lib": "*",
     "@swifty/tailwind-config": "*",

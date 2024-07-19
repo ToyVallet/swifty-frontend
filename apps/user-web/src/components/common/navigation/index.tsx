@@ -1,5 +1,5 @@
 import { BackButton } from '@components/common';
-import LeftArrow from '@icons/left-arrow.svg';
+import { Icon } from '@swifty/assets';
 import { cn } from '@swifty/shared-lib';
 import { Choose, If, When } from '@swifty/ui';
 import { cva } from 'class-variance-authority';
@@ -49,9 +49,9 @@ export default function Navigation({
             <LogoLink />
           </When>
           <When value="back">
-            <BackButton className="text-white flex items-center">
-              <LeftArrow />
-              {title && <span className="ml-5 font-bold text-16">{title}</span>}
+            <BackButton className="text-white flex items-center gap-2.5">
+              <Icon name="arrow-left" width={40} height={40} />
+              {title && <span className="font-bold text-16">{title}</span>}
             </BackButton>
           </When>
         </Choose>

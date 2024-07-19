@@ -1,5 +1,5 @@
 import Logout from '@components/mypage/logout';
-import LeftChevron from '@icons/mypage/left-chevron.svg';
+import { Icon } from '@swifty/assets';
 import { cn } from '@swifty/shared-lib';
 import Link from 'next/link';
 import type { ComponentPropsWithoutRef } from 'react';
@@ -33,7 +33,7 @@ export function UserLink({ label, className, ...props }: UserLinkProps) {
       )}
     >
       {label}
-      <LeftChevron className="w-5 h-5" />
+      <Icon name="chevron-right" width={20} height={20} />
     </Link>
   );
 }

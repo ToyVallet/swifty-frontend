@@ -1,13 +1,14 @@
 'use client';
 
 import { Search } from '@components/common';
-import Magnifier from '@icons/magnifier.svg';
 import { API_CERTIFICATION } from '@lib/constants';
 import type {
   ApiCertification,
   UniversitySearch,
 } from '@lib/types/certification';
+import { Icon } from '@swifty/assets';
 import { customFetch } from '@swifty/shared-lib';
+import { transition } from '@swifty/ui';
 import { motion } from 'framer-motion';
 import { useFormContext } from 'react-hook-form';
 
@@ -41,7 +42,7 @@ export default function UnivSearch({ onChange }: Props) {
           initial="hidden"
           animate="visible"
           exit="exit"
-          transition={{ duration: 0.3 }}
+          transition={transition}
           className="w-full h-full flex flex-col rounded-xl bg-swifty-color-800"
         >
           {searchList.length === 0 && (
@@ -80,7 +81,7 @@ function Item({ value, onClick }: ItemProps) {
       onMouseDown={onClick}
     >
       <span>{value}</span>
-      <Magnifier />
+      <Icon name="search" />
     </li>
   );
 }
