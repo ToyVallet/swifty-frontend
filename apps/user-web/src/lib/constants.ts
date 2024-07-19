@@ -26,6 +26,7 @@ export const API_USER = {
   checkId: '/user/check/id',
   checkName: '/user/check/name',
   findId: '/user/id',
+  findPassword: '/user/pwd',
   checkDuplicateId: '/user/check/same/id',
   delete: '/user',
   checkPassword: '/user/check/pwd',

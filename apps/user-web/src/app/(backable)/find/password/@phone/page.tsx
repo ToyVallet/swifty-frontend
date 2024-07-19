@@ -9,26 +9,25 @@ import { APIError, customFetch } from '@swifty/shared-lib';
 import { useContext } from 'react';
 import { useFormContext } from 'react-hook-form';
 
-import { FindIdContext, findIdSteps } from '../context';
+import { FindPasswordContext, findPasswordSteps } from '../context';
 
 export default function Page() {
   const form = useFormContext();
-  const { nextStep, currentStep } = useContext(FindIdContext);
+  const { nextStep, currentStep } = useContext(FindPasswordContext);
   const name =
     currentStep === '휴대폰 번호를 입력하세요' ? 'phoneNumber' : 'smsCode';
   const { invalid } = form.getFieldState(name);
 
   const onClick = async () => {
     const phoneNumber = form.getValues('phoneNumber');
-    const userName = form.getValues('name');
-
+    const id = form.getValues('id');
     if (currentStep === '휴대폰 번호를 입력하세요') {
       try {
         await customFetch(API_SMS.sms, {
           method: 'post',
           body: JSON.stringify({
             phoneNumber,
-            smsSituationCode: 'FIND_BY_ID',
+            smsSituationCode: 'RESET_PWD',
           }),
         });
       } catch (e) {
@@ -49,22 +48,15 @@ export default function Page() {
           body: JSON.stringify({
             code: form.getValues('smsCode'),
             phoneNumber: form.getValues('phoneNumber'),
-            situationCode: 'FIND_BY_ID',
+            situationCode: 'RESET_PWD',
           }),
         });
         await customFetch(
-          `${API_USER.checkName}?name=${encodeURI(userName)}&phone=${phoneNumber}`,
+          `${API_USER.checkId}?loginId=${encodeURI(id)}&phone=${phoneNumber}`,
           {
             method: 'GET',
           },
         );
-        await customFetch(API_USER.findId, {
-          method: 'POST',
-          body: JSON.stringify({
-            name: form.getValues('name'),
-            phoneNumber,
-          }),
-        });
       } catch (e) {
         if (APIError.isAPIError(e)) {
           form.setError('smsCode', {
@@ -80,12 +72,12 @@ export default function Page() {
   return (
     <>
       <div className="flex flex-col w-full gap-5">
-        <Funnel step={currentStep} steps={findIdSteps}>
+        <Funnel step={currentStep} steps={findPasswordSteps}>
           <Funnel.Step<StepType> step="휴대폰 번호를 입력하세요">
             <PhoneNumber />
           </Funnel.Step>
           <Funnel.Step<StepType> step="인증번호를 입력하세요">
-            <SmsCode situationCode="FIND_BY_ID" />
+            <SmsCode situationCode="RESET_PWD" />
           </Funnel.Step>
         </Funnel>
       </div>
