@@ -52,7 +52,7 @@ export default function UnivCertificationLayout({
 
   return (
     <>
-      <Navigation variant="back" title="학적 인증" />
+      <Navigation title="학적 인증" />
       <CertificationStepContext.Provider value={{ currentStep, nextStep }}>
         <Main className="h-full scrollbar-hide">
           <Header>

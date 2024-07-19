@@ -47,7 +47,6 @@ export default function PhonePage() {
         <Password name="currentPassword" label="현재 비밀번호" />
       </section>
       <FixedBottomCTA
-        type="button"
         onClick={onNext}
         disabled={!isCurrentStepDirty || !!currentStepError}
       >

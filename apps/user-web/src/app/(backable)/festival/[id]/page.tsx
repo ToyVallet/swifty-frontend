@@ -3,6 +3,7 @@ import {
   Footer,
   Hero,
   ImageWithFallback,
+  LogoLink,
   Main,
   MenuTiles,
   Navigation,
@@ -55,7 +56,7 @@ export default async function FestivalHomePage({
 
   return (
     <>
-      <Navigation variant="back" bg="gradient" centerLogo />
+      <Navigation bg="gradient" center={() => <LogoLink />} />
       <div className="mb-[90px]">
         <Hero variant="image">
           <ImageWithFallback

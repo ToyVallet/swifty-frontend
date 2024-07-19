@@ -1,4 +1,4 @@
-export { default as Navigation } from './navigation';
+export { default as Navigation, LogoLink } from './navigation';
 export { default as AdBanner } from './ad-banner';
 export { default as Footer } from './footer';
 export { default as Carousel } from './carousel';

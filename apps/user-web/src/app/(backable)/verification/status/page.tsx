@@ -13,7 +13,7 @@ export default async function Page() {
 
   return (
     <>
-      <Navigation variant="back" title="재학생 인증 상태" />
+      <Navigation title="재학생 인증 상태" />
       <VerificationStatus step={data.certificationStatus} />
     </>
   );

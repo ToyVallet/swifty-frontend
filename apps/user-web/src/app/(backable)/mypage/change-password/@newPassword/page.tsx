@@ -60,7 +60,6 @@ export default function PasswordPage() {
         </Funnel>
       </section>
       <FixedBottomCTA
-        type="button"
         onClick={onNext}
         disabled={!isCurrentStepDirty || !!currentStepError}
       >

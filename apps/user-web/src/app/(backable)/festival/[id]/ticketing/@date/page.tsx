@@ -70,7 +70,9 @@ export default async function DateSelectionPage({
       </div>
       <FixedBottomGroup className="gap-5">
         <DateSelect options={dates} />
-        <Button size="full">확인</Button>
+        <Button block variant="primary">
+          확인
+        </Button>
       </FixedBottomGroup>
     </div>
   );

@@ -9,11 +9,13 @@ import { useRouter } from 'next/navigation';
 
 export default function Page() {
   const router = useRouter();
-  const onClick = async (path: string) => {
+
+  const deleteCookieAndGo = async (path: string) => {
     await deleteCookie(COOKIE_KEYS.accessToken);
     await deleteCookie(COOKIE_KEYS.refreshToken);
     router.replace(path);
   };
+
   return (
     <section>
       <Image
@@ -25,20 +27,13 @@ export default function Page() {
       />
       <FixedBottomGroup className="gap-2.5">
         <Button
-          size="full"
+          block
           variant="white"
-          onClick={() => {
-            onClick('/login');
-          }}
+          onClick={() => deleteCookieAndGo('/login')}
         >
           로그인하기
         </Button>
-        <Button
-          size="full"
-          onClick={() => {
-            onClick('/');
-          }}
-        >
+        <Button block onClick={() => deleteCookieAndGo('/')}>
           홈으로 가기
         </Button>
       </FixedBottomGroup>
