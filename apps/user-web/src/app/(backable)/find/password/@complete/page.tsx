@@ -15,10 +15,10 @@ export default function Page() {
         height={255}
       />
       <FixedBottomGroup className="flex flex-col gap-2.5">
-        <Button size="full" variant="white" asChild>
+        <Button block variant="white" asChild>
           <Link href="/login">로그인하기</Link>
         </Button>
-        <Button size="full" asChild>
+        <Button block variant="primary" asChild>
           <Link href="/">홈으로 가기</Link>
         </Button>
       </FixedBottomGroup>

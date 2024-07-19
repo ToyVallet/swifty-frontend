@@ -78,7 +78,7 @@ export default function PhonePage() {
           </Funnel.Step>
 
           <Funnel.Step<StepType> step="인증번호를 입력하세요">
-            <SmsCode />
+            <SmsCode situationCode="CHANGE_PWD" />
           </Funnel.Step>
         </Funnel>
       </section>

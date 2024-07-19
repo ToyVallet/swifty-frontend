@@ -115,7 +115,7 @@ export default function ChangePhoneNumberForm() {
               <PhoneNumber />
             </Funnel.Step>
             <Funnel.Step<StepType> step="smsCode">
-              <SmsCode />
+              <SmsCode situationCode="CHANGE_PHONE_NUMBER" />
             </Funnel.Step>
           </Funnel>
         </form>

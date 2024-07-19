@@ -40,7 +40,7 @@ export default function Page({ complete, name, phone }: Props) {
   };
   return (
     <>
-      <Navigation variant="back" title="아이디 찾기" />
+      <Navigation title="아이디 찾기" />
       <FindIdContext.Provider value={{ currentStep, nextStep }}>
         <Main className="relative pb-20 scrollbar-hide px-5 mt-[47px]">
           <Header>
