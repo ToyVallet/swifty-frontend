@@ -1,20 +1,20 @@
 'use client';
 
-import { cn } from '@swifty/shared-lib';
+import { Button } from '@swifty/ui';
 import { useRouter } from 'next/navigation';
-import { type PropsWithChildren } from 'react';
+import { type ComponentPropsWithRef } from 'react';
 
-export default function BackButton({
-  children,
-  className,
-}: PropsWithChildren<{ className?: string }>) {
+type BackButtonProps = ComponentPropsWithRef<typeof Button>;
+
+export default function BackButton({ onClick, ...props }: BackButtonProps) {
   const router = useRouter();
   return (
-    <button
-      onClick={() => router.back()}
-      className={cn('w-full h-full', className)}
-    >
-      {children}
-    </button>
+    <Button
+      onClick={(e) => {
+        router.back();
+        onClick?.(e);
+      }}
+      {...props}
+    />
   );
 }

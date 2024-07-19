@@ -29,9 +29,7 @@ export default function Page() {
           className="m-[102px_auto_222px_auto]"
           alt="탈퇴 완료 이미지"
         />
-        <FixedBottomCTA size="full" onClick={onClick}>
-          홈으로 가기
-        </FixedBottomCTA>
+        <FixedBottomCTA onClick={onClick}>홈으로 가기</FixedBottomCTA>
       </div>
     </>
   );

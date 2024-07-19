@@ -51,7 +51,7 @@ export default function TicketingLayout({
 
   return (
     <>
-      <Navigation variant="back" title="티켓 예매하기" />
+      <Navigation title="티켓 예매하기" />
       <TicketingStepContext.Provider value={{ currentStep, nextStep }}>
         <main className="h-full flex flex-col relative pb-20 overflow-y-auto scrollbar-hide">
           <Choose value={currentStep}>

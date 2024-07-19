@@ -4,7 +4,6 @@ import {
   GlobalNavigation,
   Hero,
   HeroTile,
-  Navigation,
 } from '@components/common';
 import { API_FESTIVALS } from '@lib/constants';
 import type { Festival } from '@lib/types/festival';
@@ -19,7 +18,6 @@ export default async function HomeLayout({ children }: PropsWithChildren) {
 
   return (
     <>
-      <Navigation variant="root" bg="gradient" />
       <Hero>
         <Carousel hasIndicator autoplay>
           {festivalLineups.map((festival) => (

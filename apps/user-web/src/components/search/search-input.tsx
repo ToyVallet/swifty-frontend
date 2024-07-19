@@ -2,7 +2,7 @@
 
 import { Icon } from '@swifty/assets';
 import { customFetch } from '@swifty/shared-lib';
-import { If, Input, transition } from '@swifty/ui';
+import { Button, If, Input, transition } from '@swifty/ui';
 import { useDebounce } from '@toss/react';
 import { AnimatePresence } from 'framer-motion';
 import { motion } from 'framer-motion';
@@ -80,7 +80,8 @@ export default function SearchInput() {
             className="text-white bg-swifty-color-800 rounded-xl py-3 flex flex-col items-center justify-center w-full"
           >
             {autocompleteList.map((item) => (
-              <button
+              <Button
+                block
                 key={item}
                 className="py-3 px-5 w-full flex items-center justify-between"
                 onClick={() => {
@@ -88,10 +89,10 @@ export default function SearchInput() {
                   setAutocompleteList([]);
                   search(item);
                 }}
+                suffix={<Icon name="search" width={30} height={30} />}
               >
-                <span>{item}</span>
-                <Icon name="search" width={30} height={30} />
-              </button>
+                {item}
+              </Button>
             ))}
           </motion.div>
         </If>

@@ -47,7 +47,7 @@ export default function SignupLayout({
 
   return (
     <>
-      <Navigation variant="back" title="회원가입" />
+      <Navigation title="회원가입" />
       <SignUpStepContext.Provider value={{ currentStep, nextStep }}>
         <Main className="relative pb-20 scrollbar-hide px-5">
           <Header>{currentStep}</Header>

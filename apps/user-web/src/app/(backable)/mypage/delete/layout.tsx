@@ -36,7 +36,7 @@ export default function UserDelteLayout({
 
   return (
     <>
-      <Navigation variant="back" title="회원 탈퇴" bg="blur" />
+      <Navigation title="회원 탈퇴" bg="blur" />
       <DeleteUserContext.Provider value={{ currentStep, nextStep }}>
         <h2 className="text-center text-white font-bold text-26 mt-[44px]">
           {currentStep}
