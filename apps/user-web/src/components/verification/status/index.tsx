@@ -1,7 +1,6 @@
 import { FixedBottomCTA } from '@components/common';
-import VerificationDoneIcon from '@icons/verification/verification-done.svg';
-import VerificationRequest from '@icons/verification/verification-request.svg';
-import VerificationIcon from '@icons/verification/verification.svg';
+import type { VerficationStatus } from '@lib/types/certification';
+import { Icon } from '@swifty/assets';
 import { cn } from '@swifty/shared-lib';
 import { convertNewlineToJSX } from '@toss/react';
 import { cva } from 'class-variance-authority';
@@ -9,14 +8,14 @@ import Link from 'next/link';
 import type { PropsWithChildren, ReactNode } from 'react';
 
 type Props = {
-  step: Server;
+  step: VerficationStatus;
   message?: string;
 };
-type Server = 'WATING' | 'REJECTED' | 'APPROVED' | 'NONE';
+
 type Status = 'not' | 'yet' | 'during' | 'done' | 'sucess' | 'fail';
 
 type ServerStatus = {
-  [key in Server]: {
+  [key in VerficationStatus]: {
     title: ReactNode;
     data: { title: string; icon: JSX.Element; status: Status }[];
   };
@@ -24,15 +23,27 @@ type ServerStatus = {
 
 // 데이터
 const serverStatus: ServerStatus = {
-  NONE: {
+  UNAPPLIED: {
     title: <>재학생 인증을 요청하지 않았습니다</>,
     data: [
-      { title: '진행 예정', icon: <VerificationRequest />, status: 'not' },
-      { title: '인증 진행', icon: <VerificationIcon />, status: 'not' },
-      { title: '인증 완료', icon: <VerificationDoneIcon />, status: 'not' },
+      {
+        title: '진행 예정',
+        icon: <Icon name="user-web/verification/varification-request" />,
+        status: 'not',
+      },
+      {
+        title: '인증 진행',
+        icon: <Icon name="user-web/verification/varification" />,
+        status: 'not',
+      },
+      {
+        title: '인증 완료',
+        icon: <Icon name="user-web/verification/varification-done" />,
+        status: 'not',
+      },
     ],
   },
-  WATING: {
+  PENDING: {
     title: (
       <>
         재학생 인증은 <span className="text-primary">인증 진행 중</span> 입니다
@@ -41,11 +52,24 @@ const serverStatus: ServerStatus = {
     data: [
       {
         title: '진행 예정',
-        icon: <VerificationRequest fill={'#1760EF'} />,
+        icon: (
+          <Icon
+            name="user-web/verification/varification-request"
+            fill={'#1760EF'}
+          />
+        ),
         status: 'done',
       },
-      { title: '인증 진행', icon: <VerificationIcon />, status: 'during' },
-      { title: '인증 완료', icon: <VerificationDoneIcon />, status: 'yet' },
+      {
+        title: '인증 진행',
+        icon: <Icon name="user-web/verification/varification" />,
+        status: 'during',
+      },
+      {
+        title: '인증 완료',
+        icon: <Icon name="user-web/verification/varification-done" />,
+        status: 'yet',
+      },
     ],
   },
   REJECTED: {
@@ -58,15 +82,26 @@ const serverStatus: ServerStatus = {
     data: [
       {
         title: '진행 예정',
-        icon: <VerificationRequest fill={'#1760EF'} />,
+        icon: (
+          <Icon
+            name="user-web/verification/varification-request"
+            fill={'#1760EF'}
+          />
+        ),
         status: 'done',
       },
       {
         title: '인증 진행',
-        icon: <VerificationIcon fill={'#1760EF'} />,
+        icon: (
+          <Icon name="user-web/verification/varification" fill={'#1760EF'} />
+        ),
         status: 'done',
       },
-      { title: '인증 완료', icon: <VerificationDoneIcon />, status: 'fail' },
+      {
+        title: '인증 완료',
+        icon: <Icon name="user-web/verification/varification-done" />,
+        status: 'fail',
+      },
     ],
   },
   APPROVED: {
@@ -79,15 +114,29 @@ const serverStatus: ServerStatus = {
     data: [
       {
         title: '진행 예정',
-        icon: <VerificationRequest fill={'#1760EF'} />,
+        icon: (
+          <Icon
+            name="user-web/verification/varification-request"
+            fill={'#1760EF'}
+          />
+        ),
         status: 'done',
       },
       {
         title: '인증 진행',
-        icon: <VerificationIcon fill={'#1760EF'} />,
+        icon: (
+          <Icon
+            name="user-web/verification/varification-request"
+            fill={'#1760EF'}
+          />
+        ),
         status: 'done',
       },
-      { title: '인증 완료', icon: <VerificationDoneIcon />, status: 'sucess' },
+      {
+        title: '인증 완료',
+        icon: <Icon name="user-web/verification/varification-done" />,
+        status: 'sucess',
+      },
     ],
   },
 };
@@ -96,15 +145,19 @@ const serverStatus: ServerStatus = {
 export default function VerificationStatus({ step, message }: Props) {
   const { title, data } = serverStatus[step];
   return (
-    <div className="mt-[47px]">
+    <div className="mt-[97px]">
       <VerificationTitle>{title}</VerificationTitle>
       <VerificationData verificationStatus={data} message={message} />
-      {step === 'NONE' ||
-        (step === 'REJECTED' && (
-          <FixedBottomCTA asChild>
-            <Link href={'/verification/student'}>인증 요청하기</Link>
-          </FixedBottomCTA>
-        ))}
+      {step === 'REJECTED' && (
+        <FixedBottomCTA asChild>
+          <Link href={'/verification/student'}>인증 재요청하기</Link>
+        </FixedBottomCTA>
+      )}
+      {step === 'UNAPPLIED' && (
+        <FixedBottomCTA asChild>
+          <Link href={'/verification/student'}>인증 요청하기</Link>
+        </FixedBottomCTA>
+      )}
     </div>
   );
 }

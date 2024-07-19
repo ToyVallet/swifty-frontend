@@ -17,3 +17,14 @@ export type ApiCertification = {
   first: boolean;
   last: boolean;
 };
+
+export type VerficationStatus =
+  | 'APPROVED'
+  | 'REJECTED'
+  | 'PENDING'
+  | 'UNAPPLIED';
+
+export type VerficationAPI = {
+  certificationAnswerId: string;
+  certificationStatus: VerficationStatus;
+};
