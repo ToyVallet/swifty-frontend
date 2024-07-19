@@ -22,11 +22,11 @@ export default function SignupCompletePage() {
         </span>
       </div>
       <FixedBottomGroup className="gap-2.5">
-        <Button size="full" variant="white">
+        <Button size="full" variant="white" asChild>
           <Link href="/">등록 없이 완료</Link>
         </Button>
-        <Button size="full">
-          <Link href="/univ-certification">학적 인증</Link>
+        <Button size="full" asChild>
+          <Link href="/verification/student">학적 인증</Link>
         </Button>
       </FixedBottomGroup>
     </section>

@@ -18,7 +18,7 @@ const verificationLinks: ReadonlyArray<VerificationLink> = [
     icon: <ShieldIcon className="w-[70px] h-[70px]" />,
   },
   {
-    href: '/verification/student/status',
+    href: '/verification/status',
     title: '재학생 인증 상태',
     icon: <RunnerIncon className="w-[70px] h-[70px]" />,
   },

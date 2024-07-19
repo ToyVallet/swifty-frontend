@@ -11,7 +11,7 @@ import {
   SmsCode,
 } from '@components/signup/identification';
 import { API_SMS } from '@lib/constants';
-import { type NonEmptyArray, customFetch } from '@swifty/shared-lib';
+import { APIError, type NonEmptyArray, customFetch } from '@swifty/shared-lib';
 import { useContext, useEffect } from 'react';
 import { useFormContext } from 'react-hook-form';
 
@@ -45,10 +45,13 @@ export default function Identification() {
             smsSituationCode: 'SIGN_UP',
           }),
         });
-      } catch (err) {
-        form.setError('phoneNumber', {
-          message: '인증 요청에 실패했습니다. 다시 시도해 주세요',
-        });
+      } catch (e) {
+        if (APIError.isAPIError(e)) {
+          form.setError('root', {
+            type: String(e.statusCode),
+            message: e.message[0],
+          });
+        }
         return;
       }
 
@@ -66,8 +69,13 @@ export default function Identification() {
             situationCode: 'SIGN_UP',
           }),
         });
-      } catch (err) {
-        console.error(err);
+      } catch (e) {
+        if (APIError.isAPIError(e)) {
+          form.setError('root', {
+            type: String(e.statusCode),
+            message: e.message[0],
+          });
+        }
         return;
       }
     }

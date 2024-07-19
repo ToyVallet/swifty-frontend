@@ -24,7 +24,12 @@ export const API_FESTIVALS = {
 export const API_USER = {
   signup: '/user',
   checkId: '/user/id',
+  checkDuplicateId: '/user/check/same/id',
+  delete: '/user',
+  checkPassword: '/user/check/pwd',
   info: '/user',
+  changePhone: '/user/phone',
+  changePassword: '/user/change/pwd',
 };
 
 export const API_CERTIFICATION = {

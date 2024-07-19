@@ -4,7 +4,7 @@ import { FixedBottomCTA } from '@components/common';
 import { Funnel } from '@components/signup';
 import { Id, Password, PasswordConfirm } from '@components/signup/account';
 import { API_USER } from '@lib/constants';
-import { type NonEmptyArray, customFetch } from '@swifty/shared-lib';
+import { APIError, type NonEmptyArray, customFetch } from '@swifty/shared-lib';
 import { useContext, useEffect } from 'react';
 import { useFormContext } from 'react-hook-form';
 
@@ -30,10 +30,17 @@ export default function AccountPage() {
     // 아이디 중복 확인
     if (currentStep === '사용하실 아이디를 입력해주세요') {
       const id = form.getValues(currentStepFormName);
-
-      if (id === 'js9534') {
-        form.setError('id', { message: '중복된 아이디가 있습니다.' });
-        form.setFocus(currentStepFormName);
+      try {
+        await customFetch(`${API_USER.checkDuplicateId}?loginId=${id}`, {
+          method: 'get',
+        });
+      } catch (e) {
+        if (APIError.isAPIError(e)) {
+          form.setError('id', {
+            type: String(e.statusCode),
+            message: e.message[0],
+          });
+        }
         return;
       }
     }
@@ -56,8 +63,13 @@ export default function AccountPage() {
           method: 'post',
           body: JSON.stringify(body),
         });
-      } catch (err) {
-        console.error(err);
+      } catch (e) {
+        if (APIError.isAPIError(e)) {
+          form.setError('passwordConfirm', {
+            type: String(e.statusCode),
+            message: e.message[0],
+          });
+        }
         return;
       }
     }
