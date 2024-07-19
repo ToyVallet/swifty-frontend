@@ -3,10 +3,10 @@
   "version": "0.1.0",
   "license": "Proprietary",
   "scripts": {
-    "dev:server": "node server.js",
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
+    "dev": "NODE_ENV=development node server.js",
+    "dev:local": "NODE_ENV=development next dev",
+    "build": "NODE_ENV=production next build",
+    "start": "NODE_ENV=production next start",
     "lint": "next lint",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"

@@ -6,7 +6,8 @@
   "license": "MIT",
   "main": "dist/index.js",
   "exports": {
-    ".": "./src/index.ts"
+    ".": "./src/index.ts",
+    "./images": "./src/images"
   },
   "devDependencies": {
     "@svgr/webpack": "^8.1.0",
