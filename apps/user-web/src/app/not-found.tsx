@@ -9,7 +9,7 @@ export default function NotFound() {
   return (
     <html>
       <body>
-        <Navigation variant="back" />
+        <Navigation />
         <div className="flex h-[100dvh] w-full flex-col items-center justify-center px-5 gap-5">
           <Icon name="user-web/404/caution" height={109} width={130} />
           <h2 className="text-18 font-semibold text-white text-center">

@@ -6,7 +6,7 @@ import { type ComponentPropsWithoutRef, forwardRef } from 'react';
 
 import { GlobalPortal } from '../../app/global-portal';
 
-type Props = ComponentPropsWithoutRef<typeof Button>;
+type Props = Omit<ComponentPropsWithoutRef<typeof Button>, 'block'>;
 
 const FixedBottomCTA: ForwardRefExoticComponent<Props> = forwardRef<
   React.ElementRef<typeof Button>,

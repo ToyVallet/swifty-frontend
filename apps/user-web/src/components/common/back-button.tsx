@@ -1,6 +1,5 @@
 'use client';
 
-import { cn } from '@swifty/shared-lib';
 import { Button } from '@swifty/ui';
 import { useRouter } from 'next/navigation';
 import { type ComponentPropsWithRef } from 'react';
