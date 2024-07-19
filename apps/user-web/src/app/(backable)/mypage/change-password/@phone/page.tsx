@@ -32,7 +32,7 @@ export default function PhonePage() {
           method: 'post',
           body: JSON.stringify({
             phoneNumber,
-            smsSituationCode: 'RESET_PWD',
+            smsSituationCode: 'CHANGE_PWD',
           }),
           credentials: 'include',
         });
@@ -54,7 +54,7 @@ export default function PhonePage() {
           body: JSON.stringify({
             code: form.getValues('smsCode'),
             phoneNumber: form.getValues('phoneNumber'),
-            situationCode: 'RESET_PWD',
+            situationCode: 'CHANGE_PWD',
           }),
         });
       } catch (e) {

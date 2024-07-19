@@ -81,7 +81,7 @@ export default function ChangePhoneNumberForm() {
         });
 
         await customFetch(API_USER.changePhone, {
-          method: 'patch',
+          method: 'PATCH',
           credentials: 'include',
           body: JSON.stringify({
             phoneNumber,

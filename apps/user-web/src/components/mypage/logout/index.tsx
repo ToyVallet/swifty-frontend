@@ -1,7 +1,7 @@
 'use client';
 
 import LeftChevron from '@icons/mypage/left-chevron.svg';
-import { COOKIE_KEYS, deleteCookie } from '@swifty/shared-lib';
+import { COOKIE_KEYS, customFetch, deleteCookie } from '@swifty/shared-lib';
 import {
   Button,
   Drawer,
@@ -16,9 +16,13 @@ export default function Logout() {
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
   const onLogout = async () => {
+    await customFetch('/user/logout', {
+      method: 'get',
+      credentials: 'include',
+    });
     await deleteCookie(COOKIE_KEYS.accessToken);
     await deleteCookie(COOKIE_KEYS.refreshToken);
-    router.replace('/');
+    //router.replace('/');
   };
   return (
     <Drawer open={isOpen} onOpenChange={setIsOpen}>
