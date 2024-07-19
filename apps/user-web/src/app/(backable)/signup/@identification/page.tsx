@@ -47,7 +47,7 @@ export default function Identification() {
         });
       } catch (e) {
         if (APIError.isAPIError(e)) {
-          form.setError('root', {
+          form.setError('phoneNumber', {
             type: String(e.statusCode),
             message: e.message[0],
           });
@@ -71,7 +71,7 @@ export default function Identification() {
         });
       } catch (e) {
         if (APIError.isAPIError(e)) {
-          form.setError('root', {
+          form.setError('smsCode', {
             type: String(e.statusCode),
             message: e.message[0],
           });
@@ -92,7 +92,7 @@ export default function Identification() {
       <section className="flex flex-col gap-5">
         <Funnel step={currentStep} steps={steps}>
           <Funnel.Step<StepType> step="휴대폰 번호를 인증할게요">
-            <SmsCode />
+            <SmsCode situationCode="SIGN_UP" />
           </Funnel.Step>
 
           <Funnel.Step<StepType> step="휴대폰 번호를 알려주세요">

@@ -23,7 +23,10 @@ export const API_FESTIVALS = {
 
 export const API_USER = {
   signup: '/user',
-  checkId: '/user/id',
+  checkId: '/user/check/id',
+  checkName: '/user/check/name',
+  findId: '/user/id',
+  findPassword: '/user/pwd',
   checkDuplicateId: '/user/check/same/id',
   delete: '/user',
   checkPassword: '/user/check/pwd',

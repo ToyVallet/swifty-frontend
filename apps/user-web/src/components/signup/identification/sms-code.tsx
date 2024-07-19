@@ -8,7 +8,16 @@ import { useFormContext } from 'react-hook-form';
 
 const COUNT = 180;
 
-export default function SmsCode() {
+type Props = {
+  situationCode:
+    | 'SIGN_UP'
+    | 'FIND_BY_ID'
+    | 'RESET_PWD'
+    | 'CHANGE_PWD'
+    | 'CHANGE_PHONE_NUMBER'
+    | 'TICKET_ISSUED';
+};
+export default function SmsCode({ situationCode }: Props) {
   const form = useFormContext();
   const [count, setCount] = useState(COUNT);
   const phone = useRef<string>(form.getValues('phoneNumber'));
@@ -33,7 +42,7 @@ export default function SmsCode() {
         method: 'post',
         body: JSON.stringify({
           phoneNumber,
-          smsSituationCode: 'SIGN_UP',
+          smsSituationCode: situationCode,
         }),
       });
     } catch (e) {

@@ -102,10 +102,10 @@ export default function LoginForm() {
           render={({ field }) => <FormMessage {...field} />}
         />
         <div className="w-full flex justify-between text-14">
-          <Link href="/forget-id" className="text-white">
+          <Link href="/find/id" className="text-white">
             아이디를 잊으셨나요?
           </Link>
-          <Link href="/forgot-password" className="text-white">
+          <Link href="/find/password" className="text-white">
             비밀번호를 잊으셨나요?
           </Link>
         </div>
