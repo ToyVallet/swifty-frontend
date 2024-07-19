@@ -16,13 +16,9 @@ export default function Logout() {
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
   const onLogout = async () => {
-    await customFetch('/user/logout', {
-      method: 'get',
-      credentials: 'include',
-    });
     await deleteCookie(COOKIE_KEYS.accessToken);
     await deleteCookie(COOKIE_KEYS.refreshToken);
-    //router.replace('/');
+    router.replace('/');
   };
   return (
     <Drawer open={isOpen} onOpenChange={setIsOpen}>
