@@ -16,7 +16,7 @@ export default async function Page() {
   return (
     <>
       <Navigation title="휴대폰 번호 변경" />
-      <Main className="w-full px-5">
+      <Main className="w-full px-5 mt-[47px]">
         <Header>
           변경할 휴대폰 번호를 입력해주세요
           <span className="text-14 font-medium">{`현재 등록된 번호: ${user.phoneNumber}`}</span>

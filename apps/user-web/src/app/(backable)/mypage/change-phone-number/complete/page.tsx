@@ -16,10 +16,13 @@ export default async function CompleteChangePhoneNumberPage() {
   });
   return (
     <>
-      <Header>
-        휴대폰 번호가 변경되었습니다.
-        <span className="text-14 font-medium">{`현재 등록된 번호: ${user.phoneNumber}`}</span>
-      </Header>
+      <div className="mt-[47px]">
+        <Header>
+          휴대폰 번호가 변경되었습니다.
+          <span className="text-14 font-medium">{`현재 등록된 번호: ${user.phoneNumber}`}</span>
+        </Header>
+      </div>
+
       <Image
         src={ChangePhoneNumber}
         className="m-[120px_auto_220px_auto]"

@@ -22,6 +22,7 @@ export default async function UniversityDetailPage({
       method: 'GET',
     },
   );
+
   const breadcrumbList: BreadcrumbList = [
     {
       title: 'University',

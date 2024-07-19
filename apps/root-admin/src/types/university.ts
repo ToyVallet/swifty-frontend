@@ -18,10 +18,10 @@ export interface UniversityDetail {
 }
 
 export interface UniversityHostUser {
-  id: string;
+  subId: string;
   phone: string;
-  subUserId: string;
-  userFormId: string;
+  userId: string;
+  userLoginId: string;
 }
 
 export interface UniversityHostCreate {

@@ -15,7 +15,7 @@ interface Props {
 const columns: TableProps<UniversityHostUser>['columns'] = [
   {
     title: '아이디',
-    dataIndex: 'userFormId',
+    dataIndex: 'userLoginId',
     key: 'userFormId',
   },
   {
@@ -30,7 +30,7 @@ function HostUserTable({ data }: Props) {
   const router = useRouter();
 
   const onClickRow = (record: UniversityHostUser) => {
-    router.push(`/user/${record.subUserId}`);
+    router.push(`/user/${record.userId}`);
   };
 
   useEffect(() => {
