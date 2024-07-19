@@ -117,7 +117,6 @@ export default function Identification() {
         </Funnel>
       </section>
       <FixedBottomCTA
-        type="button"
         onClick={onNext}
         disabled={!isCurrentStepDirty || !!currentStepError}
       >

@@ -122,7 +122,6 @@ export default function ChangePhoneNumberForm() {
       </Form>
       <FixedBottomCTA
         onClick={onNext}
-        type="button"
         disabled={!isCurrentStepDirty || !!currentStepError}
       >
         완료

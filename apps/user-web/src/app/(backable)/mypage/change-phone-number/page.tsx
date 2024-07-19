@@ -15,7 +15,7 @@ export default async function Page() {
 
   return (
     <>
-      <Navigation variant="back" title="휴대폰 번호 변경" />
+      <Navigation title="휴대폰 번호 변경" />
       <Main className="w-full px-5 mt-[47px]">
         <Header>
           변경할 휴대폰 번호를 입력해주세요

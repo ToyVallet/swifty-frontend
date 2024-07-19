@@ -3,15 +3,15 @@ import { COOKIE_KEYS, getCookieValue } from '@swifty/shared-lib';
 import { Choose, Otherwise, When } from '@swifty/ui';
 import Link from 'next/link';
 
-import IconButton from './icon-button';
+import IconLink from './icon-link';
 
 export default async function GlobalNavigation() {
   const user = await getCookieValue(COOKIE_KEYS.accessToken);
 
   return (
     <nav className="fixed bottom-0 left-0 right-0 flex items-center justify-evenly bg-black shadow-[0px_-5px_7px_0px_rgba(0, 0, 0, 0.4)]">
-      <IconButton label="홈" link="/" iconName="home" />
-      <IconButton label="카테고리" link="/category" iconName="category" />
+      <IconLink label="홈" link="/" iconName="home" />
+      <IconLink label="카테고리" link="/category" iconName="category" />
 
       <div>
         <Link
@@ -22,13 +22,13 @@ export default async function GlobalNavigation() {
         </Link>
       </div>
 
-      <IconButton label="검색" link="/search" iconName="search" />
+      <IconLink label="검색" link="/search" iconName="search" />
       <Choose value={user}>
         <When value={null}>
-          <IconButton label="로그인" link="/login" iconName="lock" />
+          <IconLink label="로그인" link="/login" iconName="lock" />
         </When>
         <Otherwise>
-          <IconButton label="마이페이지" link="/mypage" iconName="user" />
+          <IconLink label="마이페이지" link="/mypage" iconName="user" />
         </Otherwise>
       </Choose>
     </nav>

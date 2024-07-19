@@ -57,7 +57,7 @@ export default function Page() {
           ))}
         </Accordion>
       </div>
-      <FixedBottomCTA type="button" onClick={onApprove}>
+      <FixedBottomCTA onClick={onApprove}>
         {isSomeNotApproved ? APPROVE_ALL : APPROVE_COMPLETE}
       </FixedBottomCTA>
     </>

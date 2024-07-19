@@ -61,13 +61,7 @@ export default function StudentCertificationImage({ onChange }: Props) {
           className="hidden"
         />
       </div>
-      <Button
-        variant="white"
-        size="full"
-        className="text-black"
-        onClick={imageUpload}
-        type="button"
-      >
+      <Button block variant="white" onClick={imageUpload} type="button">
         인증 이미지 업로드
       </Button>
     </section>

@@ -46,7 +46,7 @@ export default function SearchLayout({
   };
   return (
     <div className="w-full px-5">
-      <Navigation variant="back" title="비밀번호 재설정" />
+      <Navigation title="비밀번호 재설정" />
       <FindPasswordContext.Provider value={{ currentStep, nextStep }}>
         <Main className="mt-[47px]">
           <Header>{currentStep}</Header>

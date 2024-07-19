@@ -60,7 +60,6 @@ export default function OcrDrawer() {
     <Drawer open={isOpen} onOpenChange={setIsOpen}>
       <DrawerTrigger asChild>
         <FixedBottomCTA
-          type="button"
           variant={!isValid ? 'white' : 'default'}
           disabled={!isValid}
         >
@@ -91,7 +90,7 @@ export default function OcrDrawer() {
               disabled
             />
           </div>
-          <Button onClick={onNext} size="full">
+          <Button block variant="primary" onClick={onNext}>
             확인
           </Button>
         </div>

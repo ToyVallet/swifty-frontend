@@ -1,13 +1,13 @@
 import { Icon, type IconNames } from '@swifty/assets';
 import Link from 'next/link';
 
-type IconButtonProps = {
+type IconLinkProps = {
   link: string;
   iconName: IconNames;
   label: string;
 };
 
-export default function IconButton({ link, iconName, label }: IconButtonProps) {
+export default function IconLink({ link, iconName, label }: IconLinkProps) {
   return (
     <div className="flex flex-col items-center justify-center text-white w-full">
       <Link
