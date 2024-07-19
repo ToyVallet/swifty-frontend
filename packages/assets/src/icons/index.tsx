@@ -1,31 +1,15 @@
 import React, {
   type ComponentPropsWithoutRef,
-  type ComponentType,
-  type LazyExoticComponent,
   type Ref,
-  type SVGProps,
   Suspense,
   forwardRef,
-  lazy,
 } from 'react';
 
-type ImportedIconComponent = LazyExoticComponent<
-  ComponentType<SVGProps<SVGSVGElement>>
->;
-
-interface IconSVGMap {
-  'swifty-full-logo': ImportedIconComponent;
-}
-
-const icons: IconSVGMap = {
-  'swifty-full-logo': lazy(() => import('./svg/swifty-full-logo.svg')),
-} as const;
-
-type IconName = keyof typeof icons;
+import { type IconNames, icons } from './icons';
 
 interface IconProps
   extends Omit<ComponentPropsWithoutRef<'svg'>, 'width' | 'height'> {
-  name: IconName;
+  name: IconNames;
   width: number;
   height: number;
 }
