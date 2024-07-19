@@ -1,0 +1,11 @@
+{
+  "extends": "@swifty/typescript-config/react-library.json",
+
+  "compilerOptions": {
+    "outDir": "dist",
+    "baseUrl": ".",
+    "paths": { "@/*": ["src/*"] }
+  },
+
+  "exclude": ["node_modules", "dist"]
+}

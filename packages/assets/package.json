@@ -1,0 +1,22 @@
+{
+  "name": "@swifty/assets",
+  "type": "module",
+  "version": "0.1.0",
+  "author": "이호연",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "devDependencies": {
+    "@svgr/webpack": "^8.1.0",
+    "@swifty/typescript-config": "*",
+    "@types/react": "^18",
+    "@types/react-dom": "^18"
+  },
+  "peerDependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-svg": "^16.1.34"
+  }
+}
