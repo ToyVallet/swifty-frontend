@@ -4037,17 +4037,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@plaiceholder/next@npm:^3.0.0":
-  version: 3.0.0
-  resolution: "@plaiceholder/next@npm:3.0.0"
-  peerDependencies:
-    next: ">= 10.0.0"
-    plaiceholder: ">=3.0.0"
-    sharp: ">= 0.30.6"
-  checksum: 10c0/94f7125b288914f0633e45da43888a596e287fdff3b7a4fd72361e669613188a383eb53fcfd52fbae089da3544d9d6e1ebb5b37d95346a467a92651e5fecfb98
-  languageName: node
-  linkType: hard
-
 "@playwright/test@npm:^1.42.1":
   version: 1.45.1
   resolution: "@playwright/test@npm:1.45.1"
@@ -6938,6 +6927,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@swifty/assets@npm:*, @swifty/assets@workspace:packages/assets":
+  version: 0.0.0-use.local
+  resolution: "@swifty/assets@workspace:packages/assets"
+  dependencies:
+    "@svgr/webpack": "npm:^8.1.0"
+    "@swifty/typescript-config": "npm:*"
+    "@types/react": "npm:^18"
+    "@types/react-dom": "npm:^18"
+  peerDependencies:
+    react: ^18.3.1
+    react-dom: ^18.3.1
+    react-svg: ^16.1.34
+  languageName: unknown
+  linkType: soft
+
 "@swifty/eslint-config@npm:*, @swifty/eslint-config@workspace:packages/eslint-config":
   version: 0.0.0-use.local
   resolution: "@swifty/eslint-config@workspace:packages/eslint-config"
@@ -7774,7 +7778,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-dom@npm:*, @types/react-dom@npm:^18.0.0, @types/react-dom@npm:^18.2.19":
+"@types/react-dom@npm:*, @types/react-dom@npm:^18, @types/react-dom@npm:^18.0.0, @types/react-dom@npm:^18.2.19":
   version: 18.3.0
   resolution: "@types/react-dom@npm:18.3.0"
   dependencies:
@@ -7783,7 +7787,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:*, @types/react@npm:^16.8.0 || ^17.0.0 || ^18.0.0, @types/react@npm:^18.2.61":
+"@types/react@npm:*, @types/react@npm:^16.8.0 || ^17.0.0 || ^18.0.0, @types/react@npm:^18, @types/react@npm:^18.2.61":
   version: 18.3.3
   resolution: "@types/react@npm:18.3.3"
   dependencies:
@@ -20108,6 +20112,7 @@ __metadata:
   dependencies:
     "@ant-design/nextjs-registry": "npm:^1.0.0"
     "@svgr/webpack": "npm:^8.1.0"
+    "@swifty/assets": "npm:*"
     "@swifty/eslint-config": "npm:*"
     "@swifty/shared-lib": "npm:*"
     "@swifty/tailwind-config": "npm:*"
@@ -22594,7 +22599,6 @@ __metadata:
     "@chromatic-com/storybook": "npm:1.3.3"
     "@hookform/resolvers": "npm:^3.3.4"
     "@next/bundle-analyzer": "npm:^14.2.3"
-    "@plaiceholder/next": "npm:^3.0.0"
     "@playwright/test": "npm:^1.42.1"
     "@radix-ui/react-accordion": "npm:^1.1.2"
     "@radix-ui/react-avatar": "npm:^1.0.4"
@@ -22617,6 +22621,7 @@ __metadata:
     "@storybook/react": "npm:^8.0.9"
     "@storybook/test": "npm:^8.0.9"
     "@svgr/webpack": "npm:^8.1.0"
+    "@swifty/assets": "npm:*"
     "@swifty/eslint-config": "npm:*"
     "@swifty/shared-lib": "npm:*"
     "@swifty/tailwind-config": "npm:*"

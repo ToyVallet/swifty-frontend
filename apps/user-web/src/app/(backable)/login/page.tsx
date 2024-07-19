@@ -1,11 +1,15 @@
 import { Main } from '@components/common';
 import { LoginForm } from '@components/login';
-import Logo from '@images/swifty-text-logo.svg';
+import { Icon } from '@swifty/assets';
 
 export default function LoginPage() {
   return (
     <Main className="px-5">
-      <Logo className="mt-20 mb-16" width={169} height={53} />
+      <Icon
+        name="swifty-full-logo"
+        className="mt-[159px] mb-[60px]"
+        height={53}
+      />
       <LoginForm />
     </Main>
   );

@@ -5,7 +5,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@components/ui/accordion';
-import CheckIcon from '@icons/check.svg';
+import { Icon } from '@swifty/assets';
 import { type MouseEvent } from 'react';
 
 import type { TermAccordion, TermAction } from './types';
@@ -23,7 +23,7 @@ export default function Items({
   dispatch,
   termAccordion,
 }: Props) {
-  const handleTermCheck = (e: MouseEvent<HTMLButtonElement>) => {
+  const handleTermCheck = (e: MouseEvent<SVGElement>) => {
     e.stopPropagation();
     dispatch({ type: 'singleApprove', index });
   };
@@ -35,7 +35,10 @@ export default function Items({
         datatype="open"
       >
         {termAccordion.title}
-        <CheckIcon
+        <Icon
+          name="check-circle"
+          width={30}
+          height={30}
           fill={
             termAccordion.approved
               ? 'rgba(25, 103, 255, 1)'
