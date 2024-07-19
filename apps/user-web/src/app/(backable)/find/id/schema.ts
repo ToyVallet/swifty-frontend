@@ -22,10 +22,13 @@ const smsCode = z
   .string()
   .refine((value) => /^\d{6}$/.test(value), '6자리 숫자입니다.');
 
+const findId = z.string();
+
 export const findIdSchema = z.object({
   name,
   phoneNumber,
   smsCode,
+  findId,
 });
 
 export type FindIdSchema = z.infer<typeof findIdSchema>;

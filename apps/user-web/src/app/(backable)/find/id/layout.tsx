@@ -45,7 +45,7 @@ export default function Page({ complete, name, phone }: Props) {
         <Main className="relative pb-20 scrollbar-hide px-5 mt-[47px]">
           <Header>
             {currentStep}
-            {currentStep === '회원님의 아이디를 찾았어요.' && (
+            {currentStep === '회원님의 아이디를 찾았어요' && (
               <Header.Subtitle>
                 휴대폰 번호 정보와 일치하는 아이디입니다.
               </Header.Subtitle>

@@ -58,13 +58,18 @@ export default function Page() {
             method: 'GET',
           },
         );
-        await customFetch(API_USER.findId, {
-          method: 'POST',
-          body: JSON.stringify({
-            name: form.getValues('name'),
-            phoneNumber,
-          }),
-        });
+        const { loginId } = await customFetch<{ loginId: string }>(
+          API_USER.findId,
+          {
+            method: 'POST',
+            body: JSON.stringify({
+              name: form.getValues('name'),
+              phoneNumber,
+            }),
+          },
+        );
+
+        form.setValue('findId', loginId);
       } catch (e) {
         if (APIError.isAPIError(e)) {
           form.setError('smsCode', {

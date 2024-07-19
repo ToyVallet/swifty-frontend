@@ -7,7 +7,7 @@ export const phoneSteps = [
 export const findIdSteps = [
   '성함을 입력하세요',
   ...phoneSteps,
-  '회원님의 아이디를 찾았어요.',
+  '회원님의 아이디를 찾았어요',
 ] as const;
 
 export type FindIdSteps = (typeof findIdSteps)[number];
