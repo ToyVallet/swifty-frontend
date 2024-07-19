@@ -33,7 +33,7 @@ export function UserLink({ label, className, ...props }: UserLinkProps) {
       )}
     >
       {label}
-      <Icon name="chevron-left" width={20} height={20} />
+      <Icon name="chevron-right" width={20} height={20} />
     </Link>
   );
 }

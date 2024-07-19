@@ -38,6 +38,9 @@
       "cache": false,
       "persistent": true
     },
+    "start": {
+      "dependsOn": ["^start"]
+    },
     "test": {},
     "test:watch": {
       "cache": false,

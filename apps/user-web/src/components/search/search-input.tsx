@@ -1,13 +1,13 @@
 'use client';
 
-import Magnifier from '@icons/magnifier.svg';
+import { Icon } from '@swifty/assets';
 import { customFetch } from '@swifty/shared-lib';
 import { If, Input, transition } from '@swifty/ui';
 import { useDebounce } from '@toss/react';
 import { AnimatePresence } from 'framer-motion';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
-import { use, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function SearchInput() {
   const router = useRouter();
@@ -90,7 +90,7 @@ export default function SearchInput() {
                 }}
               >
                 <span>{item}</span>
-                <Magnifier />
+                <Icon name="search" width={30} height={30} />
               </button>
             ))}
           </motion.div>

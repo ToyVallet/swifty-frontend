@@ -13,17 +13,17 @@ const verificationLinks: ReadonlyArray<VerificationLink> = [
   {
     href: '/verification/student',
     title: '재학생 인증',
-    icon: <Icon name="shield" width={70} height={70} />,
+    icon: <Icon name="user-web/mypage/shield" width={70} height={70} />,
   },
   {
     href: '/verification/status',
     title: '재학생 인증 상태',
-    icon: <Icon name="runner" width={70} height={70} />,
+    icon: <Icon name="user-web/mypage/runner" width={70} height={70} />,
   },
   {
     href: '/verification/face',
     title: '안면 인증 관리',
-    icon: <Icon name="face-id" width={70} height={70} />,
+    icon: <Icon name="user-web/mypage/face-id" width={70} height={70} />,
   },
 ] as const;
 

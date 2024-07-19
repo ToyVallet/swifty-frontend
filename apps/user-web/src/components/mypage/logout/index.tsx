@@ -25,7 +25,7 @@ export default function Logout() {
       <DrawerTrigger asChild>
         <button className="flex items-center justify-between w-full p-5 text-16 font-semibold text-white bg-swifty-color-900 rounded-xl">
           로그아웃
-          <Icon name="chevron-left" width={20} height={20} />
+          <Icon name="chevron-right" width={20} height={20} />
         </button>
       </DrawerTrigger>
       <DrawerContent className="px-5 pt-10 mb-10">
