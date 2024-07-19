@@ -72,7 +72,7 @@ export default function SmsCode() {
           </FormErrorControl>
         )}
       />
-      <Button size="full" onClick={onRequest} disabled={count > 0}>
+      <Button block variant="primary" onClick={onRequest} disabled={count > 0}>
         {count > 0 ? `${minute}:${seconds}` : '인증번호 재요청'}
       </Button>
     </div>

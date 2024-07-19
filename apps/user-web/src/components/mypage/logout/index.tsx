@@ -1,11 +1,12 @@
 'use client';
 
 import { Icon } from '@swifty/assets';
-import { COOKIE_KEYS, customFetch, deleteCookie } from '@swifty/shared-lib';
+import { COOKIE_KEYS, deleteCookie } from '@swifty/shared-lib';
 import {
   Button,
   Drawer,
   DrawerContent,
+  DrawerDescription,
   DrawerTitle,
   DrawerTrigger,
 } from '@swifty/ui';
@@ -15,35 +16,33 @@ import { useState } from 'react';
 export default function Logout() {
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
-  const onLogout = async () => {
+
+  const logout = async () => {
     await deleteCookie(COOKIE_KEYS.accessToken);
     await deleteCookie(COOKIE_KEYS.refreshToken);
     router.replace('/');
   };
+
+  const close = () => setIsOpen(false);
+
   return (
     <Drawer open={isOpen} onOpenChange={setIsOpen}>
       <DrawerTrigger asChild>
-        <button className="flex items-center justify-between w-full p-5 text-16 font-semibold text-white bg-swifty-color-900 rounded-xl">
+        <Button
+          suffix={<Icon name="chevron-right" width={20} height={20} />}
+          className="justify-between w-full p-5 bg-swifty-color-900"
+        >
           로그아웃
-          <Icon name="chevron-right" width={20} height={20} />
-        </button>
+        </Button>
       </DrawerTrigger>
-      <DrawerContent className="px-5 pt-10 mb-10">
-        <DrawerTitle>
-          <h1 className="text-22 font-bold">로그아웃</h1>
-          <span className="text-18 font-semibold">정말 로그아웃할까요?</span>
-        </DrawerTitle>
+      <DrawerContent className="px-5 mb-10">
+        <DrawerTitle>로그아웃</DrawerTitle>
+        <DrawerDescription>정말 로그아웃할까요?</DrawerDescription>
         <section className="mt-5 flex flex-col gap-2.5">
-          <Button size="full" onClick={onLogout}>
+          <Button block variant="primary" onClick={logout}>
             로그아웃
           </Button>
-          <Button
-            variant="white"
-            size="full"
-            onClick={() => {
-              setIsOpen(false);
-            }}
-          >
+          <Button block variant="white" onClick={close}>
             닫기
           </Button>
         </section>

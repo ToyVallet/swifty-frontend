@@ -49,8 +49,9 @@ export default function Navigation({
             <LogoLink />
           </When>
           <When value="back">
-            <BackButton className="text-white flex items-center gap-2.5">
-              <Icon name="arrow-left" width={40} height={40} />
+            <BackButton
+              prefix={<Icon name="arrow-left" width={40} height={40} />}
+            >
               {title && <span className="font-bold text-16">{title}</span>}
             </BackButton>
           </When>

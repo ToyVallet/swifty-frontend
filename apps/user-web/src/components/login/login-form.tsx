@@ -109,10 +109,15 @@ export default function LoginForm() {
             비밀번호를 잊으셨나요?
           </Link>
         </div>
-        <Button type="submit" size="full" disabled={!form.formState.isValid}>
+        <Button
+          block
+          type="submit"
+          variant="primary"
+          disabled={!form.formState.isValid}
+        >
           로그인
         </Button>
-        <Button size="full" variant="white" asChild>
+        <Button block variant="white" asChild>
           <Link href="/signup" className="text-black">
             회원가입
           </Link>

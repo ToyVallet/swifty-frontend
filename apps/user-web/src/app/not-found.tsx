@@ -25,7 +25,7 @@ export default function NotFound() {
             입력하신 주소가 정확한지 다시 한번 확인해 주세요.
           </p>
 
-          <Button asChild size="full" variant="outlined">
+          <Button block asChild variant="outlined">
             <Link href="/">홈으로 돌아가기</Link>
           </Button>
         </div>

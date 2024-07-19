@@ -14,7 +14,7 @@ export default async function Home() {
   return (
     <section className="mb-20 w-full flex flex-col gap-10 px-5 z-10 lg:mx-auto">
       <FestivalTiles festivals={festivalLineups} />
-      <Button asChild variant="outlined" size="full">
+      <Button block asChild variant="outlined">
         <Link href="/all-festivals">페스티벌 전체 보기</Link>
       </Button>
       <AdBanner src="/images/banner.png" />
