@@ -25,7 +25,7 @@ export default function Page() {
     if (currentStep === '비밀번호를 확인해주세요') {
       try {
         await customFetch(API_USER.findPassword, {
-          method: 'patch',
+          method: 'PATCH',
           body: JSON.stringify({
             phoneNumber,
             password,

@@ -31,7 +31,7 @@ export default function Page({ id, phone, password, complete }: Props) {
   });
 
   const [currentStep, setCurrentStep] = useState<FindPasswordSteps>(
-    findPasswordSteps[0],
+    findPasswordSteps[5],
   );
 
   const nextStep = () => {
