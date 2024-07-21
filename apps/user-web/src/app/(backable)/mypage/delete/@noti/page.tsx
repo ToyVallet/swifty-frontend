@@ -3,7 +3,7 @@
 import { DeleteUserContext } from '@app/(backable)/mypage/delete/context';
 import { FixedBottomCTA } from '@components/common';
 import { API_USER } from '@lib/constants';
-import { COOKIE_KEYS, customFetch, deleteCookie } from '@swifty/shared-lib';
+import { customFetch } from '@swifty/shared-lib';
 import { Input } from '@swifty/ui';
 import { convertNewlineToJSX } from '@toss/react';
 import { useContext, useState } from 'react';

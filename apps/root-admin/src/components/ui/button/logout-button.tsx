@@ -1,24 +1,19 @@
 'use client';
 
 import { LogoutOutlined } from '@ant-design/icons';
-import { customFetch } from '@swifty/shared-lib';
+import { logout } from '@swifty/shared-lib';
 import { Button } from 'antd';
 import { useRouter } from 'next/navigation';
 
 export default function LogoutButton() {
-  const router = useRouter();
-  const logout = async () => {
-    try {
-      await customFetch('/user/logout', {
-        credentials: 'include',
-      });
-      router.replace('/login');
-    } catch {
-      console.error('로그아웃 중 오류가 발생했습니다.');
-    }
-  };
+  const { push } = useRouter();
+
   return (
-    <Button size="large" icon={<LogoutOutlined />} onClick={logout}>
+    <Button
+      size="large"
+      icon={<LogoutOutlined />}
+      onClick={() => logout().then(() => push('/login'))}
+    >
       로그아웃
     </Button>
   );
