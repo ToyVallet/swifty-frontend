@@ -5,8 +5,7 @@ import { Funnel } from '@components/signup';
 import type { StepType } from '@components/signup/funnel';
 import { PhoneNumber, SmsCode } from '@components/signup/identification';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { API_SMS, API_USER } from '@lib/constants';
-import { APIError, customFetch, revalidate } from '@swifty/shared-lib';
+import { APIError, http, revalidate } from '@swifty/shared-lib';
 import { Form } from '@swifty/ui';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
@@ -49,12 +48,11 @@ export default function ChangePhoneNumberForm() {
     if (step === 'phoneNumber') {
       // 인증 번호 요청 api
       try {
-        await customFetch(API_SMS.sms, {
-          method: 'post',
-          body: JSON.stringify({
+        await http.post('/sms/code', {
+          body: {
             phoneNumber,
             smsSituationCode: 'CHANGE_PHONE_NUMBER',
-          }),
+          },
           credentials: 'include',
         });
         setStep(steps[1]);
@@ -70,13 +68,14 @@ export default function ChangePhoneNumberForm() {
     }
     if (step === 'smsCode') {
       try {
-        await customFetch(API_SMS.smsCheck, {
-          method: 'post',
-          body: JSON.stringify({
-            code: form.getValues('smsCode'),
-            phoneNumber: form.getValues('phoneNumber'),
+        const code: string = form.getValues('smsCode');
+        const phoneNumber: string = form.getValues('phoneNumber');
+        await http.post('/sms/code/check', {
+          body: {
+            code,
+            phoneNumber,
             situationCode: 'CHANGE_PHONE_NUMBER',
-          }),
+          },
           credentials: 'include',
         });
 

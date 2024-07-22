@@ -72,7 +72,20 @@ const post = async <Res = undefined>(
   });
 };
 
+const patch = async <Res = undefined>(
+  url: RemoteKeys,
+  body: Record<string, unknown>,
+  options: Omit<RequestOptions, 'method'> = defaultOptions,
+) => {
+  return request<Res>(url, {
+    method: 'PATCH',
+    body: JSON.stringify(body),
+    ...options,
+  });
+};
+
 export const http = {
   get,
   post,
+  patch,
 };

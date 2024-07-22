@@ -58,14 +58,16 @@ export default function Identification() {
 
     // 전화번호 인증 확인
     if (currentStep === '휴대폰 번호를 인증할게요') {
+      const code: string = form.getValues('smsCode');
+      const phoneNumber: string = form.getValues('phoneNumber');
+
       try {
-        await customFetch(API_SMS.smsCheck, {
-          method: 'post',
-          body: JSON.stringify({
-            code: form.getValues('smsCode'),
-            phoneNumber: form.getValues('phoneNumber'),
+        await http.post('/sms/code/check', {
+          body: {
+            code,
+            phoneNumber,
             situationCode: 'SIGN_UP',
-          }),
+          },
         });
       } catch (e) {
         if (APIError.isAPIError(e)) {
