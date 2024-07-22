@@ -4,10 +4,10 @@ import { FixedBottomCTA } from '@components/common';
 import { Funnel } from '@components/signup';
 import type { StepType } from '@components/signup/funnel';
 import { PhoneNumber, SmsCode } from '@components/signup/identification';
-import { API_SMS, API_USER } from '@lib/constants';
-import { APIError, customFetch } from '@swifty/shared-lib';
+import { APIError, http } from '@swifty/shared-lib';
 import { useContext } from 'react';
 import { useFormContext } from 'react-hook-form';
+import { checkSmsCode, sendSms } from 'src/api';
 
 import { FindIdContext, findIdSteps } from '../context';
 
@@ -24,13 +24,7 @@ export default function Page() {
 
     if (currentStep === '휴대폰 번호를 입력하세요') {
       try {
-        await customFetch(API_SMS.sms, {
-          method: 'post',
-          body: JSON.stringify({
-            phoneNumber,
-            smsSituationCode: 'FIND_BY_ID',
-          }),
-        });
+        await sendSms(phoneNumber, 'FIND_BY_ID');
       } catch (e) {
         if (APIError.isAPIError(e)) {
           form.setError('phoneNumber', {
@@ -44,30 +38,20 @@ export default function Page() {
 
     if (currentStep === '인증번호를 입력하세요') {
       try {
-        await customFetch(API_SMS.smsCheck, {
-          method: 'post',
-          body: JSON.stringify({
-            code: form.getValues('smsCode'),
-            phoneNumber: form.getValues('phoneNumber'),
-            situationCode: 'FIND_BY_ID',
-          }),
+        const code: string = form.getValues('smsCode');
+        const phoneNumber: string = form.getValues('phoneNumber');
+        await checkSmsCode(code, phoneNumber, 'FIND_BY_ID');
+        await http.get('/user/check/name', {
+          query: {
+            name: userName,
+            phone: phoneNumber,
+          },
         });
-        await customFetch(
-          `${API_USER.checkName}?name=${encodeURI(userName)}&phone=${phoneNumber}`,
-          {
-            method: 'GET',
-          },
-        );
-        const { loginId } = await customFetch<{ loginId: string }>(
-          API_USER.findId,
-          {
-            method: 'POST',
-            body: JSON.stringify({
-              name: form.getValues('name'),
-              phoneNumber,
-            }),
-          },
-        );
+        const name = form.getValues('name');
+        const { loginId } = await http.post<{ loginId: string }>('/user/id', {
+          name,
+          phoneNumber,
+        });
 
         form.setValue('findId', loginId);
       } catch (e) {

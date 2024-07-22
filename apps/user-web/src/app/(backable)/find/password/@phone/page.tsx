@@ -4,10 +4,10 @@ import { FixedBottomCTA } from '@components/common';
 import { Funnel } from '@components/signup';
 import type { StepType } from '@components/signup/funnel';
 import { PhoneNumber, SmsCode } from '@components/signup/identification';
-import { API_SMS, API_USER } from '@lib/constants';
-import { APIError, customFetch } from '@swifty/shared-lib';
+import { APIError, http } from '@swifty/shared-lib';
 import { useContext } from 'react';
 import { useFormContext } from 'react-hook-form';
+import { checkSmsCode, sendSms } from 'src/api';
 
 import { FindPasswordContext, findPasswordSteps } from '../context';
 
@@ -23,13 +23,7 @@ export default function Page() {
     const id = form.getValues('id');
     if (currentStep === '휴대폰 번호를 입력하세요') {
       try {
-        await customFetch(API_SMS.sms, {
-          method: 'post',
-          body: JSON.stringify({
-            phoneNumber,
-            smsSituationCode: 'RESET_PWD',
-          }),
-        });
+        await sendSms(phoneNumber, 'RESET_PWD');
       } catch (e) {
         if (APIError.isAPIError(e)) {
           form.setError('phoneNumber', {
@@ -43,20 +37,16 @@ export default function Page() {
 
     if (currentStep === '인증번호를 입력하세요') {
       try {
-        await customFetch(API_SMS.smsCheck, {
-          method: 'post',
-          body: JSON.stringify({
-            code: form.getValues('smsCode'),
-            phoneNumber: form.getValues('phoneNumber'),
-            situationCode: 'RESET_PWD',
-          }),
-        });
-        await customFetch(
-          `${API_USER.checkId}?loginId=${encodeURI(id)}&phone=${phoneNumber}`,
-          {
-            method: 'GET',
+        const code: string = form.getValues('smsCode');
+        const phoneNumber: string = form.getValues('phoneNumber');
+        await checkSmsCode(code, phoneNumber, 'RESET_PWD');
+
+        await http.get('/user/check/id', {
+          query: {
+            loginId: id,
+            phone: phoneNumber,
           },
-        );
+        });
       } catch (e) {
         if (APIError.isAPIError(e)) {
           form.setError('smsCode', {

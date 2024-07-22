@@ -2,4 +2,5 @@ export * from './cn';
 export * from './device';
 export * from './server';
 export * from './format';
-export { http } from './http';
+export { default as http } from './http';
+export { default as assert } from './assert';

@@ -2,8 +2,7 @@
 
 import { CertificationStepContext } from '@app/(backable)/verification/student/context';
 import { FixedBottomCTA } from '@components/common';
-import { API_CERTIFICATION } from '@lib/constants';
-import { APIError, customFetch } from '@swifty/shared-lib';
+import { APIError, http } from '@swifty/shared-lib';
 import {
   Button,
   Drawer,
@@ -33,17 +32,12 @@ export default function OcrDrawer() {
         (name) => name !== 'exampleImage',
       );
 
-      const formData = new FormData();
+      const body = new FormData();
       keys.forEach((key) => {
-        formData.append(key, formValue[key]);
+        body.append(key, formValue[key]);
       });
 
-      await customFetch(API_CERTIFICATION.certification, {
-        method: 'post',
-        headers: {},
-        credentials: 'include',
-        body: formData,
-      });
+      await http.post('/certification', body, { credentials: 'include' });
 
       nextStep();
     } catch (e) {

@@ -10,6 +10,7 @@ import { Form } from '@swifty/ui';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { checkSmsCode, sendSms } from 'src/api';
 import { z } from 'zod';
 
 const schema = z.object({
@@ -48,13 +49,7 @@ export default function ChangePhoneNumberForm() {
     if (step === 'phoneNumber') {
       // 인증 번호 요청 api
       try {
-        await http.post('/sms/code', {
-          body: {
-            phoneNumber,
-            smsSituationCode: 'CHANGE_PHONE_NUMBER',
-          },
-          credentials: 'include',
-        });
+        await sendSms(phoneNumber, 'CHANGE_PHONE_NUMBER');
         setStep(steps[1]);
       } catch (e) {
         if (APIError.isAPIError(e)) {
@@ -70,21 +65,13 @@ export default function ChangePhoneNumberForm() {
       try {
         const code: string = form.getValues('smsCode');
         const phoneNumber: string = form.getValues('phoneNumber');
-        await http.post('/sms/code/check', {
+        await checkSmsCode(code, phoneNumber, 'CHANGE_PHONE_NUMBER');
+
+        await http.patch('/user/phone', {
           body: {
-            code,
             phoneNumber,
-            situationCode: 'CHANGE_PHONE_NUMBER',
           },
           credentials: 'include',
-        });
-
-        await customFetch(API_USER.changePhone, {
-          method: 'PATCH',
-          credentials: 'include',
-          body: JSON.stringify({
-            phoneNumber,
-          }),
         });
 
         await revalidate('user');

@@ -13,6 +13,7 @@ import {
 import { APIError, type NonEmptyArray, http } from '@swifty/shared-lib';
 import { useContext, useEffect } from 'react';
 import { useFormContext } from 'react-hook-form';
+import { checkSmsCode, sendSms } from 'src/api';
 
 import { SignUpStepContext, type Step, steps, stepsWithForm } from '../context';
 
@@ -37,12 +38,7 @@ export default function Identification() {
     if (currentStep === '휴대폰 번호를 알려주세요') {
       const phoneNumber = form.getValues(currentStepFormName);
       try {
-        await http.post('/sms/code', {
-          body: JSON.stringify({
-            phoneNumber,
-            smsSituationCode: 'SIGN_UP',
-          }),
-        });
+        await sendSms(phoneNumber, 'SIGN_UP');
       } catch (e) {
         if (APIError.isAPIError(e)) {
           form.setError('phoneNumber', {
@@ -62,13 +58,7 @@ export default function Identification() {
       const phoneNumber: string = form.getValues('phoneNumber');
 
       try {
-        await http.post('/sms/code/check', {
-          body: {
-            code,
-            phoneNumber,
-            situationCode: 'SIGN_UP',
-          },
-        });
+        await checkSmsCode(code, phoneNumber, 'SIGN_UP');
       } catch (e) {
         if (APIError.isAPIError(e)) {
           form.setError('smsCode', {

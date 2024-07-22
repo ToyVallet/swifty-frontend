@@ -62,11 +62,16 @@ const get = async <Res = undefined>(
 
 const post = async <Res = undefined>(
   url: RemoteKeys,
-  body: Record<string, unknown>,
+  body?: Record<string, unknown> | FormData,
   options: Omit<RequestOptions, 'method'> = defaultOptions,
 ) => {
+  console.log(body);
   return request<Res>(url, {
     method: 'POST',
+    headers: {
+      'Content-Type':
+        body instanceof FormData ? 'multipart/form-data' : 'application/json',
+    },
     body: JSON.stringify(body),
     ...options,
   });
@@ -84,8 +89,18 @@ const patch = async <Res = undefined>(
   });
 };
 
-export const http = {
+const _delete = async <Res = undefined>(
+  url: RemoteKeys,
+  options: Omit<RequestOptions, 'method'> = defaultOptions,
+) => {
+  return request<Res>(url, { method: 'DELETE', ...options });
+};
+
+const http = {
   get,
   post,
   patch,
+  delete: _delete,
 };
+
+export default http;

@@ -11,7 +11,11 @@ const user = [
   '/user/phone',
 ] as const;
 
-const certification = ['/certification/university', '/certification'] as const;
+const certification = [
+  '/certification/university',
+  '/certification',
+  '/certification/check',
+] as const;
 
 const festival = [
   '/festival',

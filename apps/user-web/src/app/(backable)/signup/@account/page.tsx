@@ -58,9 +58,7 @@ export default function AccountPage() {
       );
 
       try {
-        await http.post('/user', {
-          body,
-        });
+        await http.post('/user', body);
       } catch (e) {
         if (APIError.isAPIError(e)) {
           form.setError('passwordConfirm', {

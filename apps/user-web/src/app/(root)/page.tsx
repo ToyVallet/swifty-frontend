@@ -1,16 +1,13 @@
 import { AdBanner, Navigation } from '@components/common';
 import LogoLink from '@components/common/navigation/logo-link';
 import { FestivalTiles } from '@components/home';
-import { API_FESTIVALS } from '@lib/constants';
 import type { Festival } from '@lib/types/festival';
-import { customFetch } from '@swifty/shared-lib';
+import { http } from '@swifty/shared-lib';
 import { Button } from '@swifty/ui';
 import Link from 'next/link';
 
 export default async function Home() {
-  const festivalLineups = await customFetch<Festival[]>(
-    API_FESTIVALS.festivals(),
-  );
+  const festivalLineups = await http.get<Festival[]>('/festival');
 
   return (
     <>
