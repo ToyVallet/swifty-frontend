@@ -213,7 +213,7 @@ export default function FestivalUpdateForm({
                 },
               ]}
             >
-              <RangePicker disabledDate={overCurrentDay} />
+              <RangePicker />
             </Form.Item>
           </Col>
         </Row>
@@ -229,7 +229,7 @@ export default function FestivalUpdateForm({
                 },
               ]}
             >
-              <RangePicker disabledDate={overCurrentDay} />
+              <RangePicker />
             </Form.Item>
           </Col>
         </Row>

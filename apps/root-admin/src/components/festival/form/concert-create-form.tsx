@@ -62,7 +62,6 @@ export default function ConcertCreateForm({
               showTime
               format="YYYY-MM-DD HH:mm:ss"
               locale={locale}
-              disabledDate={overCurrentDay}
             />
           </Form.Item>
         </Col>

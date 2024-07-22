@@ -149,7 +149,7 @@ export default function FestivalForm({ id, form, onClose }: Props) {
               },
             ]}
           >
-            <RangePicker disabledDate={overCurrentDay} />
+            <RangePicker />
           </Form.Item>
         </Col>
       </Row>
@@ -165,7 +165,7 @@ export default function FestivalForm({ id, form, onClose }: Props) {
               },
             ]}
           >
-            <RangePicker disabledDate={overCurrentDay} />
+            <RangePicker />
           </Form.Item>
         </Col>
       </Row>
