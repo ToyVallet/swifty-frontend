@@ -1,4 +1,4 @@
-import { customFetch } from '@swifty/shared-lib';
+import { http } from '@swifty/shared-lib';
 import { Choose, Otherwise, When } from '@swifty/ui';
 
 import Item from './item';
@@ -14,12 +14,11 @@ export type SearchResult = {
 };
 
 export default async function SearchResult({ keyword }: { keyword: string }) {
-  const result = await customFetch<SearchResult[]>(
-    `/festival/search?name=${keyword}`,
-    {
-      method: 'GET',
+  const result = await http.get<SearchResult[]>('/festival/search', {
+    query: {
+      name: keyword,
     },
-  );
+  });
 
   return (
     <div className="flex flex-col mt-[150px]">

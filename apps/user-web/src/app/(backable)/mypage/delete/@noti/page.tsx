@@ -2,8 +2,7 @@
 
 import { DeleteUserContext } from '@app/(backable)/mypage/delete/context';
 import { FixedBottomCTA } from '@components/common';
-import { API_USER } from '@lib/constants';
-import { customFetch } from '@swifty/shared-lib';
+import { http } from '@swifty/shared-lib';
 import { Input } from '@swifty/ui';
 import { convertNewlineToJSX } from '@toss/react';
 import { useContext, useState } from 'react';
@@ -16,8 +15,7 @@ export default function Page() {
 
   const onClick = async () => {
     try {
-      await customFetch(API_USER.delete, {
-        method: 'DELETE',
+      await http.delete('/user', {
         credentials: 'include',
       });
 

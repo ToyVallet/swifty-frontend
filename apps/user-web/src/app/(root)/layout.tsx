@@ -5,16 +5,12 @@ import {
   Hero,
   HeroTile,
 } from '@components/common';
-import { API_FESTIVALS } from '@lib/constants';
 import type { Festival } from '@lib/types/festival';
-import { customFetch } from '@swifty/shared-lib';
+import { http } from '@swifty/shared-lib';
 import type { PropsWithChildren } from 'react';
 
 export default async function HomeLayout({ children }: PropsWithChildren) {
-  const festivalLineups = await customFetch<Festival[]>(
-    `${API_FESTIVALS.festivals()}`,
-    { method: 'GET' },
-  );
+  const festivalLineups = await http.get<Festival[]>('/festival');
 
   return (
     <>

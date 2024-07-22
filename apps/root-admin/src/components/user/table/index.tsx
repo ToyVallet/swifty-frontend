@@ -71,7 +71,7 @@ function UserTable({ data, pageSize, total }: Props) {
     pageSize,
     total,
     setTableData,
-    api: API_CLIENT.users,
+    api: '/root/admin/user',
   });
 
   const onClickRow = (record: User) => {

@@ -2,7 +2,7 @@ import { FixedBottomGroup, ImageWithFallback } from '@components/common';
 import { DateSelect } from '@components/festival/ticketing';
 import FallbackImage from '@images/fallback-festival.png';
 import { type Festival } from '@lib/types/festival';
-import { type Params, customFetch } from '@swifty/shared-lib';
+import { type Params, http } from '@swifty/shared-lib';
 import { Button } from '@swifty/ui';
 
 export interface TicketingDate {
@@ -18,7 +18,6 @@ export interface TicketingDate {
 export default async function DateSelectionPage({
   params: { id },
 }: Params<{ id: string }>) {
-  // 데이터 페칭 추가
   const dates: TicketingDate[] = await Promise.resolve([
     {
       name: 'Day 1',
@@ -40,15 +39,9 @@ export default async function DateSelectionPage({
     },
   ]);
 
-  const festivalInfo = await customFetch<Festival>(`/festival/${id}`);
-
-  // const dates = await customFetch<TicketingDate[]>(
-  //   `/ticketing/schedule/${id}`,
-  //   {
-  //     method: 'GET',
-  //     credentials: 'include',
-  //   },
-  // );
+  const festivalInfo = await http.get<Festival>('/festival/{id}', {
+    params: { id },
+  });
 
   return (
     <div>

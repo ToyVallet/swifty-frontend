@@ -1,13 +1,10 @@
 import { Navigation } from '@components/common';
 import { VerificationStatus } from '@components/verification';
 import type { VerficationAPI } from '@lib/types/certification';
-import { customFetch } from '@swifty/shared-lib';
+import { http } from '@swifty/shared-lib';
 
 export default async function Page() {
-  // status 상태 받아오기
-
-  const data = await customFetch<VerficationAPI>('/certification/check', {
-    method: 'get',
+  const data = await http.get<VerficationAPI>('/certification/check', {
     credentials: 'include',
   });
 

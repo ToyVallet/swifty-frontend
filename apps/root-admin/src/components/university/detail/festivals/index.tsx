@@ -4,19 +4,16 @@ import {
   FestivalPanel,
   PanelList,
 } from '@components';
-import { API_UNIVERSITY, FETCH_TAG } from '@lib';
-import { customFetch } from '@swifty/shared-lib';
+import { http } from '@swifty/shared-lib';
 import type { FestivalInfoResponse } from '@type';
 import Link from 'next/link';
 
 import styles from './university-festival.module.css';
 
 export default async function UniversityFestivals({ id }: { id: string }) {
-  const datas = await customFetch<FestivalInfoResponse[]>(
-    API_UNIVERSITY.festivals(id),
-    {
-      method: 'GET',
-    },
+  const datas = await http.get<FestivalInfoResponse[]>(
+    '/host/admin/festival/{id}/university',
+    { params: { id }, credentials: 'include' },
   );
 
   return (

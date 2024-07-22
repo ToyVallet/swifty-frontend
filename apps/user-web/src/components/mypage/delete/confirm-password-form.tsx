@@ -5,9 +5,8 @@ import { GlobalPortal } from '@app/global-portal';
 import { FixedBottomCTA } from '@components/common';
 import { FormErrorControl } from '@components/signup';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { API_USER } from '@lib/constants';
 import { passwordSchema } from '@lib/schema/schema';
-import { APIError, customFetch } from '@swifty/shared-lib';
+import { APIError, http } from '@swifty/shared-lib';
 import { Form, FormField, Input } from '@swifty/ui';
 import { useContext } from 'react';
 import { useForm } from 'react-hook-form';
@@ -31,13 +30,9 @@ export default function ConfirmPasswordForm() {
     formState: { isValid },
   } = form;
 
-  const onSubmit = async (data: Schema) => {
+  const onSubmit = async (body: Schema) => {
     try {
-      await customFetch(API_USER.checkPassword, {
-        method: 'post',
-        credentials: 'include',
-        body: JSON.stringify(data),
-      });
+      await http.post('/user/check/pwd', body, { credentials: 'include' });
       nextStep();
     } catch (e) {
       if (APIError.isAPIError(e)) {

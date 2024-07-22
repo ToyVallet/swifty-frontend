@@ -1,7 +1,6 @@
 import { BreadCrumbs, type BreadcrumbList, UserInfo } from '@components';
-import { API_CLIENT } from '@lib';
 import type { Params } from '@swifty/shared-lib';
-import { customFetch } from '@swifty/shared-lib';
+import { http } from '@swifty/shared-lib';
 import type { User } from '@type';
 
 import styles from './user-detail.module.css';
@@ -9,8 +8,8 @@ import styles from './user-detail.module.css';
 export default async function UserDetailPage({
   params: { id },
 }: Params<{ id: string }>) {
-  const data = await customFetch<User>(API_CLIENT.user(id), {
-    cache: 'no-store',
+  const data = await http.get<User>('/root/admin/user/{id}', {
+    params: { id },
     credentials: 'include',
   });
 

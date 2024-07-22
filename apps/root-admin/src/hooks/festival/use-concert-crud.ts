@@ -1,8 +1,8 @@
 'use client';
 
 import { NotificationHandlerContext } from '@components';
-import { API_CONCERT, FETCH_TAG, changeDateFormat } from '@lib';
-import { customFetch, revalidate } from '@swifty/shared-lib';
+import { FETCH_TAG, changeDateFormat } from '@lib';
+import { http, revalidate } from '@swifty/shared-lib';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ko';
 import { useCallback, useContext, useState } from 'react';
@@ -44,11 +44,10 @@ export default function useConcertCRUD() {
       formData.append('description', description);
 
       try {
-        await customFetch(API_CONCERT.concert(), {
-          method: 'POST',
-          headers: {},
-          body: formData,
+        await http.post('/host/admin/concert', formData, {
+          credentials: 'include',
         });
+
         await revalidate(FETCH_TAG.festivalsDetail(festivalId));
       } catch (e) {
         if (e instanceof Error) setError(e.message);
@@ -82,11 +81,10 @@ export default function useConcertCRUD() {
       formData.append('description', description);
 
       try {
-        await customFetch(API_CONCERT.concert(), {
-          method: 'PATCH',
-          headers: {},
-          body: formData,
+        await http.patch('/host/admin/concert', formData, {
+          credentials: 'include',
         });
+
         await revalidate('festival-detail');
       } catch (e) {
         if (e instanceof Error) setError(e.message);
@@ -109,9 +107,11 @@ export default function useConcertCRUD() {
     setIsLoading(true);
     setError(null);
     try {
-      await customFetch(API_CONCERT.concert(id), {
-        method: 'DELETE',
+      await http.delete('/host/admin/concert/{id}', {
+        credentials: 'include',
+        params: { id },
       });
+
       await revalidate('festival-detail');
     } catch (e) {
       if (e instanceof Error) setError(e.message);

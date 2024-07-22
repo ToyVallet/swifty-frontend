@@ -2,7 +2,7 @@
 
 import { NotificationHandlerContext } from '@components';
 import { API_LINEUP } from '@lib';
-import { customFetch } from '@swifty/shared-lib';
+import { http } from '@swifty/shared-lib';
 import type { UploadFile } from 'antd';
 import type { RcFile } from 'antd/es/upload';
 import dayjs from 'dayjs';
@@ -43,10 +43,8 @@ export default function useLineupCRUD() {
       }
 
       try {
-        await customFetch(API_LINEUP.lineup(), {
-          method: 'POST',
-          headers: {},
-          body: formData,
+        await http.post('/host/admin/line_up', formData, {
+          credentials: 'include',
         });
       } catch (e) {
         if (e instanceof Error) {
@@ -97,10 +95,8 @@ export default function useLineupCRUD() {
       }
 
       try {
-        await customFetch(API_LINEUP.lineup(), {
-          method: 'PATCH',
-          headers: {},
-          body: formData,
+        await http.patch('/host/admin/line_up', formData, {
+          credentials: 'include',
         });
       } catch (e) {
         if (e instanceof Error) setError(e.message);
@@ -123,8 +119,9 @@ export default function useLineupCRUD() {
     setIsLoading(true);
     setError(null);
     try {
-      await customFetch(API_LINEUP.lineup(id), {
-        method: 'DELETE',
+      await http.delete('/host/admin/line_up/{id}', {
+        params: { id },
+        credentials: 'include',
       });
     } catch (e) {
       if (e instanceof Error) setError(e.message);

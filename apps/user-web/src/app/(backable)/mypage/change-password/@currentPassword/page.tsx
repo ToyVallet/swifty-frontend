@@ -2,8 +2,7 @@
 
 import { FixedBottomCTA } from '@components/common';
 import { Password } from '@components/mypage';
-import { API_USER } from '@lib/constants';
-import { APIError, customFetch } from '@swifty/shared-lib';
+import { APIError, http } from '@swifty/shared-lib';
 import { useContext } from 'react';
 import { useFormContext } from 'react-hook-form';
 
@@ -22,15 +21,13 @@ export default function PhonePage() {
   const isCurrentStepDirty = dirtyFields[currentStepFormName];
 
   const onNext = async () => {
-    // 현재 비밀번호 일치 여부 확인
     try {
-      await customFetch(API_USER.checkPassword, {
-        method: 'post',
-        credentials: 'include',
-        body: JSON.stringify({
-          password: form.getValues('currentPassword'),
-        }),
-      });
+      const password: string = form.getValues('currentPassword');
+      await http.post(
+        '/user/check/pwd',
+        { password },
+        { credentials: 'include' },
+      );
       nextStep();
     } catch (e) {
       if (APIError.isAPIError(e)) {

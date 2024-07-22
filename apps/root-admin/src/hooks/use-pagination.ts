@@ -1,16 +1,15 @@
 'use client';
 
 import { NotificationHandlerContext } from '@components';
-import { customFetch } from '@swifty/shared-lib';
+import { type RemoteKeys, http } from '@swifty/shared-lib';
 import type { Paginaiton } from '@type';
-import type { UserRole } from '@type';
 import { useContext, useState } from 'react';
 
 interface Prop<T> {
   pageSize: number;
   total: number;
   setTableData: React.Dispatch<React.SetStateAction<T[]>>;
-  api: (page?: number, size?: number, role?: UserRole) => string;
+  api: RemoteKeys;
 }
 
 export default function usePagination<T>({
@@ -31,7 +30,14 @@ export default function usePagination<T>({
   const handleTableChange = async (page: number, pageSize: number) => {
     setLoading(true);
     try {
-      const data = await customFetch<Paginaiton<T>>(api(page - 1, pageSize));
+      const data = await http.get<Paginaiton<T>>(api, {
+        query: {
+          page: `${page - 1}`,
+          size: `${pageSize}`,
+        },
+        credentials: 'include',
+      });
+      /* const data = await customFetch<Paginaiton<T>>(api(page - 1, pageSize)); */
       setTableData(data.content);
       setPagination({
         ...pagination,
