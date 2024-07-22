@@ -2,50 +2,18 @@
 
 import { Navigation } from '@components/common';
 import { Icon } from '@swifty/assets';
-import { http } from '@swifty/shared-lib';
+import { type NextError, sendErrorLog } from '@swifty/shared-lib';
 import { useEffect } from 'react';
-
-interface ClientError extends Record<string, string> {
-  source: 'client';
-  tracking_id: string;
-  time: string;
-  path: string;
-  message: string;
-  host: string;
-  user_agent: string;
-}
 
 export default function Error({
   error,
   reset,
 }: {
-  error: Error & { digest?: string };
+  error: NextError;
   reset: () => void;
 }) {
-  const sendError = async () => {
-    const { pathname, host, search } = location;
-    const url = `${pathname}${search}`;
-    const userAgent = navigator.userAgent;
-    const time = new Date().toISOString();
-    const trackingId = error.digest || Date.now().toString().slice(0, 10);
-    const { message } = error;
-
-    const log: ClientError = {
-      source: 'client',
-      tracking_id: trackingId,
-      time,
-      message,
-      user_agent: userAgent,
-      path: url,
-      host,
-    };
-
-    console.error(log);
-    await http.post('/log', log);
-  };
-
   useEffect(() => {
-    sendError();
+    sendErrorLog(error);
   }, [error]);
 
   return (
