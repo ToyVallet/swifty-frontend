@@ -60,6 +60,6 @@ export const sendErrorLog = async (error: NextError) => {
 
   const { NODE_ENV } = process.env;
 
-  if (NODE_ENV === 'production') await http.post('/log', log);
-  else console.error(log);
+  if (NODE_ENV === 'development') console.error(log);
+  else await http.post('/log', log);
 };
