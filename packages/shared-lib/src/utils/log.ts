@@ -1,37 +1,65 @@
+import { v4 as uuidv4 } from 'uuid';
+
 import { isServer } from './device';
 import http from './http';
 
-export interface ClientErrorLog extends Record<string, string> {
-  source: 'client';
-  tracking_id: string;
+type Source = 'CLIENT' | 'SERVER';
+
+export interface BaseErrorLog extends Record<string, unknown> {
+  source: Source;
+  trackingId: string;
   time: string;
   path: string;
   message: string;
   host: string;
+}
+
+interface ClientSpecificErrorLogField {
   user_agent: string;
 }
+
+export interface ServerSpecificErrorLogField {
+  statusCode: number;
+  status: string;
+  code: string;
+  traceLog: {
+    errorPoint: string;
+    errorCode: string;
+    causedBy: string;
+    servicePoint: string[];
+  };
+}
+
+export type ErrorLogResponse = BaseErrorLog &
+  (Partial<ClientErrorLog> | Partial<ServerErrorLog>);
+
+export type ClientErrorLog = BaseErrorLog & ClientSpecificErrorLogField;
+export type ServerErrorLog = BaseErrorLog & ServerSpecificErrorLogField;
 
 export type NextError = Error & { digest?: string };
 
 export const sendErrorLog = async (error: NextError) => {
   if (isServer()) return;
+
   const { pathname, host, search } = location;
-  const url = `${pathname}${search}`;
+  const path = `${pathname}${search}`;
   const userAgent = navigator.userAgent;
   const time = new Date().toISOString();
-  const trackingId = error.digest || Date.now().toString().slice(0, 10);
+  const trackingId = error.digest || uuidv4().replace(/-/g, '').slice();
   const { message } = error;
 
   const log: ClientErrorLog = {
-    source: 'client',
-    tracking_id: trackingId,
+    source: 'CLIENT',
+    trackingId,
     time,
     message,
     user_agent: userAgent,
-    path: url,
+    path,
     host,
   };
 
-  if (process.env.NODE_ENV === 'development') console.error(log);
-  await http.post('/log', log);
+  const { NODE_ENV } = process.env;
+
+  if (NODE_ENV === 'production') await http.post('/log', log);
+  else console.error(log);
 };

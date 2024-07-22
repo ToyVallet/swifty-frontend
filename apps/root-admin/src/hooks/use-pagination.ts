@@ -1,8 +1,7 @@
 'use client';
 
 import { NotificationHandlerContext } from '@components';
-import { type RemoteKeys, http } from '@swifty/shared-lib';
-import type { Paginaiton } from '@type';
+import { type Pageable, type RemoteKeys, http } from '@swifty/shared-lib';
 import { useContext, useState } from 'react';
 
 interface Prop<T> {
@@ -30,7 +29,7 @@ export default function usePagination<T>({
   const handleTableChange = async (page: number, pageSize: number) => {
     setLoading(true);
     try {
-      const data = await http.get<Paginaiton<T>>(api, {
+      const data = await http.get<Pageable<T>>(api, {
         query: {
           page: `${page - 1}`,
           size: `${pageSize}`,
