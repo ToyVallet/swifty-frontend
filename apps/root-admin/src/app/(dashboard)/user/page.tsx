@@ -1,11 +1,11 @@
 import { Table } from '@components';
-import { http } from '@swifty/shared-lib';
-import type { Paginaiton, User } from '@type';
+import { type Pageable, http } from '@swifty/shared-lib';
+import type { User } from '@type';
 
 import styles from './user.module.css';
 
 export default async function Page() {
-  const data = await http.get<Paginaiton<User>>('/root/admin/user', {
+  const data = await http.get<Pageable<User>>('/root/admin/user', {
     query: {},
     credentials: 'include',
   });
