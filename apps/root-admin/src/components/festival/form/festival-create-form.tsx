@@ -10,7 +10,6 @@ import type { RcFile } from 'antd/lib/upload';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ko';
 import { useContext, useState } from 'react';
-import overCurrentDay from 'src/lib/util/over-current-day';
 
 const { RangePicker } = DatePicker;
 const { TextArea } = Input;

@@ -21,4 +21,11 @@ const lineup = [
   '/host/admin/line_up/{id}/open',
 ] as const;
 
-export const hostApi = [...festival, ...concert, ...lineup] as const;
+const university = ['/host/admin/university/{id}'] as const;
+
+export const hostApi = [
+  ...festival,
+  ...concert,
+  ...lineup,
+  ...university,
+] as const;

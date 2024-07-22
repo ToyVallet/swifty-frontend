@@ -12,7 +12,6 @@ import dayjs from 'dayjs';
 import 'dayjs/locale/ko';
 import { useContext, useEffect, useState } from 'react';
 import { useLock } from 'src/hooks';
-import overCurrentDay from 'src/lib/util/over-current-day';
 
 const { RangePicker } = DatePicker;
 const { TextArea } = Input;

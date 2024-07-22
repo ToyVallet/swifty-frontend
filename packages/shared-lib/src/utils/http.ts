@@ -17,6 +17,27 @@ const defaultOptions: RequestOptions = {
   cache: 'no-store',
 };
 
+const formatOptions = ({
+  body,
+  options,
+}: {
+  body?: Record<string, unknown> | FormData;
+  options: Omit<RequestOptions, 'method' | 'body'>;
+}): RequestOptions => {
+  if (body instanceof FormData) {
+    return {
+      ...options,
+      headers: {},
+      body,
+    };
+  }
+  return {
+    ...options,
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body),
+  };
+};
+
 async function request<Res>(
   url: string,
   options: RequestOptions = defaultOptions,
@@ -55,7 +76,7 @@ async function request<Res>(
 
 const get = async <Res = undefined>(
   url: RemoteKeys,
-  options: Omit<RequestOptions, 'method'> = defaultOptions,
+  options: Omit<RequestOptions, 'method' | 'body'> = defaultOptions,
 ) => {
   return request<Res>(url, { method: 'GET', ...options });
 };
@@ -63,29 +84,22 @@ const get = async <Res = undefined>(
 const post = async <Res = undefined>(
   url: RemoteKeys,
   body?: Record<string, unknown> | FormData,
-  options: Omit<RequestOptions, 'method'> = defaultOptions,
+  options: Omit<RequestOptions, 'method' | 'body'> = defaultOptions,
 ) => {
-  console.log(body);
   return request<Res>(url, {
     method: 'POST',
-    headers: {
-      'Content-Type':
-        body instanceof FormData ? 'multipart/form-data' : 'application/json',
-    },
-    body: JSON.stringify(body),
-    ...options,
+    ...formatOptions({ body, options }),
   });
 };
 
 const patch = async <Res = undefined>(
   url: RemoteKeys,
-  body: Record<string, unknown>,
+  body?: Record<string, unknown> | FormData,
   options: Omit<RequestOptions, 'method'> = defaultOptions,
 ) => {
   return request<Res>(url, {
     method: 'PATCH',
-    body: JSON.stringify(body),
-    ...options,
+    ...formatOptions({ body, options }),
   });
 };
 
