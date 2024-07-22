@@ -2,22 +2,24 @@
 
 import { NotificationHandlerContext } from '@components';
 import { Button, type ButtonProps, Popconfirm } from 'antd';
-import { type PropsWithChildren, useContext } from 'react';
+import {
+  type PropsWithChildren,
+  type Ref,
+  forwardRef,
+  useContext,
+} from 'react';
 
-interface Props extends PropsWithChildren {
+export interface Props extends PropsWithChildren {
   title: string;
   description: string;
   onConfirm: () => void | Promise<void>;
   size?: ButtonProps['size'];
 }
 
-export default function DeleteButton({
-  title,
-  description,
-  onConfirm,
-  children,
-  size = 'small',
-}: Props) {
+const DeleteButton = forwardRef(function DeleteButton(
+  { title, description, onConfirm, children, size = 'small' }: Props,
+  ref: Ref<HTMLButtonElement>,
+) {
   const handleNotification = useContext(NotificationHandlerContext);
   const onDelete = async () => {
     try {
@@ -42,9 +44,11 @@ export default function DeleteButton({
       cancelText="취소"
       onConfirm={onDelete}
     >
-      <Button type="primary" danger size={size}>
+      <Button type="primary" ref={ref} danger size={size}>
         {children}
       </Button>
     </Popconfirm>
   );
-}
+});
+
+export default DeleteButton;

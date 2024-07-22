@@ -1,14 +1,20 @@
 'use client';
 
+import { type NextError, sendErrorLog } from '@swifty/shared-lib';
 import { Button, Card, Tag } from 'antd';
+import { useEffect } from 'react';
 
 export default function DashboardError({
   error,
   reset,
 }: {
-  error: Error & { digest?: string };
+  error: NextError;
   reset: () => void;
 }) {
+  useEffect(() => {
+    sendErrorLog(error);
+  }, [error]);
+
   return (
     <div
       style={{

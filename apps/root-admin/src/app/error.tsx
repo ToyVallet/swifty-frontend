@@ -1,5 +1,6 @@
 'use client';
 
+import { type NextError, sendErrorLog } from '@swifty/shared-lib';
 import { Button } from 'antd';
 import Link from 'next/link';
 import { useEffect } from 'react';
@@ -10,12 +11,11 @@ export default function GlobalError({
   error,
   reset,
 }: {
-  error: Error & { digest?: string };
+  error: NextError;
   reset: () => void;
 }) {
   useEffect(() => {
-    // Log the error to an error reporting service
-    console.error(error);
+    sendErrorLog(error);
   }, [error]);
 
   return (

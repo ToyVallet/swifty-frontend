@@ -2,14 +2,20 @@
 
 import { Navigation } from '@components/common';
 import { Icon } from '@swifty/assets';
+import { type NextError, sendErrorLog } from '@swifty/shared-lib';
+import { useEffect } from 'react';
 
 export default function Error({
   error,
   reset,
 }: {
-  error: Error & { digest?: string };
+  error: NextError;
   reset: () => void;
 }) {
+  useEffect(() => {
+    sendErrorLog(error);
+  }, [error]);
+
   return (
     <>
       <Navigation title="오류" />
