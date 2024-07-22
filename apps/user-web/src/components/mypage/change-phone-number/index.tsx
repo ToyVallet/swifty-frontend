@@ -5,12 +5,12 @@ import { Funnel } from '@components/signup';
 import type { StepType } from '@components/signup/funnel';
 import { PhoneNumber, SmsCode } from '@components/signup/identification';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { API_SMS, API_USER } from '@lib/constants';
-import { APIError, customFetch, revalidate } from '@swifty/shared-lib';
+import { APIError, http, revalidate } from '@swifty/shared-lib';
 import { Form } from '@swifty/ui';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { checkSmsCode, sendSms } from 'src/api';
 import { z } from 'zod';
 
 const schema = z.object({
@@ -49,14 +49,7 @@ export default function ChangePhoneNumberForm() {
     if (step === 'phoneNumber') {
       // 인증 번호 요청 api
       try {
-        await customFetch(API_SMS.sms, {
-          method: 'post',
-          body: JSON.stringify({
-            phoneNumber,
-            smsSituationCode: 'CHANGE_PHONE_NUMBER',
-          }),
-          credentials: 'include',
-        });
+        await sendSms(phoneNumber, 'CHANGE_PHONE_NUMBER');
         setStep(steps[1]);
       } catch (e) {
         if (APIError.isAPIError(e)) {
@@ -70,22 +63,15 @@ export default function ChangePhoneNumberForm() {
     }
     if (step === 'smsCode') {
       try {
-        await customFetch(API_SMS.smsCheck, {
-          method: 'post',
-          body: JSON.stringify({
-            code: form.getValues('smsCode'),
-            phoneNumber: form.getValues('phoneNumber'),
-            situationCode: 'CHANGE_PHONE_NUMBER',
-          }),
-          credentials: 'include',
-        });
+        const code: string = form.getValues('smsCode');
+        const phoneNumber: string = form.getValues('phoneNumber');
+        await checkSmsCode(code, phoneNumber, 'CHANGE_PHONE_NUMBER');
 
-        await customFetch(API_USER.changePhone, {
-          method: 'PATCH',
-          credentials: 'include',
-          body: JSON.stringify({
+        await http.patch('/user/phone', {
+          body: {
             phoneNumber,
-          }),
+          },
+          credentials: 'include',
         });
 
         await revalidate('user');

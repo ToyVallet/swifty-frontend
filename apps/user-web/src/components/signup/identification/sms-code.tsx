@@ -1,22 +1,19 @@
+'use client';
+
 import { FormErrorControl } from '@components/signup';
 import { useInterval } from '@hooks/index';
-import { API_SMS } from '@lib/constants';
-import { APIError, customFetch } from '@swifty/shared-lib';
+import { APIError, type SmsSituationCode } from '@swifty/shared-lib';
 import { Button, FormField, Input } from '@swifty/ui';
 import { useEffect, useRef, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
+import { sendSms } from 'src/api';
 
 const COUNT = 180;
 
 type Props = {
-  situationCode:
-    | 'SIGN_UP'
-    | 'FIND_BY_ID'
-    | 'RESET_PWD'
-    | 'CHANGE_PWD'
-    | 'CHANGE_PHONE_NUMBER'
-    | 'TICKET_ISSUED';
+  situationCode: SmsSituationCode;
 };
+
 export default function SmsCode({ situationCode }: Props) {
   const form = useFormContext();
   const [count, setCount] = useState(COUNT);
@@ -38,13 +35,7 @@ export default function SmsCode({ situationCode }: Props) {
   const onRequest = async () => {
     // 재 요청 보내기
     try {
-      await customFetch(API_SMS.sms, {
-        method: 'post',
-        body: JSON.stringify({
-          phoneNumber,
-          smsSituationCode: situationCode,
-        }),
-      });
+      await sendSms(phoneNumber, situationCode);
     } catch (e) {
       if (APIError.isAPIError(e)) {
         form.setError('smsCode', {

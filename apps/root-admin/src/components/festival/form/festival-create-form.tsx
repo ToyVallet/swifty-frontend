@@ -1,8 +1,8 @@
 'use client';
 
 import { NotificationHandlerContext, Upload } from '@components';
-import { API_FESTIVAL, FETCH_TAG } from '@lib';
-import { customFetch, revalidate } from '@swifty/shared-lib';
+import { FETCH_TAG } from '@lib';
+import { http, revalidate } from '@swifty/shared-lib';
 import type { UploadFile } from 'antd';
 import { Col, DatePicker, Form, Input, Row } from 'antd';
 import type { FormInstance, FormProps } from 'antd/lib/form';
@@ -78,10 +78,9 @@ export default function FestivalForm({ id, form, onClose }: Props) {
       thumbnailFile.name,
     );
     try {
-      await customFetch(API_FESTIVAL.updateOrCreate(), {
-        method: 'POST',
+      await http.post('/host/admin/festival', formData, {
+        credentials: 'include',
         headers: {},
-        body: formData,
       });
 
       await revalidate(FETCH_TAG.festivals);

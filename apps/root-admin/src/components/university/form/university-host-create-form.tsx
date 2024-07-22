@@ -1,8 +1,8 @@
 'use client';
 
 import { NotificationHandlerContext } from '@components';
-import { API_HSOT, FETCH_TAG } from '@lib';
-import { customFetch, revalidate } from '@swifty/shared-lib';
+import { FETCH_TAG } from '@lib';
+import { http, revalidate } from '@swifty/shared-lib';
 import type { UniversityHostCreate } from '@type';
 import { Col, Form, Input, Radio, Row } from 'antd';
 import { Modal } from 'antd';
@@ -41,16 +41,18 @@ export default function UniversityHostCreateForm({ onClose, form, id }: Props) {
     onClose?.();
   };
 
-  const onFinish: FormProps<FieldType>['onFinish'] = async (
-    values: FieldType,
-  ) => {
+  const onFinish: FormProps<FieldType>['onFinish'] = async (values) => {
     values.universityId = id;
+    const body = { ...values };
     try {
-      const data = await customFetch<UniversityHostCreate>(API_HSOT.host, {
-        method: 'POST',
-        credentials: 'include',
-        body: JSON.stringify(values),
-      });
+      const data = await http.post<UniversityHostCreate>(
+        '/root/admin/host',
+        body,
+        {
+          credentials: 'include',
+        },
+      );
+
       await revalidate(FETCH_TAG.hostUsers);
       sethostUserInfo({
         id: data.clientLoginId,

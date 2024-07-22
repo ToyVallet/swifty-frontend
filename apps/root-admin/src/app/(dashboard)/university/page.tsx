@@ -4,20 +4,19 @@ import {
   UniversityCreateForm,
   UniversityTable,
 } from '@components';
-import { API_UNIVERSITY } from '@lib';
-import { customFetch } from '@swifty/shared-lib';
+import { http } from '@swifty/shared-lib';
 import type { Paginaiton, University } from '@type';
 
 import styles from './university.module.css';
 
 export default async function UniversityPage() {
-  const data = await customFetch<Paginaiton<University>>(
-    API_UNIVERSITY.get_univiresity(),
+  const data = await http.get<Paginaiton<University>>(
+    '/root/admin/university',
     {
-      method: 'GET',
-      next: {
-        tags: ['university'],
+      query: {
+        page: '0',
       },
+      credentials: 'include',
     },
   );
 

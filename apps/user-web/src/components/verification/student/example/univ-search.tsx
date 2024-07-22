@@ -1,13 +1,12 @@
 'use client';
 
 import { Search } from '@components/common';
-import { API_CERTIFICATION } from '@lib/constants';
 import type {
   ApiCertification,
   UniversitySearch,
 } from '@lib/types/certification';
 import { Icon } from '@swifty/assets';
-import { customFetch } from '@swifty/shared-lib';
+import { http } from '@swifty/shared-lib';
 import { transition } from '@swifty/ui';
 import { motion } from 'framer-motion';
 import { useFormContext } from 'react-hook-form';
@@ -25,13 +24,14 @@ type Props = {
 export default function UnivSearch({ onChange }: Props) {
   const form = useFormContext();
 
-  const searchApi = async (term: string) => {
-    const result = await customFetch<ApiCertification>(
-      API_CERTIFICATION.search(encodeURIComponent(term)),
+  const searchApi = async (keyword: string) => {
+    const result = await http.get<ApiCertification>(
+      '/certification/university',
       {
-        method: 'get',
+        query: { keyword },
       },
     );
+
     return result.content;
   };
   return (

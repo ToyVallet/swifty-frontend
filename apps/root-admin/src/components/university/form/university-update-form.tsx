@@ -1,8 +1,7 @@
 'use client';
 
 import { NotificationHandlerContext, SearchUniversity } from '@components';
-import { API_UNIVERSITY } from '@lib';
-import { customFetch, revalidate } from '@swifty/shared-lib';
+import { http, revalidate } from '@swifty/shared-lib';
 import type { University } from '@type';
 import { Col, Form, Input, Row } from 'antd';
 import type { FormInstance, FormProps } from 'antd/lib/form';
@@ -31,10 +30,11 @@ export default function UniversityUpdateForm({
     values: FieldType,
   ) => {
     try {
-      await customFetch(API_UNIVERSITY.patch_delete_universiry(university.id), {
-        method: 'PATCH',
-        body: JSON.stringify(values),
+      await http.patch('/root/admin/university/{id}', values, {
+        credentials: 'include',
+        params: { id: university.id },
       });
+
       await revalidate('university');
       onClose?.();
     } catch (err) {

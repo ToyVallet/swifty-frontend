@@ -1,25 +1,106 @@
-import { SERVER_URL } from '../constants';
-import { PresetKeys, remotes } from '../remotes';
+import { SERVER_EXTERNAL_URL, SERVER_URL } from '../constants';
+import {
+  type RemoteKeys,
+  type UrlParams,
+  buildUrl,
+  remotes,
+} from '../constants/remotes';
+import APIError from '../error';
+import { isServer } from './device';
+import { getAllCookies } from './server';
 
-type GetPath = keyof typeof remotes.GET;
+type RequestOptions = RequestInit & UrlParams;
 
-const get = async <Res extends unknown>(
-  url: PresetKeys<typeof remotes.GET>,
-) => {
-  return fetch(`${SERVER_URL}${url}`, remotes.GET[url]) as Promise<Res>;
+const defaultOptions: RequestOptions = {
+  headers: { 'Content-Type': 'application/json' },
+  credentials: 'include',
+  cache: 'no-store',
 };
 
-const post = async <Res extends unknown>(
-  url: PresetKeys<typeof remotes.POST>,
-  body: Record<string, unknown>,
+async function request<Res>(
+  url: string,
+  options: RequestOptions = defaultOptions,
+): Promise<Res> {
+  const root = isServer() ? SERVER_URL : SERVER_EXTERNAL_URL;
+
+  if (options.credentials === 'include' && isServer()) {
+    options.headers = {
+      ...options.headers,
+      Cookie: await getAllCookies(),
+    };
+  }
+
+  const requestUrl = `${root}${buildUrl(url, options)}`;
+
+  try {
+    const response = await fetch(requestUrl, options);
+
+    if (!response.ok) {
+      const error = await response.json();
+      throw error;
+    }
+    const data: Res = await response.json();
+
+    return data;
+  } catch (e) {
+    if (APIError.isAPIError(e)) {
+      throw new APIError(e);
+    }
+    if (e instanceof Error) {
+      throw e;
+    }
+    throw new Error('예상치 못한 오류가 발생했습니다.');
+  }
+}
+
+const get = async <Res = undefined>(
+  url: RemoteKeys,
+  options: Omit<RequestOptions, 'method'> = defaultOptions,
 ) => {
-  return fetch(`${SERVER_URL}${url}`, {
-    ...remotes.POST[url],
+  return request<Res>(url, { method: 'GET', ...options });
+};
+
+const post = async <Res = undefined>(
+  url: RemoteKeys,
+  body?: Record<string, unknown> | FormData,
+  options: Omit<RequestOptions, 'method'> = defaultOptions,
+) => {
+  console.log(body);
+  return request<Res>(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type':
+        body instanceof FormData ? 'multipart/form-data' : 'application/json',
+    },
     body: JSON.stringify(body),
-  }) as Promise<Res>;
+    ...options,
+  });
 };
 
-export const http = {
+const patch = async <Res = undefined>(
+  url: RemoteKeys,
+  body: Record<string, unknown>,
+  options: Omit<RequestOptions, 'method'> = defaultOptions,
+) => {
+  return request<Res>(url, {
+    method: 'PATCH',
+    body: JSON.stringify(body),
+    ...options,
+  });
+};
+
+const _delete = async <Res = undefined>(
+  url: RemoteKeys,
+  options: Omit<RequestOptions, 'method'> = defaultOptions,
+) => {
+  return request<Res>(url, { method: 'DELETE', ...options });
+};
+
+const http = {
   get,
   post,
+  patch,
+  delete: _delete,
 };
+
+export default http;

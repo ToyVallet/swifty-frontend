@@ -45,7 +45,7 @@ export default function ConcertUpdateForm({
 
   const [isLock, toggleLock] = useLock(true);
 
-  const initialValues = {
+  let initialValues = {
     name: name,
     startDate: dayjs(startDate),
     endDate: dayjs(endDate),
@@ -56,21 +56,27 @@ export default function ConcertUpdateForm({
   const onFinish: FormProps<FieldType>['onFinish'] = async (values) => {
     await updateConcert(id, { ...values });
     if (!error) {
+      initialValues = {
+        name: name,
+        startDate: dayjs(startDate),
+        endDate: dayjs(endDate),
+        location: location,
+        description: description,
+      };
       toggleLock();
       onClose?.();
     }
   };
 
   useEffect(() => {
-    if (!isLock) return;
-    form?.setFieldsValue({
+    initialValues = {
       name: name,
       startDate: dayjs(startDate),
       endDate: dayjs(endDate),
       location: location,
       description: description,
-    });
-  }, [isLock]);
+    };
+  }, [name, startDate, endDate, location, description]);
 
   if (isLoading) return <Loading3QuartersOutlined spin />;
 

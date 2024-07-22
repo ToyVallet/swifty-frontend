@@ -4,8 +4,7 @@ import { FixedBottomCTA } from '@components/common';
 import { Funnel } from '@components/signup';
 import { Password, PasswordConfirm } from '@components/signup/account';
 import type { StepType } from '@components/signup/funnel';
-import { API_USER } from '@lib/constants';
-import { APIError, customFetch } from '@swifty/shared-lib';
+import { APIError, http } from '@swifty/shared-lib';
 import { useContext } from 'react';
 import { useFormContext } from 'react-hook-form';
 
@@ -24,12 +23,11 @@ export default function Page() {
     const phoneNumber = form.getValues('phoneNumber');
     if (currentStep === '비밀번호를 확인해주세요') {
       try {
-        await customFetch(API_USER.findPassword, {
-          method: 'PATCH',
-          body: JSON.stringify({
+        await http.patch('/user/pwd', {
+          body: {
             phoneNumber,
             password,
-          }),
+          },
         });
       } catch (e) {
         if (APIError.isAPIError(e)) {

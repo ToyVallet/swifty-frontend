@@ -1,7 +1,7 @@
 'use client';
 
-import { API_CONCERT, API_FESTIVAL, API_LINEUP, FETCH_TAG } from '@lib';
-import { customFetch, revalidate } from '@swifty/shared-lib';
+import { API_LINEUP, FETCH_TAG } from '@lib';
+import { http, revalidate } from '@swifty/shared-lib';
 import type { Status } from '@type';
 import type { SegmentedProps } from 'antd';
 import { ConfigProvider, Segmented } from 'antd';
@@ -26,18 +26,48 @@ export default function OpenHiddenToggle({
 }: Props) {
   const [curStatus, setCurStatus] = useState(status);
 
-  const API_URL = {
+  const hiddenOpenHttp = {
     FESTIVAL: {
-      HIDDEN: API_FESTIVAL.hidden(id),
-      OPENED: API_FESTIVAL.open(id),
+      HIDDEN: http.patch(
+        '/host/admin/festival/{id}/hidden',
+        {},
+        {
+          params: { id },
+          credentials: 'include',
+        },
+      ),
+      OPENED: http.patch(
+        '/host/admin/festival/{id}/open',
+        {},
+        {
+          params: { id },
+          credentials: 'include',
+        },
+      ),
     },
     CONCERT: {
-      HIDDEN: API_CONCERT.hidden(id),
-      OPENED: API_CONCERT.open(id),
+      HIDDEN: http.patch(
+        '/host/admin/concert/{id}/hidden',
+        {},
+        { params: { id }, credentials: 'include' },
+      ),
+      OPENED: http.patch(
+        '/host/admin/concert/{id}/open',
+        {},
+        { params: { id }, credentials: 'include' },
+      ),
     },
     LINEUP: {
-      HIDDEN: API_LINEUP.hidden(id),
-      OPENED: API_LINEUP.open(id),
+      HIDDEN: http.patch(
+        '/host/admin/line_up/{id}/hidden',
+        {},
+        { params: { id }, credentials: 'include' },
+      ),
+      OPENED: http.patch(
+        '/host/admin/line_up/{id}/open',
+        {},
+        { params: { id }, credentials: 'include' },
+      ),
     },
   };
 
@@ -45,8 +75,8 @@ export default function OpenHiddenToggle({
     const prev = curStatus;
     setCurStatus(value);
     try {
-      await customFetch(API_URL[apiTarget][value], { method: 'PATCH' });
-      await revalidate(FETCH_TAG.festivalsDetail(festivalId));
+      await hiddenOpenHttp[apiTarget][value]; //
+      //await revalidate(FETCH_TAG.festivalsDetail(festivalId));
     } catch (err) {
       setCurStatus(prev);
       console.error(err);

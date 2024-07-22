@@ -4,10 +4,10 @@ import { FixedBottomCTA } from '@components/common';
 import { Funnel } from '@components/signup';
 import type { StepType } from '@components/signup/funnel';
 import { PhoneNumber, SmsCode } from '@components/signup/identification';
-import { API_SMS } from '@lib/constants';
-import { APIError, customFetch } from '@swifty/shared-lib';
+import { APIError, http } from '@swifty/shared-lib';
 import { useContext } from 'react';
 import { useFormContext } from 'react-hook-form';
+import { checkSmsCode, sendSms } from 'src/api';
 
 import { FindPasswordContext, steps, stepsWithForm } from '../context';
 
@@ -28,14 +28,7 @@ export default function PhonePage() {
       const phoneNumber = form.getValues('phoneNumber');
       // 인증 번호 요청 api
       try {
-        await customFetch(API_SMS.sms, {
-          method: 'post',
-          body: JSON.stringify({
-            phoneNumber,
-            smsSituationCode: 'CHANGE_PWD',
-          }),
-          credentials: 'include',
-        });
+        await sendSms(phoneNumber, 'CHANGE_PWD');
       } catch (e) {
         if (APIError.isAPIError(e)) {
           form.setError('phoneNumber', {
@@ -49,14 +42,11 @@ export default function PhonePage() {
     if (currentStep === '인증번호를 입력하세요') {
       // 인증 번호 입력
       try {
-        await customFetch(API_SMS.smsCheck, {
-          method: 'post',
-          body: JSON.stringify({
-            code: form.getValues('smsCode'),
-            phoneNumber: form.getValues('phoneNumber'),
-            situationCode: 'CHANGE_PWD',
-          }),
-        });
+        await checkSmsCode(
+          form.getValues('smsCode'),
+          form.getValues('phoneNumber'),
+          'CHANGE_PWD',
+        );
       } catch (e) {
         if (APIError.isAPIError(e)) {
           form.setError('smsCode', {

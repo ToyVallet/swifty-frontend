@@ -1,8 +1,8 @@
 'use client';
 
 import { LockButton, NotificationHandlerContext, Upload } from '@components';
-import { API_FESTIVAL, FETCH_TAG } from '@lib';
-import { customFetch, revalidate } from '@swifty/shared-lib';
+import { FETCH_TAG } from '@lib';
+import { http, revalidate } from '@swifty/shared-lib';
 import type { FestivalDetail } from '@type';
 import type { UploadFile } from 'antd';
 import { Col, DatePicker, Form, Input, Row } from 'antd';
@@ -126,10 +126,8 @@ export default function FestivalUpdateForm({
     }
 
     try {
-      await customFetch(API_FESTIVAL.updateOrCreate(), {
-        method: 'PATCH',
-        headers: {},
-        body: formData,
+      await http.patch('/host/admin/festival', formData, {
+        credentials: 'include',
       });
 
       await revalidate(FETCH_TAG.festivalsDetail(id));
