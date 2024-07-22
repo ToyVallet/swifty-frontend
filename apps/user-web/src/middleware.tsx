@@ -1,13 +1,12 @@
 'use server';
 
-import { COOKIE_KEYS } from '@swifty/shared-lib';
-import { cookies } from 'next/headers';
+import { getCookie } from '@swifty/shared-lib';
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 
 export async function middleware(request: NextRequest) {
   const url = request.nextUrl.clone();
-  const token = cookies().get(COOKIE_KEYS.accessToken);
+  const token = await getCookie('accessToken');
 
   const pathRequiredLogin = [
     'verification',

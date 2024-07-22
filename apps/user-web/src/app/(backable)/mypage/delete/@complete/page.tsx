@@ -2,18 +2,14 @@
 
 import { FixedBottomCTA } from '@components/common';
 import DeleteUser from '@images/delet-user/delete-user.gif';
-import { COOKIE_KEYS, deleteCookie } from '@swifty/shared-lib';
+import { logout } from '@swifty/shared-lib';
 import { convertNewlineToJSX } from '@toss/react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
 export default function Page() {
-  const router = useRouter();
-  const onClick = async () => {
-    await deleteCookie('swifty-access');
-    await deleteCookie(COOKIE_KEYS.refreshToken);
-    router.replace('/');
-  };
+  const { push } = useRouter();
+
   return (
     <>
       <div className="text-center mt-2.5">
@@ -29,7 +25,9 @@ export default function Page() {
           className="m-[102px_auto_222px_auto]"
           alt="탈퇴 완료 이미지"
         />
-        <FixedBottomCTA onClick={onClick}>홈으로 가기</FixedBottomCTA>
+        <FixedBottomCTA onClick={() => logout().then(() => push('/'))}>
+          홈으로 가기
+        </FixedBottomCTA>
       </div>
     </>
   );

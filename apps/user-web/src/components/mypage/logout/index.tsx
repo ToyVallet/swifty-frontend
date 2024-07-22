@@ -1,7 +1,7 @@
 'use client';
 
 import { Icon } from '@swifty/assets';
-import { COOKIE_KEYS, deleteCookie } from '@swifty/shared-lib';
+import { removeAllCookies } from '@swifty/shared-lib';
 import {
   Button,
   Drawer,
@@ -18,8 +18,7 @@ export default function Logout() {
   const router = useRouter();
 
   const logout = async () => {
-    await deleteCookie(COOKIE_KEYS.accessToken);
-    await deleteCookie(COOKIE_KEYS.refreshToken);
+    await removeAllCookies();
     router.replace('/');
   };
 

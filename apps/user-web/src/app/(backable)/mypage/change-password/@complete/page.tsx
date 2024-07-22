@@ -2,19 +2,13 @@
 
 import { FixedBottomGroup } from '@components/common';
 import ChangePassowrd from '@images/change-password/change-password.gif';
-import { COOKIE_KEYS, deleteCookie } from '@swifty/shared-lib';
+import { logout } from '@swifty/shared-lib';
 import { Button } from '@swifty/ui';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
 export default function Page() {
-  const router = useRouter();
-
-  const deleteCookieAndGo = async (path: string) => {
-    await deleteCookie(COOKIE_KEYS.accessToken);
-    await deleteCookie(COOKIE_KEYS.refreshToken);
-    router.replace(path);
-  };
+  const { push } = useRouter();
 
   return (
     <section>
@@ -29,11 +23,11 @@ export default function Page() {
         <Button
           block
           variant="white"
-          onClick={() => deleteCookieAndGo('/login')}
+          onClick={() => logout().then(() => push('/login'))}
         >
           로그인하기
         </Button>
-        <Button block onClick={() => deleteCookieAndGo('/')}>
+        <Button block onClick={() => logout().then(() => push('/'))}>
           홈으로 가기
         </Button>
       </FixedBottomGroup>

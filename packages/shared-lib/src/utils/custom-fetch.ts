@@ -1,14 +1,12 @@
 import { SERVER_EXTERNAL_URL, SERVER_URL } from '../constants';
 import APIError from '../error';
 import { isServer } from './device';
-import getServerSideCookies from './server/get-serverside-cookies';
+import { getAllCookies } from './server';
 
 export async function customFetch<Res>(
   url: string,
   options: RequestInit = {},
 ): Promise<Res> {
-  console.log('요청: ', url, options);
-
   const root = isServer() ? SERVER_URL : SERVER_EXTERNAL_URL;
   options = {
     headers: {
@@ -22,7 +20,7 @@ export async function customFetch<Res>(
   if (options.credentials === 'include' && isServer()) {
     options.headers = {
       ...options.headers,
-      Cookie: await getServerSideCookies(),
+      Cookie: await getAllCookies(),
     };
   }
 
