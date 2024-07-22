@@ -17,3 +17,4 @@ export const COOKIE_KEYS = {
 } as const;
 
 export * from './enums';
+export { type RemoteKeys } from './remotes';

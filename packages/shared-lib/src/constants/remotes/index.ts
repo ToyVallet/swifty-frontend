@@ -1,4 +1,5 @@
 import { hostApi } from './host-admin';
+import { rootApi } from './root-admin';
 import { userApi } from './user-api';
 
 type Params = Record<string, string>;
@@ -9,7 +10,7 @@ export type UrlParams = {
   query?: Query;
 };
 
-export const remotes = [...userApi, ...hostApi] as const;
+export const remotes = [...userApi, ...hostApi, ...rootApi] as const;
 
 export type RemoteKeys = (typeof remotes)[number];
 

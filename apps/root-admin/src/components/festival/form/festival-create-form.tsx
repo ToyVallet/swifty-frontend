@@ -10,7 +10,6 @@ import type { RcFile } from 'antd/lib/upload';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ko';
 import { useContext, useState } from 'react';
-import overCurrentDay from 'src/lib/util/over-current-day';
 
 const { RangePicker } = DatePicker;
 const { TextArea } = Input;
@@ -148,7 +147,7 @@ export default function FestivalForm({ id, form, onClose }: Props) {
               },
             ]}
           >
-            <RangePicker disabledDate={overCurrentDay} />
+            <RangePicker />
           </Form.Item>
         </Col>
       </Row>
@@ -164,7 +163,7 @@ export default function FestivalForm({ id, form, onClose }: Props) {
               },
             ]}
           >
-            <RangePicker disabledDate={overCurrentDay} />
+            <RangePicker />
           </Form.Item>
         </Col>
       </Row>

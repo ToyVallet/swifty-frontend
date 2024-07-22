@@ -2,7 +2,6 @@
 
 import { Loading3QuartersOutlined } from '@ant-design/icons';
 import { useConcertCRUD } from '@hooks';
-import { overCurrentDay } from '@lib';
 import { Col, DatePicker, Form, Input, Row } from 'antd';
 import type { FormProps } from 'antd';
 import locale from 'antd/es/date-picker/locale/ko_KR';
@@ -62,7 +61,6 @@ export default function ConcertCreateForm({
               showTime
               format="YYYY-MM-DD HH:mm:ss"
               locale={locale}
-              disabledDate={overCurrentDay}
             />
           </Form.Item>
         </Col>
