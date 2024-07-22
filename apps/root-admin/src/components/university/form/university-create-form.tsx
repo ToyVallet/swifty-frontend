@@ -5,8 +5,7 @@ import {
   SearchUniversity,
   Upload,
 } from '@components';
-import { API_UNIVERSITY } from '@lib';
-import { customFetch, revalidate } from '@swifty/shared-lib';
+import { http, revalidate } from '@swifty/shared-lib';
 import type { UploadFile } from 'antd';
 import { Col, Form, Input, Row } from 'antd';
 import type { FormInstance, FormProps } from 'antd/lib/form';
@@ -46,11 +45,10 @@ export default function UniversityCreateForm({ onClose, form }: Props) {
     }
 
     try {
-      await customFetch(API_UNIVERSITY.post_university(), {
-        method: 'POST',
-        headers: {},
-        body: formData,
+      await http.post('/root/admin/university', formData, {
+        credentials: 'include',
       });
+
       form?.resetFields(['name', 'addr', 'logo']);
       setFileList([]);
       await revalidate('university');

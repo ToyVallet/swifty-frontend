@@ -6,12 +6,8 @@ import {
   DrawerButton,
   FestivalUpdateForm,
 } from '@components';
-import { API_FESTIVAL, FETCH_TAG } from '@lib';
-import {
-  type PropsWithClassName,
-  customFetch,
-  revalidate,
-} from '@swifty/shared-lib';
+import { FETCH_TAG } from '@lib';
+import { type PropsWithClassName, http, revalidate } from '@swifty/shared-lib';
 import type { FestivalDetail } from '@type';
 import { Flex } from 'antd';
 import { useRouter } from 'next/navigation';
@@ -23,7 +19,11 @@ export default function FestivalButtonList({
 }: FestivalDetail & PropsWithClassName) {
   const router = useRouter();
   const onDelet = async () => {
-    await customFetch(API_FESTIVAL.delete(id), { method: 'DELETE' });
+    await http.delete('/host/admin/festival/{id}', {
+      params: { id },
+      credentials: 'include',
+    });
+
     await revalidate(FETCH_TAG.festivals);
     router.replace(`/festivals`);
   };

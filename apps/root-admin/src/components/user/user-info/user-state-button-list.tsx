@@ -1,8 +1,7 @@
 'use client';
 
 import { DeleteButton, NotificationHandlerContext } from '@components';
-import { API_CLIENT } from '@lib';
-import { customFetch, revalidate } from '@swifty/shared-lib';
+import { http, revalidate } from '@swifty/shared-lib';
 import type { UserStatus } from '@type';
 import { Button } from 'antd';
 import { useRouter } from 'next/navigation';
@@ -17,6 +16,27 @@ interface UserActionsProps {
 
 type States = 'active' | 'ban' | 'pause';
 const USER_STATES = ['active', 'ban', 'pause'] as const;
+
+const USER_STATES_API = {
+  active: (id: string) =>
+    http.patch(
+      '/root/admin/user/{id}/activation',
+      {},
+      { credentials: 'include', params: { id } },
+    ),
+  ban: (id: string) =>
+    http.patch(
+      '/root/admin/user/{id}/ban',
+      {},
+      { credentials: 'include', params: { id } },
+    ),
+  pause: (id: string) =>
+    http.patch(
+      '/root/admin/user/{id}/pause',
+      {},
+      { credentials: 'include', params: { id } },
+    ),
+};
 
 export default function UserStateButtonList({
   userId,
@@ -35,15 +55,14 @@ export default function UserStateButtonList({
   };
 
   // 낙관적 업데이트 적용
-  const onChangeStatus = (state: States) => {
+  const onChangeStatus = async (state: States) => {
     if (changeStatesToUserStatus(state) === userStatus) return;
 
     const prevStatus = status;
     setUserStatus(() => changeStatesToUserStatus(state));
     try {
-      customFetch(API_CLIENT[state](userId), {
-        method: 'PATCH',
-      });
+      await USER_STATES_API[state](userId);
+
       setErrorMessage(null);
       revalidate('users');
     } catch (err) {
@@ -62,8 +81,9 @@ export default function UserStateButtonList({
   };
 
   const deleteUser = async () => {
-    await customFetch(API_CLIENT.user(userId), {
-      method: 'DELETE',
+    await http.delete('/root/admin/user/{id}', {
+      credentials: 'include',
+      params: { id: userId },
     });
     await revalidate('users');
     router.replace('/user');

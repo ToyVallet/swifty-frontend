@@ -5,8 +5,7 @@ import {
   UniversityHostUsers,
 } from '@components';
 import School from '@icons/school.svg';
-import { API_UNIVERSITY } from '@lib';
-import { type Params } from '@swifty/shared-lib';
+import { type Params, http } from '@swifty/shared-lib';
 import type { UniversityDetail } from '@type';
 import { Avatar } from 'antd';
 import Image from 'next/image';
@@ -16,12 +15,10 @@ import styles from './university-detail.module.css';
 export default async function UniversityDetailPage({
   params: { id },
 }: Params<{ id: string }>) {
-  const data = await customFetch<UniversityDetail>(
-    API_UNIVERSITY.university_detail(id),
-    {
-      method: 'GET',
-    },
-  );
+  const data = await http.get<UniversityDetail>('/host/admin/university/{id}', {
+    params: { id },
+    credentials: 'include',
+  });
 
   const breadcrumbList: BreadcrumbList = [
     {

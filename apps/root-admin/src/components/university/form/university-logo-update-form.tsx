@@ -1,8 +1,7 @@
 'use client';
 
 import { NotificationHandlerContext, Upload } from '@components';
-import { API_UNIVERSITY } from '@lib';
-import { customFetch, revalidate } from '@swifty/shared-lib';
+import { http, revalidate } from '@swifty/shared-lib';
 import type { University } from '@type';
 import { Col, Form, Row } from 'antd';
 import type { UploadFile } from 'antd/lib';
@@ -42,11 +41,11 @@ export default function UniversityLogoUpdateForm({
 
     formData.append('logo', imageFile.originFileObj as RcFile, imageFile.name);
     try {
-      await customFetch(API_UNIVERSITY.university_logo(university.id), {
-        method: 'POST',
-        headers: {},
-        body: formData,
+      await http.post('/root/admin/university/{id}/logo', formData, {
+        credentials: 'include',
+        params: { id: university.id },
       });
+
       form?.resetFields(['logo']);
       await revalidate('university');
       onClose?.();
