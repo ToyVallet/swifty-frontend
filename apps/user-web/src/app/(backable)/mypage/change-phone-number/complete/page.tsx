@@ -1,19 +1,16 @@
 import { FixedBottomCTA } from '@components/common';
 import { Header } from '@components/signup';
 import ChangePhoneNumber from '@images/change-phone-number/phone-number.gif';
-import { API_USER } from '@lib/constants';
 import type { UserInfoApi } from '@lib/types';
-import { customFetch } from '@swifty/shared-lib';
+import { http } from '@swifty/shared-lib';
 import Image from 'next/image';
 import Link from 'next/link';
 
 export default async function CompleteChangePhoneNumberPage() {
-  const user = await customFetch<UserInfoApi>(API_USER.info, {
-    method: 'get',
-    next: {
-      tags: ['user'],
-    },
+  const user = await http.get<UserInfoApi>('/user', {
+    credentials: 'include',
   });
+
   return (
     <>
       <div className="mt-[47px]">

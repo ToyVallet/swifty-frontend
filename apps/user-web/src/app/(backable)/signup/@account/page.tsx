@@ -3,8 +3,7 @@
 import { FixedBottomCTA } from '@components/common';
 import { Funnel } from '@components/signup';
 import { Id, Password, PasswordConfirm } from '@components/signup/account';
-import { API_USER } from '@lib/constants';
-import { APIError, type NonEmptyArray, customFetch } from '@swifty/shared-lib';
+import { APIError, type NonEmptyArray, http } from '@swifty/shared-lib';
 import { useContext, useEffect } from 'react';
 import { useFormContext } from 'react-hook-form';
 
@@ -31,8 +30,8 @@ export default function AccountPage() {
     if (currentStep === '사용하실 아이디를 입력해주세요') {
       const id = form.getValues(currentStepFormName);
       try {
-        await customFetch(`${API_USER.checkDuplicateId}?loginId=${id}`, {
-          method: 'get',
+        await http.get('/user/check/id', {
+          query: { loginId: id },
         });
       } catch (e) {
         if (APIError.isAPIError(e)) {
@@ -59,9 +58,8 @@ export default function AccountPage() {
       );
 
       try {
-        await customFetch(API_USER.signup, {
-          method: 'post',
-          body: JSON.stringify(body),
+        await http.post('/user', {
+          body,
         });
       } catch (e) {
         if (APIError.isAPIError(e)) {

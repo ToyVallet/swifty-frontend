@@ -6,7 +6,7 @@ import Link from 'next/link';
 import styles from './page.module.css';
 
 export default async function Page() {
-  const datas = await http.get<FestivalInfoResponse[]>('getAllFestivals');
+  const datas = await http.get<FestivalInfoResponse[]>('/festival');
 
   return (
     <main className={styles.main}>

@@ -12,21 +12,20 @@ import {
 import { FadeOverlay } from '@components/common';
 import { LineUpSection, TopCard } from '@components/festival';
 import FallbackHero from '@images/fallback-hero.png';
-import { API_FESTIVALS } from '@lib/constants';
 import type { LineupApi } from '@lib/types/api';
 import type { Festival } from '@lib/types/festival';
-import { type Params, customFetch, formatDateRange } from '@swifty/shared-lib';
+import { type Params, formatDateRange, http } from '@swifty/shared-lib';
 import { BsBellFill } from 'react-icons/bs';
 import { TiStarFullOutline } from 'react-icons/ti';
 
 export default async function FestivalHomePage({
   params: { id },
 }: Params<{ id: string }>) {
-  const festivalInfo = await customFetch<Festival>(API_FESTIVALS.festival(id), {
-    method: 'GET',
+  const festivalInfo = await http.get<Festival>('/festival/{id}', {
+    params: { id },
   });
-  const lineup = await customFetch<LineupApi>(API_FESTIVALS.lineUp(id), {
-    method: 'GET',
+  const lineup = await http.get<LineupApi>('/festival/detail/{id}', {
+    params: { id },
   });
 
   const tiles: TileInfo[] = [
