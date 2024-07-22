@@ -39,7 +39,7 @@ export default function usePagination<T>({
         },
         credentials: 'include',
       });
-      /* const data = await customFetch<Paginaiton<T>>(api(page - 1, pageSize)); */
+
       setTableData(data.content);
       setPagination({
         ...pagination,
