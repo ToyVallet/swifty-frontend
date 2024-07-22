@@ -6,7 +6,7 @@ import {
 } from '@components';
 import School from '@icons/school.svg';
 import { API_UNIVERSITY } from '@lib';
-import { type Params, customFetch } from '@swifty/shared-lib';
+import { type Params } from '@swifty/shared-lib';
 import type { UniversityDetail } from '@type';
 import { Avatar } from 'antd';
 import Image from 'next/image';

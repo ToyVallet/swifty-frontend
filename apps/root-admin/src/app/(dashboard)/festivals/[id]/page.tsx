@@ -15,7 +15,7 @@ import styles from './page.module.css';
 export default async function Page({ params: { id } }: Params<{ id: string }>) {
   const { adminFestivalInfoResponse, adminConcertInfoResponses } =
     await getDetailFestival(id);
-
+  console.log(adminConcertInfoResponses, adminFestivalInfoResponse);
   const { addr, festivalStatus, name } = adminFestivalInfoResponse;
 
   const breadcrumbList: BreadcrumbList = [
