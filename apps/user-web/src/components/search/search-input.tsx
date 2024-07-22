@@ -1,7 +1,7 @@
 'use client';
 
 import { Icon } from '@swifty/assets';
-import { customFetch } from '@swifty/shared-lib';
+import { http } from '@swifty/shared-lib';
 import { Button, If, Input, transition } from '@swifty/ui';
 import { useDebounce } from '@toss/react';
 import { AnimatePresence } from 'framer-motion';
@@ -15,12 +15,11 @@ export default function SearchInput() {
   const [autocompleteList, setAutocompleteList] = useState<string[]>([]);
 
   const autocomplete = useDebounce(async () => {
-    const list = await customFetch<string[]>(
-      `/festival/auto-complete?keyword=${searchValue}`,
-      {
-        method: 'GET',
+    const list = await http.get<string[]>('/festival/auto-complete', {
+      query: {
+        keyword: searchValue,
       },
-    );
+    });
     setAutocompleteList(list);
   }, 500);
 

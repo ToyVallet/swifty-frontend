@@ -1,11 +1,13 @@
 import { FestivalPanel, PanelList } from '@components';
+import { http } from '@swifty/shared-lib';
+import { type FestivalInfoResponse } from '@type';
 import Link from 'next/link';
 
-import { getAllFestivals } from './data';
 import styles from './page.module.css';
 
 export default async function Page() {
-  const datas = await getAllFestivals();
+  const datas = await http.get<FestivalInfoResponse[]>('getAllFestivals');
+
   return (
     <main className={styles.main}>
       <h2 className={styles.heading}>축제 관리</h2>

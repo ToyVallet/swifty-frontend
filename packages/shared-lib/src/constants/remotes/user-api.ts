@@ -1,56 +1,42 @@
-const user = {
-  login: '/user/login',
-  signup: '/user',
-  withdraw: '/user',
-  checkUniqueId: '/user/check/id',
-  checkNameMatches: '/user/check/name',
-  findId: '/user/id',
-  findPassword: '/user/pwd',
-  checkDuplicateId: '/user/check/same/id',
-  checkPasswordMatches: '/user/check/pwd',
-  changePassword: '/user/change/pwd',
-  info: '/user',
-  changePhone: '/user/phone',
-} as const;
+const user = [
+  '/user/login',
+  '/user',
+  '/user/check/id',
+  '/user/check/name',
+  '/user/id',
+  '/user/pwd',
+  '/user/check/same/id',
+  '/user/check/pwd',
+  '/user/change/pwd',
+  '/user/phone',
+] as const;
 
-const certification = {
-  searchUniversity: '/certification/university',
-  certificate: '/certification',
-} as const;
+const certification = ['/certification/university', '/certification'] as const;
 
-const festival = {
-  getFestivals: '/festival',
-  getFestival: '/festival/[id]',
-  getDetailedFestival: '/festival/detail/[id]',
-} as const;
+const festival = [
+  '/festival',
+  '/festival/{id}',
+  '/festival/detail/{id}',
+  '/festival/auto-complete',
+  '/festival/search',
+] as const;
 
-const search = {
-  autoComplete: '/festival/auto-complete',
-  search: '/search',
-} as const;
+const sms = ['/sms/code', '/sms/code/check'] as const;
 
-const sms = {
-  send: '/sms/code',
-  check: '/sms/code/check',
-} as const;
+const ticketing = [
+  '/ticketing',
+  '/ticketing/{id}',
+  '/ticketing/area/{id}',
+  '/ticketing/schedule/{id}',
+  '/ticketing/schedule/{id}/check',
+] as const;
 
-const ticketing = {
-  cancelTicket: '/ticketing',
-  getTicketById: '/ticketing/[id]',
-  applyTicket: '/ticketing',
-  getAppliableAreas: '/ticketing/area/[id]',
-  getAppliableDates: '/ticketing/schedule/[id]',
-  checkIfSomeTicketsAppliable: '/ticketing/schedule/[id]/check',
-} as const;
-
-export const userApi = {
+export const userApi = [
   ...user,
   ...certification,
   ...festival,
-  ...search,
   ...sms,
   ...ticketing,
-} as const;
+] as const;
 
-export type UserApi = typeof userApi;
-export type UserApiKeys = keyof UserApi;
+export type UserApiKeys = (typeof userApi)[number];

@@ -1,18 +1,25 @@
 import { SERVER_EXTERNAL_URL, SERVER_URL } from '../constants';
-import { RemoteKeys, remotes } from '../constants/remotes';
+import {
+  type RemoteKeys,
+  type UrlParams,
+  buildUrl,
+  remotes,
+} from '../constants/remotes';
 import APIError from '../error';
 import { isServer } from './device';
 import { getAllCookies } from './server';
 
-const defaultOptions: RequestInit = {
+type RequestOptions = RequestInit & UrlParams;
+
+const defaultOptions: RequestOptions = {
   headers: { 'Content-Type': 'application/json' },
   credentials: 'include',
-  cache: 'no-cache',
+  cache: 'no-store',
 };
 
 async function request<Res>(
   url: string,
-  options: RequestInit = defaultOptions,
+  options: RequestOptions = defaultOptions,
 ): Promise<Res> {
   const root = isServer() ? SERVER_URL : SERVER_EXTERNAL_URL;
 
@@ -23,8 +30,10 @@ async function request<Res>(
     };
   }
 
+  const requestUrl = `${root}${buildUrl(url, options)}`;
+
   try {
-    const response = await fetch(`${root}${url}`, options);
+    const response = await fetch(requestUrl, options);
 
     if (!response.ok) {
       const error = await response.json();
@@ -44,19 +53,19 @@ async function request<Res>(
   }
 }
 
-const get = async <Res extends undefined>(
-  urlKey: RemoteKeys,
-  options: RequestInit = defaultOptions,
+const get = async <Res = undefined>(
+  url: RemoteKeys,
+  options: Omit<RequestOptions, 'method'> = defaultOptions,
 ) => {
-  return request<Res>(remotes[urlKey], { method: 'GET', ...options });
+  return request<Res>(url, { method: 'GET', ...options });
 };
 
-const post = async <Res extends undefined>(
-  urlKey: RemoteKeys,
+const post = async <Res = undefined>(
+  url: RemoteKeys,
   body: Record<string, unknown>,
-  options: RequestInit = defaultOptions,
+  options: Omit<RequestOptions, 'method'> = defaultOptions,
 ) => {
-  return request<Res>(remotes[urlKey], {
+  return request<Res>(url, {
     method: 'POST',
     body: JSON.stringify(body),
     ...options,
