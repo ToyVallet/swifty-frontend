@@ -1,7 +1,6 @@
 'use client';
 
-import { API_LINEUP, FETCH_TAG } from '@lib';
-import { http, revalidate } from '@swifty/shared-lib';
+import { http } from '@swifty/shared-lib';
 import type { Status } from '@type';
 import type { SegmentedProps } from 'antd';
 import { ConfigProvider, Segmented } from 'antd';
@@ -17,6 +16,56 @@ interface Props {
 
 const STATUS_LIST: Status[] = ['HIDDEN', 'OPENED'];
 
+const hiddenOpenHttp = {
+  FESTIVAL: {
+    HIDDEN: async (id: string) =>
+      http.patch(
+        '/host/admin/festival/{id}/hidden',
+        {},
+        {
+          params: { id },
+          credentials: 'include',
+        },
+      ),
+    OPENED: async (id: string) =>
+      http.patch(
+        '/host/admin/festival/{id}/open',
+        {},
+        {
+          params: { id },
+          credentials: 'include',
+        },
+      ),
+  },
+  CONCERT: {
+    HIDDEN: async (id: string) =>
+      http.patch(
+        '/host/admin/concert/{id}/hidden',
+        {},
+        { params: { id }, credentials: 'include' },
+      ),
+    OPENED: async (id: string) =>
+      http.patch(
+        '/host/admin/concert/{id}/open',
+        {},
+        { params: { id }, credentials: 'include' },
+      ),
+  },
+  LINEUP: {
+    HIDDEN: async (id: string) =>
+      http.patch(
+        '/host/admin/line_up/{id}/hidden',
+        {},
+        { params: { id }, credentials: 'include' },
+      ),
+    OPENED: async (id: string) =>
+      http.patch(
+        '/host/admin/line_up/{id}/open',
+        {},
+        { params: { id }, credentials: 'include' },
+      ),
+  },
+};
 export default function OpenHiddenToggle({
   apiTarget,
   status,
@@ -25,57 +74,12 @@ export default function OpenHiddenToggle({
   size = 'small',
 }: Props) {
   const [curStatus, setCurStatus] = useState(status);
-
-  const hiddenOpenHttp = {
-    FESTIVAL: {
-      HIDDEN: http.patch(
-        '/host/admin/festival/{id}/hidden',
-        {},
-        {
-          params: { id },
-          credentials: 'include',
-        },
-      ),
-      OPENED: http.patch(
-        '/host/admin/festival/{id}/open',
-        {},
-        {
-          params: { id },
-          credentials: 'include',
-        },
-      ),
-    },
-    CONCERT: {
-      HIDDEN: http.patch(
-        '/host/admin/concert/{id}/hidden',
-        {},
-        { params: { id }, credentials: 'include' },
-      ),
-      OPENED: http.patch(
-        '/host/admin/concert/{id}/open',
-        {},
-        { params: { id }, credentials: 'include' },
-      ),
-    },
-    LINEUP: {
-      HIDDEN: http.patch(
-        '/host/admin/line_up/{id}/hidden',
-        {},
-        { params: { id }, credentials: 'include' },
-      ),
-      OPENED: http.patch(
-        '/host/admin/line_up/{id}/open',
-        {},
-        { params: { id }, credentials: 'include' },
-      ),
-    },
-  };
-
+  console.log(status);
   const onChange = async (value: Status) => {
     const prev = curStatus;
     setCurStatus(value);
     try {
-      await hiddenOpenHttp[apiTarget][value]; //
+      await hiddenOpenHttp[apiTarget][value](id); //
       //await revalidate(FETCH_TAG.festivalsDetail(festivalId));
     } catch (err) {
       setCurStatus(prev);
