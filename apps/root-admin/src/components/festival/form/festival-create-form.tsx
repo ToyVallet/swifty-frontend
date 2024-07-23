@@ -59,7 +59,7 @@ export default function FestivalForm({ id, form, onClose }: Props) {
 
     formData.append('name', values.name);
     formData.append('addr', values.addr);
-    formData.append('universityId', id);
+    formData.append('id', id);
     formData.append('description', values.description);
 
     // poster & thumbnail

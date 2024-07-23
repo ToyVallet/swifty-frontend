@@ -12,13 +12,13 @@ export default function UserInfo(props: User) {
 
   return (
     <div className={styles.container}>
-      <UserStateButtonList userId={props.userId} status={props.status} />
+      <UserStateButtonList id={props.id} status={props.status} />
       <ul className={styles.list}>
         {keys.map((key) => (
           <li key={key}>
             <span className={styles.listItem}>
               <strong>{key.toLocaleUpperCase()}</strong> &#58; &nbsp;
-              {key === 'status' ? status : props[key]}
+              {props[key]}
             </span>
           </li>
         ))}

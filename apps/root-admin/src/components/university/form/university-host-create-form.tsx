@@ -2,7 +2,7 @@
 
 import { NotificationHandlerContext } from '@components';
 import { FETCH_TAG } from '@lib';
-import { http, revalidate } from '@swifty/shared-lib';
+import { APIError, http, revalidate } from '@swifty/shared-lib';
 import type { UniversityHostCreate } from '@type';
 import { Col, Form, Input, Radio, Row } from 'antd';
 import { Modal } from 'antd';
@@ -15,7 +15,7 @@ interface FieldType {
   phoneNumber: string;
   loginId: string;
   userRole: 'MANAGER' | 'SUB_MANAGER' | 'CLIENT';
-  universityId: string;
+  id: string;
 }
 
 interface Props {
@@ -42,7 +42,7 @@ export default function UniversityHostCreateForm({ onClose, form, id }: Props) {
   };
 
   const onFinish: FormProps<FieldType>['onFinish'] = async (values) => {
-    values.universityId = id;
+    values.id = id;
     const body = { ...values };
     try {
       const data = await http.post<UniversityHostCreate>(
@@ -55,21 +55,22 @@ export default function UniversityHostCreateForm({ onClose, form, id }: Props) {
 
       await revalidate(FETCH_TAG.hostUsers);
       sethostUserInfo({
-        id: data.clientLoginId,
-        pw: data.clientPassword,
+        id: data.loginId,
+        pw: data.password,
         role: values.userRole,
       });
       form?.resetFields(['phoneNumber', 'loginId', 'userRole']);
       setModal(true);
     } catch (err) {
-      console.error(err);
-      handleNotification(
-        {
-          message: 'host 유저 생성에 실패하였습니다.',
-          description: (err as Error).message,
-        },
-        'error',
-      );
+      if (APIError.isAPIError(err)) {
+        handleNotification(
+          {
+            message: 'host 유저 생성에 실패하였습니다.',
+            description: err.message,
+          },
+          'error',
+        );
+      }
     }
   };
   return (

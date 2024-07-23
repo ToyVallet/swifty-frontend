@@ -15,8 +15,8 @@ interface Props {
 const columns: TableProps<UniversityHostUser>['columns'] = [
   {
     title: '아이디',
-    dataIndex: 'userLoginId',
-    key: 'userFormId',
+    dataIndex: 'loginId',
+    key: 'id',
   },
   {
     title: '휴대폰',

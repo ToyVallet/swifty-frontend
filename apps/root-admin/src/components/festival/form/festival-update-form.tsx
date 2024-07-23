@@ -97,7 +97,7 @@ export default function FestivalUpdateForm({
 
     formData.append('name', values.name);
     formData.append('addr', values.addr);
-    formData.append('festivalId', id);
+    formData.append('id', id);
     formData.append('description', values.description);
 
     // poster
