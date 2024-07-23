@@ -15,7 +15,7 @@ export interface BaseErrorLog extends Record<string, unknown> {
 }
 
 interface ClientSpecificErrorLogField {
-  user_agent: string;
+  userAgent: string;
 }
 
 export interface ServerSpecificErrorLogField {
@@ -38,6 +38,18 @@ export type ServerErrorLog = BaseErrorLog & ServerSpecificErrorLogField;
 
 export type NextError = Error & { digest?: string };
 
+export const isClientLog = (
+  data: ErrorLogResponse | undefined,
+): data is ClientErrorLog => {
+  return data?.source === 'CLIENT';
+};
+
+export const isServerLog = (
+  data: ErrorLogResponse | undefined,
+): data is ServerErrorLog => {
+  return data?.source === 'SERVER';
+};
+
 export const sendErrorLog = async (error: NextError) => {
   if (isServer()) return;
 
@@ -53,7 +65,7 @@ export const sendErrorLog = async (error: NextError) => {
     trackingId,
     time,
     message,
-    user_agent: userAgent,
+    userAgent: userAgent,
     path,
     host,
   };

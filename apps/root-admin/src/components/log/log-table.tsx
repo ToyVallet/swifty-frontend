@@ -1,39 +1,100 @@
 'use client';
 
+import type { MultipleLogs } from '@app/(dashboard)/page';
 import { usePagination } from '@hooks';
-import { type BaseErrorLog } from '@swifty/shared-lib';
+import { type ErrorLogResponse, http } from '@swifty/shared-lib';
 import type { TableProps } from 'antd';
 import { Table } from 'antd';
-import { useState } from 'react';
+import dayjs from 'dayjs';
+import 'dayjs/locale/ko';
+import { useRef, useState } from 'react';
+
+import LogBadge from './badge';
+import LogDetailDrawer from './log-detail-drawer';
+import styles from './log-table.module.css';
+
+dayjs.locale('ko');
 
 interface Props {
-  data: BaseErrorLog[];
+  data: MultipleLogs[];
   pageSize: number;
   total: number;
 }
 
-const columns: TableProps<BaseErrorLog>['columns'] = [
+const columns: TableProps<MultipleLogs>['columns'] = [
   {
     title: '구분',
     dataIndex: 'source',
-    key: 'source',
+    key: 'id',
+    filters: [
+      { text: 'CLIENT', value: 'CLIENT' },
+      { text: 'SERVER', value: 'SERVER' },
+    ],
+
+    onFilter: (value, record) => record.source === value,
+    render: (value, record, index) => (
+      <LogBadge key={record.id} value={record.source} />
+    ),
   },
-  { title: '발생 위치', dataIndex: 'path', key: 'path' },
   { title: '메시지', dataIndex: 'message', key: 'message' },
-  { title: '시각', dataIndex: 'time', key: 'time' },
   { title: '트래킹 아이디', dataIndex: 'trackingId', key: 'trackingId' },
+  {
+    title: '발생 위치',
+    dataIndex: 'path',
+    key: 'path',
+    render: (_, record) => (
+      <span>
+        {record.host}
+        {record.path}
+      </span>
+    ),
+  },
+  {
+    title: '시각',
+    dataIndex: 'time',
+    key: 'time',
+    sorter: (a, b) => {
+      const dateA = new Date(a.time);
+      const dateB = new Date(b.time);
+      return dateA.getTime() - dateB.getTime();
+    },
+    render: (value, record) => (
+      <div>{dayjs(record.time).format('YYYY. MM. DD ddd HH:mm:ss')}</div>
+    ),
+  },
 ];
 
 function LogTable({ data, pageSize, total }: Props) {
-  const [tableData, setTableData] = useState<BaseErrorLog[]>(data);
+  const [tableData, setTableData] = useState<MultipleLogs[]>(data);
+  const [source, setSource] = useState<'' | 'CLIENT' | 'SERVER'>('');
   const { pagination, loading, handleTableChange } =
-    usePagination<BaseErrorLog>({
+    usePagination<MultipleLogs>({
       pageSize,
       total,
       setTableData,
+      source,
       api: '/log',
     });
+  const [open, setOpen] = useState(false);
 
+  const showDrawer = () => {
+    setOpen(true);
+  };
+
+  const onClose = () => {
+    setOpen(false);
+  };
+
+  const detailInfo = useRef<ErrorLogResponse>();
+
+  const onClick = async (id: string) => {
+    const data = await http.get<ErrorLogResponse>('/log/{id}', {
+      credentials: 'include',
+      params: { id },
+    });
+    showDrawer();
+    detailInfo.current = data;
+  };
   return (
     <section>
       <Table
@@ -48,8 +109,20 @@ function LogTable({ data, pageSize, total }: Props) {
           showTotal: (total) => `Total ${total} items`,
           onChange: (page, pageSize) => handleTableChange(page, pageSize),
         }}
+        style={{ userSelect: 'text' }}
+        rowClassName={styles.row}
+        onRow={(record) => ({
+          onClick: async () => {
+            await onClick(record.id);
+          },
+        })}
         loading={loading}
-        rowKey="trackingId"
+        rowKey="id"
+      />
+      <LogDetailDrawer
+        open={open}
+        onClose={onClose}
+        detailLogInfo={detailInfo.current}
       />
     </section>
   );

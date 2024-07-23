@@ -11,7 +11,7 @@ export default function Logo({
   className,
 }: PropsWithClassName<{ variant?: 'small' | 'default' }>) {
   return (
-    <Link href="#" className={clsx(styles.link, className)}>
+    <Link href="/" className={clsx(styles.link, className)}>
       <h1 className={styles.srOnly}>swifty root</h1>
       {variant === 'small' && <LogoSmallIcon />}
       {variant === 'default' && <LogoIcon className={styles.logo} />}
