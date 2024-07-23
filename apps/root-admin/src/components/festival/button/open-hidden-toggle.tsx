@@ -74,7 +74,7 @@ export default function OpenHiddenToggle({
   size = 'small',
 }: Props) {
   const [curStatus, setCurStatus] = useState(status);
-  console.log(status);
+
   const onChange = async (value: Status) => {
     const prev = curStatus;
     setCurStatus(value);

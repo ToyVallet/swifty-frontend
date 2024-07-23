@@ -4,10 +4,11 @@ import type { MultipleLogs } from '@app/(dashboard)/page';
 import { usePagination } from '@hooks';
 import { type ErrorLogResponse, http } from '@swifty/shared-lib';
 import type { TableProps } from 'antd';
-import { Table } from 'antd';
+import { Row, Table } from 'antd';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ko';
 import { useRef, useState } from 'react';
+import LogSourceToggle from 'src/components/log/log-source-toggle';
 
 import LogBadge from './badge';
 import LogDetailDrawer from './log-detail-drawer';
@@ -26,12 +27,6 @@ const columns: TableProps<MultipleLogs>['columns'] = [
     title: '구분',
     dataIndex: 'source',
     key: 'id',
-    filters: [
-      { text: 'CLIENT', value: 'CLIENT' },
-      { text: 'SERVER', value: 'SERVER' },
-    ],
-
-    onFilter: (value, record) => record.source === value,
     render: (value, record, index) => (
       <LogBadge key={record.id} value={record.source} />
     ),
@@ -95,8 +90,13 @@ function LogTable({ data, pageSize, total }: Props) {
     showDrawer();
     detailInfo.current = data;
   };
+
   return (
     <section>
+      <Row>
+        <LogSourceToggle setSource={setSource} source="" />
+      </Row>
+
       <Table
         columns={columns}
         dataSource={tableData}

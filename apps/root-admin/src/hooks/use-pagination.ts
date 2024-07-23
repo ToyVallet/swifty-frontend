@@ -2,7 +2,7 @@
 
 import { NotificationHandlerContext } from '@components';
 import { type Pageable, type RemoteKeys, http } from '@swifty/shared-lib';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 interface Prop<T> {
   pageSize: number;
@@ -59,5 +59,25 @@ export default function usePagination<T>({
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    http
+      .get<Pageable<T>>(api, {
+        query: {
+          page: `${0}`,
+          size: `${pageSize}`,
+          source,
+        },
+        credentials: 'include',
+      })
+      .then((data) => {
+        setTableData(data.content);
+        setPagination({
+          total: data.totalElements,
+          pageSize: data.size,
+          current: data.page,
+        });
+      });
+  }, [source]);
   return { pagination, loading, handleTableChange };
 }

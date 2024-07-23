@@ -8,20 +8,22 @@ interface Props {
   setSource: (string: '' | 'CLIENT' | 'SERVER') => void;
 }
 
-const SOURCE = ['ALL', 'CLIENT', 'SERVER'];
+const SOURCE = ['ALL', 'CLIENT', 'SERVER'] as const;
 
-export default function LogSourceToggle({ source }: Props) {
-  const [curStatus, setCurStatus] = useState<(typeof SOURCE)[number]>(() =>
-    selectStatus(source),
-  );
-
+export default function LogSourceToggle({ source, setSource }: Props) {
   const selectStatus = useCallback((source: '' | 'CLIENT' | 'SERVER') => {
     if (source === '') return 'ALL';
     return source;
   }, []);
 
+  const [curStatus, setCurStatus] = useState<(typeof SOURCE)[number]>(() =>
+    selectStatus(source),
+  );
+
   const onChange = async (value: (typeof SOURCE)[number]) => {
     setCurStatus(value);
+    const changeValue = value === 'ALL' ? '' : value;
+    setSource(changeValue);
   };
 
   useEffect(() => {
@@ -39,11 +41,11 @@ export default function LogSourceToggle({ source }: Props) {
         },
       }}
     >
-      <Segmented
+      <Segmented<'ALL' | 'CLIENT' | 'SERVER'>
         defaultValue={curStatus}
         value={curStatus}
         onChange={(value) => onChange(value)}
-        options={SOURCE}
+        options={['ALL', 'CLIENT', 'SERVER']}
         size={'small'}
       />
     </ConfigProvider>

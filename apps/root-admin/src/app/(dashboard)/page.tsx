@@ -8,11 +8,9 @@ export type MultipleLogs = BaseErrorLog & {
 export default async function Home() {
   const fullErrorLogs = await http.get<Pageable<MultipleLogs>>('/log', {
     credentials: 'include',
-    query: {
-      size: `${100}`,
-    },
+    query: {},
   });
-  console.log(fullErrorLogs);
+
   return (
     <div
       style={{
