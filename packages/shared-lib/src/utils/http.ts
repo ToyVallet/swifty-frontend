@@ -27,12 +27,14 @@ const formatOptions = ({
   if (body instanceof FormData) {
     return {
       ...options,
+      cache: 'no-store',
       headers: {},
       body,
     };
   }
   return {
     ...options,
+    cache: 'no-store',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(body),
   };
