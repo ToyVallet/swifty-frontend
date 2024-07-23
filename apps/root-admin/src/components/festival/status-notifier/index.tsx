@@ -19,13 +19,13 @@ export default function StatusNotifier({
           styles.notifier,
           {
             [styles.hidden as string]: status === 'HIDDEN',
-            [styles.open as string]: status === 'OPENED',
+            [styles.open as string]: status === 'OPEN',
             [styles.pale as string]: isPale,
           },
           className,
         )}
       >
-        {status === 'OPENED' && 'Opened'}
+        {status === 'OPEN' && 'Open'}
         {status === 'HIDDEN' && 'Hidden'}
       </div>
     </>

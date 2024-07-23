@@ -25,7 +25,7 @@ type FieldType = {
 };
 
 interface IConcertUpdateForm
-  extends Omit<ConcertsResponse, 'lineUpInfoResponses'> {
+  extends Omit<ConcertsResponse, 'lineupInfoResponses'> {
   festivalId: string;
   form?: FormInstance<FieldType>;
   onClose?: () => void;
