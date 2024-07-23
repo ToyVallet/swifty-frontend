@@ -48,6 +48,7 @@ export default function LoginForm() {
       if (APIError.isAPIError(e)) {
         form.setError('root', {
           type: String(e.statusCode),
+          message: e.message,
         });
       }
     }
