@@ -9,6 +9,6 @@ export type ConcertsResponse = {
   endDate: string;
   location: string;
   description: string;
-  lineUpInfoResponses: LineUpInfoResponse[];
+  lineupInfoResponses: LineUpInfoResponse[];
   concertStatus: Status;
 };

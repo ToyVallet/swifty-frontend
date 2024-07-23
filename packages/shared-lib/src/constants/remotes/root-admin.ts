@@ -16,7 +16,7 @@ const university = [
 
 const festival = ['/root/admin/festival'] as const;
 
-const log = ['/log', '/log/{id}'] as const;
+const log = ['/log', '/log/{id}', '/log/flush', '/log/export'] as const;
 
 export const rootApi = [
   ...log,

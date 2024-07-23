@@ -38,7 +38,6 @@ export default function LogDetailDrawer({
   onClose,
   detailLogInfo,
 }: Props) {
-  console.log(detailLogInfo);
   return (
     <Drawer
       width={840}
