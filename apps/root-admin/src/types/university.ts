@@ -11,9 +11,9 @@ export interface UniversityLogo {
 }
 
 export interface UniversityDetail {
-  universityId: string;
-  universityName: string;
-  universityAddr: string;
+  id: string;
+  name: string;
+  addr: string;
   fileInfoResponse: UniversityLogo;
 }
 
