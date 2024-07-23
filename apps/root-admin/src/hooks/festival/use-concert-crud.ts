@@ -37,7 +37,7 @@ export default function useConcertCRUD() {
       const formData = new FormData();
 
       formData.append('name', name);
-      formData.append('festivalId', festivalId);
+      formData.append('id', festivalId);
       formData.append('startDate', changeDateFormat(rangeDateTime[0]));
       formData.append('endDate', changeDateFormat(rangeDateTime[1]));
       formData.append('location', location);
@@ -47,8 +47,6 @@ export default function useConcertCRUD() {
         await http.post('/host/admin/concert', formData, {
           credentials: 'include',
         });
-
-        await revalidate(FETCH_TAG.festivalsDetail(festivalId));
       } catch (e) {
         if (e instanceof Error) setError(e.message);
         else setError('예상치 못한 오류가 발생했습니다.');
@@ -74,7 +72,7 @@ export default function useConcertCRUD() {
       const formData = new FormData();
 
       formData.append('name', name);
-      formData.append('concertId', id);
+      formData.append('id', id);
       formData.append('startDate', dayjs(startDate).format(FORMAT));
       formData.append('endDate', dayjs(endDate).format(FORMAT));
       formData.append('location', location);

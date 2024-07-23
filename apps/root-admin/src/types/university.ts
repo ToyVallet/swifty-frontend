@@ -18,13 +18,13 @@ export interface UniversityDetail {
 }
 
 export interface UniversityHostUser {
-  subId: string;
+  hostId: string;
   phone: string;
   userId: string;
-  userLoginId: string;
+  loginId: string;
 }
 
 export interface UniversityHostCreate {
-  clientLoginId: string;
-  clientPassword: string;
+  loginId: string;
+  password: string;
 }

@@ -1,7 +1,6 @@
 'use client';
 
 import { NotificationHandlerContext } from '@components';
-import { API_LINEUP } from '@lib';
 import { http } from '@swifty/shared-lib';
 import type { UploadFile } from 'antd';
 import type { RcFile } from 'antd/es/upload';
@@ -29,7 +28,7 @@ export default function useLineupCRUD() {
       setError(null);
 
       const formData = new FormData();
-      formData.append('concertId', concertId);
+      formData.append('id', concertId);
       formData.append('title', title);
       formData.append('description', description);
       formData.append('performanceTime', dayjs(performanceTime).format(FORMAT));
@@ -43,7 +42,7 @@ export default function useLineupCRUD() {
       }
 
       try {
-        await http.post('/host/admin/line_up', formData, {
+        await http.post('/host/admin/lineup', formData, {
           credentials: 'include',
         });
       } catch (e) {
@@ -77,7 +76,7 @@ export default function useLineupCRUD() {
       setIsLoading(true);
       setError(null);
       const formData = new FormData();
-      formData.append('lineUpId', id);
+      formData.append('id', id);
       formData.append('title', title);
       formData.append('description', description);
       formData.append('performanceTime', dayjs(performanceTime).format(FORMAT));
@@ -95,7 +94,7 @@ export default function useLineupCRUD() {
       }
 
       try {
-        await http.patch('/host/admin/line_up', formData, {
+        await http.patch('/host/admin/lineup', formData, {
           credentials: 'include',
         });
       } catch (e) {
@@ -119,7 +118,7 @@ export default function useLineupCRUD() {
     setIsLoading(true);
     setError(null);
     try {
-      await http.delete('/host/admin/line_up/{id}', {
+      await http.delete('/host/admin/lineup/{id}', {
         params: { id },
         credentials: 'include',
       });

@@ -29,13 +29,13 @@ const columns: TableProps<User>['columns'] = [
   },
   {
     title: '아이디',
-    dataIndex: 'userFormId',
-    key: 'userFormId',
+    dataIndex: 'loginId',
+    key: 'loginId',
   },
   {
     title: '생일',
-    dataIndex: 'bod',
-    key: 'bod',
+    dataIndex: 'dateOfBirth',
+    key: 'dateOfBirth',
   },
   {
     title: '성별',
@@ -74,7 +74,7 @@ function UserTable({ data, pageSize, total }: Props) {
   });
 
   const onClickRow = (record: User) => {
-    router.push(`user/${record.userId}`);
+    router.push(`user/${record.id}`);
   };
 
   return (

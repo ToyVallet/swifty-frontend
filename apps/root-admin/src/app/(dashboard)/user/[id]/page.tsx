@@ -19,7 +19,7 @@ export default async function UserDetailPage({
       path: '/user',
     },
     {
-      title: data.userFormId,
+      title: data.loginId,
     },
   ];
   return (

@@ -10,7 +10,7 @@ import { useContext, useState } from 'react';
 import styles from './userInfo.module.css';
 
 interface UserActionsProps {
-  userId: string;
+  id: string;
   status: UserStatus;
 }
 
@@ -38,10 +38,7 @@ const USER_STATES_API = {
     ),
 };
 
-export default function UserStateButtonList({
-  userId,
-  status,
-}: UserActionsProps) {
+export default function UserStateButtonList({ id, status }: UserActionsProps) {
   const router = useRouter();
   const [errorMessage, setErrorMessage] = useState<null | string>(null);
   const [userStatus, setUserStatus] = useState<UserStatus>(status);
@@ -61,7 +58,7 @@ export default function UserStateButtonList({
     const prevStatus = status;
     setUserStatus(() => changeStatesToUserStatus(state));
     try {
-      await USER_STATES_API[state](userId);
+      await USER_STATES_API[state](id);
 
       setErrorMessage(null);
       revalidate('users');
@@ -83,7 +80,7 @@ export default function UserStateButtonList({
   const deleteUser = async () => {
     await http.delete('/root/admin/user/{id}', {
       credentials: 'include',
-      params: { id: userId },
+      params: { id },
     });
     await revalidate('users');
     router.replace('/user');
