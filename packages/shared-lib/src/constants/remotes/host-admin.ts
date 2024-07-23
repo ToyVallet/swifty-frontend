@@ -15,10 +15,10 @@ const concert = [
 ] as const;
 
 const lineup = [
-  '/host/admin/line_up',
-  '/host/admin/line_up/{id}',
-  '/host/admin/line_up/{id}/hidden',
-  '/host/admin/line_up/{id}/open',
+  '/host/admin/lineup',
+  '/host/admin/lineup/{id}',
+  '/host/admin/lineup/{id}/hidden',
+  '/host/admin/lineup/{id}/open',
 ] as const;
 
 const university = ['/host/admin/university/{id}'] as const;

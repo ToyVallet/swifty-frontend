@@ -14,11 +14,11 @@ export type UserGender = 'MALE' | 'FEMALE';
 export type UserEnrolled = 'FORM' | 'KAKAO';
 
 export interface User {
-  userId: string;
+  id: string;
   name: string;
   phoneNumber: string;
-  userFormId: string;
-  bod: string;
+  loginId: string;
+  dateOfBirth: string;
   gender: UserGender;
   userRole: UserRole;
   enrolled: UserEnrolled;
