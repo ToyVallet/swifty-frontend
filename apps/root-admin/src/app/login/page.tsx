@@ -2,7 +2,6 @@
 
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { NotificationHandlerContext } from '@components';
-import { API_AUTH } from '@lib';
 import { http } from '@swifty/shared-lib';
 import type { FormProps } from 'antd';
 import { Button, Form, Input } from 'antd';
