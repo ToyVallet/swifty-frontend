@@ -26,7 +26,7 @@ export default async function ConcertPage({
     (concert) => concert.id === consertId,
   )!;
 
-  const lineUp = concertInfo.lineUpInfoResponses;
+  const lineup = concertInfo.lineupInfoResponses;
 
   const breadcrumbList: BreadcrumbList = [
     { path: '/festivals', title: 'Festival' },
@@ -49,7 +49,7 @@ export default async function ConcertPage({
       <ConcertButtonList {...concertInfo} festivalId={festivalId} />
 
       <div className={cn(styles.wrapper, styles.gridContainer)}>
-        {lineUp.map((item) => (
+        {lineup.map((item) => (
           <LineUpCard key={item.id} festivalId={festivalId} {...item} />
         ))}
       </div>

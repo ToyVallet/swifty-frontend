@@ -33,7 +33,7 @@ export default function Search<T extends { [key in string]: any }>({
       setOpen(true);
     } catch (e) {
       if (APIError.isAPIError(e)) {
-        console.log(e.statusCode, e.message);
+        console.error(e.statusCode, e.message);
       }
     }
   }, 500);
