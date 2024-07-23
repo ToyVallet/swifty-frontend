@@ -14,7 +14,6 @@ export default function DashboardError({
   useEffect(() => {
     sendErrorLog(error);
   }, [error]);
-
   return (
     <div
       style={{

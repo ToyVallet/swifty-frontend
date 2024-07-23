@@ -2,7 +2,6 @@
 
 import { DefaultTag, GenderTag, LoginTag, StatusTag } from '@components';
 import { usePagination } from '@hooks';
-import { API_CLIENT } from '@lib';
 import type { User, UserEnrolled, UserGender, UserStatus } from '@type';
 import type { TableProps } from 'antd';
 import { Table } from 'antd';

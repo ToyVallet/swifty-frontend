@@ -9,6 +9,7 @@ interface Prop<T> {
   total: number;
   setTableData: React.Dispatch<React.SetStateAction<T[]>>;
   api: RemoteKeys;
+  source?: 'CLIENT' | 'SERVER' | '';
 }
 
 export default function usePagination<T>({
@@ -16,6 +17,7 @@ export default function usePagination<T>({
   total,
   setTableData,
   api,
+  source = '',
 }: Prop<T>) {
   const [pagination, setPagination] = useState({
     current: 1,
@@ -33,6 +35,7 @@ export default function usePagination<T>({
         query: {
           page: `${page - 1}`,
           size: `${pageSize}`,
+          source,
         },
         credentials: 'include',
       });
