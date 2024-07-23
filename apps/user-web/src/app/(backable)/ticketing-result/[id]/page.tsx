@@ -4,12 +4,7 @@ import {
   Navigation,
 } from '@components/common';
 import ImageFallBack from '@images/fallback-festival.png';
-import {
-  type Params,
-  formatDate,
-  formatDateRange,
-  http,
-} from '@swifty/shared-lib';
+import { type Params, formatDateRange, http } from '@swifty/shared-lib';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 
