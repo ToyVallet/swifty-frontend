@@ -54,13 +54,13 @@ const hiddenOpenHttp = {
   LINEUP: {
     HIDDEN: async (id: string) =>
       http.patch(
-        '/host/admin/line_up/{id}/hidden',
+        '/host/admin/lineup/{id}/hidden',
         {},
         { params: { id }, credentials: 'include' },
       ),
     OPENED: async (id: string) =>
       http.patch(
-        '/host/admin/line_up/{id}/open',
+        '/host/admin/lineup/{id}/open',
         {},
         { params: { id }, credentials: 'include' },
       ),
