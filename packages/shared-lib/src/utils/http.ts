@@ -41,7 +41,7 @@ const formatOptions = ({
 };
 
 async function request<Res>(
-  url: string,
+  url: RemoteKeys,
   options: RequestOptions = defaultOptions,
 ): Promise<Res> {
   const root = isServer() ? SERVER_URL : SERVER_EXTERNAL_URL;
@@ -62,6 +62,12 @@ async function request<Res>(
       const error = await response.json();
       throw error;
     }
+
+    if (url === '/log/export') {
+      const data: Blob = await response.blob();
+      return data as unknown as Res;
+    }
+
     const data: Res = await response.json();
 
     return data;
