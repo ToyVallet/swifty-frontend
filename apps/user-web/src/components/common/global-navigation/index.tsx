@@ -24,7 +24,7 @@ export default async function GlobalNavigation() {
 
       <IconLink label="검색" link="/search" iconName="search" />
       <Choose value={user}>
-        <When value={null}>
+        <When value={undefined}>
           <IconLink label="로그인" link="/login" iconName="lock" />
         </When>
         <Otherwise>
