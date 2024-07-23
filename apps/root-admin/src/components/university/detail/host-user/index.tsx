@@ -17,7 +17,7 @@ export default async function UniversityHostUsers({ id }: { id: string }) {
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <h1>호스트 유저</h1>
+        <h1 className={styles.heading}>호스트 유저</h1>
         <DrawerButton variant="host-create">
           <UniversityHostCreateForm id={id} />
         </DrawerButton>
