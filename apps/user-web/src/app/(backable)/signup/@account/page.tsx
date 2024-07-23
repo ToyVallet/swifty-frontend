@@ -28,10 +28,11 @@ export default function AccountPage() {
 
     // 아이디 중복 확인
     if (currentStep === '사용하실 아이디를 입력해주세요') {
-      const id = form.getValues(currentStepFormName);
+      const id = form.getValues('id');
+      const phone = form.getValues('phoneNumber');
       try {
         await http.get('/user/check/id', {
-          query: { loginId: id },
+          query: { loginId: id, phone },
         });
       } catch (e) {
         if (APIError.isAPIError(e)) {
