@@ -6,7 +6,7 @@ import { useFormContext } from 'react-hook-form';
 const carrierOptions = [
   { label: 'SKT', value: 'SKT' },
   { label: 'KT', value: 'KT' },
-  { label: 'LG U+', value: 'LG U+' },
+  { label: 'LG U+', value: 'LGU' },
   { label: '알뜰폰', value: 'MVNO' },
 ];
 
