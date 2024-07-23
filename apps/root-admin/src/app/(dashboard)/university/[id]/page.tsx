@@ -1,6 +1,7 @@
 import type { BreadcrumbList } from '@components';
 import {
   BreadCrumbs,
+  UniversityButtonList,
   UniversityFestivals,
   UniversityHostUsers,
 } from '@components';
@@ -41,7 +42,7 @@ export default async function UniversityDetailPage({
             }
             icon={!data.fileInfoResponse.url && <School />}
           />
-          <span>{data.universityName}</span>
+          <span>{data.name}</span>
         </div>
       ),
     },
@@ -50,8 +51,16 @@ export default async function UniversityDetailPage({
     <main>
       <header>
         <BreadCrumbs separator="/" breadcrumbList={breadcrumbList} />
-        <span className={styles.addr}>{data.universityAddr}</span>
+        <span className={styles.addr}>{data.addr}</span>
       </header>
+      <section>
+        <UniversityButtonList
+          id={data.id}
+          addr={data.addr}
+          name={data.name}
+          logo={data.fileInfoResponse.url || ''}
+        />
+      </section>
       <section className={styles.section}>
         <UniversityHostUsers id={id} />
         <UniversityFestivals id={id} />
