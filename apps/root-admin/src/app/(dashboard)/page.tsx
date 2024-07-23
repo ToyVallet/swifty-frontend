@@ -6,8 +6,12 @@ import {
   http,
 } from '@swifty/shared-lib';
 
+export type MultipleLogs = BaseErrorLog & {
+  id: string;
+};
+
 export default async function Home() {
-  const fullErrorLogs = await http.get<Pageable<BaseErrorLog>>('/log');
+  const fullErrorLogs = await http.get<Pageable<MultipleLogs>>('/log');
 
   const clientErrorLog = await Promise.resolve([
     {
@@ -73,7 +77,7 @@ export default async function Home() {
         <RefetchButton />
       </div>
       <LogTable
-        data={fullErrorLogs.content as BaseErrorLog[]}
+        data={fullErrorLogs.content}
         pageSize={fullErrorLogs.size}
         total={fullErrorLogs.totalElements}
       />
