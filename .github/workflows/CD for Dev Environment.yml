@@ -34,6 +34,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build and push user-web image
+        if: ${{ github.event.pull_request && contains(github.event.pull_request.changed_files, 'apps/user-web') || contains(github.event.commits.*.modified, 'apps/user-web') || contains(github.event.commits.*.added, 'apps/user-web') || contains(github.event.commits.*.removed, 'apps/user-web') || contains(github.event.commits.*.modified, 'packages') || contains(github.event.commits.*.added, 'packages') || contains(github.event.commits.*.removed, 'packages') }}
         uses: docker/build-push-action@v2
         with:
           context: .
@@ -43,6 +44,7 @@ jobs:
           cache-to: type=local,dest=/tmp/.buildx-cache
 
       - name: Build and push root-admin image
+        if: ${{ github.event.pull_request && contains(github.event.pull_request.changed_files, 'apps/root-admin') || contains(github.event.commits.*.modified, 'apps/root-admin') || contains(github.event.commits.*.added, 'apps/root-admin') || contains(github.event.commits.*.removed, 'apps/root-admin') || contains(github.event.commits.*.modified, 'packages') || contains(github.event.commits.*.added, 'packages') || contains(github.event.commits.*.removed, 'packages') }}
         uses: docker/build-push-action@v2
         with:
           context: .
