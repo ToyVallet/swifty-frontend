@@ -21,7 +21,7 @@ const footerLinks = [
 
 export default function Footer() {
   return (
-    <footer className="w-full flex flex-col px-9 pt-10 pb-8 lg:max-w-full bg-swifty-color-200 dark:bg-swifty-color-darkBg">
+    <footer className="w-full flex flex-col px-9 pt-10 pb-8 lg:max-w-full bg-swifty-color-200 dark:bg-swifty-color-dark-bg">
       <div className="w-full flex justify-between mb-12">
         {footerLinks.map(({ name, href }) => (
           <Link href={href} key={name} className="font-medium text-12">
