@@ -17,7 +17,8 @@ const buttonVariants = cva(
         default: 'bg-transparent text-white',
         primary: 'bg-primary text-white hover:bg-primary/90',
         destructive: 'bg-destructive text-white hover:bg-destructive/90',
-        outlined: 'bg-transparent border border-white text-white',
+        outlined:
+          'bg-transparent border brder-dark text-black dark:border-white dark:text-white',
         white: 'bg-white text-black',
         ghost: 'hover:bg-accent hover:text-accent-foreground',
       },
