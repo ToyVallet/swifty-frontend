@@ -2,6 +2,6 @@ export type LineUp = {
   id: string;
   title: string;
   description: string;
-  lineUpImagePath: string;
+  lineupImagePath: string;
   performanceTime: string;
 };
