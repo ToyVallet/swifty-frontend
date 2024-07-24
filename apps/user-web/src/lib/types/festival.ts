@@ -20,5 +20,5 @@ export type Concert = {
   location: string;
   status: 'HIDDEN' | 'OPEN';
   description: string;
-  lineUpInfoResponses: LineUp[];
+  lineupInfoResponses: LineUp[];
 };

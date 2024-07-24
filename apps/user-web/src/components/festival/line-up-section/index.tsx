@@ -38,7 +38,7 @@ export default function LineUpSection({ concerts }: LineUpSectionProps) {
             dayjs(startDate).isSame(currentDate, 'day'),
           )
           .map((concert) =>
-            concert.lineUpInfoResponses.map((lineup) => (
+            concert.lineupInfoResponses.map((lineup) => (
               <LineUpCard key={lineup.id} lineup={lineup} />
             )),
           )}
