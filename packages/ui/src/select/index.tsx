@@ -61,26 +61,26 @@ export default function Select<T extends SelectOptionType[]>({
       <DrawerTrigger asChild>
         <button
           className={cn(
-            'w-full h-full flex items-center justify-between border font-medium rounded-xl relative px-5 py-3 overflow-hidden bg-swifty-color-800 transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary',
+            'ui-w-full ui-h-full ui-flex ui-items-center ui-justify-between ui-border ui-font-medium ui-rounded-xl ui-relative ui-px-5 ui-py-3 ui-overflow-hidden ui-bg-swifty-color-800 ui-transition-colors ui-duration-200 ui-ease-in-out focus:ui-outline-none focus:ui-ring-2 focus:ui-ring-offset-2 focus:ui-ring-primary',
             isOpen
-              ? 'border-primary shadow-input-active'
-              : 'border-transparent',
+              ? 'ui-border-primary ui-shadow-input-active'
+              : 'ui-border-transparent',
           )}
           type="button"
         >
-          <div className="flex flex-col items-start">
+          <div className="ui-flex ui-flex-col ui-items-start">
             <label
               className={cn(
-                'text-[14px] leading-5 mb-2',
-                isOpen ? 'text-primary' : 'text-swifty-color-400',
+                'ui-text-[14px] ui-leading-5 ui-mb-2',
+                isOpen ? 'ui-text-primary' : 'ui-text-swifty-color-400',
               )}
             >
               {label}
             </label>
             <span
               className={cn(
-                'text-white text-16 font-medium leading-6',
-                selectedOption !== null && 'text-swifty-color-400',
+                'ui-text-white ui-text-16 ui-font-medium ui-leading-6',
+                selectedOption !== null && 'ui-text-swifty-color-400',
               )}
             >
               {getLabel(selectedOption)}
@@ -89,9 +89,9 @@ export default function Select<T extends SelectOptionType[]>({
           <ChevronDown />
         </button>
       </DrawerTrigger>
-      <DrawerContent className="px-[30px] pb-[40px]">
+      <DrawerContent className="ui-px-[30px] ui-pb-[40px]">
         <div
-          className="grid gird-cols-1 divide-y divide-swifty-color-700"
+          className="ui-grid ui-gird-cols-1 ui-divide-y ui-divide-swifty-color-700"
           onClick={handleSelect}
         >
           <Choose value={render}>
@@ -125,7 +125,7 @@ export const SelectOption = forwardRef<ElementRef<'button'>, SelectOptionProps>(
         <button
           ref={ref}
           data-value={value}
-          className="bg-black text-white text-center text-16 font-medium py-[22px] hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-swifty-gray-900"
+          className="ui-bg-black ui-text-white ui-text-center ui-text-16 ui-font-medium ui-py-[22px] hover:ui-bg-gray-900 focus:ui-outline-none focus:ui-ring-2 focus:ui-ring-offset-2 focus:ui-ring-swifty-color-900"
           {...props}
         >
           {children}

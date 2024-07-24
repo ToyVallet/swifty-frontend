@@ -95,13 +95,9 @@ export default function LoginForm() {
           name="root"
           render={({ field }) => <FormMessage {...field} />}
         />
-        <div className="w-full flex justify-between text-14">
-          <Link href="/find/id" className="text-white">
-            아이디를 잊으셨나요?
-          </Link>
-          <Link href="/find/password" className="text-white">
-            비밀번호를 잊으셨나요?
-          </Link>
+        <div className="w-full flex justify-between text-14 font-medium">
+          <Link href="/find/id">아이디를 잊으셨나요?</Link>
+          <Link href="/find/password">비밀번호를 잊으셨나요?</Link>
         </div>
         <Button
           block
@@ -111,10 +107,13 @@ export default function LoginForm() {
         >
           로그인
         </Button>
-        <Button block variant="white" asChild>
-          <Link href="/signup" className="text-black">
-            회원가입
-          </Link>
+        <Button
+          block
+          className="dark:bg-white dark:text-black"
+          variant="white"
+          asChild
+        >
+          <Link href="/signup">회원가입</Link>
         </Button>
       </form>
     </Form>
