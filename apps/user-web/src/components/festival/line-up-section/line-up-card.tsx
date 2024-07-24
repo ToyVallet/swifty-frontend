@@ -11,7 +11,7 @@ export default function LineUpCard({ lineup }: LineUpCardProps) {
     <div className="flex flex-col gap-[10px] aspect-[7/4] w-full">
       <ImageWithFallback
         fallback={FallbackHero}
-        src={lineup.lineUpImagePath}
+        src={lineup.lineupImagePath}
         alt={lineup.title}
         className="object-cover rounded-xl aspect-[7/4] w-full"
         width={353}

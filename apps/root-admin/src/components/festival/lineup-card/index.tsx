@@ -26,9 +26,9 @@ export default function LineupCard(props: Props) {
     title,
     description,
     performanceTime,
-    lineUpImagePath,
+    lineupImagePath,
     festivalId,
-    lineUpStatus,
+    lineupStatus,
   } = props;
 
   const { error, deleteLineup } = useLineupCRUD();
@@ -48,14 +48,14 @@ export default function LineupCard(props: Props) {
         <OpenHiddenToggle
           id={id}
           apiTarget="LINEUP"
-          status={lineUpStatus}
+          status={lineupStatus}
           festivalId={festivalId}
         />
       }
       cover={
         <Image
           alt="poster"
-          src={lineUpImagePath ? lineUpImagePath : '/icons/swifty-logo.svg'}
+          src={lineupImagePath ? lineupImagePath : '/icons/swifty-logo.svg'}
           width={150}
           height={150}
           style={{ objectFit: 'contain' }}
