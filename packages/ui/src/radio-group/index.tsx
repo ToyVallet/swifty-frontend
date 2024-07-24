@@ -13,7 +13,7 @@ const RadioGroup = React.forwardRef<
   return (
     <FormControl>
       <RadioGroupPrimitive.Root
-        className={cn('grid gap-2', className)}
+        className={cn('ui-grid ui-gap-2', className)}
         {...props}
         ref={ref}
       />
@@ -32,10 +32,10 @@ const RadioOption = React.forwardRef<
   RadioOptionProps
 >(({ value, label }, ref) => {
   return (
-    <FormItem className="flex w-full">
+    <FormItem className="ui-flex ui-w-full">
       <FormControl>
         <RadioGroupItem value={value} ref={ref}>
-          <FormLabel className="font-bold text-16">{label}</FormLabel>
+          <FormLabel className="ui-font-bold ui-text-16">{label}</FormLabel>
         </RadioGroupItem>
       </FormControl>
     </FormItem>
@@ -51,7 +51,7 @@ const RadioGroupItem = React.forwardRef<
     <RadioGroupPrimitive.Item
       ref={ref}
       className={cn(
-        'relative data-[state=unchecked]:border data-[state=checked]:bg-primary overflow-hidden rounded-xl h-[50px] w-full px-5 text-white ring-offset-background focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 transition-colors duration-200 ease-in-out',
+        'ui-relative data-[state=unchecked]:ui-border data-[state=checked]:ui-bg-primary ui-overflow-hidden ui-rounded-xl ui-h-[50px] ui-w-full ui-px-5 ui-text-white ui-ring-offset-background focus:ui-outline-none focus-visible:ui-ring-2 focus-visible:ui-ring-ring focus-visible:ui-ring-offset-2 disabled:ui-cursor-not-allowed disabled:ui-opacity-50 ui-transition-colors ui-duration-200 ui-ease-in-out',
         className,
       )}
       {...props}

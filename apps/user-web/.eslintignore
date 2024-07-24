@@ -1,2 +1,3 @@
 server.js
 next.config.mjs
+./src/app/layout.tsx
