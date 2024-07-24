@@ -9,7 +9,7 @@ export default async function GlobalNavigation() {
   const user = await getCookie('accessToken');
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 flex items-center justify-evenly shadow-[0px_-5px_7px_0px_rgba(0, 0, 0, 0.4)]">
+    <nav className="fixed bottom-0 left-0 right-0 flex items-center justify-evenly shadow-gnb">
       <IconLink label="홈" link="/" iconName="home" />
       <IconLink label="카테고리" link="/category" iconName="category" />
 
