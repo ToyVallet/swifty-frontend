@@ -1,0 +1,38 @@
+services:
+  user-web:
+    image: ho991217/user-web:dev
+    network_mode: 'host'
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+    command: ['node', 'apps/user-web/server.js']
+    restart: always
+    logging:
+      driver: json-file
+      options:
+        max-size: '10m'
+        max-file: '3'
+    security_opt:
+      - no-new-privileges:true
+    read_only: true
+    tmpfs:
+      - /tmp
+
+  root-admin:
+    image: ho991217/root-admin:dev
+    network_mode: 'host'
+    environment:
+      NODE_ENV: production
+      PORT: 3001
+    command: ['node', 'apps/root-admin/server.js']
+    restart: always
+    logging:
+      driver: json-file
+      options:
+        max-size: '10m'
+        max-file: '3'
+    security_opt:
+      - no-new-privileges:true
+    read_only: true
+    tmpfs:
+      - /tmp
