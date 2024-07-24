@@ -8,7 +8,7 @@ const config: Omit<Config, 'content'> = {
         'input-active':
           '0px 2.77px 2.21px 0px rgba(25, 103, 255, 0.0197), 0px 6.65px 5.32px 0px rgba(25, 103, 255, 0.0283), 0px 12.52px 10.02px 0px rgba(25, 103, 255, 0.035), 0px 22.34px 17.87px 0px rgba(25, 103, 255, 0.0417), 0px 41.78px 33.42px 0px rgba(25, 103, 255, 0.0503), 0px 100px 80px 0px rgba(25, 103, 255, 0.07)',
         gnb: '0 -5px 10px 0px rgba(0, 0, 0, 0.07)',
-        darkGnb: '0 -5px 7px 0px rgba(0, 0, 0, 0.4)',
+        'dark-gnb': '0 -5px 7px 0px rgba(0, 0, 0, 0.4)',
       },
       keyframes: {
         'accordion-down': {
@@ -51,7 +51,7 @@ const config: Omit<Config, 'content'> = {
           800: '#2E2E33',
           900: '#1D1D20',
           green: '#34c759',
-          darkBg: '#000206',
+          'dark-bg': '#000206',
         },
       },
       fontFamily: {
