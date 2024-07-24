@@ -14,7 +14,12 @@ export default async function Home() {
       <Navigation bg="gradient" left={() => <LogoLink />} />
       <section className="mb-20 w-full flex flex-col gap-10 px-5 z-10 lg:mx-auto">
         <FestivalTiles festivals={festivalLineups} />
-        <Button block asChild variant="outlined">
+        <Button
+          block
+          asChild
+          variant="outlined"
+          className="border-black dark:border-white"
+        >
           <Link href="/all-festivals">페스티벌 전체 보기</Link>
         </Button>
         <AdBanner src="/images/banner.png" />
