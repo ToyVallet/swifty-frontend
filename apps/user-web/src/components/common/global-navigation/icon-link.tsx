@@ -9,7 +9,7 @@ type IconLinkProps = {
 
 export default function IconLink({ link, iconName, label }: IconLinkProps) {
   return (
-    <div className="flex flex-col items-center justify-center text-white w-full">
+    <div className="flex flex-col items-center justify-center w-full">
       <Link
         href={link}
         className="w-full h-full flex flex-col items-center justify-center"
