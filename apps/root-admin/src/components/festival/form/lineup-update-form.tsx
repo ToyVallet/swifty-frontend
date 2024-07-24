@@ -37,20 +37,20 @@ export default function LineupUpdateForm({
   title,
   description,
   performanceTime,
-  lineUpImagePath,
+  lineupImagePath,
   festivalId,
   form,
   onClose,
 }: Props) {
   const [lock, toggleLock] = useLock();
   const { updateLineup, error } = useLineupCRUD();
-  const fileInitialValue: UploadFile[] = lineUpImagePath
+  const fileInitialValue: UploadFile[] = lineupImagePath
     ? [
         {
           uid: '-1',
           name: '',
           status: 'done',
-          url: lineUpImagePath,
+          url: lineupImagePath,
         },
       ]
     : [];
@@ -62,7 +62,7 @@ export default function LineupUpdateForm({
       id,
       values,
       fileList[0] as UploadFile,
-      lineUpImagePath ? lineUpImagePath : '',
+      lineupImagePath ? lineupImagePath : '',
     );
     if (!error) {
       await revalidate(FETCH_TAG.festivalsDetail(festivalId));
