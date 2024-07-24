@@ -18,7 +18,7 @@ const navigationVariants = cva(
   {
     variants: {
       bg: {
-        gradient: 'bg-gradient-to-b from-black to-transparent',
+        gradient: 'bg-gradient-to-b from-black to-transparent text-white',
         transparent: 'bg-transparent',
         solid: 'bg-black',
         blur: 'bg-transparent backdrop-blur-md backdrop-filter',
@@ -45,13 +45,20 @@ export default function Navigation({
             prefix={
               <Icon
                 name="arrow-left"
-                className="-translate-x-2.5"
+                className={cn(
+                  '-translate-x-2.5 stroke-black dark:stroke-white',
+                  bg === 'gradient' && 'stroke-white',
+                )}
                 width={40}
                 height={40}
               />
             }
           >
-            {title && <span className="font-bold text-16">{title}</span>}
+            {title && (
+              <span className="font-bold text-16 text-black dark:text-white">
+                {title}
+              </span>
+            )}
           </BackButton>
         );
   const Center = center != null ? center : () => null;

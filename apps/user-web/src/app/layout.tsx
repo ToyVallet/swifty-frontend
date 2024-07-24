@@ -46,7 +46,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang="ko">
-      <body className="font-Pretendard scrollbar-hide text-black bg-swifty-color-100 dark:text-white dark:bg-swifty-color-darkBg">
+      <body className="font-Pretendard scrollbar-hide">
         <Providers>{children}</Providers>
       </body>
     </html>
