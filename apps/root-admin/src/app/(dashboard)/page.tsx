@@ -1,4 +1,4 @@
-import { FlushButton, LogTable, RefetchButton } from '@components';
+import { Download, FlushButton, LogTable, RefetchButton } from '@components';
 import { type BaseErrorLog, type Pageable, http } from '@swifty/shared-lib';
 
 export type MultipleLogs = BaseErrorLog & {
@@ -12,7 +12,7 @@ export default async function Home() {
       size: `${100}`,
     },
   });
-  console.log(fullErrorLogs);
+
   return (
     <div
       style={{
@@ -37,6 +37,7 @@ export default async function Home() {
       >
         <FlushButton />
         <RefetchButton />
+        <Download />
       </div>
       <LogTable
         data={fullErrorLogs.content}

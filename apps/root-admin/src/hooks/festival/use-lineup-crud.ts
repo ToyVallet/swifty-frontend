@@ -28,7 +28,7 @@ export default function useLineupCRUD() {
       setError(null);
 
       const formData = new FormData();
-      formData.append('concertId', concertId);
+      formData.append('id', concertId);
       formData.append('title', title);
       formData.append('description', description);
       formData.append('performanceTime', dayjs(performanceTime).format(FORMAT));
@@ -76,7 +76,7 @@ export default function useLineupCRUD() {
       setIsLoading(true);
       setError(null);
       const formData = new FormData();
-      formData.append('lineUpId', id);
+      formData.append('id', id);
       formData.append('title', title);
       formData.append('description', description);
       formData.append('performanceTime', dayjs(performanceTime).format(FORMAT));

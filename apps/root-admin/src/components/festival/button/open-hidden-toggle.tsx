@@ -14,7 +14,7 @@ interface Props {
   size?: SegmentedProps['size'];
 }
 
-const STATUS_LIST: Status[] = ['HIDDEN', 'OPENED'];
+const STATUS_LIST: Status[] = ['HIDDEN', 'OPEN'];
 
 const hiddenOpenHttp = {
   FESTIVAL: {
@@ -27,7 +27,7 @@ const hiddenOpenHttp = {
           credentials: 'include',
         },
       ),
-    OPENED: async (id: string) =>
+    OPEN: async (id: string) =>
       http.patch(
         '/host/admin/festival/{id}/open',
         {},
@@ -44,7 +44,7 @@ const hiddenOpenHttp = {
         {},
         { params: { id }, credentials: 'include' },
       ),
-    OPENED: async (id: string) =>
+    OPEN: async (id: string) =>
       http.patch(
         '/host/admin/concert/{id}/open',
         {},
@@ -58,7 +58,7 @@ const hiddenOpenHttp = {
         {},
         { params: { id }, credentials: 'include' },
       ),
-    OPENED: async (id: string) =>
+    OPEN: async (id: string) =>
       http.patch(
         '/host/admin/lineup/{id}/open',
         {},
@@ -74,13 +74,12 @@ export default function OpenHiddenToggle({
   size = 'small',
 }: Props) {
   const [curStatus, setCurStatus] = useState(status);
-  console.log(status);
+
   const onChange = async (value: Status) => {
     const prev = curStatus;
     setCurStatus(value);
     try {
       await hiddenOpenHttp[apiTarget][value](id); //
-      //await revalidate(FETCH_TAG.festivalsDetail(festivalId));
     } catch (err) {
       setCurStatus(prev);
       console.error(err);

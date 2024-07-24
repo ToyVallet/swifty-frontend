@@ -14,6 +14,14 @@ const university = [
   '/root/admin/university/{id}/logo',
 ] as const;
 
-const log = ['/log', '/log/{id}'] as const;
+const festival = ['/root/admin/festival'] as const;
 
-export const rootApi = [...log, ...user, ...host, ...university] as const;
+const log = ['/log', '/log/{id}', '/log/flush', '/log/export'] as const;
+
+export const rootApi = [
+  ...log,
+  ...user,
+  ...host,
+  ...university,
+  ...festival,
+] as const;

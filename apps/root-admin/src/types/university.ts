@@ -11,20 +11,20 @@ export interface UniversityLogo {
 }
 
 export interface UniversityDetail {
-  universityId: string;
-  universityName: string;
-  universityAddr: string;
+  id: string;
+  name: string;
+  addr: string;
   fileInfoResponse: UniversityLogo;
 }
 
 export interface UniversityHostUser {
-  subId: string;
+  hostId: string;
   phone: string;
   userId: string;
-  userLoginId: string;
+  loginId: string;
 }
 
 export interface UniversityHostCreate {
-  clientLoginId: string;
-  clientPassword: string;
+  loginId: string;
+  password: string;
 }

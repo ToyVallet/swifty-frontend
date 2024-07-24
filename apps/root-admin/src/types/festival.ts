@@ -1,6 +1,6 @@
 import type { ConcertsResponse } from './concert';
 
-export type Status = 'OPENED' | 'HIDDEN';
+export type Status = 'OPEN' | 'HIDDEN';
 
 export type FestivalRequest = {
   sort: 'updated' | 'recently' | 'popular';
