@@ -1,4 +1,3 @@
-import { Carousel } from '@components/common';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@components/ui/tabs';
 import TestBG from '@images/mypage/b0b857c3f53e145baf443f7c1a5441d8.png';
 
@@ -28,7 +27,7 @@ export default function ScheduleCard() {
                 id: '1',
                 title: '아이유',
                 description: '아이유의 노래를 들으며 행복한 시간을 보내세요.',
-                lineUpImagePath: '/images/line-up/1.jpg',
+                lineupImage: '/images/line-up/1.jpg',
                 performanceTime: '2024년 05월 04일 20:00',
               },
             ]}
