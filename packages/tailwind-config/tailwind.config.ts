@@ -1,6 +1,7 @@
 import { type Config } from 'tailwindcss';
 
 const config: Omit<Config, 'content'> = {
+  darkMode: 'media',
   theme: {
     extend: {
       boxShadow: {
@@ -48,6 +49,7 @@ const config: Omit<Config, 'content'> = {
           800: '#2E2E33',
           900: '#1D1D20',
           green: '#34c759',
+          darkBg: '#000206',
         },
       },
       fontFamily: {
