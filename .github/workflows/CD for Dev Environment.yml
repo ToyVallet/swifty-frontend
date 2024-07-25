@@ -42,7 +42,7 @@ jobs:
   build-user-web:
     runs-on: ubuntu-latest
     needs: setup
-    if: ${{ github.event_name == 'push' && (contains(github.event.head_commit.message, 'apps/user-web') || contains(github.event.head_commit.message, 'packages')) || github.event_name == 'pull_request' && (contains(github.event.pull_request.changed_files, 'apps/user-web') || contains(github.event.pull_request.changed_files, 'packages')) }}
+    # if: ${{ github.event_name == 'push' && (contains(github.event.head_commit.message, 'apps/user-web') || contains(github.event.head_commit.message, 'packages')) || github.event_name == 'pull_request' && (contains(github.event.pull_request.changed_files, 'apps/user-web') || contains(github.event.pull_request.changed_files, 'packages')) }}
 
     steps:
       - name: Build and push user-web image
@@ -57,7 +57,7 @@ jobs:
   build-root-admin:
     runs-on: ubuntu-latest
     needs: setup
-    if: ${{ github.event_name == 'push' && (contains(github.event.head_commit.message, 'apps/root-admin') || contains(github.event.head_commit.message, 'packages')) || github.event_name == 'pull_request' && (contains(github.event.pull_request.changed_files, 'apps/root-admin') || contains(github.event.pull_request.changed_files, 'packages')) }}
+    # if: ${{ github.event_name == 'push' && (contains(github.event.head_commit.message, 'apps/root-admin') || contains(github.event.head_commit.message, 'packages')) || github.event_name == 'pull_request' && (contains(github.event.pull_request.changed_files, 'apps/root-admin') || contains(github.event.pull_request.changed_files, 'packages')) }}
 
     steps:
       - name: Build and push root-admin image
