@@ -14,7 +14,7 @@ export default function Hero({ children, variant = 'carousel' }: HeroProps) {
       )}
     >
       {children}
-      <div className="bg-black absolute bottom-0 w-full max-h-10 h-[15%] z-10 rounded-t-[22px]" />
+      <div className="bg-swifty-color-100 dark:bg-swifty-color-dark-bg absolute bottom-0 w-full max-h-10 h-[15%] z-10 rounded-t-[22px]" />
     </section>
   );
 }

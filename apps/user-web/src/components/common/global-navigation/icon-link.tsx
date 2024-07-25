@@ -9,13 +9,18 @@ type IconLinkProps = {
 
 export default function IconLink({ link, iconName, label }: IconLinkProps) {
   return (
-    <div className="flex flex-col items-center justify-center text-white w-full">
+    <div className="flex flex-col items-center justify-center w-full">
       <Link
         href={link}
         className="w-full h-full flex flex-col items-center justify-center"
       >
         <div className="flex items-center justify-center w-[30px] h-[30px]">
-          <Icon name={iconName} width={30} height={30} />
+          <Icon
+            name={iconName}
+            width={30}
+            height={30}
+            className="fill-black dark:fill-white"
+          />
         </div>
         <span className="text-10 font-semibold">{label}</span>
       </Link>

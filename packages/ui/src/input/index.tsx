@@ -68,6 +68,10 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function (
     onBlur?.(e);
   }, []);
 
+  const labelClick = useCallback((e: React.MouseEvent<HTMLLabelElement>) => {
+    setIsFocused(true);
+  }, []);
+
   useEffect(() => {
     if (name === 'search') {
       setInputValue(value);
@@ -94,18 +98,21 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function (
       whileTap={'active'}
       initial="initial"
       className={cn(
-        'w-full relative rounded-xl overflow-hidden bg-swifty-color-800 border transition-colors duration-200 ease-in-out',
-        isFocused ? 'border-primary shadow-input-active' : 'border-transparent',
+        'ui-w-full ui-relative ui-rounded-xl ui-overflow-hidden ui-bg-white dark:ui-bg-swifty-color-800 ui-border ui-transition-colors ui-duration-200 ui-ease-in-out',
+        isFocused
+          ? 'ui-border-primary ui-shadow-input-active'
+          : 'ui-border-transparent',
       )}
     >
       {label && (
         <Label
           htmlFor={name}
           className={cn(
-            'left-5 absolute top-[14px] transition-all duration-200 ease-in-out',
-            isActive ? 'text-[14px]' : 'text-16',
-            isFocused ? 'text-primary' : 'text-swifty-color-400',
+            'ui-absolute ui-left-5 ui-top-[14px] ui-transition-all ui-duration-200 ui-ease-in-out',
+            isActive ? 'ui-text-[14px]' : 'ui-text-16',
+            isFocused ? 'ui-text-primary' : 'ui-text-swifty-color-400',
           )}
+          onClick={labelClick}
         >
           {label}
         </Label>
@@ -116,8 +123,8 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function (
         type={!isVisible && type !== 'number' ? type : 'text'}
         value={inputValue}
         className={cn(
-          'w-full bg-transparent text-16 py-3 px-5 autofill:bg-transparent transition-all duration-200 ease-in-out text-white',
-          isActive && 'mt-[30px]',
+          'ui-w-full ui-bg-transparent ui-text-16 ui-py-3 ui-px-5 autofill:ui-bg-transparent ui-transition-all ui-duration-200 ui-ease-in-out',
+          isActive && 'ui-mt-[30px]',
         )}
         inputMode={
           type === 'number' || type === 'tel' || label === '생년월일'
@@ -147,14 +154,14 @@ const Eye = forwardRef<SVGSVGElement, EyeProps>(({ cross, ...props }, ref) =>
     <EyeCrossIcon
       ref={ref}
       fill="white"
-      className="absolute top-1/2 right-7 translate-x-1/2 -translate-y-1/2 active:bg-swifty-color-800/80"
+      className="ui-absolute ui-top-1/2 ui-right-7 ui-translate-x-1/2 ui--translate-y-1/2 active:ui-bg-swifty-color-800/80"
       {...props}
     />
   ) : (
     <EyeIcon
       ref={ref}
       fill="white"
-      className="absolute top-1/2 right-7 translate-x-1/2 -translate-y-1/2 active:bg-swifty-color-800/80"
+      className="ui-absolute ui-top-1/2 ui-right-7 ui-translate-x-1/2 ui--translate-y-1/2 active:ui-bg-swifty-color-800/80"
       {...props}
     />
   ),

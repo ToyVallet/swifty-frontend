@@ -17,7 +17,7 @@ function FestivalTiles({
   headerPosiion = 'start',
 }: Props) {
   return (
-    <div className="flex flex-col gap-5 items-center text-white bg-black">
+    <div className="flex flex-col gap-5 items-center">
       <TileHeader
         className={headerPosiion === 'center' ? 'justify-center' : ''}
       >

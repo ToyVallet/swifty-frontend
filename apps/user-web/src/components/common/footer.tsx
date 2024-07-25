@@ -21,7 +21,7 @@ const footerLinks = [
 
 export default function Footer() {
   return (
-    <footer className="w-full flex flex-col px-9 pt-10 pb-8 lg:max-w-full bg-black text-white">
+    <footer className="w-full flex flex-col px-9 pt-10 pb-8 lg:max-w-full bg-swifty-color-200 dark:bg-swifty-color-dark-bg">
       <div className="w-full flex justify-between mb-12">
         {footerLinks.map(({ name, href }) => (
           <Link href={href} key={name} className="font-medium text-12">
@@ -32,7 +32,7 @@ export default function Footer() {
       <h3 className="font-medium text-[11px] mb-3">
         (주)스위프트코퍼레이션 사업자등록 정보
       </h3>
-      <p className="text-[10px] whitespace-pre-line leading-[15px] mb-16 text-gray-300">
+      <p className="text-[10px] whitespace-pre-line leading-[15px] mb-16 dark:text-swifty-color-300 text-swifty-color-600 ">
         주식회사 스위프티코퍼레이션
         <br />
         경기도 화성시 동탄중심상가2길 8,6층(반송동)

@@ -10,19 +10,20 @@ import PulseLoader from 'react-spinners/PulseLoader';
 import { Choose, Otherwise, When } from '../lib';
 
 const buttonVariants = cva(
-  'flex items-center justify-center gap-2.5 whitespace-nowrap rounded-xl font-bold ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 transition-all duration-200 ease-in-out user-select-none',
+  'ui-flex ui-items-center ui-justify-center ui-gap-2.5 ui-whitespace-nowrap ui-rounded-xl ui-font-bold ui-ring-offset-background focus-visible:ui-outline-none focus-visible:ui-ring-2 focus-visible:ui-ring-ring focus-visible:ui-ring-offset-2 disabled:ui-pointer-events-none disabled:ui-opacity-50 ui-transition-all ui-duration-200 ui-ease-in-out ui-user-select-none',
   {
     variants: {
       variant: {
-        default: 'bg-transparent text-white',
-        primary: 'bg-primary text-white hover:bg-primary/90',
-        destructive: 'bg-destructive text-white hover:bg-destructive/90',
-        outlined: 'bg-transparent border border-white text-white',
-        white: 'bg-white text-black',
-        ghost: 'hover:bg-accent hover:text-accent-foreground',
+        default: 'ui-bg-transparent',
+        primary: 'ui-bg-primary hover:ui-bg-primary/90 ui-text-white',
+        destructive: 'ui-bg-destructive hover:ui-bg-destructive/90',
+        outlined:
+          'ui-bg-transparent ui-border ui-border-black dark:ui-border-white',
+        white: 'ui-bg-black ui-text-white dark:ui-bg-white dark:ui-text-black',
+        ghost: 'hover:ui-bg-accent hover:ui-text-accent-foreground',
       },
       block: {
-        true: 'w-full min-h-[50px] px-4 py-[13px]',
+        true: 'ui-w-full ui-min-h-[50px] ui-px-4 ui-py-[13px]',
         false: '',
       },
     },
@@ -60,7 +61,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps & MotionProps>(
         <button
           className={cn(
             buttonVariants({ variant, block, className }),
-            'pointer-events-none opacity-50',
+            'ui-pointer-events-none ui-opacity-50',
           )}
           disabled
           ref={ref}

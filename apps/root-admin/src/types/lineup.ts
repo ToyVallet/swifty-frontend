@@ -5,6 +5,6 @@ export type LineUpInfoResponse = {
   title: string;
   description: string;
   performanceTime: string;
-  lineUpImagePath: string | null;
-  lineUpStatus: Status;
+  lineupImage: string | null;
+  lineupStatus: Status;
 };

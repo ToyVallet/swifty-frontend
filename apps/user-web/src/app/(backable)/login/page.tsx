@@ -7,7 +7,7 @@ export default function LoginPage() {
     <Main className="px-5">
       <Icon
         name="swifty-full-logo"
-        className="mt-[159px] mb-[60px]"
+        className="mt-[159px] mb-[60px] fill-black dark:fill-white"
         height={53}
       />
       <LoginForm />
