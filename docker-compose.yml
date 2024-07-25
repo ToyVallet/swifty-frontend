@@ -1,8 +1,6 @@
-version: '3.8'
-
 services:
   user-web:
-    build: .
+    image: ho991217/user-web:dev
     network_mode: 'host'
     environment:
       NODE_ENV: production
@@ -21,7 +19,7 @@ services:
       - /tmp
 
   root-admin:
-    build: .
+    image: ho991217/root-admin:dev
     network_mode: 'host'
     environment:
       NODE_ENV: production

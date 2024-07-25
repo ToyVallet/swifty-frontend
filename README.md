@@ -1,6 +1,6 @@
 # Swifty 프로젝트 프론트엔드 레포지토리
 
-[![🚀 Chromatic Deployment](https://github.com/ToyVallet/swifty-frontend/actions/workflows/deploy.yml/badge.svg?branch=dev)](https://github.com/ToyVallet/swifty-frontend/actions/workflows/deploy.yml)
+[![🪽 Dev Deployment](https://github.com/ToyVallet/swifty-frontend/actions/workflows/deploy_to_dev.yml/badge.svg)](https://github.com/ToyVallet/swifty-frontend/actions/workflows/deploy_to_dev.yml)
 
 Swifty 프로젝트의 프론트엔드 레포지토리입니다.
 모노레포를 사용하고 있으며, [Turborepo](https://turbo.build/repo/docs/)를 사용하고 있습니다.
