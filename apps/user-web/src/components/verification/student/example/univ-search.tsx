@@ -28,7 +28,7 @@ export default function UnivSearch({ onChange }: Props) {
     const result = await http.get<ApiCertification>(
       '/certification/university',
       {
-        query: { keyword },
+        query: { keyword, page: `0`, size: `20` },
         credentials: 'include',
       },
     );
