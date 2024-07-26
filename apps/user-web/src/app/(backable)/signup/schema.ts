@@ -23,7 +23,10 @@ const name = z
  */
 const dateOfBirth = z
   .string()
-  .regex(/^\d{4}-\d{2}-\d{2}$/, '날짜 형식이 맞지 않습니다. YYYYMMDD')
+  .regex(
+    /^\d{4}-\d{2}-\d{2}$/,
+    '날짜 형식이 맞지 않습니다. 생년월일 8자리를 입력해주세요',
+  )
   .refine((date) => {
     const dateArr = date.split('-') as [string, string, string];
     const year = parseInt(dateArr[0], 10);
