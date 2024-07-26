@@ -29,7 +29,6 @@ export default function AccountPage() {
     // 아이디 중복 확인
     if (currentStep === '사용하실 아이디를 입력해주세요') {
       const id = form.getValues('id');
-
       try {
         await http.get('/user/check/same/id', {
           query: { loginId: id },
