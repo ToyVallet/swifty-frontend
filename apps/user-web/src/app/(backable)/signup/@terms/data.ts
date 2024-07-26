@@ -17,14 +17,14 @@ export const initialData: TermAccordion[] = [
     required: true,
   },
   {
-    id: 'privacyInfoAvaliable',
+    id: 'isPrivacyUsageAgreed',
     title: '개인정보 제3자와 제공 동의 (선택)',
     content: '전장금융거래',
     approved: false,
     required: false,
   },
   {
-    id: 'marketingAvailable',
+    id: 'isMarketingUsageAgreed',
     title: '마케팅 정보 SMS 수신 동의 (선택)',
     content: '전장금융거래',
     approved: false,
