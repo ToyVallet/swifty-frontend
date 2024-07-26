@@ -1,6 +1,6 @@
 export type UniversitySearch = {
-  universityId: string;
-  universityName: string;
+  id: string;
+  name: string;
   exampleImage: {
     url: string;
     id: string;
