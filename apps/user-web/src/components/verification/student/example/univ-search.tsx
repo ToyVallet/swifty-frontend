@@ -29,6 +29,7 @@ export default function UnivSearch({ onChange }: Props) {
       '/certification/university',
       {
         query: { keyword },
+        credentials: 'include',
       },
     );
 
