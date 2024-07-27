@@ -26,7 +26,7 @@ export default function LineupCard(props: Props) {
     title,
     description,
     performanceTime,
-    lineupImagePath,
+    lineupImage,
     festivalId,
     lineupStatus,
   } = props;
@@ -55,7 +55,7 @@ export default function LineupCard(props: Props) {
       cover={
         <Image
           alt="poster"
-          src={lineupImagePath ? lineupImagePath : '/icons/swifty-logo.svg'}
+          src={lineupImage ? lineupImage : '/icons/swifty-logo.svg'}
           width={150}
           height={150}
           style={{ objectFit: 'contain' }}

@@ -34,7 +34,7 @@ export default async function DateSelectionPage({
       concertDateTime: '2022-01-01 23:59:59',
       ticketingStartDateTime: '2021-12-01 00:00:00',
       ticketingEndDateTime: '2022-01-01 23:59:59',
-      ticketingAvailable: true,
+      ticketingAvailable: false,
       fieldLength: 1,
     },
   ]);

@@ -53,10 +53,7 @@ export default function OcrDrawer() {
   return (
     <Drawer open={isOpen} onOpenChange={setIsOpen}>
       <DrawerTrigger asChild>
-        <FixedBottomCTA
-          variant={!isValid ? 'white' : 'default'}
-          disabled={!isValid}
-        >
+        <FixedBottomCTA disabled={!isValid}>
           {isValid ? '학적 인증 요청' : '이미지를 업로드 해주세요'}
         </FixedBottomCTA>
       </DrawerTrigger>

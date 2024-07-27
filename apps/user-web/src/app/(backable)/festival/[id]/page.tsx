@@ -1,3 +1,4 @@
+import type { TicketingDate } from '@app/(backable)/festival/[id]/ticketing/@date/page';
 import type { TileInfo } from '@components/common';
 import {
   Footer,
@@ -14,7 +15,12 @@ import { LineUpSection, TopCard } from '@components/festival';
 import FallbackHero from '@images/fallback-hero.png';
 import type { LineupApi } from '@lib/types/api';
 import type { Festival } from '@lib/types/festival';
-import { type Params, formatDateRange, http } from '@swifty/shared-lib';
+import {
+  APIError,
+  type Params,
+  formatDateRange,
+  http,
+} from '@swifty/shared-lib';
 import { BsBellFill } from 'react-icons/bs';
 import { TiStarFullOutline } from 'react-icons/ti';
 
@@ -27,6 +33,22 @@ export default async function FestivalHomePage({
   const lineup = await http.get<LineupApi>('/festival/detail/{id}', {
     params: { id },
   });
+
+  // 축제 정보 모두 가지고 오기 및 상태 확인
+  let isCertificate = true;
+  let isAvaliable = true;
+  try {
+    const ticketings = await http.get<TicketingDate[]>('/ticketing/{id}', {
+      credentials: 'include',
+      params: { id },
+    });
+    isAvaliable = ticketings.some((ticketing) => ticketing.ticketingAvailable);
+  } catch (err) {
+    if (APIError.isAPIError(err)) {
+      isCertificate = false;
+      isAvaliable = false;
+    }
+  }
 
   const tiles: TileInfo[] = [
     {
@@ -50,6 +72,8 @@ export default async function FestivalHomePage({
       link: `/festival/${id}/ticketing`,
       icon: <BsBellFill size={17} />,
       bgColor: 'bg-white text-black',
+      isCertificate,
+      isAvaliable,
     },
   ];
 

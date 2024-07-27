@@ -28,6 +28,7 @@ const festival = [
 const sms = ['/sms/code', '/sms/code/check'] as const;
 
 const ticketing = [
+  '/ticket/{id}',
   '/ticketing',
   '/ticketing/{id}',
   '/ticketing/area/{id}',

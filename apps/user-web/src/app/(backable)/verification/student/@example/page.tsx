@@ -17,7 +17,7 @@ export default function ExamplePage() {
 
   return (
     <>
-      <div className="flex flex-col gap-5 overflow-y-scroll scrollbar-hide">
+      <div className="flex flex-col h-full gap-5 overflow-y-scroll scrollbar-hide">
         <FormField
           name="universityId"
           render={({ field }) => (

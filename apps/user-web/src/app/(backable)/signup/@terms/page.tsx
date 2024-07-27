@@ -12,8 +12,8 @@ import { reducer } from './reducer';
 
 const APPROVE_ALL = '전체 동의';
 const APPROVE_COMPLETE = '동의 완료';
-const MARKETING = 'marketingAvailable';
-const PRIVACY = 'privacyInfoAvaliable';
+const MARKETING = 'isMarketingUsageAgreed';
+const PRIVACY = 'isPrivacyUsageAgreed';
 
 export default function Page() {
   const { nextStep } = useContext(SignUpStepContext);

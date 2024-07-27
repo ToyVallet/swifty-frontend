@@ -28,7 +28,8 @@ export default function UnivSearch({ onChange }: Props) {
     const result = await http.get<ApiCertification>(
       '/certification/university',
       {
-        query: { keyword },
+        query: { keyword, page: `0`, size: `20` },
+        credentials: 'include',
       },
     );
 
@@ -52,11 +53,11 @@ export default function UnivSearch({ onChange }: Props) {
           )}
           {searchList.map((item) => (
             <Item
-              value={item.universityName}
-              key={item.universityName}
+              value={item.name}
+              key={item.name}
               onClick={() => {
-                selectSearchValue(item.universityName);
-                onChange?.(item.universityId);
+                selectSearchValue(item.name);
+                onChange?.(item.id);
                 form.setValue('exampleImage', item.exampleImage.url, {
                   shouldValidate: true,
                   shouldDirty: true,
@@ -77,11 +78,10 @@ type ItemProps = {
 function Item({ value, onClick }: ItemProps) {
   return (
     <li
-      className="flex justify-between items-center text-16 font-medium py-3.5 px-5 rounded-xl hover:bg-swifty-color-600"
+      className="w-full text-16 font-medium py-3.5 px-5 rounded-xl hover:bg-swifty-color-600"
       onMouseDown={onClick}
     >
       <span>{value}</span>
-      <Icon name="search" />
     </li>
   );
 }
