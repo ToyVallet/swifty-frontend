@@ -21,7 +21,7 @@ const navigationVariants = cva(
         gradient: 'bg-gradient-to-b from-black to-transparent text-white',
         transparent: 'bg-transparent',
         solid: 'bg-black',
-        blur: 'bg-transparent backdrop-blur-md backdrop-filter',
+        blur: 'backdrop-blur-md backdrop-filter',
       },
     },
     defaultVariants: {

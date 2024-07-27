@@ -1,7 +1,6 @@
 'use client';
 
 import { Main, Navigation } from '@components/common';
-import Header from '@components/mypage/header';
 import { Choose, When } from '@swifty/ui';
 import { AnimatePresence } from 'framer-motion';
 import { type PropsWithChildren, type ReactNode, useState } from 'react';
@@ -38,10 +37,10 @@ export default function UserDelteLayout({
     <>
       <Navigation title="회원 탈퇴" bg="blur" />
       <DeleteUserContext.Provider value={{ currentStep, nextStep }}>
-        <h2 className="text-center text-white font-bold text-26 mt-[44px]">
+        <h2 className="text-center font-bold text-26 mt-[44px]">
           {currentStep}
         </h2>
-        <Main className="relative pb-20 scrollbar-hide w-full px-5">
+        <Main className="relative pb-20 scrollbar-hide w-full px-5 bg-swifty-color-100">
           <AnimatePresence initial={false}>
             <Choose value={currentStep}>
               <When value="비밀번호를 입력하세요">{password}</When>

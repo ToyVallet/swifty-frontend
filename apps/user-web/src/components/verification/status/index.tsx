@@ -28,17 +28,32 @@ const serverStatus: ServerStatus = {
     data: [
       {
         title: '진행 예정',
-        icon: <Icon name="user-web/verification/varification-request" />,
+        icon: (
+          <Icon
+            name="user-web/verification/varification-request"
+            className="fill-black dark:fill-white"
+          />
+        ),
         status: 'not',
       },
       {
         title: '인증 진행',
-        icon: <Icon name="user-web/verification/varification" />,
+        icon: (
+          <Icon
+            name="user-web/verification/varification"
+            className="fill-black dark:fill-white"
+          />
+        ),
         status: 'not',
       },
       {
         title: '인증 완료',
-        icon: <Icon name="user-web/verification/varification-done" />,
+        icon: (
+          <Icon
+            name="user-web/verification/varification-done"
+            className="fill-black dark:fill-white"
+          />
+        ),
         status: 'not',
       },
     ],
@@ -62,12 +77,22 @@ const serverStatus: ServerStatus = {
       },
       {
         title: '인증 진행',
-        icon: <Icon name="user-web/verification/varification" />,
+        icon: (
+          <Icon
+            name="user-web/verification/varification"
+            className="fill-black dark:fill-white"
+          />
+        ),
         status: 'during',
       },
       {
         title: '인증 완료',
-        icon: <Icon name="user-web/verification/varification-done" />,
+        icon: (
+          <Icon
+            name="user-web/verification/varification-done"
+            className="fill-black dark:fill-white"
+          />
+        ),
         status: 'yet',
       },
     ],
@@ -99,7 +124,12 @@ const serverStatus: ServerStatus = {
       },
       {
         title: '인증 완료',
-        icon: <Icon name="user-web/verification/varification-done" />,
+        icon: (
+          <Icon
+            name="user-web/verification/varification-done"
+            className="fill-black dark:fill-white"
+          />
+        ),
         status: 'fail',
       },
     ],
@@ -134,7 +164,12 @@ const serverStatus: ServerStatus = {
       },
       {
         title: '인증 완료',
-        icon: <Icon name="user-web/verification/varification-done" />,
+        icon: (
+          <Icon
+            name="user-web/verification/varification-done"
+            className="fill-black dark:fill-white"
+          />
+        ),
         status: 'sucess',
       },
     ],
@@ -210,7 +245,7 @@ function VerticalBar() {
 // 제목
 function VerificationTitle({ children }: PropsWithChildren) {
   return (
-    <h1 className="text-22 text-white font-semibold">
+    <h1 className="text-22 font-semibold">
       현재 사용자 님의<br></br> {children}
     </h1>
   );
@@ -228,7 +263,7 @@ function VerificationStep({ title, icon, status }: VerificationStepProps) {
     <div className="flex items-center justify-between">
       <div className="flex gap-[30px] items-center justify-between">
         {icon}
-        <span className="text-18 text-white font-bold">{title}</span>
+        <span className="text-18 font-bold">{title}</span>
       </div>
       <StatusNoti status={status} />
     </div>
@@ -246,7 +281,7 @@ function VerificationData({
   message,
 }: VerificationDataProps) {
   return (
-    <section className="bg-swifty-color-900 px-5 py-10 rounded-xl mt-10 flex flex-col gap-5">
+    <section className="bg-swifty-color-200 dark:bg-swifty-color-900 px-5 py-10 rounded-xl mt-10 flex flex-col gap-5">
       {verificationStatus.map((data, index) => {
         if (
           verificationStatus[index - 1]?.status === 'done' &&

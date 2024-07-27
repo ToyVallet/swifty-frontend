@@ -9,6 +9,7 @@ import {
   useEffect,
   useState,
 } from 'react';
+import { FieldError } from 'react-hook-form';
 
 import EyeCrossIcon from '../../icon/input/eye-cross.svg';
 import EyeIcon from '../../icon/input/eye.svg';
@@ -20,6 +21,7 @@ interface InputProps
   label: string;
   name: string;
   placeholder?: string;
+  isError?: FieldError | undefined;
 }
 
 export const variants = {
@@ -44,6 +46,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function (
     onBlur,
     value,
     onChange,
+    isError,
     ...props
   },
   ref,
@@ -99,9 +102,10 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function (
       initial="initial"
       className={cn(
         'ui-w-full ui-relative ui-rounded-xl ui-overflow-hidden ui-bg-white dark:ui-bg-swifty-color-800 ui-border ui-transition-colors ui-duration-200 ui-ease-in-out',
-        isFocused
+        isFocused && !isError
           ? 'ui-border-primary ui-shadow-input-active'
           : 'ui-border-transparent',
+        isError && 'ui-border-destructive ui-shadow-input-error',
       )}
     >
       {label && (
@@ -109,8 +113,9 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function (
           htmlFor={name}
           className={cn(
             'ui-absolute ui-left-5 ui-top-[14px] ui-transition-all ui-duration-200 ui-ease-in-out',
+            isError ? 'ui-text-destructive' : '',
             isActive ? 'ui-text-[14px]' : 'ui-text-16',
-            isFocused ? 'ui-text-primary' : 'ui-text-swifty-color-400',
+            isFocused && !isError && 'ui-text-primary',
           )}
           onClick={labelClick}
         >

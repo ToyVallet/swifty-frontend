@@ -28,8 +28,15 @@ export default function Logout() {
     <Drawer open={isOpen} onOpenChange={setIsOpen}>
       <DrawerTrigger asChild>
         <Button
-          suffix={<Icon name="chevron-right" width={20} height={20} />}
-          className="justify-between w-full p-5 bg-swifty-color-900"
+          suffix={
+            <Icon
+              name="chevron-right"
+              width={20}
+              height={20}
+              className="fill-black dark:fill-white"
+            />
+          }
+          className="justify-between w-full p-5 bg-swifty-color-200 dark:bg-swifty-color-900"
         >
           로그아웃
         </Button>
