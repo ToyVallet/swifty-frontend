@@ -76,7 +76,7 @@ export default function SearchInput() {
               scale: 0.95,
             }}
             transition={transition}
-            className="text-white bg-swifty-color-800 rounded-xl py-3 flex flex-col items-center justify-center w-full"
+            className="dark:bg-swifty-color-800 bg-white rounded-xl py-3 flex flex-col items-center justify-center w-full"
           >
             {autocompleteList.map((item) => (
               <Button

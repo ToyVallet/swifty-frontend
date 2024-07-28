@@ -9,7 +9,7 @@ import {
   useEffect,
   useState,
 } from 'react';
-import { FieldError } from 'react-hook-form';
+import type { FieldError } from 'react-hook-form';
 
 import EyeCrossIcon from '../../icon/input/eye-cross.svg';
 import EyeIcon from '../../icon/input/eye.svg';
