@@ -53,7 +53,7 @@ export default function TicketingLayout({
     <>
       <Navigation title="티켓 예매하기" />
       <TicketingStepContext.Provider value={{ currentStep, nextStep }}>
-        <main className="h-full flex flex-col relative pb-20 overflow-y-auto scrollbar-hide">
+        <main className="h-full flex flex-col relative pb-20 overflow-y-auto scrollbar-hide mt-[47px]">
           <Choose value={currentStep}>
             <When value="선택 확인 페이지">{check}</When>
             <Otherwise>
@@ -61,7 +61,7 @@ export default function TicketingLayout({
                 <Header>{currentStep}</Header>
                 <AnimatePresence initial={false}>
                   <Form {...form}>
-                    <form className="text-white w-full h-full">
+                    <form className="w-full h-full">
                       <Choose value={currentStep}>
                         <When value="날짜를 선택해주세요">{date}</When>
                         <When value="구역을 선택해주세요">{area}</When>
