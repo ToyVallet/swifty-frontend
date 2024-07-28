@@ -27,19 +27,15 @@ export default function Logout() {
   return (
     <Drawer open={isOpen} onOpenChange={setIsOpen}>
       <DrawerTrigger asChild>
-        <Button
-          suffix={
-            <Icon
-              name="chevron-right"
-              width={20}
-              height={20}
-              className="fill-black dark:fill-white"
-            />
-          }
-          className="justify-between w-full p-5 bg-swifty-color-200 dark:bg-swifty-color-900"
-        >
+        <button className="font-bold rounded-xl flex justify-between w-full p-5 bg-swifty-color-200 dark:bg-swifty-color-900">
           로그아웃
-        </Button>
+          <Icon
+            name="chevron-right"
+            width={20}
+            height={20}
+            className="fill-black dark:fill-white"
+          />
+        </button>
       </DrawerTrigger>
       <DrawerContent className="px-5 mb-10">
         <DrawerTitle>로그아웃</DrawerTitle>

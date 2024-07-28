@@ -16,7 +16,7 @@ export default function Page() {
 
   const name =
     currentStep === '새 비밀번호를 입력하세요' ? 'password' : 'passwordConfirm';
-  const { invalid } = form.getFieldState(name);
+  const { invalid, isDirty } = form.getFieldState(name);
 
   const onClick = async () => {
     const password = form.getValues('password');
@@ -54,7 +54,7 @@ export default function Page() {
           </Funnel.Step>
         </Funnel>
       </div>
-      <FixedBottomCTA disabled={invalid} onClick={onClick}>
+      <FixedBottomCTA disabled={invalid || !isDirty} onClick={onClick}>
         확인
       </FixedBottomCTA>
     </>

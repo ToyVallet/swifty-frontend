@@ -31,10 +31,10 @@ export default function Items({
   return (
     <AccordionItem value={value} className="flex flex-col gap-2.5 border-none">
       <AccordionTrigger
-        className="dark:bg-swifty-color-800 bg-swifty-color-200 p-5 rounded-xl text-16 font-medium [&[data-state=open]>svg]:rotate-90"
+        className="dark:bg-swifty-color-800 bg-swifty-color-200 px-3 py-5  rounded-xl text-16 font-medium [&[data-state=open]>svg]:rotate-90"
         datatype="open"
       >
-        <div className="flex justify-center items-center gap-5">
+        <div className="flex justify-center items-center gap-2">
           <Icon
             name="check-circle"
             width={30}
@@ -50,8 +50,8 @@ export default function Items({
         </div>
         <Icon
           name="chevron-right"
-          width={30}
-          height={30}
+          width={20}
+          height={20}
           className="dark:fill-white fill-black"
         />
       </AccordionTrigger>
