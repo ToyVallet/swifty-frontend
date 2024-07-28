@@ -31,23 +31,31 @@ export default function Items({
   return (
     <AccordionItem value={value} className="flex flex-col gap-2.5 border-none">
       <AccordionTrigger
-        className="bg-swifty-color-800 p-5 rounded-xl text-16 text-white font-medium"
+        className="dark:bg-swifty-color-800 bg-swifty-color-200 p-5 rounded-xl text-16 font-medium [&[data-state=open]>svg]:rotate-90"
         datatype="open"
       >
-        {termAccordion.title}
+        <div className="flex justify-center items-center gap-5">
+          <Icon
+            name="check-circle"
+            width={30}
+            height={30}
+            fill={
+              termAccordion.approved
+                ? 'rgba(25, 103, 255, 1)'
+                : 'rgba(162, 162, 168, 1)'
+            }
+            onClick={handleTermCheck}
+          />
+          {termAccordion.title}
+        </div>
         <Icon
-          name="check-circle"
+          name="chevron-right"
           width={30}
           height={30}
-          fill={
-            termAccordion.approved
-              ? 'rgba(25, 103, 255, 1)'
-              : 'rgba(162, 162, 168, 1)'
-          }
-          onClick={handleTermCheck}
+          className="dark:fill-white fill-black"
         />
       </AccordionTrigger>
-      <AccordionContent className="bg-swifty-color-800 px-5 py-[22px] rounded-xl text-13 text-white max-h-[210px] overflow-y-auto ">
+      <AccordionContent className="dark:bg-swifty-color-800 bg-swifty-color-200 px-5 py-[22px] rounded-xl text-13 max-h-[210px] overflow-y-auto ">
         {termAccordion.content}
       </AccordionContent>
     </AccordionItem>

@@ -24,9 +24,7 @@ export default function LineUpSection({ concerts }: LineUpSectionProps) {
 
   return (
     <section id="line-up" className="flex flex-col gap-5 w-full">
-      <h1 className="w-full text-center text-20 font-bold text-white">
-        라인업
-      </h1>
+      <h1 className="w-full text-center text-20 font-bold">라인업</h1>
       <DateSelector
         selectedDate={currentDate}
         availableDays={lineupDates.map(dayjs)}

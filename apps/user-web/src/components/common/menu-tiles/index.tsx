@@ -55,6 +55,7 @@ export default function MenuTiles({ tiles }: { tiles: TileInfo[] }) {
               onClick={() =>
                 controlTicket(tile.isCertificate, tile.isAvaliable, tile.link)
               }
+              className="text-start"
             >
               <Tile {...tile} />
               <CertificationDrawer open={isOpen} onOpenChange={setIsOpen} />

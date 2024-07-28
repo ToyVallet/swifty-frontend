@@ -66,7 +66,7 @@ export default function OcrDrawer() {
             일치하지 않을 경우 수정해주세요
           </span>
         </DrawerTitle>
-        <div className="flex flex-col w-full text-center text-white px-5 pb-10">
+        <div className="flex flex-col w-full text-center px-5 pb-10">
           <div className="w-full flex flex-col gap-5 mb-10">
             <OcrInput name="ocrName" label="이름" placeholder="홍길동" />
             <OcrInput

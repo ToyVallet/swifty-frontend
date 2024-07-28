@@ -1,6 +1,6 @@
 'use client';
 
-import { type Dayjs } from 'dayjs';
+import dayjs, { type Dayjs } from 'dayjs';
 
 import DateBlock from './date-block';
 
@@ -25,7 +25,10 @@ export default function DateSelector({
         <DateBlock
           key={index}
           date={date}
-          selected={selectedDate === date}
+          selected={
+            dayjs(selectedDate).format('YYYY-MM-DD') ===
+            dayjs(date).format('YYYY-MM-DD')
+          }
           disabled={!availableDays.some((day) => day.isSame(date, 'day'))}
           onClick={() => onSelectDate(date)}
         />

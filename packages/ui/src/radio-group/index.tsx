@@ -35,7 +35,7 @@ const RadioOption = React.forwardRef<
     <FormItem className="ui-flex ui-w-full">
       <FormControl>
         <RadioGroupItem value={value} ref={ref}>
-          <FormLabel className="ui-font-bold ui-text-16">{label}</FormLabel>
+          {label}
         </RadioGroupItem>
       </FormControl>
     </FormItem>
@@ -51,7 +51,7 @@ const RadioGroupItem = React.forwardRef<
     <RadioGroupPrimitive.Item
       ref={ref}
       className={cn(
-        'ui-relative data-[state=unchecked]:ui-border data-[state=checked]:ui-bg-primary ui-overflow-hidden ui-rounded-xl ui-h-[50px] ui-w-full ui-px-5 ui-text-white ui-ring-offset-background focus:ui-outline-none focus-visible:ui-ring-2 focus-visible:ui-ring-ring focus-visible:ui-ring-offset-2 disabled:ui-cursor-not-allowed disabled:ui-opacity-50 ui-transition-colors ui-duration-200 ui-ease-in-out',
+        'ui-relative data-[state=unchecked]:ui-border data-[state=unchecked]:ui-border-swifty-color-400 data-[state=unchecked]:ui-text-swifty-color-400 data-[state=checked]:ui-text-white  data-[state=checked]:ui-bg-primary ui-overflow-hidden ui-rounded-xl ui-h-[50px] ui-w-full ui-px-5 ui-ring-offset-background focus:ui-outline-none focus-visible:ui-ring-2 focus-visible:ui-ring-ring focus-visible:ui-ring-offset-2 disabled:ui-cursor-not-allowed disabled:ui-opacity-50 ui-transition-colors ui-duration-200 ui-ease-in-out',
         className,
       )}
       {...props}

@@ -13,7 +13,7 @@
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-rgb: 244, 244, 255;
-  --input-shadow: 255, 255, 255;
+  --input-shadow: 228, 228, 231;
   -webkit-tap-highlight-color: transparent;
 }
 

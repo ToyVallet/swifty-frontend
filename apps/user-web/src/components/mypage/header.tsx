@@ -6,8 +6,6 @@ export default function Header({
   className,
 }: PropsWithChildren<{ className?: string }>) {
   return (
-    <h3 className={cn('py-5 text-20 font-bold text-white', className)}>
-      {children}
-    </h3>
+    <h3 className={cn('py-5 text-20 font-bold', className)}>{children}</h3>
   );
 }

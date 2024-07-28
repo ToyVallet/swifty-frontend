@@ -27,7 +27,11 @@ export default function Page() {
         >
           로그인하기
         </Button>
-        <Button block onClick={() => logout().then(() => push('/'))}>
+        <Button
+          block
+          variant="primary"
+          onClick={() => logout().then(() => push('/'))}
+        >
           홈으로 가기
         </Button>
       </FixedBottomGroup>

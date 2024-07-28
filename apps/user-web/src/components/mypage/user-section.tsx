@@ -28,12 +28,17 @@ export function UserLink({ label, className, ...props }: UserLinkProps) {
     <Link
       {...props}
       className={cn(
-        'flex items-center justify-between w-full p-5 text-16 font-semibold text-white bg-swifty-color-900 rounded-xl',
+        'flex items-center justify-between w-full p-5 text-16 font-semibold bg-swifty-color-200 dark:bg-swifty-color-900 rounded-xl',
         className,
       )}
     >
       {label}
-      <Icon name="chevron-right" width={20} height={20} />
+      <Icon
+        name="chevron-right"
+        width={20}
+        height={20}
+        className="fill-black dark:fill-white"
+      />
     </Link>
   );
 }
