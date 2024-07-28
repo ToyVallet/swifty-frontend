@@ -102,9 +102,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function (
       initial="initial"
       className={cn(
         'ui-w-full ui-relative ui-rounded-xl ui-overflow-hidden ui-bg-swifty-color-200 dark:ui-bg-swifty-color-800 ui-border ui-transition-colors ui-duration-200 ui-ease-in-out',
-        isFocused && !isError
-          ? 'ui-border-primary ui-shadow-input-active'
-          : 'ui-border-transparent',
+        isFocused && !isError && 'ui-border-primary ui-shadow-input-active',
         isError && 'ui-border-destructive ui-shadow-input-error',
       )}
     >
@@ -113,9 +111,10 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function (
           htmlFor={name}
           className={cn(
             'ui-absolute ui-left-5 ui-top-[14px] ui-transition-all ui-duration-200 ui-ease-in-out',
-            isError ? 'ui-text-destructive' : '',
-            isActive ? 'ui-text-[14px]' : 'ui-text-16',
             isFocused && !isError && 'ui-text-primary',
+            isError && 'ui-text-destructive',
+            !isFocused && 'ui-text-swifty-color-400',
+            isActive ? 'ui-text-[14px]' : 'ui-text-16',
           )}
           onClick={labelClick}
         >
