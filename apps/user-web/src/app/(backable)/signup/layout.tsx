@@ -55,7 +55,7 @@ export default function SignupLayout({
           <AnimatePresence initial={false}>
             <Form {...form}>
               <form
-                className="text-white w-full"
+                className="w-full"
                 onSubmit={(e) => {
                   e.preventDefault();
                 }}

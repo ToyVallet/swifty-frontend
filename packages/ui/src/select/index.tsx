@@ -61,7 +61,7 @@ export default function Select<T extends SelectOptionType[]>({
       <DrawerTrigger asChild>
         <button
           className={cn(
-            'ui-w-full ui-h-full ui-flex ui-items-center ui-justify-between ui-border ui-font-medium ui-rounded-xl ui-relative ui-px-5 ui-py-3 ui-overflow-hidden ui-bg-swifty-color-800 ui-transition-colors ui-duration-200 ui-ease-in-out focus:ui-outline-none focus:ui-ring-2 focus:ui-ring-offset-2 focus:ui-ring-primary',
+            'ui-w-full ui-h-full ui-flex ui-items-center ui-justify-between ui-border ui-font-medium ui-rounded-xl ui-relative ui-px-5 ui-py-3 ui-overflow-hidden dark:ui-bg-swifty-color-800 ui-bg-white ui-transition-colors ui-duration-200 ui-ease-in-out focus:ui-outline-none focus:ui-ring-2 focus:ui-ring-offset-2 focus:ui-ring-primary',
             isOpen
               ? 'ui-border-primary ui-shadow-input-active'
               : 'ui-border-transparent',
@@ -79,7 +79,7 @@ export default function Select<T extends SelectOptionType[]>({
             </label>
             <span
               className={cn(
-                'ui-text-white ui-text-16 ui-font-medium ui-leading-6',
+                'ui-text-16 ui-font-medium ui-leading-6',
                 selectedOption !== null && 'ui-text-swifty-color-400',
               )}
             >
@@ -125,7 +125,7 @@ export const SelectOption = forwardRef<ElementRef<'button'>, SelectOptionProps>(
         <button
           ref={ref}
           data-value={value}
-          className="ui-bg-black ui-text-white ui-text-center ui-text-16 ui-font-medium ui-py-[22px] hover:ui-bg-gray-900 focus:ui-outline-none focus:ui-ring-2 focus:ui-ring-offset-2 focus:ui-ring-swifty-color-900"
+          className="ui-text-center ui-text-16 ui-font-medium ui-py-[22px] hover:dark:ui-bg-gray-900 hover:ui-bg-swifty-color-200 focus:ui-outline-none focus:ui-ring-2 focus:ui-ring-offset-2 focus:dark:ui-ring-swifty-color-900 hover:ui-ring-swifty-color-200"
           {...props}
         >
           {children}
