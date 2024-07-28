@@ -9,13 +9,13 @@ import { FindPasswordContext } from '../context';
 
 export default function Page() {
   const form = useFormContext();
-  const { invalid } = form.getFieldState('name');
+  const { invalid, isDirty } = form.getFieldState('id');
   const { nextStep } = useContext(FindPasswordContext);
 
   return (
     <>
       <Id />
-      <FixedBottomCTA disabled={invalid} onClick={nextStep}>
+      <FixedBottomCTA disabled={invalid || !isDirty} onClick={nextStep}>
         확인
       </FixedBottomCTA>
     </>
