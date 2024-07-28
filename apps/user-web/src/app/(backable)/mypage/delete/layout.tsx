@@ -40,7 +40,7 @@ export default function UserDelteLayout({
         <h2 className="text-center font-bold text-26 mt-[44px]">
           {currentStep}
         </h2>
-        <Main className="relative pb-20 scrollbar-hide w-full px-5 bg-swifty-color-100">
+        <Main className="relative pb-20 scrollbar-hide w-full px-5">
           <AnimatePresence initial={false}>
             <Choose value={currentStep}>
               <When value="비밀번호를 입력하세요">{password}</When>
