@@ -5,7 +5,6 @@ import FalBackImg from '@images/fallback-festival.png';
 import { formatDateRange } from '@swifty/shared-lib';
 import { transition } from '@swifty/ui';
 import { motion } from 'framer-motion';
-import Image from 'next/image';
 import NextLink from 'next/link';
 
 import { type SearchResult } from '.';

@@ -18,7 +18,7 @@ const navigationVariants = cva(
   {
     variants: {
       bg: {
-        gradient: 'bg-gradient-to-b from-black to-transparent text-white',
+        gradient: 'bg-gradient-to-b dark:from-black from-white to-transparent',
         transparent: 'bg-transparent',
         solid: 'bg-black',
         blur: 'backdrop-blur-md backdrop-filter',
@@ -47,7 +47,7 @@ export default function Navigation({
                 name="arrow-left"
                 className={cn(
                   '-translate-x-2.5 stroke-black dark:stroke-white',
-                  bg === 'gradient' && 'stroke-white',
+                  bg === 'gradient' && 'dark:stroke-white stroke-black',
                 )}
                 width={40}
                 height={40}
