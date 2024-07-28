@@ -61,7 +61,7 @@ export default function Select<T extends SelectOptionType[]>({
       <DrawerTrigger asChild>
         <button
           className={cn(
-            'ui-w-full ui-h-full ui-flex ui-items-center ui-justify-between ui-border ui-font-medium ui-rounded-xl ui-relative ui-px-5 ui-py-3 ui-overflow-hidden dark:ui-bg-swifty-color-800 ui-bg-white ui-transition-colors ui-duration-200 ui-ease-in-out focus:ui-outline-none focus:ui-ring-2 focus:ui-ring-offset-2 focus:ui-ring-primary',
+            'ui-w-full ui-h-full ui-flex ui-items-center ui-justify-between ui-border ui-font-medium ui-rounded-xl ui-relative ui-px-5 ui-py-3 ui-overflow-hidden dark:ui-bg-swifty-color-800 ui-bg-swifty-color-200 ui-transition-colors ui-duration-200 ui-ease-in-out focus:ui-outline-none focus:ui-ring-2 focus:ui-ring-offset-2 focus:ui-ring-primary',
             isOpen
               ? 'ui-border-primary ui-shadow-input-active'
               : 'ui-border-transparent',

@@ -101,7 +101,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function (
       whileTap={'active'}
       initial="initial"
       className={cn(
-        'ui-w-full ui-relative ui-rounded-xl ui-overflow-hidden ui-bg-white dark:ui-bg-swifty-color-800 ui-border ui-transition-colors ui-duration-200 ui-ease-in-out',
+        'ui-w-full ui-relative ui-rounded-xl ui-overflow-hidden ui-bg-swifty-color-200 dark:ui-bg-swifty-color-800 ui-border ui-transition-colors ui-duration-200 ui-ease-in-out',
         isFocused && !isError
           ? 'ui-border-primary ui-shadow-input-active'
           : 'ui-border-transparent',
