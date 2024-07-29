@@ -24,10 +24,8 @@ export default function Page() {
     if (currentStep === '비밀번호를 확인해주세요') {
       try {
         await http.patch('/user/pwd', {
-          body: {
-            phoneNumber,
-            password,
-          },
+          phoneNumber,
+          password,
         });
       } catch (e) {
         if (APIError.isAPIError(e)) {

@@ -26,12 +26,13 @@ export default function PasswordPage() {
     if (currentStep === '비밀번호를 확인해주세요') {
       // 비밀번호 변경 요청
       try {
-        await http.patch('/user/change/pwd', {
-          body: {
+        await http.patch(
+          '/user/change/pwd',
+          {
             newPwd: form.getValues('newPassword'),
           },
-          credentials: 'include',
-        });
+          { credentials: 'include' },
+        );
       } catch (e) {
         if (APIError.isAPIError(e)) {
           form.setError('newPassword', {
