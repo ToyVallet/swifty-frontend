@@ -2,8 +2,8 @@ import createStepContext from '@contexts/step-context';
 
 export const ticketingSteps = [
   '날짜를 선택해주세요',
-  '구역을 선택해주세요',
-  '선택 확인 페이지',
+  //'구역을 선택해주세요',
+  '티켓 예매 정보를 확인해주세요',
   '티켓 예매가 진행 중이에요\n조금만 기다려주세요',
 ] as const;
 

@@ -21,8 +21,8 @@ export default function DateSelect({ options }: DateSelectProps) {
           <div className="flex flex-col ui-divide-y ui-divide-swifty-color-700">
             {options.map((option) => (
               <Button
-                key={option.ticketingId}
-                data-value={option.ticketingId}
+                key={option.id}
+                data-value={option.id}
                 className="flex justify-center items-end rounded-none gap-[60px] py-4 hover:dark:ui-bg-gray-900 hover:ui-bg-swifty-color-300 focus:ui-bg-swifty-color-400  w-full"
                 disabled={!option.ticketingAvailable}
               >
@@ -49,16 +49,16 @@ export default function DateSelect({ options }: DateSelectProps) {
 
   return (
     <FormField
-      name="date"
+      name="scheduleId"
       render={({ field }) => (
         <Select
           options={options.map((option) => ({
             label: option.name,
-            value: option.ticketingId,
+            value: option.id,
             ...option,
           }))}
           label="날짜 선택"
-          defaultValue={options[0]?.ticketingId}
+          defaultValue={options[0]?.id}
           onValueChange={field.onChange}
           render={renderOptions}
         />
