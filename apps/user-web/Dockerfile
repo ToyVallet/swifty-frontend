@@ -1,4 +1,4 @@
-FROM node:18-alpine AS base
+FROM node:20-alpine AS base
 
 # This Dockerfile is copy-pasted into our main docs at /docs/handbook/deploying-with-docker.
 # Make sure you update both files!
@@ -8,8 +8,8 @@ FROM base AS builder
 RUN apk update
 RUN apk add --no-cache libc6-compat
 # Set working directory
-WORKDIR /app
-RUN yarn global add turbo
+WORKDIR /user
+RUN yarn global add turbo@latest
 COPY . .
 
 RUN turbo prune user-web --docker
@@ -18,16 +18,16 @@ RUN turbo prune user-web --docker
 FROM base AS installer
 RUN apk update
 RUN apk add --no-cache libc6-compat
-WORKDIR /app
+WORKDIR /user
 
 # First install the dependencies (as they change less often)
 COPY .gitignore .gitignore
-COPY --from=builder /app/out/json/ .
-COPY --from=builder /app/out/yarn.lock ./yarn.lock
+COPY --from=builder /user/out/json/ .
+COPY --from=builder /user/out/yarn.lock ./yarn.lock
 RUN yarn install
 
 # Build the project
-COPY --from=builder /app/out/full/ .
+COPY --from=builder /user/out/full/ .
 COPY turbo.json turbo.json
 
 # Uncomment and use build args to enable remote caching
@@ -37,23 +37,22 @@ COPY turbo.json turbo.json
 # ARG TURBO_TOKEN
 # ENV TURBO_TOKEN=$TURBO_TOKEN
 
-RUN yarn turbo build
+RUN yarn turbo run build
 
 FROM base AS runner
-WORKDIR /app
+WORKDIR /user
 
 # Don't run production as root
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 USER nextjs
 
-COPY --from=installer /app/apps/user-web/next.config.js .
-COPY --from=installer /app/apps/user-web/package.json .
+COPY --from=installer /user/apps/user-web/next.config.mjs .
+COPY --from=installer /user/apps/user-web/package.json .
 
 # Automatically leverage output traces to reduce image size
 # https://nextjs.org/docs/advanced-features/output-file-tracing
-COPY --from=installer --chown=nextjs:nodejs /app/apps/user-web/.next/standalone ./
-COPY --from=installer --chown=nextjs:nodejs /app/apps/user-web/.next/static ./apps/user-web/.next/static
-COPY --from=installer --chown=nextjs:nodejs /app/apps/user-web/public ./apps/user-web/public
+COPY --from=installer --chown=nextjs:nodejs /user/apps/user-web/.next/standalone ./
+COPY --from=installer --chown=nextjs:nodejs /user/apps/user-web/.next/static ./apps/user-web/.next/static
+COPY --from=installer --chown=nextjs:nodejs /user/apps/user-web/public ./apps/user-web/public
 
-CMD node apps/user-web/server.js
