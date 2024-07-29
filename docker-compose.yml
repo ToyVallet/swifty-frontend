@@ -1,6 +1,10 @@
+version: '3.8'
+
 services:
   user-web:
-    image: ho991217/user-web:dev
+    build:
+      context: .
+      dockerfile: ./apps/user-web/Dockerfile
     network_mode: 'host'
     environment:
       NODE_ENV: production
@@ -19,7 +23,9 @@ services:
       - /tmp
 
   root-admin:
-    image: ho991217/root-admin:dev
+    build:
+      context: .
+      dockerfile: ./apps/root-admin/Dockerfile
     network_mode: 'host'
     environment:
       NODE_ENV: production

@@ -1,4 +1,4 @@
-FROM node:18-alpine AS base
+FROM node:20-alpine AS base
  
 FROM base AS builder
 RUN apk update
@@ -29,7 +29,8 @@ RUN yarn install
  
 # Build the project
 COPY --from=builder /app/out/full/ .
-RUN yarn turbo run build
+COPY turbo.json turbo.json
+RUN yarn turbo build
  
 FROM base AS runner
 WORKDIR /app
