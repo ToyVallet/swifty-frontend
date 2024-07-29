@@ -35,7 +35,7 @@ export default function StudentCertificationImage({ onChange }: Props) {
     <section className="flex flex-col gap-2.5">
       <div
         onClick={imageUpload}
-        className="dark:bg-swifty-color-800 bg-swifty-color-200 rounded-xl flex justify-center items-center w-full min-w-[353px] min-h-[315px] relative"
+        className="dark:bg-swifty-color-800 bg-swifty-color-200 rounded-xl flex justify-center items-center w-full min-h-[315px] relative"
       >
         {imagePreview && (
           <Image
