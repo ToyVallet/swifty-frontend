@@ -27,7 +27,7 @@ export default function DateBlock({
       onClick={onClick}
       whileTap={{ scale: disabled ? 1 : 0.95 }}
       className={cn(
-        'flex flex-col h-full justify-center items-center rounded-lg flex-1 relative gap-2 text-white',
+        'flex flex-col h-full justify-center items-center rounded-lg flex-1 relative gap-2 ',
         disabled &&
           'text-neutral-400 dark:text-neutral-700 pointer-events-none',
         selected && 'text-white bg-primary',

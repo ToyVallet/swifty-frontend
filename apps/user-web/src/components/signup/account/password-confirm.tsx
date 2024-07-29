@@ -5,7 +5,7 @@ export default function PasswordConfirm() {
   return (
     <FormField
       name="passwordConfirm"
-      render={({ field }) => (
+      render={({ field, fieldState }) => (
         <FormErrorControl>
           <Input
             {...field}
@@ -13,6 +13,7 @@ export default function PasswordConfirm() {
             label="비밀번호 확인"
             placeholder="비밀번호를 한번 더 입력해주세요"
             autoComplete="new-password"
+            isError={fieldState.error}
           />
         </FormErrorControl>
       )}

@@ -49,12 +49,13 @@ export default function ConfirmPasswordForm() {
         <form onSubmit={form.handleSubmit(onSubmit)}>
           <FormField
             name="password"
-            render={({ field }) => (
+            render={({ field, fieldState }) => (
               <FormErrorControl>
                 <Input
                   label="비밀번호"
                   placeholder="********"
                   type="password"
+                  isError={fieldState.error}
                   {...field}
                 />
               </FormErrorControl>

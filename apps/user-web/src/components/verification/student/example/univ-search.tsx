@@ -44,7 +44,7 @@ export default function UnivSearch({ onChange }: Props) {
           animate="visible"
           exit="exit"
           transition={transition}
-          className="w-full h-full flex flex-col rounded-xl bg-swifty-color-800"
+          className="w-full h-full flex flex-col rounded-xl dark:bg-swifty-color-800 bg-swifty-color-200"
         >
           {searchList.length === 0 && (
             <div className="text-center text-16 p-5">
@@ -78,7 +78,7 @@ type ItemProps = {
 function Item({ value, onClick }: ItemProps) {
   return (
     <li
-      className="w-full text-16 font-medium py-3.5 px-5 rounded-xl hover:bg-swifty-color-600"
+      className="w-full text-16 font-medium py-3.5 px-5 rounded-xl hover:dark:bg-swifty-color-600 hover:bg-swifty-color-300"
       onMouseDown={onClick}
     >
       <span>{value}</span>

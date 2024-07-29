@@ -8,7 +8,7 @@ export default function ExampleImage() {
   const exampleImage = form.getValues('exampleImage');
 
   return (
-    <section className="w-full bg-swifty-color-800 rounded-xl px-5 pt-5 pb-[35px]">
+    <section className="w-full dark:bg-swifty-color-800 bg-swifty-color-200 rounded-xl px-5 pt-5 pb-[35px]">
       <h3 className="text-center font-medium text-14 mb-2.5">
         학적 인증 이미지 업로드 시 <br></br>아래의 사항이 포함되어야 합니다.
       </h3>

@@ -71,7 +71,7 @@ export default async function FestivalHomePage({
       title: <TileHeader>티켓 예매하기</TileHeader>,
       link: `/festival/${id}/ticketing`,
       icon: <BsBellFill size={17} />,
-      bgColor: 'bg-white text-black',
+      bgColor: 'dark:bg-white dark:text-black text-white bg-black',
       isCertificate,
       isAvaliable,
     },
@@ -80,7 +80,7 @@ export default async function FestivalHomePage({
   return (
     <>
       <Navigation bg="gradient" center={() => <LogoLink />} />
-      <div className="mb-[90px]">
+      <div className="mb-[90px]  bg-swifty-color-100 dark:bg-swifty-color-dark-bg">
         <Hero variant="image">
           <ImageWithFallback
             src={festivalInfo.festivalImage}

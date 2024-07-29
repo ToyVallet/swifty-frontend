@@ -26,7 +26,7 @@ export default function Page() {
   };
   return (
     <div className="flex flex-col w-full gap-5 mt-10">
-      <section className="bg-swifty-color-800 rounded-xl p-5 text-16 font-medium text-white text-center">
+      <section className="bg-swifty-color-200 dark:bg-swifty-color-800 rounded-xl p-5 text-16 font-medium text-center">
         {convertNewlineToJSX(
           '회원 탈퇴시 예매한 모든 티켓이 삭제됩니다.\n동의 하고 탈퇴를 원하실 경우 아래에\n "확인했습니다"를 입혁해주세요',
         )}
@@ -41,7 +41,7 @@ export default function Page() {
         }}
       />
       <FixedBottomCTA
-        variant={value === CONFIRM_MESSAGE ? 'default' : 'white'}
+        variant={value === CONFIRM_MESSAGE ? 'primary' : 'white'}
         disabled={value !== CONFIRM_MESSAGE}
         onClick={onClick}
       >

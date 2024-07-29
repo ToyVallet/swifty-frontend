@@ -26,6 +26,9 @@ export default function Page({ complete, name, phone }: Props) {
   const form = useForm<FindIdSchema>({
     mode: 'onChange',
     resolver: zodResolver(findIdSchema),
+    defaultValues: {
+      name: '',
+    },
   });
 
   const [currentStep, setCurrentStep] = useState<FindIdSteps>(findIdSteps[0]);
@@ -55,7 +58,7 @@ export default function Page({ complete, name, phone }: Props) {
           <AnimatePresence initial={false}>
             <Form {...form}>
               <form
-                className="text-white w-full"
+                className="w-full"
                 onSubmit={(e) => {
                   e.preventDefault();
                 }}

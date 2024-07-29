@@ -49,13 +49,13 @@ export default function SignupLayout({
     <>
       <Navigation title="회원가입" />
       <SignUpStepContext.Provider value={{ currentStep, nextStep }}>
-        <Main className="relative pb-20 scrollbar-hide px-5">
+        <Main className="relative pb-20 scrollbar-hide px-5 mt-[47px]">
           <Header>{currentStep}</Header>
 
           <AnimatePresence initial={false}>
             <Form {...form}>
               <form
-                className="text-white w-full"
+                className="w-full"
                 onSubmit={(e) => {
                   e.preventDefault();
                 }}

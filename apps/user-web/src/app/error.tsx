@@ -19,7 +19,7 @@ export default function Error({
   return (
     <>
       <Navigation title="오류" />
-      <div className="flex h-[100dvh] w-full flex-col items-center justify-center px-5 gap-5 text-white">
+      <div className="flex h-[100dvh] w-full flex-col items-center justify-center px-5 gap-5">
         <Icon name="user-web/500/face" height={128} />
         <h2 className="text-18 font-semibold text-center mb-5">
           웹 사이트에서 페이지를 표시할 수 없습니다.

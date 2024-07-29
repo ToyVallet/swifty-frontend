@@ -44,7 +44,7 @@ function Link({ href, title, icon }: VerificationLink) {
   return (
     <NextLink
       href={href}
-      className="rounded-lg bg-swifty-color-900 flex flex-col gap-[6px] items-center justify-center text-white w-full h-full text-13 font-semibold"
+      className="rounded-lg bg-swifty-color-200 dark:bg-swifty-color-900 flex flex-col gap-[6px] items-center justify-center w-full h-full text-13 font-semibold"
     >
       {icon}
       {title}

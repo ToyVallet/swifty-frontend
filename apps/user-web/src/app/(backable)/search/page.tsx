@@ -7,8 +7,8 @@ export default function SearchPage({
 }: SearchParams<{ keyword: string }>) {
   return (
     <>
-      <Navigation title="검색" />
-      <section className="px-2.5 pt-[27px] relative">
+      <Navigation title="검색" bg="blur" />
+      <section className="px-5 pt-[27px] relative">
         <SearchInput />
         <SearchResult keyword={keyword} />
       </section>

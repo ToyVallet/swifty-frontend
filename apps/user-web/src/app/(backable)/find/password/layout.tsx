@@ -52,7 +52,7 @@ export default function Page({ id, phone, password, complete }: Props) {
           <AnimatePresence initial={false}>
             <Form {...form}>
               <form
-                className="text-white w-full"
+                className="w-full"
                 onSubmit={(e) => {
                   e.preventDefault();
                 }}

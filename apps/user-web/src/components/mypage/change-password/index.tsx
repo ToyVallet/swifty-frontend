@@ -12,13 +12,14 @@ export default function Password({ name, label }: Props) {
   return (
     <FormField
       name={name}
-      render={({ field }) => (
+      render={({ field, fieldState }) => (
         <FormErrorControl>
           <Input
             type="password"
             label={label}
             placeholder="영문, 특수문자 포함 8자 이상"
             {...field}
+            isError={fieldState.error}
           />
         </FormErrorControl>
       )}

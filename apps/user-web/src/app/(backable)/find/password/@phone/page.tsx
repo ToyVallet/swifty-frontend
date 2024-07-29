@@ -16,7 +16,7 @@ export default function Page() {
   const { nextStep, currentStep } = useContext(FindPasswordContext);
   const name =
     currentStep === '휴대폰 번호를 입력하세요' ? 'phoneNumber' : 'smsCode';
-  const { invalid } = form.getFieldState(name);
+  const { invalid, isDirty } = form.getFieldState(name);
 
   const onClick = async () => {
     const phoneNumber = form.getValues('phoneNumber');
@@ -71,7 +71,7 @@ export default function Page() {
           </Funnel.Step>
         </Funnel>
       </div>
-      <FixedBottomCTA disabled={invalid} onClick={onClick}>
+      <FixedBottomCTA disabled={invalid || !isDirty} onClick={onClick}>
         확인
       </FixedBottomCTA>
     </>

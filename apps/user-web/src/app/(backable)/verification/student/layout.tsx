@@ -54,7 +54,7 @@ export default function UnivCertificationLayout({
     <>
       <Navigation title="학적 인증" />
       <CertificationStepContext.Provider value={{ currentStep, nextStep }}>
-        <Main className="h-full scrollbar-hide">
+        <Main className="h-full scrollbar-hide mt-[47px]">
           <Header>
             <Choose value={currentStep}>
               <When value="학적 인증을 시작할게요">
@@ -71,7 +71,7 @@ export default function UnivCertificationLayout({
           </Header>
           <AnimatePresence initial={false}>
             <Form {...form}>
-              <form className="text-white w-full h-full">
+              <form className="w-full h-full">
                 <Choose value={currentStep}>
                   <When value="학적 인증을 시작할게요">{example}</When>
                   <When value="인증 이미지를 업로드 해주세요">

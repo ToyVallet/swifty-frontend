@@ -5,7 +5,6 @@ import FalBackImg from '@images/fallback-festival.png';
 import { formatDateRange } from '@swifty/shared-lib';
 import { transition } from '@swifty/ui';
 import { motion } from 'framer-motion';
-import Image from 'next/image';
 import NextLink from 'next/link';
 
 import { type SearchResult } from '.';
@@ -21,7 +20,7 @@ function Item({ item }: { item: SearchResult }) {
       transition={transition}
       whileTap={{ scale: 0.98, backgroundColor: '#1a1a1a' }}
       href={`/festival/${item.id}`}
-      className="text-white bg-black flex w-full items-center gap-[30px] p-2.5 rounded-xl"
+      className="flex w-full items-center gap-[30px] p-2.5 rounded-xl"
     >
       <ImageWithFallback
         fallback={FalBackImg}

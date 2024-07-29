@@ -60,7 +60,7 @@ export default function SmsCode({ situationCode }: Props) {
     <div className="flex flex-col gap-3">
       <FormField
         name="smsCode"
-        render={({ field }) => (
+        render={({ field, fieldState }) => (
           <FormErrorControl>
             <Input
               {...field}
@@ -68,6 +68,7 @@ export default function SmsCode({ situationCode }: Props) {
               label="인증번호"
               placeholder="숫자 6자리"
               maxLength={6}
+              isError={fieldState.error}
             />
           </FormErrorControl>
         )}

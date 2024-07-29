@@ -4,6 +4,7 @@ import FallbackImage from '@images/fallback-festival.png';
 import { type Festival } from '@lib/types/festival';
 import { type Params, http } from '@swifty/shared-lib';
 import { Button } from '@swifty/ui';
+import dayjs from 'dayjs';
 
 export interface TicketingDate {
   name: string;
@@ -34,7 +35,7 @@ export default async function DateSelectionPage({
       concertDateTime: '2022-01-01 23:59:59',
       ticketingStartDateTime: '2021-12-01 00:00:00',
       ticketingEndDateTime: '2022-01-01 23:59:59',
-      ticketingAvailable: false,
+      ticketingAvailable: true,
       fieldLength: 1,
     },
   ]);
@@ -45,7 +46,7 @@ export default async function DateSelectionPage({
 
   return (
     <div>
-      <div className="flex flex-col w-full items-center gap-10 text-white px-5">
+      <div className="flex flex-col w-full items-center gap-10 px-5">
         <ImageWithFallback
           src={festivalInfo.festivalImage}
           fallback={FallbackImage}
@@ -57,7 +58,8 @@ export default async function DateSelectionPage({
         <div className="flex flex-col items-center gap-[6px]">
           <h1 className="text-24 font-semibold">{festivalInfo.name}</h1>
           <p className="text-16 font-medium">
-            {festivalInfo.startDate} - {festivalInfo.endDate}
+            {dayjs(festivalInfo.startDate).format('YYYY-MM-DD')} -{' '}
+            {dayjs(festivalInfo.endDate).format('YYYY-MM-DD')}
           </p>
         </div>
       </div>
