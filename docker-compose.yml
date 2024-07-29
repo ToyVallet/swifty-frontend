@@ -1,38 +1,68 @@
+# services:
+#   user-web:
+#     image: ho991217/user-web:dev
+#     network_mode: 'host'
+#     environment:
+#       NODE_ENV: production
+#       PORT: 3000
+#     command: ['node', 'apps/user-web/server.js']
+#     restart: always
+#     logging:
+#       driver: json-file
+#       options:
+#         max-size: '10m'
+#         max-file: '3'
+#     security_opt:
+#       - no-new-privileges:true
+#     read_only: true
+#     tmpfs:
+#       - /tmp
+
+#   root-admin:
+#     image: ho991217/root-admin:dev
+#     network_mode: 'host'
+#     environment:
+#       NODE_ENV: production
+#       PORT: 3001
+#     command: ['node', 'apps/root-admin/server.js']
+#     restart: always
+#     logging:
+#       driver: json-file
+#       options:
+#         max-size: '10m'
+#         max-file: '3'
+#     security_opt:
+#       - no-new-privileges:true
+#     read_only: true
+#     tmpfs:
+#       - /tmp
+
+version: '3'
+
 services:
   user-web:
-    image: ho991217/user-web:dev
-    network_mode: 'host'
-    environment:
-      NODE_ENV: production
-      PORT: 3000
-    command: ['node', 'apps/user-web/server.js']
+    container_name: user-web
+    build:
+      context: .
+      dockerfile: ./apps/user-web/Dockerfile
     restart: always
-    logging:
-      driver: json-file
-      options:
-        max-size: '10m'
-        max-file: '3'
-    security_opt:
-      - no-new-privileges:true
-    read_only: true
-    tmpfs:
-      - /tmp
-
+    ports:
+      - 3000:3000
+    networks:
+      - app_network
   root-admin:
-    image: ho991217/root-admin:dev
-    network_mode: 'host'
-    environment:
-      NODE_ENV: production
-      PORT: 3001
-    command: ['node', 'apps/root-admin/server.js']
+    container_name: root-admin
+    build:
+      context: .
+      dockerfile: ./apps/root-admin/Dockerfile
     restart: always
-    logging:
-      driver: json-file
-      options:
-        max-size: '10m'
-        max-file: '3'
-    security_opt:
-      - no-new-privileges:true
-    read_only: true
-    tmpfs:
-      - /tmp
+    ports:
+      - 3001:3001
+    networks:
+      - app_network
+
+# Define a network, which allows containers to communicate
+# with each other, by using their container name as a hostname
+networks:
+  app_network:
+    external: true
