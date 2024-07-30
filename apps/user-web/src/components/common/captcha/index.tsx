@@ -20,7 +20,7 @@ export default function GoogleCaptcha({ onSucess }: Props) {
   };
   return (
     <ReCAPTCHA
-      sitekey="6Lf1fxoqAAAAALPYFLz7APuNwHCGLOjvh_j8wxbh"
+      sitekey="6LfgthoqAAAAAHkLJli12cf5AH1Qetq6s7BQkjqh"
       onChange={onChange}
       ref={recaptcha}
       size="normal"

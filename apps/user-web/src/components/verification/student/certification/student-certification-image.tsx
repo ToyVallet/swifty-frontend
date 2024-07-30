@@ -1,10 +1,12 @@
 'use client';
 
 import FileIcon from '@icons/file.svg';
+import { cn } from '@swifty/shared-lib';
 import { Button } from '@swifty/ui';
 import Image from 'next/image';
 import type { ChangeEvent } from 'react';
 import { useRef, useState } from 'react';
+import { useFormContext, useWatch } from 'react-hook-form';
 
 type Props = {
   onChange?: (file: File) => void;
@@ -16,6 +18,15 @@ export default function StudentCertificationImage({ onChange }: Props) {
   const imageUpload = () => {
     inputRef.current?.click();
   };
+
+  const form = useFormContext();
+
+  useWatch({
+    control: form.control,
+    name: 'image',
+  });
+
+  const imageError = form.formState.errors['image'];
 
   const handleImage = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -31,11 +42,15 @@ export default function StudentCertificationImage({ onChange }: Props) {
       });
     }
   };
+
   return (
     <section className="flex flex-col gap-2.5">
       <div
         onClick={imageUpload}
-        className="dark:bg-swifty-color-800 bg-swifty-color-200 rounded-xl flex justify-center items-center w-full min-h-[315px] relative"
+        className={cn(
+          'dark:bg-swifty-color-800 bg-swifty-color-200 rounded-xl flex justify-center items-center w-full min-h-[315px] relative',
+          imageError && 'border border-destructive shadow-input-error',
+        )}
       >
         {imagePreview && (
           <Image

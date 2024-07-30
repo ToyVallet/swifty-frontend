@@ -90,7 +90,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function (
     setInputValue(sanitizedValue);
     onChange?.(e);
   }, []);
-  console.log(props);
+
   return (
     <motion.div
       tabIndex={-1}
