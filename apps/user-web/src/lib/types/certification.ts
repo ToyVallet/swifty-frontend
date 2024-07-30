@@ -27,4 +27,5 @@ export type VerficationStatus =
 export type VerficationAPI = {
   certificationAnswerId: string;
   certificationStatus: VerficationStatus;
+  rejectedReason: string;
 };

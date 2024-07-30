@@ -32,6 +32,7 @@ export default async function TicketingResultPage({
     // TODO: 지금은 티켓팅 결과를 가져오는 API가 없어서 임시로 작성한 코드입니다.
     result = await http.get<TicketingResult>('/ticket/{id}', {
       params: { id },
+      query: { type: 'RESULT' },
       credentials: 'include',
     });
   } catch (e) {

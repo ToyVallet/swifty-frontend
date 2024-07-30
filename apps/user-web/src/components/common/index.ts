@@ -15,3 +15,4 @@ export { default as FixedBottomCTA } from './fixed-bottom-cta';
 export { default as FixedBottomGroup } from './fixed-bottom-group';
 export { default as Main } from './main';
 export { default as Search } from './search';
+export { default as GoogleCaptcha } from './captcha';

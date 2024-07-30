@@ -67,12 +67,13 @@ export default function ChangePhoneNumberForm() {
         const phoneNumber: string = form.getValues('phoneNumber');
         await checkSmsCode(code, phoneNumber, 'CHANGE_PHONE_NUMBER');
 
-        await http.patch('/user/phone', {
-          body: {
+        await http.patch(
+          '/user/phone',
+          {
             phoneNumber,
           },
-          credentials: 'include',
-        });
+          { credentials: 'include' },
+        );
 
         await revalidate('user');
         router.push('/mypage/change-phone-number/complete');

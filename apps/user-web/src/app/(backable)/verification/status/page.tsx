@@ -11,7 +11,10 @@ export default async function Page() {
   return (
     <>
       <Navigation title="재학생 인증 상태" bg="blur" />
-      <VerificationStatus step={data.certificationStatus} />
+      <VerificationStatus
+        step={data.certificationStatus}
+        message={data.rejectedReason}
+      />
     </>
   );
 }

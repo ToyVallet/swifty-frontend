@@ -1,7 +1,14 @@
 import { z } from 'zod';
 
-const MAX_UPLOAD_SIZE = 1024 * 1024 * 5; // 5MB
-const ACCEPTED_FILE_TYPES = ['image/jpg', 'image/jpeg'];
+const ACCEPTED_IMAGE_TYPES = [
+  'image/jpeg',
+  'image/jpg',
+  'image/png',
+  'image/webp',
+  'image/JPEG',
+  'image/JPG',
+  'image/PNG',
+];
 
 /**대학생 고유 아이디 */
 const universityId = z.string();
@@ -27,7 +34,12 @@ const ocrMajor = z.string();
 const ocrStudenStatus = z.string();
 
 /**이미지 */
-const image = z.any();
+const image = z
+  .any()
+  .refine(
+    (files) => ACCEPTED_IMAGE_TYPES.includes(files?.type),
+    '.jpg, .jpeg, .png, .webp 형식 이미지 파일만 허용합니다.',
+  );
 
 const exampleImage = z.string();
 

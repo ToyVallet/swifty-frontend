@@ -47,6 +47,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function (
     value,
     onChange,
     isError,
+    id,
     ...props
   },
   ref,
@@ -69,10 +70,6 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function (
   const handleBlur = useCallback((e: React.FocusEvent<HTMLInputElement>) => {
     setIsFocused(false);
     onBlur?.(e);
-  }, []);
-
-  const labelClick = useCallback((e: React.MouseEvent<HTMLLabelElement>) => {
-    setIsFocused(true);
   }, []);
 
   useEffect(() => {
@@ -110,7 +107,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function (
     >
       {label && (
         <Label
-          htmlFor={name}
+          htmlFor={id || name}
           className={cn(
             'ui-absolute ui-left-5 ui-top-[14px] ui-transition-all ui-duration-200 ui-ease-in-out',
             isFocused && !isError && 'ui-text-primary',
@@ -118,14 +115,12 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function (
             !isFocused && 'ui-text-swifty-color-400',
             isActive ? 'ui-text-[14px]' : 'ui-text-16',
           )}
-          onClick={labelClick}
         >
           {label}
         </Label>
       )}
       <input
         ref={ref}
-        id={name}
         type={!isVisible && type !== 'number' ? type : 'text'}
         value={inputValue}
         className={cn(
@@ -141,6 +136,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function (
         onBlur={handleBlur}
         onChange={handleChange}
         placeholder={isActive ? placeholder : ''}
+        id={id || name}
         {...props}
       />
       <If condition={type === 'password' && isActive}>

@@ -44,7 +44,7 @@ export default function Page({ id, phone, password, complete }: Props) {
   };
   return (
     <>
-      <Navigation title="아이디 찾기" />
+      <Navigation title="비밀번호 찾기" />
       <FindPasswordContext.Provider value={{ currentStep, nextStep }}>
         <Main className="relative pb-20 scrollbar-hide px-5 mt-[47px]">
           <Header>{currentStep}</Header>

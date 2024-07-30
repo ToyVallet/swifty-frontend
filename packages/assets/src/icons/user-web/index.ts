@@ -11,6 +11,8 @@ export interface UserWebIconsMap {
   'user-web/verification/varification-done': ImportedIconComponent;
   'user-web/verification/varification-request': ImportedIconComponent;
   'user-web/verification/varification': ImportedIconComponent;
+  'user-web/ticketing/calender': ImportedIconComponent;
+  'user-web/ticketing/time': ImportedIconComponent;
 }
 
 export const userWebIcons: UserWebIconsMap = {
@@ -28,4 +30,6 @@ export const userWebIcons: UserWebIconsMap = {
   'user-web/verification/varification': lazy(
     () => import('./verification/verification.svg'),
   ),
+  'user-web/ticketing/calender': lazy(() => import('./ticketing/calender.svg')),
+  'user-web/ticketing/time': lazy(() => import('./ticketing/time.svg')),
 } as const;

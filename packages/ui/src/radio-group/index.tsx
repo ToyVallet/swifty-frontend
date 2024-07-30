@@ -13,7 +13,7 @@ const RadioGroup = React.forwardRef<
   return (
     <FormControl>
       <RadioGroupPrimitive.Root
-        className={cn('ui-grid ui-gap-2', className)}
+        className={cn(className)}
         {...props}
         ref={ref}
       />
