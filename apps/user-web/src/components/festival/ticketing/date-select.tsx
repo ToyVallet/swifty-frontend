@@ -50,7 +50,7 @@ export default function DateSelect({ options }: DateSelectProps) {
   return (
     <FormField
       name="scheduleId"
-      render={({ field }) => (
+      render={({ field, fieldState }) => (
         <Select
           options={options.map((option) => ({
             label: option.name,
@@ -61,6 +61,7 @@ export default function DateSelect({ options }: DateSelectProps) {
           defaultValue={options[0]?.id}
           onValueChange={field.onChange}
           render={renderOptions}
+          {...fieldState}
         />
       )}
     />

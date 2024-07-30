@@ -1,5 +1,6 @@
 import '@swifty/ui/styles.css';
 import type { Metadata } from 'next';
+import Script from 'next/script';
 import type { PropsWithChildren } from 'react';
 
 import './globals.css';

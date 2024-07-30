@@ -5,8 +5,8 @@ import { TicketingStepContext } from '@app/(backable)/festival/[id]/ticketing/co
 import { FixedBottomGroup } from '@components/common';
 import DateSelect from '@components/festival/ticketing/date-select';
 import { Button } from '@swifty/ui';
-import { useContext } from 'react';
-import { useFormContext } from 'react-hook-form';
+import { useContext, useEffect } from 'react';
+import { useFormContext, useWatch } from 'react-hook-form';
 
 type Props = {
   ticketings: TicketingDate[];
@@ -15,8 +15,15 @@ type Props = {
 export default function TicketingDateFixedButtonGroup({ ticketings }: Props) {
   const { nextStep } = useContext(TicketingStepContext);
   const form = useFormContext();
-  const { invalid, isDirty } = form.getFieldState('scheduleId');
+
+  useWatch({
+    control: form.control,
+    name: 'scheduleId',
+  });
+
+  const { invalid, isDirty } = form.getFieldState('scheduleId', form.formState);
   const isDisabled = invalid || !isDirty;
+
   return (
     <FixedBottomGroup className="gap-5">
       <DateSelect options={ticketings} />
