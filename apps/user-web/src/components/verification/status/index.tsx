@@ -203,12 +203,12 @@ const statusNotiVariants = cva(
   {
     variants: {
       status: {
-        not: 'bg-swifty-color-800',
-        yet: 'bg-swifty-color-800',
+        not: 'dark:bg-swifty-color-800 bg-swifty-color-500',
+        yet: 'dark:bg-swifty-color-800 bg-swifty-color-400',
         during: 'bg-swifty-color-500',
         done: 'bg-primary',
         sucess: 'bg-swifty-color-green',
-        fail: 'bg-[#ff004d]',
+        fail: 'bg-destructive',
       },
     },
     defaultVariants: {

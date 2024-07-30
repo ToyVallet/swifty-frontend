@@ -35,7 +35,7 @@ export default function SignupLayout({
     resolver: zodResolver(formSchema),
   });
 
-  const [currentStep, setCurrentStep] = useState<Step>(steps[0]);
+  const [currentStep, setCurrentStep] = useState<Step>(steps[8]);
 
   const nextStep = () => {
     const nextStepIndex = steps.indexOf(currentStep) + 1;
