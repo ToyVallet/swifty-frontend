@@ -20,12 +20,14 @@ type TicketingLayoutProps = PropsWithChildren<{
   date: ReactNode;
   area: ReactNode;
   check: ReactNode;
+  wait: ReactNode;
 }>;
 
 export default function TicketingLayout({
   date,
   area,
   check,
+  wait,
 }: TicketingLayoutProps) {
   const form = useForm<TicketingValues>({
     mode: 'onChange',
@@ -48,6 +50,8 @@ export default function TicketingLayout({
     }
   };
 
+  console.log(currentStep);
+
   return (
     <>
       <Navigation title="티켓 예매하기" />
@@ -56,28 +60,30 @@ export default function TicketingLayout({
           <main
             className={cn(
               'h-full flex flex-col relative pb-20 overflow-y-auto scrollbar-hide',
-              currentStep === '날짜를 선택해주세요' && 'mt-[47px]',
+              currentStep !== '티켓 예매 정보를 확인해주세요' && 'mt-[47px]',
             )}
           >
             <Choose value={currentStep}>
               <When value="티켓 예매 정보를 확인해주세요">{check}</When>
               <Otherwise>
-                <>
-                  <Header>{currentStep}</Header>
-                  <AnimatePresence initial={false}>
-                    <form
-                      className="w-full h-full"
-                      onSubmit={(e) => {
-                        e.preventDefault();
-                      }}
-                    >
-                      <Choose value={currentStep}>
-                        <When value="날짜를 선택해주세요">{date}</When>
-                        {/* <When value="구역을 선택해주세요">{area}</When> */}
-                      </Choose>
-                    </form>
-                  </AnimatePresence>
-                </>
+                <Header>{currentStep}</Header>
+                <AnimatePresence initial={false}>
+                  <form
+                    className="w-full h-full"
+                    onSubmit={(e) => {
+                      e.preventDefault();
+                    }}
+                  >
+                    <Choose value={currentStep}>
+                      <When value="날짜를 선택해주세요">{date}</When>
+                      <When
+                        value={'티켓 예매가 진행 중이에요\n조금만 기다려주세요'}
+                      >
+                        {wait}
+                      </When>
+                    </Choose>
+                  </form>
+                </AnimatePresence>
               </Otherwise>
             </Choose>
           </main>
