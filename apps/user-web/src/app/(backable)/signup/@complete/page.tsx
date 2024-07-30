@@ -17,7 +17,7 @@ export default function SignupCompletePage() {
         height={255}
       />
       <div className="text-center">
-        <span className="text-14 font-medium text-white">
+        <span className="text-14 font-medium">
           대학 축제 티켓팅 기능은 학적 인증이 필요합니다.
         </span>
       </div>
