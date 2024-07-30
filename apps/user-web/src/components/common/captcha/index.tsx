@@ -5,10 +5,10 @@ import { useRef } from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
 
 type Props = {
-  nextStep?: () => void;
+  onSucess?: () => void;
 };
 
-export default function GoogleCaptcha({ nextStep }: Props) {
+export default function GoogleCaptcha({ onSucess }: Props) {
   const recaptcha: RefObject<ReCAPTCHA> = useRef(null);
   const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
@@ -16,7 +16,7 @@ export default function GoogleCaptcha({ nextStep }: Props) {
     // 서버로 데이터 전송하기
     console.log(value);
     // 데이터 확인 성공
-    nextStep?.();
+    onSucess?.();
   };
   return (
     <ReCAPTCHA
