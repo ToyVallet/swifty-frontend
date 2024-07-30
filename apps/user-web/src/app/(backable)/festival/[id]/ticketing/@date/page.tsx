@@ -4,6 +4,7 @@ import FallbackImage from '@images/fallback-festival.png';
 import { type Festival } from '@lib/types/festival';
 import { type Params, http } from '@swifty/shared-lib';
 import dayjs from 'dayjs';
+import { redirect } from 'next/navigation';
 
 export interface TicketingDate {
   name: string;
@@ -26,6 +27,10 @@ export default async function DateSelectionPage({
     credentials: 'include',
     params: { id },
   });
+
+  if (ticketings.length === 0) {
+    redirect('/not-authorized');
+  }
 
   return (
     <div>
