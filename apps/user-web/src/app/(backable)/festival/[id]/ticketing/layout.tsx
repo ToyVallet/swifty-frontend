@@ -50,8 +50,6 @@ export default function TicketingLayout({
     }
   };
 
-  console.log(currentStep);
-
   return (
     <>
       <Navigation title="티켓 예매하기" />
