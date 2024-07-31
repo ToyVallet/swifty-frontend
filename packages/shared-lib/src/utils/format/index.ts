@@ -1,2 +1,7 @@
 export { formatPhoneNumber } from './phone';
-export { formatDate, formatDateRange, formatDateOfBirth } from './date';
+export {
+  formatDate,
+  formatDateRange,
+  formatDateOfBirth,
+  dayDifference,
+} from './date';

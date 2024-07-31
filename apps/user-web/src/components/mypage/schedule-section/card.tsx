@@ -1,12 +1,20 @@
+'use client';
+
+import { FadeOverlay, ImageWithFallback } from '@components/common';
+import FallbackHero from '@images/fallback-hero.png';
 import { type LineUp } from '@lib/types';
-import Image, { type StaticImageData } from 'next/image';
+import { type StaticImageData } from 'next/image';
+import { useRouter } from 'next/navigation';
+import type { MouseEvent } from 'react';
 
 type CardProps = {
   title: string;
   date: string;
   lineups: LineUp[];
-  enterAt: Date;
+  enterAt: string;
   backgroundImage: StaticImageData | string;
+  ticketId: string;
+  festivalId: string;
 };
 
 export default function Card({
@@ -15,22 +23,40 @@ export default function Card({
   lineups,
   enterAt,
   backgroundImage,
+  ticketId,
+  festivalId,
 }: CardProps) {
+  const router = useRouter();
+
+  const onNavigateFestival = (e: MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
+    router.push(`/festival/${festivalId}`);
+  };
+  const onNavigateTicketDetail = (e: MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
+    router.push(`/ticketing-result/${ticketId}`);
+  };
   return (
-    <div className="w-full rounded-xl p-5 relative overflow-hidden bg-contain bg-center bg-no-repeat bg-gradient-to-t from-[#001235] to-transparent">
-      <div className="flex flex-col gap-[10px] text-white">
+    <div
+      className="w-full rounded-xl p-5 relative overflow-hidden "
+      onClick={onNavigateFestival}
+    >
+      <ImageWithFallback
+        src={backgroundImage}
+        alt="background"
+        className="z-10 object-cover"
+        fill
+        fallback={FallbackHero}
+      />
+      <FadeOverlay className="z-20" />
+      <div className="flex flex-col gap-[10px] z-20 relative">
         <h4 className="text-22 font-bold">{title}</h4>
         <p className="text-12 font-normal">{date}</p>
       </div>
-      <div className="mt-[51px] flex items-center justify-between">
-        <div>라인업 보기</div>
-        <div className="font-semibold text-14 text-primary">입장 10분 전</div>
+      <div className="mt-[51px] flex items-center justify-between z-20 relative">
+        <div onClick={onNavigateTicketDetail}>라인업 보기</div>
+        <div className="font-bold text-14 text-primary">{enterAt}</div>
       </div>
-      <Image
-        src={backgroundImage}
-        alt="background"
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-10"
-      />
     </div>
   );
 }

@@ -9,6 +9,7 @@ const user = [
   '/user/check/pwd',
   '/user/change/pwd',
   '/user/phone',
+  '/user/ticket',
 ] as const;
 
 const certification = [
