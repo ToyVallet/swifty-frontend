@@ -37,12 +37,15 @@ const ticketing = [
   '/ticketing/schedule/{id}/check',
 ] as const;
 
+const recaptcha = ['/recaptcha'] as const;
+
 export const userApi = [
   ...user,
   ...certification,
   ...festival,
   ...sms,
   ...ticketing,
+  ...recaptcha,
 ] as const;
 
 export type UserApiKeys = (typeof userApi)[number];

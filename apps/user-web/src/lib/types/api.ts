@@ -23,3 +23,16 @@ export type UserTicketApi = {
   festivalId: string;
   festivalImage: string;
 };
+
+export interface TicketingResultApi {
+  name: string;
+  issuedDateTime: string;
+  concertStartDateTime: string;
+  concertEndDateTime: string;
+  concertLocation: string;
+  areaName: string;
+  ticketIdentifier: string;
+  festivalName: string;
+  concertName: string;
+  poster: string;
+}
