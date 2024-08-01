@@ -1,11 +1,10 @@
 'use client';
 
-import { GlobalNavigation } from '@components/common';
 import TicketCard from '@components/ticket/ticket-card';
 import { Tabs, TabsTrigger } from '@components/ui/tabs';
 import type { UserTicketApi } from '@lib/types';
 import { TabsContent, TabsList } from '@radix-ui/react-tabs';
-import { Drawer, DrawerContent, DrawerTitle, DrawerTrigger } from '@swifty/ui';
+import { Drawer, DrawerContent, DrawerTitle } from '@swifty/ui';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
@@ -21,6 +20,7 @@ export default function TicketDrawer({
   overDateTickets,
 }: Props) {
   const [open] = useState(true);
+
   const router = useRouter();
   const onOpenChange = (open: boolean) => {
     if (!open) {

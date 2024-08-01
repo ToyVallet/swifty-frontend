@@ -5,14 +5,13 @@ import dayjs from 'dayjs';
 import Link from 'next/link';
 
 export default function TicketCard(props: UserTicketApi) {
-  const id = 'asd';
   const { ticketId, festivalName, concertDate } = props;
   const dDay = dayDifference(concertDate);
   return (
     <div className="px-4 dark:bg-swifty-color-900 bg-swifty-color-100 rounded-xl py-4 flex flex-col gap-2 justify-center divide-y divide-swifty-color-200 dark:divide-swifty-color-700">
       <div className="flex justify-between items-center py-2">
         <h1 className="text-13 font-normal dark:text-swifty-color-300 text-swifty-color-400">
-          예매 번호: {ticketId}
+          예매 번호: {ticketId.slice(0, 6)}
         </h1>
         <span className="text-primary text-16 font-bold">{dDay}</span>
       </div>
