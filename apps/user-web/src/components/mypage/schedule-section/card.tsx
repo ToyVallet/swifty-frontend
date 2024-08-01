@@ -34,12 +34,12 @@ export default function Card({
   };
   const onNavigateTicketDetail = (e: MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
-    router.push(`/ticketing-result/${ticketId}`);
+    router.push(`/ticket`);
   };
   return (
     <div
       className="w-full rounded-xl p-5 relative overflow-hidden "
-      onClick={onNavigateFestival}
+      onClick={onNavigateTicketDetail}
     >
       <ImageWithFallback
         src={backgroundImage}
@@ -54,7 +54,7 @@ export default function Card({
         <p className="text-12 font-normal">{date}</p>
       </div>
       <div className="mt-[51px] flex items-center justify-between z-20 relative">
-        <div onClick={onNavigateTicketDetail}>라인업 보기</div>
+        <div onClick={onNavigateFestival}>라인업 보기</div>
         <div className="font-bold text-14 text-primary">{enterAt}</div>
       </div>
     </div>

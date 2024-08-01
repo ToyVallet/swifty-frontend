@@ -19,7 +19,7 @@ export type UserTicketApi = {
   ticketId: string;
   festivalName: string;
   festivalDescription: string;
-  concertDate: '2024-07-30T10:28:02.440Z';
+  concertDate: string;
   festivalId: string;
   festivalImage: string;
 };

@@ -21,7 +21,7 @@ export default function TicketInfo({ ticketing, concertsResponse }: Props) {
   const concertDetail = concertsResponse.filter(
     (concert) => concert.id === selectedTicketId,
   );
-  console.log(concertDetail, selectedTicketId, concertsResponse);
+
   return (
     <div className="w-full">
       <List>

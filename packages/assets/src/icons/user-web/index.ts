@@ -13,6 +13,7 @@ export interface UserWebIconsMap {
   'user-web/verification/varification': ImportedIconComponent;
   'user-web/ticketing/calender': ImportedIconComponent;
   'user-web/ticketing/time': ImportedIconComponent;
+  'user-web/ticket-list/calender': ImportedIconComponent;
 }
 
 export const userWebIcons: UserWebIconsMap = {
@@ -32,4 +33,7 @@ export const userWebIcons: UserWebIconsMap = {
   ),
   'user-web/ticketing/calender': lazy(() => import('./ticketing/calender.svg')),
   'user-web/ticketing/time': lazy(() => import('./ticketing/time.svg')),
+  'user-web/ticket-list/calender': lazy(
+    () => import('./ticket-list/calender.svg'),
+  ),
 } as const;
