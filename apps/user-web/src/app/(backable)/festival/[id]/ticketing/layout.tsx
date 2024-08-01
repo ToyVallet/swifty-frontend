@@ -20,14 +20,12 @@ type TicketingLayoutProps = PropsWithChildren<{
   date: ReactNode;
   area: ReactNode;
   check: ReactNode;
-  wait: ReactNode;
 }>;
 
 export default function TicketingLayout({
   date,
   area,
   check,
-  wait,
 }: TicketingLayoutProps) {
   const form = useForm<TicketingValues>({
     mode: 'onChange',
@@ -74,11 +72,6 @@ export default function TicketingLayout({
                   >
                     <Choose value={currentStep}>
                       <When value="날짜를 선택해주세요">{date}</When>
-                      <When
-                        value={'티켓 예매가 진행 중이에요\n조금만 기다려주세요'}
-                      >
-                        {wait}
-                      </When>
                     </Choose>
                   </form>
                 </AnimatePresence>

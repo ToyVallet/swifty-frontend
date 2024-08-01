@@ -4,33 +4,21 @@ import {
   Navigation,
 } from '@components/common';
 import ImageFallBack from '@images/fallback-festival.png';
+import type { TicketingResultApi } from '@lib/types';
 import { type Params, formatDateRange, http } from '@swifty/shared-lib';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 
 type TicketingResultPageProps = Params<{ id: string }>;
 
-interface TicketingResult {
-  name: 'string';
-  issuedDateTime: '2024-07-23T07:54:27.665Z';
-  concertStartDateTime: '2024-07-23T07:54:27.665Z';
-  concertEndDateTime: '2024-07-23T07:54:27.665Z';
-  concertLocation: 'string';
-  areaName: 'string';
-  ticketIdentifier: '123456';
-  festivalName: 'DANFESTA 2024';
-  concertName: '1일차';
-  poster: 'string';
-}
-
 export default async function TicketingResultPage({
   params: { id },
 }: TicketingResultPageProps) {
-  let result: TicketingResult | null = null;
+  let result: TicketingResultApi | null = null;
 
   try {
     // TODO: 지금은 티켓팅 결과를 가져오는 API가 없어서 임시로 작성한 코드입니다.
-    result = await http.get<TicketingResult>('/ticket/{id}', {
+    result = await http.get<TicketingResultApi>('/ticket/{id}', {
       params: { id },
       query: { type: 'RESULT' },
       credentials: 'include',
