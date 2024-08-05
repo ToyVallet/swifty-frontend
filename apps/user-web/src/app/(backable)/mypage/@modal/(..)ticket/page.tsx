@@ -9,6 +9,7 @@ export default async function Page() {
     <TicketDrawer
       availableTickets={availableTickets}
       overDateTickets={overDateTickets}
+      backUrl="/mypage"
     />
   );
 }

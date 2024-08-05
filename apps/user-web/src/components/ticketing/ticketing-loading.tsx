@@ -8,13 +8,11 @@ import { convertNewlineToJSX } from '@toss/react';
 import Image from 'next/image';
 
 type Props = {
-  cookies: string;
   id: string;
 };
 
-export default function TicketingWait({ cookies, id }: Props) {
-  // SSE를 활용한 연결 로직 추가 필요'
-  useEventSoure(cookies, id);
+export default function TicketingWait({ id }: Props) {
+  useEventSoure(id);
   return (
     <main className="h-full flex flex-col items-center relative pb-20 overflow-y-auto scrollbar-hide mt-[47px]">
       <Header>

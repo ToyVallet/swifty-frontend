@@ -4,9 +4,18 @@ import QrCode from '@components/ticket/qr-code';
 import { Avatar, AvatarFallback, AvatarImage } from '@components/ui/avatar';
 import { Tabs, TabsContent } from '@components/ui/tabs';
 import type { TicketingResultApi } from '@lib/types';
-import { Button, Drawer, DrawerContent, DrawerTitle } from '@swifty/ui';
+import * as VisuallyHidden from '@radix-ui/react-visually-hidden';
+import { Icon } from '@swifty/assets';
+import {
+  Button,
+  Drawer,
+  DrawerContent,
+  DrawerDescription,
+  DrawerTitle,
+} from '@swifty/ui';
 import { convertNewlineToJSX } from '@toss/react';
 import dayjs from 'dayjs';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { usePathname } from 'next/navigation';
 import type { PropsWithChildren } from 'react';
@@ -28,7 +37,9 @@ const Text = ({ children }: PropsWithChildren) => (
   <h1 className="text-14 font-medium text-center">{children}</h1>
 );
 
-export default function TicketDetailDrawer(props: TicketingResultApi) {
+type Props = { backUrl?: string } & TicketingResultApi;
+
+export default function TicketDetailDrawer({ backUrl = '/', ...props }: Props) {
   const {
     name,
     qrEmbeddedId,
@@ -47,7 +58,7 @@ export default function TicketDetailDrawer(props: TicketingResultApi) {
   const onOpenChange = (open: boolean) => {
     if (!open) {
       setOpen(false);
-      router.push('/');
+      router.replace(backUrl);
     }
   };
 
@@ -62,14 +73,22 @@ export default function TicketDetailDrawer(props: TicketingResultApi) {
     <Drawer open={open} onOpenChange={onOpenChange}>
       <DrawerContent>
         <section className="w-full px-[50px] pb-10 pt-5 flex flex-col gap-4 items-center">
-          <DrawerTitle className="text-center text-26 font-bold">
+          <DrawerTitle className="text-center text-26 font-bold relative w-full">
+            <Link href="/ticket" className="absolute left-0">
+              <Icon
+                name="arrow-left"
+                className="stroke-black dark:stroke-white"
+                width={40}
+                height={40}
+              />
+            </Link>
             QR 일반 티켓 인증
           </DrawerTitle>
           <header className="flex flex-col gap-2 items-center justify-center">
             <Avatar className="w-[125px] h-[125px] border-4 border-primary">
               <AvatarImage />
-              <AvatarFallback className=" bg-swifty-color-900 text-white">
-                이미지 없음
+              <AvatarFallback>
+                <Icon name="user-web/mypage/profile" />
               </AvatarFallback>
             </Avatar>
             <h1 className="text-32 font-bold">{name}님</h1>
@@ -103,7 +122,7 @@ export default function TicketDetailDrawer(props: TicketingResultApi) {
                 </InfoContainer>
                 <InfoContainer>
                   <Title>얘매 번호</Title>
-                  <Text>{props.ticketIdentifier}</Text>
+                  <Text>{ticketIdentifier}</Text>
                 </InfoContainer>
               </div>
             </TabsContent>
@@ -113,6 +132,9 @@ export default function TicketDetailDrawer(props: TicketingResultApi) {
             {activeTab}
           </Button>
         </section>
+        <VisuallyHidden.Root>
+          <DrawerDescription>티켓 상세정보 및 qr 정보 제공</DrawerDescription>
+        </VisuallyHidden.Root>
       </DrawerContent>
     </Drawer>
   );

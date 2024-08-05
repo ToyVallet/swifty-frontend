@@ -38,7 +38,7 @@ export default function Card({
   };
   return (
     <div
-      className="w-full rounded-xl p-5 relative overflow-hidden "
+      className="w-full rounded-xl p-5 relative overflow-hidden text-white"
       onClick={onNavigateTicketDetail}
     >
       <ImageWithFallback
@@ -47,6 +47,7 @@ export default function Card({
         className="z-10 object-cover"
         fill
         fallback={FallbackHero}
+        priority
       />
       <FadeOverlay className="z-20" />
       <div className="flex flex-col gap-[10px] z-20 relative">

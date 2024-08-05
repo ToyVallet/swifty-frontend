@@ -26,6 +26,7 @@ export default async function TicketDeatilPage({
       festivalName={ticketDetail.festivalName}
       concertName={ticketDetail.concertName}
       image={ticketDetail.image}
+      backUrl="/mypage"
     />
   );
 }

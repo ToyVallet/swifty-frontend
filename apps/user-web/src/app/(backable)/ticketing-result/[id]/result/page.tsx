@@ -44,7 +44,7 @@ export default async function TicketingResultPage({
 
           <ImageWithFallback
             className="rounded-md w-[124px] h-[107px] object-cover "
-            src={result.poster}
+            src={result.image}
             fallback={ImageFallBack}
             alt="축제 이미지"
             width={124}

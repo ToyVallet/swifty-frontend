@@ -6,6 +6,7 @@ export interface UserWebIconsMap {
   'user-web/mypage/shield': ImportedIconComponent;
   'user-web/mypage/runner': ImportedIconComponent;
   'user-web/mypage/face-id': ImportedIconComponent;
+  'user-web/mypage/profile': ImportedIconComponent;
   'user-web/404/caution': ImportedIconComponent;
   'user-web/500/face': ImportedIconComponent;
   'user-web/verification/varification-done': ImportedIconComponent;
@@ -18,6 +19,7 @@ export interface UserWebIconsMap {
 
 export const userWebIcons: UserWebIconsMap = {
   'user-web/mypage/shield': lazy(() => import('./mypage/shield.svg')),
+  'user-web/mypage/profile': lazy(() => import('./mypage/profile.svg')),
   'user-web/mypage/runner': lazy(() => import('./mypage/runner.svg')),
   'user-web/mypage/face-id': lazy(() => import('./mypage/face-id.svg')),
   'user-web/404/caution': lazy(() => import('./404/caution.svg')),
