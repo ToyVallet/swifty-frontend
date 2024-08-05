@@ -36,7 +36,7 @@ export default function QrCode({ qr, ticketId }: Props) {
       src={qrData}
       fill
       alt="qr"
-      className="absolute top-0 bottom-0 right-0 left-0 object-cover"
+      className="absolute top-0 bottom-0 right-0 left-0 object-cover rounded-3xl"
     />
   );
 }

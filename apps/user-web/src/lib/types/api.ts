@@ -25,6 +25,7 @@ export type UserTicketApi = {
 };
 
 export interface TicketingResultApi {
+  qrEmbeddedId: string;
   name: string;
   issuedDateTime: string;
   concertStartDateTime: string;
@@ -32,7 +33,8 @@ export interface TicketingResultApi {
   concertLocation: string;
   areaName: string;
   ticketIdentifier: string;
+  ticketStatus: 'COUNTING | ISSUED | DELAYED | FAILURE';
   festivalName: string;
   concertName: string;
-  poster: string;
+  image: string;
 }

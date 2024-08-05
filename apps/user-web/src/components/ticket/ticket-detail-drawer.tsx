@@ -2,16 +2,45 @@
 
 import QrCode from '@components/ticket/qr-code';
 import { Avatar, AvatarFallback, AvatarImage } from '@components/ui/avatar';
+import { Tabs, TabsContent } from '@components/ui/tabs';
 import type { TicketingResultApi } from '@lib/types';
 import { Button, Drawer, DrawerContent, DrawerTitle } from '@swifty/ui';
+import { convertNewlineToJSX } from '@toss/react';
+import dayjs from 'dayjs';
 import { useRouter } from 'next/navigation';
 import { usePathname } from 'next/navigation';
+import type { PropsWithChildren } from 'react';
 import { useState } from 'react';
 
-export default function TicketDetailDrawer(props: TicketingResultApi) {
-  const { name, qrEmbeddedId } = props;
-  const ticketId = usePathname().split('/')[2]!;
+const BUTTON_VALUE = ['얘매자 정보 확인', 'QR 티켓 확인'] as const;
 
+const InfoContainer = ({ children }: PropsWithChildren) => (
+  <div className="flex flex-col items-center justify-center gap-2">
+    {children}
+  </div>
+);
+
+const Title = ({ children }: PropsWithChildren) => (
+  <h1 className="text-16 font-bold text-center">{children}</h1>
+);
+
+const Text = ({ children }: PropsWithChildren) => (
+  <h1 className="text-14 font-medium text-center">{children}</h1>
+);
+
+export default function TicketDetailDrawer(props: TicketingResultApi) {
+  const {
+    name,
+    qrEmbeddedId,
+    ticketIdentifier,
+    festivalName,
+    concertStartDateTime,
+    concertEndDateTime,
+  } = props;
+  const ticketId = usePathname().split('/')[2]!;
+  const [activeTab, setActiveTab] = useState<(typeof BUTTON_VALUE)[number]>(
+    BUTTON_VALUE[0],
+  );
   const [open, setOpen] = useState(true);
 
   const router = useRouter();
@@ -20,6 +49,13 @@ export default function TicketDetailDrawer(props: TicketingResultApi) {
       setOpen(false);
       router.push('/');
     }
+  };
+
+  const handleTabChange = () => {
+    // Logic to switch tabs, you might toggle or set a specific value
+    setActiveTab((prevTab) =>
+      prevTab === BUTTON_VALUE[0] ? BUTTON_VALUE[1] : BUTTON_VALUE[0],
+    );
   };
 
   return (
@@ -44,11 +80,37 @@ export default function TicketDetailDrawer(props: TicketingResultApi) {
               본 QR코드는 15초마다 갱신됩니다.
             </span>
           </header>
-          <div className="relative rounded-3xl h-[270px] max-w-[290px] w-full">
-            <QrCode qr={qrEmbeddedId} ticketId={ticketId} />
-          </div>
-          <Button variant="primary" block>
-            얘매자 정보 확인
+          <Tabs value={activeTab} className="w-full h-full">
+            <TabsContent value={BUTTON_VALUE[0]}>
+              <div className="relative rounded-3xl h-[270px] max-w-[290px] w-full mx-auto">
+                <QrCode qr={qrEmbeddedId} ticketId={ticketId} />
+              </div>
+            </TabsContent>
+            <TabsContent value={BUTTON_VALUE[1]}>
+              <div className="flex flex-col gap-5 bg-swifty-color-100 dark:bg-swifty-color-900 rounded-3xl py-[25px]">
+                <InfoContainer>
+                  <Title>행사명</Title>
+                  <Text>{convertNewlineToJSX(`${festivalName}`)}</Text>
+                </InfoContainer>
+                <InfoContainer>
+                  <Title>행사 일시</Title>
+                  <Text>
+                    {convertNewlineToJSX(
+                      `${dayjs(concertStartDateTime).format('YYYY년 MM월 DD일')}
+                      ${dayjs(concertStartDateTime).format('a h:mm').toUpperCase()} - ${dayjs(concertEndDateTime).format('a h:mm').toUpperCase()}`,
+                    )}
+                  </Text>
+                </InfoContainer>
+                <InfoContainer>
+                  <Title>얘매 번호</Title>
+                  <Text>{props.ticketIdentifier}</Text>
+                </InfoContainer>
+              </div>
+            </TabsContent>
+          </Tabs>
+
+          <Button variant="primary" block onClick={handleTabChange}>
+            {activeTab}
           </Button>
         </section>
       </DrawerContent>
