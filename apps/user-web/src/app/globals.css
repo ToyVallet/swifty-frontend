@@ -85,6 +85,12 @@ input.password {
   }
 }
 
+video {
+  transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg);
+  -moz-transform: rotateY(180deg);
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
