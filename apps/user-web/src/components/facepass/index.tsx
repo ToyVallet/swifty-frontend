@@ -1,12 +1,8 @@
 'use client';
 
-// import * as flDetection from '@tensorflow-models/face-landmarks-detection';
-import '@mediapipe/face_detection';
-import '@mediapipe/face_mesh';
-import * as faceDetection from '@tensorflow-models/face-detection';
-import type { BoundingBox } from '@tensorflow-models/face-detection/dist/shared/calculators/interfaces/shape_interfaces';
+import * as poseDetection from '@tensorflow-models/pose-detection';
 import '@tensorflow/tfjs-backend-webgl';
-// import '@tensorflow/tfjs-core';
+import * as tf from '@tensorflow/tfjs-core';
 import { useEffect, useRef, useState } from 'react';
 
 export default function FaceDetector() {
@@ -15,8 +11,6 @@ export default function FaceDetector() {
   const [yaw, setYaw] = useState<null | number>(null);
   const [pitch, setPitch] = useState<null | number>(null);
   const [distance, setDistance] = useState<null | number>(null);
-  const [initialYaw, setInitialYaw] = useState<null | number>(null);
-  const [initialPitch, setInitialPitch] = useState<null | number>(null);
 
   const setupCamera = async () => {
     const video = videoRef.current;
@@ -28,128 +22,63 @@ export default function FaceDetector() {
     video.play();
   };
 
-  const calculateDistance = (box: BoundingBox) => {
-    const REFERENCE_BBOX_WIDTH = 100;
-    const REFERENCE_BBOX_HEIGHT = 150;
+  const calculateYawPitchDistance = (keypoints: poseDetection.Keypoint[]) => {
+    const leftEye = keypoints.find((k) => k.name === 'left_eye');
+    const rightEye = keypoints.find((k) => k.name === 'right_eye');
+    const nose = keypoints.find((k) => k.name === 'nose');
 
-    const referenceArea = REFERENCE_BBOX_WIDTH * REFERENCE_BBOX_HEIGHT;
-    const currentArea = box.width * box.height;
-    const calculatedDistance = (referenceArea / currentArea).toFixed(2);
+    if (!leftEye || !rightEye || !nose)
+      return {
+        yaw: null,
+        pitch: null,
+        distance: null,
+      };
 
-    return Number(calculatedDistance);
-  };
+    // Calculate yaw: left-right rotation
+    const yawValue = ((leftEye.x + rightEye.x) / 2 - nose.x) / 3; // Adjust scale factor
+    const yaw = Math.max(-100, Math.min(100, -yawValue));
 
-  const calculateYaw = (
-    leftEye: faceDetection.Keypoint,
-    rightEye: faceDetection.Keypoint,
-    noseTip: faceDetection.Keypoint,
-  ) => {
-    const eyeMidPoint = {
-      x: (leftEye.x + rightEye.x) / 2,
-      y: (leftEye.y + rightEye.y) / 2,
-    } as const;
+    // Calculate pitch: up-down rotation
+    const pitchValue = (nose.y - (leftEye.y + rightEye.y) / 2) / 3; // Adjust scale factor
+    const pitch = Math.max(-100, Math.min(100, -pitchValue));
 
-    const yaw =
-      (Math.atan2(noseTip.x - eyeMidPoint.x, noseTip.y - eyeMidPoint.y) * 180) /
-      Math.PI;
+    // Calculate distance: based on the distance between the eyes
+    const eyeDistance = Math.sqrt(
+      Math.pow(leftEye.x - rightEye.x, 2) + Math.pow(leftEye.y - rightEye.y, 2),
+    );
+    const referenceDistance = 100; // Reference distance for 0 distance (tune this based on your needs)
+    const distanceValue = (referenceDistance - eyeDistance) * 2; // Adjust scale factor
+    const distance = Math.max(-100, Math.min(100, distanceValue));
 
-    return yaw;
-  };
-
-  const calculatePitch = (
-    leftEar: faceDetection.Keypoint,
-    rightEar: faceDetection.Keypoint,
-    mouthCenter: faceDetection.Keypoint,
-  ) => {
-    const earMidPoint = {
-      x: (leftEar.x + rightEar.x) / 2,
-      y: (leftEar.y + rightEar.y) / 2,
-    } as const;
-
-    const yDifference = mouthCenter.y - earMidPoint.y;
-    const xDifference = mouthCenter.x - earMidPoint.x;
-
-    const pitch = (Math.atan2(yDifference, xDifference) * 180) / Math.PI;
-
-    return pitch;
-  };
-
-  const normalizeValue = (
-    value: number,
-    initialValue: number,
-    range: number = 30,
-  ) => {
-    const normalizedValue = (value - initialValue) / range;
-    return Math.max(-1, Math.min(1, normalizedValue)); // -1과 1 사이로 제한
+    return { yaw, pitch, distance };
   };
 
   const loadModelAndPredict = async () => {
-    const model = faceDetection.SupportedModels.MediaPipeFaceDetector;
-    const detectorConfig = {
-      runtime: 'tfjs',
-    };
-    const detector = await faceDetection.createDetector(model, detectorConfig);
-    const predict = async () => {
-      if (!videoRef.current) return;
+    await tf.setBackend('webgl');
+    if (!videoRef.current || !canvasRef.current) return;
 
-      const predictions: faceDetection.Face[] = await detector.estimateFaces(
-        videoRef.current,
+    const model = poseDetection.SupportedModels.BlazePose;
+    const detector = await poseDetection.createDetector(model, {
+      runtime: 'tfjs',
+      enableSmoothing: true,
+      modelType: 'full',
+    });
+
+    const predict = async () => {
+      const timestamp = performance.now();
+      const poses = await detector.estimatePoses(
+        videoRef.current!,
+        {},
+        timestamp,
       );
 
-      if (predictions.length > 0 && predictions?.[0]?.keypoints) {
-        const { keypoints, box } = predictions[0];
-
-        const calculatedDistance = calculateDistance(box);
-        setDistance(Number(calculatedDistance));
-
-        const [rightEye, leftEye, noseTip, mouthCenter, rightEar, leftEar] =
-          keypoints;
-
-        if (
-          !rightEye ||
-          !leftEye ||
-          !noseTip ||
-          !mouthCenter ||
-          !rightEar ||
-          !leftEar
-        )
-          return;
-
-        const currentYaw = calculateYaw(leftEye, rightEye, noseTip);
-        const currentPitch = calculatePitch(leftEar, rightEar, mouthCenter);
-
-        // 초기 yaw, pitch 설정
-        if (initialYaw === null && initialPitch === null) {
-          setInitialYaw(currentYaw);
-          setInitialPitch(currentPitch);
-        }
-
-        const normalizedYaw = normalizeValue(currentYaw, initialYaw!);
-        const normalizedPitch = normalizeValue(currentPitch, initialPitch!);
-
-        setYaw(normalizedYaw);
-        setPitch(normalizedPitch);
-
-        // 시각화
-        const canvas = canvasRef.current;
-        if (!canvas) return;
-
-        const ctx = canvas.getContext('2d');
-        if (!ctx) return;
-
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.strokeStyle = 'red';
-        ctx.lineWidth = 2;
-
-        ctx.beginPath();
-        ctx.moveTo(leftEar.x, leftEar.y);
-        ctx.lineTo(rightEar.x, rightEar.y);
-        ctx.stroke();
-
-        ctx.beginPath();
-        ctx.moveTo(noseTip.x, noseTip.y);
-        ctx.lineTo(mouthCenter.x, mouthCenter.y);
-        ctx.stroke();
+      if (poses.length > 0 && poses[0]?.keypoints) {
+        const { yaw, pitch, distance } = calculateYawPitchDistance(
+          poses[0].keypoints,
+        );
+        setYaw(yaw);
+        setPitch(pitch);
+        setDistance(distance);
       }
 
       requestAnimationFrame(predict);
@@ -169,9 +98,11 @@ export default function FaceDetector() {
         <video ref={videoRef} width={640} height={480} className="absolute" />
         <canvas ref={canvasRef} width="640" height="480" className="absolute" />
       </div>
-      {yaw && <div>Yaw: {yaw}</div>}
-      {pitch && <div>Pitch: {pitch}</div>}
-      {distance && <div>Distance: {distance}</div>}
+      <div>Yaw: {yaw !== null ? yaw.toFixed(2) : 'Loading...'}</div>
+      <div>Pitch: {pitch !== null ? pitch.toFixed(2) : 'Loading...'}</div>
+      <div>
+        Distance: {distance !== null ? distance.toFixed(2) : 'Loading...'}
+      </div>
     </div>
   );
 }
