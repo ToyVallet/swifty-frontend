@@ -21,7 +21,7 @@ const verificationLinks: ReadonlyArray<VerificationLink> = [
     icon: <Icon name="user-web/mypage/runner" width={70} height={70} />,
   },
   {
-    href: '/verification/face',
+    href: '/verification/facepass',
     title: '안면 인증 관리',
     icon: <Icon name="user-web/mypage/face-id" width={70} height={70} />,
   },
