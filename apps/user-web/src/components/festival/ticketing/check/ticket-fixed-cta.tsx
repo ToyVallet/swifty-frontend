@@ -1,6 +1,5 @@
 'use client';
 
-import { TicketingStepContext } from '@app/(backable)/festival/[id]/ticketing/context';
 import { FixedBottomCTA, GoogleCaptcha } from '@components/common';
 import { http } from '@swifty/shared-lib';
 import { Drawer, DrawerContent, DrawerTrigger } from '@swifty/ui';
