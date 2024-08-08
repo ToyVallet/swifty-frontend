@@ -130,10 +130,6 @@ export default function FaceLandMark() {
     };
   }, []);
 
-  useEffect(() => {
-    adjustCanvasAndVideoSize();
-  }, []);
-
   return (
     <div className="relative w-full h-full">
       <video
