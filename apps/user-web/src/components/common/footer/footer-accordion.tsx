@@ -13,12 +13,12 @@ export default function FooterDrawer() {
     <Accordion type="single" collapsible>
       <AccordionItem value="item-1">
         <AccordionTrigger>
-          (주)스위프트코퍼레이션 사업자등록 정보
+          (주)스위프티코퍼레이션 사업자등록 정보
           <ChevronDown className="h-4 w-4 shrink-0 transition-transform duration-200" />
         </AccordionTrigger>
         <AccordionContent>
           <p className="text-[10px] whitespace-pre-line leading-[15px] dark:text-swifty-color-300 text-swifty-color-600 ">
-            주식회사 스위프티코퍼레이션 대표이사 강우주
+            주식회사 스위프티코퍼레이션 | 대표이사 강우주
             <br />
             경기도 화성시 동탄중심상가2길 8,6층(반송동)
             <br />
@@ -37,7 +37,7 @@ export default function FooterDrawer() {
             <br />
             고객센터
             <br />
-            <a href="mailto:info@feasta.kr">이메일 info@feasta.kr</a>
+            <a href="mailto:info@swifty.kr">이메일 info@swifty.kr</a>
           </p>
         </AccordionContent>
       </AccordionItem>
