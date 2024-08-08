@@ -56,7 +56,7 @@ export default function Page({ complete, name, phone }: Props) {
           </Header>
 
           <AnimatePresence initial={false}>
-            <Form {...form}>
+            <Form {...(form as any)}>
               <form
                 className="w-full"
                 onSubmit={(e) => {

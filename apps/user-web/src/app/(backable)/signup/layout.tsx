@@ -53,7 +53,7 @@ export default function SignupLayout({
           <Header>{currentStep}</Header>
 
           <AnimatePresence initial={false}>
-            <Form {...form}>
+            <Form {...(form as any)}>
               <form
                 className="w-full"
                 onSubmit={(e) => {

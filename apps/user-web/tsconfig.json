@@ -10,7 +10,9 @@
       "@hooks/*": ["./src/hooks/*"],
       "@contexts/*": ["./src/contexts/*"],
       "@images/*": ["./public/images/*"],
-      "@icons/*": ["./public/icons/*"]
+      "@icons/*": ["./public/icons/*"],
+
+      "react-hook-form": ["../../node_modules/react-hook-form"]
     }
   },
   "include": [

@@ -70,7 +70,7 @@ export default function UnivCertificationLayout({
             </Choose>
           </Header>
           <AnimatePresence initial={false}>
-            <Form {...form}>
+            <Form {...(form as any)}>
               <form className="w-full h-full">
                 <Choose value={currentStep}>
                   <When value="학적 인증을 시작할게요">{example}</When>
