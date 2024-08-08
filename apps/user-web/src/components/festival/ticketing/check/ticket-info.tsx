@@ -1,6 +1,7 @@
 'use client';
 
 import type { TicketingDate } from '@app/(backable)/festival/[id]/ticketing/@date/page';
+import type { Concert } from '@lib/types/festival';
 import { Icon } from '@swifty/assets';
 import dayjs from 'dayjs';
 import type { PropsWithChildren } from 'react';
@@ -8,13 +9,17 @@ import { useFormContext } from 'react-hook-form';
 
 type Props = {
   ticketing: TicketingDate[];
+  concertsResponse: Concert[];
 };
 
-export default function TicketInfo({ ticketing }: Props) {
+export default function TicketInfo({ ticketing, concertsResponse }: Props) {
   const form = useFormContext();
   const selectedTicketId = form.getValues('scheduleId');
   const selectiedTicketInfo = ticketing.filter(
     (ticket) => (ticket.id = selectedTicketId),
+  );
+  const concertDetail = concertsResponse.filter(
+    (concert) => concert.id === selectedTicketId,
   );
 
   return (

@@ -29,4 +29,11 @@ export {
   DrawerTitle,
   DrawerDescription,
 } from './drawer';
+
+export {
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionContent,
+} from './accordion';
 export { default as Toast } from './toast';

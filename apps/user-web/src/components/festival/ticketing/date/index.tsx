@@ -5,7 +5,7 @@ import { TicketingStepContext } from '@app/(backable)/festival/[id]/ticketing/co
 import { FixedBottomGroup } from '@components/common';
 import DateSelect from '@components/festival/ticketing/date-select';
 import { Button } from '@swifty/ui';
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import { useFormContext, useWatch } from 'react-hook-form';
 
 type Props = {

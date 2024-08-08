@@ -1,5 +1,6 @@
 'use client';
 
+import { http } from '@swifty/shared-lib';
 import type { RefObject } from 'react';
 import { useRef } from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
@@ -12,11 +13,19 @@ export default function GoogleCaptcha({ onSucess }: Props) {
   const recaptcha: RefObject<ReCAPTCHA> = useRef(null);
   const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
-  const onChange = (value: string | null) => {
+  const onChange = async (value: string | null) => {
     // 서버로 데이터 전송하기
-    console.log(value);
+    const result = await http.post<{ result: boolean }>(
+      '/recaptcha',
+      {
+        token: value,
+      },
+      { credentials: 'include' },
+    );
     // 데이터 확인 성공
-    onSucess?.();
+    if (result) {
+      onSucess?.();
+    }
   };
   return (
     <ReCAPTCHA

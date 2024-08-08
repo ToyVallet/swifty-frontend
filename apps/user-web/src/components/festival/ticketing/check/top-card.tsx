@@ -21,7 +21,7 @@ export default function TicketingCheckTopCard({
       <h1 className="font-bold text-20 mb-[30px]">{currentStep}</h1>
       <div className="flex justify-between w-full">
         <div className="h-full flex flex-col items-start justify-start font-semibold">
-          <span className="text-12 mb-[3px]">예정된 축제</span>
+          <span className="text-12 font-semibold mb-[3px]">예정된 축제</span>
           <h1 className="text-22 font-bold mb-[3px] uppercase">{title}</h1>
           <h1 className="text-22 font-bold mb-[6px]">{description}</h1>
         </div>
