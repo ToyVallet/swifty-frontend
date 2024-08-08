@@ -9,7 +9,7 @@ export async function middleware(request: NextRequest) {
   const token = await getCookie('accessToken');
 
   const pathRequiredLogin = [
-    'verification',
+    //'verification',
     'mypage',
     'ticketing',
     'change-password',

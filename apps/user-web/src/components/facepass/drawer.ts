@@ -6,17 +6,17 @@ const rad2deg = (theat: number) => Math.round((theat * 180) / Math.PI);
 export function drawGazeSpheres(
   ctx: CanvasRenderingContext2D | OffscreenCanvasRenderingContext2D,
   box: BoundingBox,
-
   angle: {
     roll: number;
     yaw: number;
     pitch: number;
     distance: number;
   },
+  canvas: HTMLCanvasElement,
   color: string = 'pink',
 ) {
   ctx.strokeStyle = color;
-
+  /* 
   const { xMin, xMax, yMin, yMax, width, height } = box;
 
   const centerX = xMin + width / 2;
@@ -41,8 +41,39 @@ export function drawGazeSpheres(
         ${xMax} ${valY},
         ${xMax} ${centerY}
     `);
-  ctx.stroke(pathH);
-  ctx.stroke(pathV);
+ */
+  if (canvas) {
+    const width = canvas.width;
+    const height = canvas.height;
+
+    const videoCenterX = width / 2;
+    const videoCenterY = height / 2;
+
+    const videoValX = videoCenterX - (height * rad2deg(-angle.yaw)) / 90;
+    const videoValY = videoCenterY + (width * rad2deg(angle.pitch)) / 90;
+    const pathVideoV = new Path2D(
+      `M ${videoCenterX} ${0}
+      C
+        ${videoValX} ${0},
+        ${videoValX} ${height},
+        ${videoCenterX} ${height}
+    `,
+    );
+    const pathVideoH = new Path2D(
+      `M ${0} ${videoCenterY}
+      C 
+        ${0} ${videoValY},
+        ${width} ${videoValY},
+        ${width} ${videoCenterY}
+    `,
+    );
+
+    ctx.stroke(pathVideoH);
+    ctx.stroke(pathVideoV);
+  }
+
+  /*   ctx.stroke(pathH);
+  ctx.stroke(pathV); */
 }
 
 export function drawBoundingBox(

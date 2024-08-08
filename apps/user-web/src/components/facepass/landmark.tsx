@@ -6,9 +6,6 @@ import '@tensorflow/tfjs-backend-webgl';
 import * as tf from '@tensorflow/tfjs-core';
 import { useEffect, useRef, useState } from 'react';
 
-const WIDTH = 640;
-const HEIGHT = 480;
-
 export default function FaceLandMark() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -29,6 +26,7 @@ export default function FaceLandMark() {
 
       video.onloadedmetadata = () => {
         video.play();
+        adjustCanvasAndVideoSize();
       };
     } catch (error) {
       console.error('Error accessing webcam: ', error);
@@ -73,18 +71,23 @@ export default function FaceLandMark() {
 
     const predict = async () => {
       const poses = await detector.estimateFaces(videoRef.current!, {});
-      console.log(poses);
+      //console.log(poses);
       const ctx = canvasRef.current!.getContext('2d');
       if (ctx && poses.length > 0 && poses[0]?.keypoints) {
         const mesh = poses[0].keypoints;
-        ctx.clearRect(0, 0, WIDTH, HEIGHT);
+        ctx.clearRect(
+          0,
+          0,
+          canvasRef.current!.width,
+          canvasRef.current!.height,
+        );
 
         const angle = calculateFaceAngleAndDistance(mesh);
 
         // Draw the circular pattern around the face
 
         drawBoundingBox(ctx, poses[0].box);
-        drawGazeSpheres(ctx, poses[0].box, angle);
+        drawGazeSpheres(ctx, poses[0].box, angle, canvasRef.current!);
 
         setPitch(Number(angle.pitch));
         setYaw(Number(angle.yaw));
@@ -97,27 +100,50 @@ export default function FaceLandMark() {
     predict();
   };
 
+  const adjustCanvasAndVideoSize = () => {
+    const video = videoRef.current;
+    const canvas = canvasRef.current;
+    if (video && canvas) {
+      // Get the bounding rect to find the rendered size of the video
+      const { width, height } = video.getBoundingClientRect();
+      // Set the dimensions for both video and canvas to ensure they are the same
+      video.width = width;
+      video.height = height;
+
+      canvas.width = width;
+      canvas.height = height;
+    }
+  };
+
   useEffect(() => {
+    const handleResize = () => {
+      adjustCanvasAndVideoSize();
+    };
+
+    window.addEventListener('resize', handleResize);
+
     setupCamera();
     loadModelAndPredict();
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  useEffect(() => {
+    adjustCanvasAndVideoSize();
   }, []);
 
   return (
-    <div className="">
-      <div className="relative w-[640px] h-[480px]">
-        <video
-          ref={videoRef}
-          width={WIDTH}
-          height={HEIGHT}
-          className="absolute"
-        />
-        <canvas
-          ref={canvasRef}
-          width={WIDTH}
-          height={HEIGHT}
-          className="absolute"
-        />
-      </div>
+    <div className="relative w-full h-full">
+      <video
+        ref={videoRef}
+        className="absolute left-0 right-0 top-0 bottom-0 my-auto mx-auto"
+      />
+      <canvas
+        ref={canvasRef}
+        className="absolute left-0 right-0 top-0 bottom-0 my-auto mx-auto"
+      />
       <div>Yaw: {yaw !== null ? yaw.toFixed(2) : 'Loading...'}</div>
       <div>Pitch: {pitch !== null ? pitch.toFixed(2) : 'Loading...'}</div>
       <div>Roll: {roll !== null ? roll.toFixed(2) : 'Loading...'}</div>
