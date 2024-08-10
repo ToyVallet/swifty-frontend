@@ -7,9 +7,12 @@ import {
 } from '@components/common';
 import type { Festival } from '@lib/types/festival';
 import { http } from '@swifty/shared-lib';
-import type { PropsWithChildren } from 'react';
+import type { PropsWithChildren, ReactNode } from 'react';
 
-export default async function HomeLayout({ children }: PropsWithChildren) {
+export default async function HomeLayout({
+  children,
+  modal,
+}: PropsWithChildren<{ modal: ReactNode }>) {
   const festivalLineups = await http.get<Festival[]>('/festival');
 
   return (
@@ -22,6 +25,7 @@ export default async function HomeLayout({ children }: PropsWithChildren) {
         </Carousel>
       </Hero>
       {children}
+      {modal}
       <GlobalNavigation />
       <Footer />
     </>

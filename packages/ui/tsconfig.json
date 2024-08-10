@@ -4,7 +4,10 @@
   "compilerOptions": {
     "outDir": "dist",
     "baseUrl": ".",
-    "paths": { "@/*": ["src/*"] }
+    "paths": {
+      "@/*": ["src/*"],
+      "react-hook-form": ["../../node_modules/react-hook-form"]
+    }
   },
 
   "exclude": ["node_modules", "dist"]

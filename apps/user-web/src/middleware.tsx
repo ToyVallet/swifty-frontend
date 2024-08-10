@@ -14,6 +14,7 @@ export async function middleware(request: NextRequest) {
     'ticketing',
     'change-password',
     'change-phone-number',
+    'ticket',
   ] as const;
 
   if (token) {

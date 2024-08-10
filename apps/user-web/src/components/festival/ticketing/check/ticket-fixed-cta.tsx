@@ -1,14 +1,14 @@
 'use client';
 
-import { TicketingStepContext } from '@app/(backable)/festival/[id]/ticketing/context';
 import { FixedBottomCTA, GoogleCaptcha } from '@components/common';
 import { http } from '@swifty/shared-lib';
 import { Drawer, DrawerContent, DrawerTrigger } from '@swifty/ui';
-import { useContext, useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 
 export default function TicketFixedCta() {
-  const { nextStep } = useContext(TicketingStepContext);
+  const router = useRouter();
   const [open, setOpen] = useState(false);
   const [isSucess, setIsSucess] = useState(false);
   const form = useFormContext();
@@ -27,8 +27,8 @@ export default function TicketFixedCta() {
           { credentials: 'include' },
         )
         .then((data) => {
-          form.setValue('ticketId', data.id);
-          nextStep();
+          const ticketId = data.id;
+          router.replace(`/ticketing-result/${ticketId}/loading`);
         })
         .catch((err) => {
           console.error(err);

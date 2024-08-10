@@ -7,16 +7,17 @@ import {
 } from '@components/festival/ticketing';
 import TicketDescription from '@components/festival/ticketing/check/ticket-description';
 import FallbackHero from '@images/fallback-festival.png';
-import type { Festival } from '@lib/types/festival';
+import type { LineupApi } from '@lib/types';
 import type { Params } from '@swifty/shared-lib';
 import { http } from '@swifty/shared-lib';
 
 export default async function TicketingCheckPage({
   params: { id },
 }: Params<{ id: string }>) {
-  const festivalInfo = await http.get<Festival>('/festival/{id}', {
-    params: { id },
-  });
+  const { festivalInfoResponse, concertsResponse, thumbnailImage, logoImage } =
+    await http.get<LineupApi>('/festival/detail/{id}', {
+      params: { id },
+    });
 
   const ticketings = await http.get<TicketingDate[]>('/ticketing/{id}', {
     credentials: 'include',
@@ -27,8 +28,8 @@ export default async function TicketingCheckPage({
     <div className="bg-swifty-color-100 dark:bg-swifty-color-dark-bg">
       <Hero variant="image">
         <ImageWithFallback
-          src={festivalInfo.festivalImage}
-          alt={festivalInfo.name}
+          src={thumbnailImage}
+          alt={festivalInfoResponse.name}
           width={500}
           height={500}
           fallback={FallbackHero}
@@ -37,11 +38,15 @@ export default async function TicketingCheckPage({
       </Hero>
       <Main className="px-5 gap-[25px]">
         <TicketingCheckTopCard
-          title={festivalInfo.name}
-          description={festivalInfo.description}
+          title={festivalInfoResponse.name}
+          description={festivalInfoResponse.addr}
+          iconSrc={logoImage}
         />
-        <TicketInfo ticketing={ticketings} />
-        <TicketDescription />
+        <TicketInfo
+          ticketing={ticketings}
+          concertsResponse={concertsResponse}
+        />
+        <TicketDescription description={festivalInfoResponse.description} />
       </Main>
       <TicketFixedCta />
     </div>

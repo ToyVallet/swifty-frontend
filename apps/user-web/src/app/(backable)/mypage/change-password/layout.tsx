@@ -50,7 +50,7 @@ export default function SearchLayout({
       <FindPasswordContext.Provider value={{ currentStep, nextStep }}>
         <Main className="mt-[47px]">
           <Header>{currentStep}</Header>
-          <Form {...form}>
+          <Form {...(form as any)}>
             <form
               className="w-full"
               onSubmit={(e) => {

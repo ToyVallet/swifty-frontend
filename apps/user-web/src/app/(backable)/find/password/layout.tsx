@@ -50,7 +50,7 @@ export default function Page({ id, phone, password, complete }: Props) {
           <Header>{currentStep}</Header>
 
           <AnimatePresence initial={false}>
-            <Form {...form}>
+            <Form {...(form as any)}>
               <form
                 className="w-full"
                 onSubmit={(e) => {

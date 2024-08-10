@@ -55,14 +55,14 @@ export default function LoginForm() {
   };
 
   return (
-    <Form {...form}>
+    <Form {...(form as any)}>
       <form
         autoComplete="off"
         onSubmit={form.handleSubmit(onSubmit)}
         className="w-full flex flex-col gap-5"
       >
         <FormField
-          control={form.control}
+          control={form.control as any}
           name="loginId"
           render={({ field }) => (
             <FormItem>
@@ -74,7 +74,7 @@ export default function LoginForm() {
           )}
         />
         <FormField
-          control={form.control}
+          control={form.control as any}
           name="password"
           render={({ field }) => (
             <FormItem>

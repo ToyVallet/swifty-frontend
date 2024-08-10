@@ -1,11 +1,22 @@
+import { Carousel } from '@components/common';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@components/ui/tabs';
-import TestBG from '@images/mypage/b0b857c3f53e145baf443f7c1a5441d8.png';
+import type { UserTicketApi } from '@lib/types';
+import { dayDifference, http } from '@swifty/shared-lib';
+import dayjs from 'dayjs';
 
 import Card from './card';
 
 const schedule = ['축제 일정', '완료된 일정'] as const;
 
-export default function ScheduleCard() {
+export default async function ScheduleCard() {
+  const availableTicketings = await http.get<UserTicketApi[]>('/user/ticket', {
+    credentials: 'include',
+  });
+  const overDateTicketings = await http.get<UserTicketApi[]>('/user/ticket', {
+    params: { ticketStatus: 'OVER_DATE' },
+    credentials: 'include',
+  });
+
   return (
     <section className="w-full">
       <Tabs defaultValue={schedule[0]}>
@@ -17,23 +28,41 @@ export default function ScheduleCard() {
           ))}
         </TabsList>
         <TabsContent value={schedule[0]}>
-          <Card
-            title="DANFESTA 2024"
-            date="2024년 05월 04일 - 05일"
-            enterAt={new Date()}
-            backgroundImage={TestBG}
-            lineups={[
-              {
-                id: '1',
-                title: '아이유',
-                description: '아이유의 노래를 들으며 행복한 시간을 보내세요.',
-                lineupImage: '/images/line-up/1.jpg',
-                performanceTime: '2024년 05월 04일 20:00',
-              },
-            ]}
-          />
+          <Carousel autoplay hasDotButton>
+            {availableTicketings.map((available) => (
+              <Card
+                title={available.festivalName}
+                date={dayjs(available.concertDate).format(
+                  'YYYY년 MMd월 DD일 hh:mm a',
+                )}
+                backgroundImage={available.festivalImage}
+                enterAt={dayDifference(available.concertDate)}
+                ticketId={available.ticketId}
+                festivalId={available.festivalId}
+                lineups={[]}
+                key={available.ticketId}
+              />
+            ))}
+          </Carousel>
         </TabsContent>
-        <TabsContent value={schedule[1]}></TabsContent>
+        <TabsContent value={schedule[1]}>
+          <Carousel autoplay hasDotButton>
+            {overDateTicketings.map((available) => (
+              <Card
+                title={available.festivalName}
+                date={dayjs(available.concertDate).format(
+                  'YYYY년 MMd월 DD일 hh:mm a',
+                )}
+                backgroundImage={available.festivalImage}
+                enterAt={dayDifference(available.concertDate)}
+                ticketId={available.ticketId}
+                festivalId={available.festivalId}
+                lineups={[]}
+                key={available.ticketId}
+              />
+            ))}
+          </Carousel>
+        </TabsContent>
       </Tabs>
     </section>
   );

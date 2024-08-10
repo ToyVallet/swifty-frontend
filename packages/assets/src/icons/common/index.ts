@@ -14,6 +14,7 @@ export interface CommonIconsMap {
   lock: ImportedIconComponent;
   user: ImportedIconComponent;
   'check-circle': ImportedIconComponent;
+  'arrow-right': ImportedIconComponent;
 }
 
 export const commonIcons: CommonIconsMap = {
@@ -28,4 +29,5 @@ export const commonIcons: CommonIconsMap = {
   lock: lazy(() => import('./lock.svg')),
   user: lazy(() => import('./user.svg')),
   'check-circle': lazy(() => import('./check-circle.svg')),
+  'arrow-right': lazy(() => import('./arrow-right.svg')),
 } as const;

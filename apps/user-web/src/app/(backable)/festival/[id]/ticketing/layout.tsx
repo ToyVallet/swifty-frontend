@@ -18,23 +18,13 @@ import { type TicketingValues, ticketingSchema } from './schema';
 
 type TicketingLayoutProps = PropsWithChildren<{
   date: ReactNode;
-  area: ReactNode;
   check: ReactNode;
-  wait: ReactNode;
 }>;
 
-export default function TicketingLayout({
-  date,
-  area,
-  check,
-  wait,
-}: TicketingLayoutProps) {
+export default function TicketingLayout({ date, check }: TicketingLayoutProps) {
   const form = useForm<TicketingValues>({
     mode: 'onChange',
     resolver: zodResolver(ticketingSchema),
-    defaultValues: {
-      //area: 'A', // 구역선택 기능 활성화되면 변경
-    },
   });
 
   const [currentStep, setCurrentStep] = useState<TicketingStep>(
@@ -54,7 +44,7 @@ export default function TicketingLayout({
     <>
       <Navigation title="티켓 예매하기" />
       <TicketingStepContext.Provider value={{ currentStep, nextStep }}>
-        <Form {...form}>
+        <Form {...(form as any)}>
           <main
             className={cn(
               'h-full flex flex-col relative pb-20 overflow-y-auto scrollbar-hide',
@@ -74,11 +64,6 @@ export default function TicketingLayout({
                   >
                     <Choose value={currentStep}>
                       <When value="날짜를 선택해주세요">{date}</When>
-                      <When
-                        value={'티켓 예매가 진행 중이에요\n조금만 기다려주세요'}
-                      >
-                        {wait}
-                      </When>
                     </Choose>
                   </form>
                 </AnimatePresence>

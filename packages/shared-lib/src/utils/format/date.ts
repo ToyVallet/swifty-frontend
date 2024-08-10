@@ -80,3 +80,27 @@ export function formatDateOfBirth(value: string) {
 
   return value;
 }
+
+/**
+ * @name dauDifference
+ * @description 인자로 주어진 날짜와 현재 시간간의 차이를 비교합니다.
+ * @param date 비교할 생년월일
+ * @returns 해당 공연 시작이 며칠 남았는지 반환합니다. 이미 축제 기간이 지났다면 "마감"으로 표기합니다.
+ */
+export function dayDifference(date: Date | string) {
+  const now = new Date();
+  const targetDate = new Date(date);
+  const diff = targetDate.getTime() - now.getTime();
+
+  // 밀리초를 일로 변환
+  const diffDays = Math.floor(diff / (1000 * 60 * 60 * 24));
+
+  // 결과 반환
+  if (diffDays > 1) {
+    return `${diffDays}일 전`;
+  } else if (diffDays === 0) {
+    return '오늘';
+  } else {
+    return `마감`;
+  }
+}
