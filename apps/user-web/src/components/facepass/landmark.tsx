@@ -46,6 +46,8 @@ export default function FaceLandMark() {
   const animationIdRef = useRef<number | null>(null);
   const isNextRef = useRef<boolean>(false);
   const imagesRef = useRef<Image[]>([]);
+  const detectorRef =
+    useRef<null | faceLandmarksDetection.FaceLandmarksDetector>(null);
   const [step, setStep] = useState(0);
   const [error, setError] = useState<null | string>(null);
   const [loading, setLoading] = useState(true);
@@ -58,18 +60,23 @@ export default function FaceLandMark() {
     }
   };
 
-  const loadModelAndPredict = async () => {
+  const loadModel = async () => {
     if (!videoRef.current || !canvasRef.current) return;
-
     await tf.setBackend('webgl');
 
     const model = faceLandmarksDetection.SupportedModels.MediaPipeFaceMesh;
-    const detector = await faceLandmarksDetection.createDetector(model, {
+    detectorRef.current = await faceLandmarksDetection.createDetector(model, {
       runtime: 'tfjs',
     } as faceLandmarksDetection.MediaPipeFaceMeshTfjsModelConfig);
+    setLoading(false);
+  };
 
-    const predict = async () => {
-      const poses = await detector.estimateFaces(videoRef.current!, {});
+  const predict = async () => {
+    if (detectorRef.current) {
+      const poses = await detectorRef.current.estimateFaces(
+        videoRef.current!,
+        {},
+      );
 
       const ctx = canvasRef.current!.getContext('2d');
       if (ctx && poses.length > 0 && poses[0]?.keypoints && canvasRef.current) {
@@ -164,16 +171,19 @@ export default function FaceLandMark() {
       } else {
         animationIdRef.current = requestAnimationFrame(predict);
       }
-    };
-
-    await predict();
-    setLoading(false);
+    }
   };
 
   useEffect(() => {
+    loadModel();
+  }, []);
+
+  useEffect(() => {
     isNextRef.current = false;
-    loadModelAndPredict();
-  }, [step]);
+    if (!loading) {
+      predict();
+    }
+  }, [step, loading]);
 
   return (
     <div className="relative w-full h-full">
@@ -194,6 +204,7 @@ export default function FaceLandMark() {
       <button
         onClick={async () => {
           const images = imagesRef.current;
+          console.log(imagesRef.current);
           const fileArr = images.map(({ src, name }) => {
             // base64 문자열에서 실제 데이터 부분을 분리합니다.
             const base64ImageContent = src.split(',')[1]!;
@@ -220,9 +231,9 @@ export default function FaceLandMark() {
             formData.append(item[1], fileArr[index]!);
           });
 
-          await http.post('/facepass', formData, {
+          /*           await http.post('/facepass', formData, {
             credentials: 'include',
-          });
+          }); */
         }}
       >
         CLICK IMAGE
