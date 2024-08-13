@@ -1,4 +1,4 @@
-import type { DirectionType } from '@components/facepass/landmark';
+import type { DirectionType, Image } from '@components/facepass/landmark';
 import type { Dispatch, SetStateAction } from 'react';
 
 const rad2deg = (theat: number) => Math.round((theat * 180) / Math.PI);
@@ -122,7 +122,7 @@ export function saveImage(
   canvas: HTMLCanvasElement,
   video: HTMLVideoElement,
   name: string,
-  setImage: Dispatch<SetStateAction<any[]>>,
+  images: Image[],
 ) {
   // OffscreenCanvas를 생성합니다.
   const offscreenCanvas = new OffscreenCanvas(canvas.width, canvas.height);
@@ -139,7 +139,9 @@ export function saveImage(
       reader.readAsDataURL(blob);
       reader.onloadend = () => {
         const base64data = reader.result;
-        setImage((prev) => [...prev, { src: base64data, name }]);
+        if (typeof base64data === 'string') {
+          images.push({ src: base64data, name });
+        }
       };
     });
   }

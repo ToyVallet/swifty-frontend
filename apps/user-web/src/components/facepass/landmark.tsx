@@ -26,7 +26,7 @@ export type DirectionType = readonly [
   'yaw' | 'pitch',
 ];
 
-export type Image = { src: string | ArrayBuffer | null; name: string };
+export type Image = { src: string; name: string };
 const STEP: NonEmptyArray<DirectionType> = [
   [-0.45, 'right45', 'yaw'],
   [0.45, 'left45', 'yaw'],
@@ -47,7 +47,7 @@ export default function FaceLandMark() {
 
   const [step, setStep] = useState(0);
   const [error, setError] = useState<null | string>(null);
-  const [images, setImages] = useState<any[]>([]);
+  const [images, setImages] = useState<Image[]>([]);
   const [loading, setLoading] = useState(true);
 
   const resetError = () => setError(null);
@@ -89,7 +89,7 @@ export default function FaceLandMark() {
 
     const predict = async () => {
       const poses = await detector.estimateFaces(videoRef.current!, {});
-      console.log(poses, isNextRef.current, images, step);
+      console.log(poses, isNextRef.current, imagesRef.current, step);
       const ctx = canvasRef.current!.getContext('2d');
       if (ctx && poses.length > 0 && poses[0]?.keypoints && canvasRef.current) {
         const mesh = poses[0].keypoints;
@@ -111,7 +111,7 @@ export default function FaceLandMark() {
 
         const angle = calculateFaceAngle(mesh);
         const distance = calculateDistance(box, canvas);
-
+        const images = imagesRef.current;
         drawGazeSpheres(ctx, angle, canvas, circleAngle);
 
         if (step < STEP.length)
@@ -141,7 +141,7 @@ export default function FaceLandMark() {
                       canvas,
                       videoRef.current!,
                       currentStep[1],
-                      setImages,
+                      images,
                     );
                     setStep((prev) => prev + 1);
                     return;
@@ -160,7 +160,7 @@ export default function FaceLandMark() {
                       canvas,
                       videoRef.current!,
                       currentStep[1],
-                      setImages,
+                      images,
                     );
                     return;
                   }
@@ -219,7 +219,7 @@ export default function FaceLandMark() {
   }, []);
 
   useEffect(() => {
-    console.log('useEffect');
+    isNextRef.current = false;
     loadModelAndPredict();
   }, [step]);
 
@@ -241,28 +241,27 @@ export default function FaceLandMark() {
       {error && <div>{error}</div>}
       <button
         onClick={async () => {
-          const fileArr = images
-            .slice(1)
-            .map((obj: { src: string; name: string }) => {
-              // base64 문자열에서 실제 데이터 부분을 분리합니다.
-              const base64ImageContent = obj.src.split(',')[1]!;
+          const images = imagesRef.current;
+          const fileArr = images.map(({ src, name }) => {
+            // base64 문자열에서 실제 데이터 부분을 분리합니다.
+            const base64ImageContent = src.split(',')[1]!;
 
-              // base64 데이터를 바이너리 데이터로 변환합니다.
-              const byteCharacters = atob(base64ImageContent);
-              const byteNumbers = new Array(byteCharacters.length);
-              for (let i = 0; i < byteCharacters.length; i++) {
-                byteNumbers[i] = byteCharacters.charCodeAt(i);
-              }
-              const byteArray = new Uint8Array(byteNumbers);
+            // base64 데이터를 바이너리 데이터로 변환합니다.
+            const byteCharacters = atob(base64ImageContent);
+            const byteNumbers = new Array(byteCharacters.length);
+            for (let i = 0; i < byteCharacters.length; i++) {
+              byteNumbers[i] = byteCharacters.charCodeAt(i);
+            }
+            const byteArray = new Uint8Array(byteNumbers);
 
-              // 바이너리 데이터로부터 Blob 객체를 생성합니다.
-              const blob = new Blob([byteArray], { type: 'image/png' });
+            // 바이너리 데이터로부터 Blob 객체를 생성합니다.
+            const blob = new Blob([byteArray], { type: 'image/png' });
 
-              // Blob 객체를 File 객체로 변환합니다.
+            // Blob 객체를 File 객체로 변환합니다.
 
-              const file = new File([blob], obj.name, { type: 'image/png' });
-              return file;
-            });
+            const file = new File([blob], name, { type: 'image/png' });
+            return file;
+          });
 
           const formData = new FormData();
           STEP.forEach((item, index) => {
