@@ -1,5 +1,5 @@
 import type { DirectionType } from '@components/facepass/landmark';
-import type { BoundingBox } from '@tensorflow-models/face-landmarks-detection/dist/shared/calculators/interfaces/shape_interfaces';
+import type { Dispatch, SetStateAction } from 'react';
 
 const rad2deg = (theat: number) => Math.round((theat * 180) / Math.PI);
 
@@ -63,7 +63,7 @@ export function drawNextPosition(
     const videoCenterY = height / 2;
 
     if (!step[1].includes('up')) {
-      const videoValX = videoCenterX - (height * rad2deg(step[0])) / 200;
+      const videoValX = videoCenterX - (height * rad2deg(-step[0])) / 200;
       const pathVideoV = new Path2D(
         `M ${videoCenterX} ${height / 2 - position.radius}
       C
@@ -91,59 +91,7 @@ export function drawNextPosition(
   }
 }
 
-export function drawBoundingBox(
-  ctx: CanvasRenderingContext2D | OffscreenCanvasRenderingContext2D,
-  box: BoundingBox,
-  color = 'lime',
-  lineWidth = 2,
-) {
-  const { xMin, xMax, yMax, yMin } = box;
-  // Set the stroke color and line width
-  ctx.strokeStyle = color;
-  ctx.lineWidth = lineWidth;
-
-  // Draw the rectangle
-  ctx.beginPath();
-  ctx.rect(box.xMin, box.yMin, box.width, box.yMax - box.yMin);
-  ctx.arc((xMin + xMax) / 2, (yMin + yMax) / 2, 5, 0, 2 * Math.PI); // 중심에 원 그리기
-  ctx.stroke();
-}
-
-export function drawFixedSquare(canvas: HTMLCanvasElement, box: BoundingBox) {
-  const { width, height } = box;
-  const ctx = canvas.getContext('2d');
-  if (ctx) {
-    const canvasWidth = canvas.width;
-    const canvasHeight = canvas.height;
-
-    ctx.strokeStyle = 'red';
-    ctx.lineWidth = 3;
-    ctx.beginPath();
-    ctx.rect(
-      canvasWidth / 2 - width / 3,
-      canvasHeight / 2 - height / 3,
-      width / 1.5,
-      height / 1.5,
-    );
-    ctx.stroke();
-  }
-}
-
-export function drawCenterPoint(canvas: HTMLCanvasElement) {
-  const ctx = canvas.getContext('2d');
-  if (ctx) {
-    const x = canvas.width / 2;
-    const y = canvas.height / 2;
-    const radius = 5; // 원의 반지름
-
-    ctx.beginPath();
-    ctx.arc(x, y, radius, 0, 2 * Math.PI); // 중심에 원 그리기
-    ctx.fillStyle = 'red'; // 원 색상 설정
-    ctx.fill(); // 원을 채움
-  }
-}
-
-export function drawMasking(canvas: HTMLCanvasElement) {
+export function drawMasking(canvas: HTMLCanvasElement | OffscreenCanvas) {
   const ctx = canvas.getContext('2d');
   const x = canvas.width / 2;
   const y = canvas.height / 2;
@@ -168,4 +116,31 @@ export function drawMasking(canvas: HTMLCanvasElement) {
   }
 
   return { radius, x, y };
+}
+
+export function saveImage(
+  canvas: HTMLCanvasElement,
+  video: HTMLVideoElement,
+  name: string,
+  setImage: Dispatch<SetStateAction<any[]>>,
+) {
+  // OffscreenCanvas를 생성합니다.
+  const offscreenCanvas = new OffscreenCanvas(canvas.width, canvas.height);
+  const offscreenCtx = offscreenCanvas.getContext('2d');
+
+  if (offscreenCtx) {
+    // OffscreenCanvas에 비디오 프레임을 그립니다.
+
+    offscreenCtx.drawImage(video, 0, 0, canvas.width, canvas.height);
+    // 비디오 프레임을 캡쳐합니다.
+
+    offscreenCanvas.convertToBlob().then((blob) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(blob);
+      reader.onloadend = () => {
+        const base64data = reader.result;
+        setImage((prev) => [...prev, { src: base64data, name }]);
+      };
+    });
+  }
 }

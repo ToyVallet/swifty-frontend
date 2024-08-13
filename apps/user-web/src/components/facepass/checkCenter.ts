@@ -29,10 +29,10 @@ export function calculateFixedCenterSquaer(
   const width = canvas.width;
   const height = canvas.height;
 
-  const minX = width / 2 - box.width / 3;
+  const minX = width / 2 - box.width / 4;
   const minY = height / 2 - box.height / 3;
   const maxY = minY + box.height / 1.5;
-  const maxX = minX + box.width / 1.5;
+  const maxX = minX + box.width / 2;
 
   return { minX, minY, maxX, maxY };
 }
@@ -71,26 +71,26 @@ export function condition(
   const { yaw, pitch } = angle;
   const value = step[0];
   switch (step[1]) {
-    case 'right':
+    case 'right45':
       return (
-        -yaw >= value - value * MARGIN_OF_ERROR &&
-        -yaw <= value + value * MARGIN_OF_ERROR
+        yaw <= value - value * MARGIN_OF_ERROR &&
+        yaw >= value + value * MARGIN_OF_ERROR
       );
-    case 'left':
+    case 'left45':
       return (
-        -yaw <= value - value * MARGIN_OF_ERROR &&
-        -yaw >= value + value * MARGIN_OF_ERROR
+        yaw >= value - value * MARGIN_OF_ERROR &&
+        yaw <= value + value * MARGIN_OF_ERROR
       );
-    case 'face':
+    case 'front':
       return yaw <= value + MARGIN_OF_ERROR && yaw >= value - MARGIN_OF_ERROR;
 
-    case 'low-up':
+    case 'up30':
       return (
         pitch <= value - value * MARGIN_OF_ERROR &&
         pitch >= value + value * MARGIN_OF_ERROR
       );
 
-    case 'high-up':
+    case 'up45':
       return (
         pitch <= value - value * MARGIN_OF_ERROR &&
         pitch >= value + value * MARGIN_OF_ERROR
