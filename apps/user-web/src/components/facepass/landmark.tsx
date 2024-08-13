@@ -13,11 +13,12 @@ import {
   drawNextPosition,
   saveImage,
 } from '@components/facepass/drawer';
+import useCamera from '@hooks/use-camera';
 import { type NonEmptyArray, http } from '@swifty/shared-lib';
 import * as faceLandmarksDetection from '@tensorflow-models/face-landmarks-detection';
 import '@tensorflow/tfjs-backend-webgl';
 import * as tf from '@tensorflow/tfjs-core';
-import Image from 'next/image';
+import type Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 
 export type DirectionType = readonly [
@@ -39,37 +40,17 @@ const MIN_DISTANCE = 0.3;
 const MAX_DISTANCE = 0.4;
 
 export default function FaceLandMark() {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const { videoRef, canvasRef } = useCamera();
+
+  // 모델 컨트롤에 필요한 변수 및 이미지 저장 객체
   const animationIdRef = useRef<number | null>(null);
   const isNextRef = useRef<boolean>(false);
   const imagesRef = useRef<Image[]>([]);
-
   const [step, setStep] = useState(0);
   const [error, setError] = useState<null | string>(null);
-  const [images, setImages] = useState<Image[]>([]);
   const [loading, setLoading] = useState(true);
 
   const resetError = () => setError(null);
-
-  const setupCamera = async () => {
-    try {
-      const video = videoRef.current;
-      if (!video) return;
-
-      const stream = await navigator.mediaDevices.getUserMedia({
-        video: true,
-      });
-      video.srcObject = stream;
-
-      video.onloadedmetadata = () => {
-        video.play();
-        adjustCanvasAndVideoSize();
-      };
-    } catch (error) {
-      alert('Camera access is needed for this application to work.');
-    }
-  };
 
   const stopPrediction = () => {
     if (animationIdRef.current) {
@@ -89,7 +70,7 @@ export default function FaceLandMark() {
 
     const predict = async () => {
       const poses = await detector.estimateFaces(videoRef.current!, {});
-      console.log(poses, isNextRef.current, imagesRef.current, step);
+
       const ctx = canvasRef.current!.getContext('2d');
       if (ctx && poses.length > 0 && poses[0]?.keypoints && canvasRef.current) {
         const mesh = poses[0].keypoints;
@@ -135,7 +116,6 @@ export default function FaceLandMark() {
               if (currentStep && currentStep[2] === 'yaw') {
                 if (Math.abs(angle.pitch) < 0.1) {
                   if (condition(currentStep, angle) && !isNextRef.current) {
-                    console.log('Done', step, currentStep);
                     isNextRef.current = true;
                     saveImage(
                       canvas,
@@ -153,7 +133,6 @@ export default function FaceLandMark() {
               } else if (currentStep && currentStep[2] === 'pitch') {
                 if (Math.abs(angle.yaw) < 0.1) {
                   if (condition(currentStep, angle) && !isNextRef.current) {
-                    console.log('Done', step, currentStep);
                     isNextRef.current = true;
                     setStep((prev) => prev + 1);
                     saveImage(
@@ -190,33 +169,6 @@ export default function FaceLandMark() {
     await predict();
     setLoading(false);
   };
-
-  const adjustCanvasAndVideoSize = () => {
-    const video = videoRef.current;
-    const canvas = canvasRef.current;
-    if (video && canvas) {
-      const { width, height } = video.getBoundingClientRect();
-      video.width = width;
-      video.height = height;
-
-      canvas.width = width;
-      canvas.height = height;
-    }
-  };
-
-  useEffect(() => {
-    const handleResize = () => {
-      adjustCanvasAndVideoSize();
-    };
-
-    window.addEventListener('resize', handleResize);
-
-    setupCamera();
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
 
   useEffect(() => {
     isNextRef.current = false;
@@ -275,16 +227,6 @@ export default function FaceLandMark() {
       >
         CLICK IMAGE
       </button>
-      {images.length > 0 &&
-        images.map((key: { src: string; name: string }, index) => (
-          <Image
-            key={index}
-            src={key.src}
-            height={100}
-            width={100}
-            alt={key.name}
-          />
-        ))}
     </div>
   );
 }
