@@ -14,7 +14,7 @@ export default async function MyPage() {
   const user = await http.get<UserInfoApi>('/user');
   return (
     <>
-      <Navigation title="마이 페이지" bg="blur" />
+      <Navigation title="마이페이지" bg="blur" />
       <Main className="gap-5 pb-32 px-5">
         <UserBar username={user.name || '사용자'} />
         <Suspense fallback={<PulseLoader />}>

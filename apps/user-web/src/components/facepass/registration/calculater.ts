@@ -1,8 +1,9 @@
 'use client';
 
-import type { DirectionType } from '@components/facepass/landmark';
 import type * as faceLandmarksDetection from '@tensorflow-models/face-landmarks-detection';
 import type { BoundingBox } from '@tensorflow-models/face-landmarks-detection/dist/shared/calculators/interfaces/shape_interfaces';
+
+import type { DirectionType } from './index';
 
 export function calculateCenter(box: BoundingBox, canvas: HTMLCanvasElement) {
   // 바운딩 박스의 원본 좌표와 크기

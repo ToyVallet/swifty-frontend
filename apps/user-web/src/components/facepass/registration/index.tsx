@@ -1,18 +1,5 @@
 'use client';
 
-import {
-  calculateCenter,
-  calculateDistance,
-  calculateFaceAngle,
-  calculateFixedCenterSquaer,
-  condition,
-} from '@components/facepass/checkCenter';
-import {
-  drawGazeSpheres,
-  drawMasking,
-  drawNextPosition,
-  saveImage,
-} from '@components/facepass/drawer';
 import useCamera from '@hooks/use-camera';
 import { type NonEmptyArray, http } from '@swifty/shared-lib';
 import * as faceLandmarksDetection from '@tensorflow-models/face-landmarks-detection';
@@ -20,6 +7,20 @@ import '@tensorflow/tfjs-backend-webgl';
 import * as tf from '@tensorflow/tfjs-core';
 import type Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
+
+import {
+  calculateCenter,
+  calculateDistance,
+  calculateFaceAngle,
+  calculateFixedCenterSquaer,
+  condition,
+} from './calculater';
+import {
+  drawGazeSpheres,
+  drawMasking,
+  drawNextPosition,
+  saveImage,
+} from './drawer';
 
 export type DirectionType = readonly [
   number,

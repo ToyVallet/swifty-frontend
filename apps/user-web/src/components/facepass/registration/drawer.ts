@@ -1,5 +1,4 @@
-import type { DirectionType, Image } from '@components/facepass/landmark';
-import type { Dispatch, SetStateAction } from 'react';
+import type { DirectionType, Image } from './index';
 
 const rad2deg = (theat: number) => Math.round((theat * 180) / Math.PI);
 

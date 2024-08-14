@@ -1,12 +1,11 @@
 'use client';
 
+import { openToast } from '@lib/utils';
 import { Button, Drawer, DrawerContent } from '@swifty/ui';
-import { convertNewlineToJSX } from '@toss/react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import type { Dispatch, SetStateAction } from 'react';
 import { type PropsWithChildren, useState } from 'react';
-import { toast } from 'sonner';
 
 import Tile from './tile';
 
@@ -37,12 +36,12 @@ export default function MenuTiles({ tiles }: { tiles: TileInfo[] }) {
     if (isAvaliable && isCertificate) {
       router.push(link);
     }
-    if (!isCertificate) {
+    /*     if (!isCertificate) {
       // 학적 인증
       setIsOpen(true);
-    } else if (!isAvaliable) {
+    } else  */ if (!isAvaliable) {
       // 모달
-      openToast();
+      openToast('현재는 티켓 예매가\n 가능한 시간이 아닙니다.');
     }
   };
   return (
@@ -70,24 +69,6 @@ export default function MenuTiles({ tiles }: { tiles: TileInfo[] }) {
       })}
     </div>
   );
-}
-
-function openToast() {
-  toast.custom((t) => (
-    <div className="bg-swifty-color-100 text-black dark:bg-black dark:text-white flex flex-col items-center justify-center text-center px-5 pt-10 pb-5 rounded-lg gap-5 x-[346px] y-[198px]">
-      <h1 className="text-18 text-bold">
-        {convertNewlineToJSX('현재는 티켓 예매가\n 가능한 시간이 아닙니다.')}
-      </h1>
-      <div className="border border-swifty-color-700 w-full mt-5" />
-      <Button
-        block
-        className="text-16 font-bold"
-        onClick={() => toast.dismiss(t)}
-      >
-        확인
-      </Button>
-    </div>
-  ));
 }
 
 function CertificationDrawer({
