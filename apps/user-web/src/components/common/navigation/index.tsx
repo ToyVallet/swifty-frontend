@@ -9,7 +9,7 @@ type NavigationProps = {
   left?: React.FC;
   center?: React.FC;
   right?: React.FC;
-  bg?: 'transparent' | 'gradient' | 'solid' | 'blur';
+  bg?: 'transparent' | 'gradient' | 'solid' | 'blur' | 'white' | 'black';
   title?: string;
 };
 
@@ -22,6 +22,8 @@ const navigationVariants = cva(
         transparent: 'bg-transparent',
         solid: 'bg-black',
         blur: 'backdrop-blur-md backdrop-filter',
+        white: 'text-white bg-gradient-to-b from-black',
+        black: 'text-black',
       },
     },
     defaultVariants: {
@@ -48,6 +50,8 @@ export default function Navigation({
                 className={cn(
                   '-translate-x-2.5 stroke-black dark:stroke-white',
                   bg === 'gradient' && 'dark:stroke-white stroke-black',
+                  bg === 'white' && 'stroke-white',
+                  bg === 'black' && 'stroke-black',
                 )}
                 width={40}
                 height={40}
@@ -55,7 +59,13 @@ export default function Navigation({
             }
           >
             {title && (
-              <span className="font-bold text-16 text-black dark:text-white">
+              <span
+                className={cn(
+                  'font-bold text-16 text-black dark:text-white',
+                  bg === 'white' && 'text-white',
+                  bg === 'black' && 'text-black',
+                )}
+              >
                 {title}
               </span>
             )}

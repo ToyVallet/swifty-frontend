@@ -1,6 +1,8 @@
 'use server';
 
-import { getCookie } from '@swifty/shared-lib';
+import type { VerficationAPI } from '@lib/types/certification';
+import { ApiCertification } from '@lib/types/certification';
+import { getCookie, http } from '@swifty/shared-lib';
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 
@@ -9,7 +11,7 @@ export async function middleware(request: NextRequest) {
   const token = await getCookie('accessToken');
 
   const pathRequiredLogin = [
-    'verification',
+    //'verification',
     'mypage',
     'ticketing',
     'change-password',
@@ -23,6 +25,18 @@ export async function middleware(request: NextRequest) {
     if (url.pathname === '/login' || url.pathname === '/signup') {
       url.pathname = '/';
       return NextResponse.redirect(url);
+    }
+
+    // 학적 인증이 상태에 따른 상황 체크
+    if (url.pathname === '/verification/student') {
+      const status = await http.get<VerficationAPI>('/certification/check');
+      if (
+        status.certificationStatus === 'APPROVED' ||
+        status.certificationStatus === 'PENDING'
+      ) {
+        url.pathname = '/';
+        return NextResponse.redirect(url);
+      }
     }
   } else {
     // 로그인 하지 않았을 경우 접근해서는 안되는 페이지

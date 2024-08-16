@@ -1,5 +1,6 @@
 'use client';
 
+import { NoTicketCard } from '@components/common';
 import TicketCard from '@components/ticket/ticket-card';
 import { Tabs, TabsTrigger } from '@components/ui/tabs';
 import type { UserTicketApi } from '@lib/types';
@@ -64,16 +65,20 @@ export default function TicketDrawer({
             </TabsList>
             <TabsContent value={TicketTypes[0]}>
               <div className="mt-4 flex flex-col gap-4">
-                {availableTickets.map((ticket) => (
-                  <TicketCard key={ticket.ticketId} {...ticket} />
-                ))}
+                {availableTickets.length > 0 &&
+                  availableTickets.map((ticket) => (
+                    <TicketCard key={ticket.ticketId} {...ticket} />
+                  ))}
+                {availableTickets.length < 1 && <NoTicketCard />}
               </div>
             </TabsContent>
             <TabsContent value={TicketTypes[1]}>
               <div className="mt-4 flex flex-col gap-4">
-                {overDateTickets.map((ticket) => (
-                  <TicketCard key={ticket.ticketId} {...ticket} />
-                ))}
+                {overDateTickets.length > 0 &&
+                  overDateTickets.map((ticket) => (
+                    <TicketCard key={ticket.ticketId} {...ticket} />
+                  ))}
+                {overDateTickets.length < 1 && <NoTicketCard />}
               </div>
             </TabsContent>
           </Tabs>

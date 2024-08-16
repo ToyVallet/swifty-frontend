@@ -8,7 +8,7 @@ const Main = forwardRef<HTMLDivElement, React.HTMLProps<HTMLDivElement>>(
       <main
         ref={ref}
         className={cn(
-          'flex flex-col items-center justify-start w-full',
+          'flex flex-col items-center justify-start w-full gap-10',
           className,
         )}
         {...rest}

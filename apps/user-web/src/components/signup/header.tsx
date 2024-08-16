@@ -1,14 +1,23 @@
 'use client';
 
+import { cn } from '@swifty/shared-lib';
 import { convertNewlineToJSX } from '@toss/react';
 import { motion } from 'framer-motion';
 import type { PropsWithChildren } from 'react';
 
 import Funnel, { type StepType } from './funnel';
 
-export default function Header({ children }: PropsWithChildren) {
+export default function Header({
+  children,
+  className,
+}: PropsWithChildren<{ className?: string }>) {
   return (
-    <h1 className=" text-center font-bold text-26 my-10 flex flex-col items-center">
+    <h1
+      className={cn(
+        ' text-center font-bold text-26 mt-10 flex flex-col items-center',
+        className,
+      )}
+    >
       {typeof children === 'string' ? convertNewlineToJSX(children) : children}
     </h1>
   );

@@ -4,3 +4,4 @@ export { default as useInterval } from './use-interval';
 export { default as useDebounce } from './use-debounce';
 export { default as useCarouselDotButton } from './use-carousel-dot-button';
 export { default as useEventSoure } from './use-event-source';
+export { default as useCamera } from './use-camera';

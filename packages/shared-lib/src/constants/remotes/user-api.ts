@@ -40,6 +40,12 @@ const ticketing = [
 
 const recaptcha = ['/recaptcha'] as const;
 
+const facepass = [
+  '/facepass',
+  '/facepass/check/{id}',
+  '/facepass/identification/{id}',
+] as const;
+
 export const userApi = [
   ...user,
   ...certification,
@@ -47,6 +53,7 @@ export const userApi = [
   ...sms,
   ...ticketing,
   ...recaptcha,
+  ...facepass,
 ] as const;
 
 export type UserApiKeys = (typeof userApi)[number];

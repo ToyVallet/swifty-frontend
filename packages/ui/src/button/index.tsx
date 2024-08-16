@@ -91,9 +91,6 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps & MotionProps>(
           <motion.button
             whileTap={{
               scale: 0.98,
-              backgroundColor:
-                variant === 'outlined' ? 'rgba(255, 255, 255, 1)' : '',
-              color: variant === 'outlined' ? 'rgba(0, 0, 0, 1)' : '',
             }}
             transition={{
               duration: 0.1,

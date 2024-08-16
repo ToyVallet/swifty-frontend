@@ -84,6 +84,17 @@ input.password {
     font-family: 'Roboto', Helvetica, Arial, sans-serif;
   }
 }
+video {
+  transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg);
+  -moz-transform: rotateY(180deg);
+}
+
+canvas {
+  transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg);
+  -moz-transform: rotateY(180deg);
+}
 
 @layer utilities {
   .text-balance {

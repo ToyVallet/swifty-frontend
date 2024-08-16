@@ -15,6 +15,12 @@ export interface UserWebIconsMap {
   'user-web/ticketing/calender': ImportedIconComponent;
   'user-web/ticketing/time': ImportedIconComponent;
   'user-web/ticket-list/calender': ImportedIconComponent;
+  'user-web/facepass/browser': ImportedIconComponent;
+  'user-web/facepass/light': ImportedIconComponent;
+  'user-web/facepass/logo': ImportedIconComponent;
+  'user-web/facepass/mask': ImportedIconComponent;
+  'user-web/facepass/phone': ImportedIconComponent;
+  'user-web/facepass/title': ImportedIconComponent;
 }
 
 export const userWebIcons: UserWebIconsMap = {
@@ -38,4 +44,10 @@ export const userWebIcons: UserWebIconsMap = {
   'user-web/ticket-list/calender': lazy(
     () => import('./ticket-list/calender.svg'),
   ),
+  'user-web/facepass/browser': lazy(() => import('./facepass/browser.svg')),
+  'user-web/facepass/light': lazy(() => import('./facepass/light.svg')),
+  'user-web/facepass/logo': lazy(() => import('./facepass/logo.svg')),
+  'user-web/facepass/mask': lazy(() => import('./facepass/mask.svg')),
+  'user-web/facepass/phone': lazy(() => import('./facepass/phone.svg')),
+  'user-web/facepass/title': lazy(() => import('./facepass/title.svg')),
 } as const;
