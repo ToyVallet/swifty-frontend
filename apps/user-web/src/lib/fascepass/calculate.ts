@@ -1,9 +1,19 @@
 'use client';
 
+import type { DirectionType } from '@lib/types';
 import type * as faceLandmarksDetection from '@tensorflow-models/face-landmarks-detection';
 import type { BoundingBox } from '@tensorflow-models/face-landmarks-detection/dist/shared/calculators/interfaces/shape_interfaces';
+import type { RefObject } from 'react';
 
-import type { DirectionType } from './index';
+import { drawInnerCircle, drawMasking } from './draw';
+
+export function calculateRadius(canvas: HTMLCanvasElement | OffscreenCanvas) {
+  const x = canvas.width / 2;
+  const y = canvas.height / 2;
+  const radius = Math.min(canvas.width, canvas.height) * 0.5;
+
+  return { radius, x, y };
+}
 
 export function calculateCenter(box: BoundingBox, canvas: HTMLCanvasElement) {
   // 바운딩 박스의 원본 좌표와 크기
@@ -96,5 +106,26 @@ export function condition(
         pitch <= value - value * MARGIN_OF_ERROR &&
         pitch >= value + value * MARGIN_OF_ERROR
       );
+  }
+}
+
+export function adjustCanvasAndVideoSize(
+  videoRef: RefObject<HTMLVideoElement>,
+  canvasRef: RefObject<HTMLCanvasElement>,
+) {
+  const video = videoRef.current;
+  const canvas = canvasRef.current;
+  if (video && canvas) {
+    const { width, height } = video.getBoundingClientRect();
+    //console.log(width, height);
+    video.width = width;
+    video.height = height;
+
+    canvas.width = width;
+    canvas.height = height;
+    canvas.style.width = `${width}px`;
+    canvas.style.height = `${height}px`;
+    drawMasking(canvas);
+    drawInnerCircle(canvas);
   }
 }

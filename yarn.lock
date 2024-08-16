@@ -6222,15 +6222,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-lottie@npm:^1":
-  version: 1.2.10
-  resolution: "@types/react-lottie@npm:1.2.10"
-  dependencies:
-    "@types/react": "npm:*"
-  checksum: 10c0/c0b71c534a8f6e7540a620bfeb98264217a66db1f886f499a49e5bd39960fbc0897d9c5475e575d29ebb225b50bf51f6032053a51a1d3e919396a322e7f183b1
-  languageName: node
-  linkType: hard
-
 "@types/react@npm:*, @types/react@npm:^16.8.0 || ^17.0.0 || ^18.0.0, @types/react@npm:^18, @types/react@npm:^18.2.61, @types/react@npm:^18.3.3":
   version: 18.3.3
   resolution: "@types/react@npm:18.3.3"
@@ -7811,16 +7802,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"babel-runtime@npm:^6.26.0":
-  version: 6.26.0
-  resolution: "babel-runtime@npm:6.26.0"
-  dependencies:
-    core-js: "npm:^2.4.0"
-    regenerator-runtime: "npm:^0.11.0"
-  checksum: 10c0/caa752004936b1463765ed3199c52f6a55d0613b9bed108743d6f13ca532b821d4ea9decc4be1b583193164462b1e3e7eefdfa36b15c72e7daac58dd72c1772f
-  languageName: node
-  linkType: hard
-
 "balanced-match@npm:^1.0.0":
   version: 1.0.2
   resolution: "balanced-match@npm:1.0.2"
@@ -8955,13 +8936,6 @@ __metadata:
   version: 3.29.1
   resolution: "core-js@npm:3.29.1"
   checksum: 10c0/e5fb4a18148e76a136b5c90d994715e15ed0e42cf0f073429174204bd119f1ba81dc582fff450e3792b73825cd1fe234ad76f85567ba7943039f5842be02591c
-  languageName: node
-  linkType: hard
-
-"core-js@npm:^2.4.0":
-  version: 2.6.12
-  resolution: "core-js@npm:2.6.12"
-  checksum: 10c0/00128efe427789120a06b819adc94cc72b96955acb331cb71d09287baf9bd37bebd191d91f1ee4939c893a050307ead4faea08876f09115112612b6a05684b63
   languageName: node
   linkType: hard
 
@@ -13058,13 +13032,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jeom-mae-chu@npm:^0.2.4":
-  version: 0.2.4
-  resolution: "jeom-mae-chu@npm:0.2.4"
-  checksum: 10c0/540551b0289d4430e395f1935dc2ad790249c5a8c2133bcc9056c5d86d8f4237a6be3b1a8cbb75a21564b10c6bdd2c2dc1d973f4277296ae3437588a1ead0e9e
-  languageName: node
-  linkType: hard
-
 "jest-changed-files@npm:^29.7.0":
   version: 29.7.0
   resolution: "jest-changed-files@npm:29.7.0"
@@ -14082,13 +14049,6 @@ __metadata:
   bin:
     loose-envify: cli.js
   checksum: 10c0/655d110220983c1a4b9c0c679a2e8016d4b67f6e9c7b5435ff5979ecdb20d0813f4dec0a08674fcbdd4846a3f07edbb50a36811fd37930b94aaa0d9daceb017e
-  languageName: node
-  linkType: hard
-
-"lottie-web@npm:^5.1.3":
-  version: 5.12.2
-  resolution: "lottie-web@npm:5.12.2"
-  checksum: 10c0/0aeaf631b10a76afd025df70c2a1486543530708e07a316946c08e55891dac483ffbaf2bf3648ae0b9c54c733118a0a086fd150aa76f7848606214c67ad72c30
   languageName: node
   linkType: hard
 
@@ -17278,18 +17238,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-lottie@npm:^1.2.4":
-  version: 1.2.4
-  resolution: "react-lottie@npm:1.2.4"
-  dependencies:
-    babel-runtime: "npm:^6.26.0"
-    lottie-web: "npm:^5.1.3"
-  peerDependencies:
-    react: ">=15.0.0"
-  checksum: 10c0/1a97c11a50a5ef7ca067b55ead45aa69817b4122f277744f98cb9b617a9dea5030b4fcbf0c59240909c3b685b025d538b6f558d54a76ebbd4beafdd0cc03c9d6
-  languageName: node
-  linkType: hard
-
 "react-refresh@npm:^0.14.0":
   version: 0.14.2
   resolution: "react-refresh@npm:0.14.2"
@@ -17499,13 +17447,6 @@ __metadata:
   version: 1.4.2
   resolution: "regenerate@npm:1.4.2"
   checksum: 10c0/f73c9eba5d398c818edc71d1c6979eaa05af7a808682749dd079f8df2a6d91a9b913db216c2c9b03e0a8ba2bba8701244a93f45211afbff691c32c7b275db1b8
-  languageName: node
-  linkType: hard
-
-"regenerator-runtime@npm:^0.11.0":
-  version: 0.11.1
-  resolution: "regenerator-runtime@npm:0.11.1"
-  checksum: 10c0/69cfa839efcf2d627fe358bf302ab8b24e5f182cb69f13e66f0612d3640d7838aad1e55662135e3ef2c1cc4322315b757626094fab13a48f9a64ab4bdeb8795b
   languageName: node
   linkType: hard
 
@@ -20334,7 +20275,6 @@ __metadata:
     "@types/react": "npm:^18.3.3"
     "@types/react-dom": "npm:^18.3.0"
     "@types/react-google-recaptcha": "npm:^2.1.9"
-    "@types/react-lottie": "npm:^1"
     "@vladmandic/human": "npm:^3.2.2"
     class-variance-authority: "npm:^0.7.0"
     clsx: "npm:^2.1.0"
@@ -20344,7 +20284,6 @@ __metadata:
     embla-carousel-react: "npm:^8.0.0"
     eslint-config-next: "npm:14.1.0"
     framer-motion: "npm:^11.0.6"
-    jeom-mae-chu: "npm:^0.2.4"
     jwt-decode: "npm:^4.0.0"
     jwt-encode: "npm:^1.0.1"
     lucide-react: "npm:^0.358.0"
@@ -20359,7 +20298,6 @@ __metadata:
     react-google-recaptcha: "npm:^3.1.0"
     react-hook-form: "npm:^7.51.0"
     react-icons: "npm:^5.0.1"
-    react-lottie: "npm:^1.2.4"
     react-spinners: "npm:^0.13.8"
     sharp: "npm:0.32.6"
     sonner: "npm:^1.4.41"

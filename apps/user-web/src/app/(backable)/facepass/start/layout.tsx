@@ -1,5 +1,6 @@
 'use client';
 
+import { Navigation } from '@components/common';
 import { Choose, When } from '@swifty/ui';
 import type { ReactNode } from 'react';
 import { type PropsWithChildren, useState } from 'react';
@@ -22,7 +23,8 @@ export default function FacePassLayout({ camera, start }: Props) {
     }
   };
   return (
-    <div className="w-full h-full">
+    <div className="w-full h-full px-5 overflow-hidden">
+      <Navigation title="돌아가기" bg="transparent" />
       <FacePassContext.Provider value={{ currentStep, nextStep }}>
         <Choose value={currentStep}>
           <When value="start">{start}</When>

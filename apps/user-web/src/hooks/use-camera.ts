@@ -1,11 +1,12 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { adjustCanvasAndVideoSize } from '@lib/fascepass';
+import { useEffect, useRef, useState } from 'react';
 
 const useCamera = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-
+  const [isVideoLoad, setIsVideoLoad] = useState(false);
   const setupCamera = async () => {
     try {
       const video = videoRef.current;
@@ -18,29 +19,17 @@ const useCamera = () => {
 
       video.onloadedmetadata = () => {
         video.play();
-        adjustCanvasAndVideoSize();
+        adjustCanvasAndVideoSize(videoRef, canvasRef);
+        setIsVideoLoad(true);
       };
     } catch (error) {
       alert('Camera access is needed for this application to work.');
     }
   };
 
-  const adjustCanvasAndVideoSize = () => {
-    const video = videoRef.current;
-    const canvas = canvasRef.current;
-    if (video && canvas) {
-      const { width, height } = video.getBoundingClientRect();
-      video.width = width;
-      video.height = height;
-
-      canvas.width = width;
-      canvas.height = height;
-    }
-  };
-
   useEffect(() => {
     const handleResize = () => {
-      adjustCanvasAndVideoSize();
+      adjustCanvasAndVideoSize(videoRef, canvasRef);
     };
 
     window.addEventListener('resize', handleResize);
@@ -52,7 +41,7 @@ const useCamera = () => {
     };
   }, []);
 
-  return { videoRef, canvasRef };
+  return { videoRef, canvasRef, isVideoLoad };
 };
 
 export default useCamera;
