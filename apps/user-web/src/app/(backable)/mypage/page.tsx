@@ -6,12 +6,14 @@ import {
   VerificationSection,
 } from '@components/mypage';
 import type { UserInfoApi } from '@lib/types';
+import type { VerficationAPI } from '@lib/types/certification';
 import { http } from '@swifty/shared-lib';
 import { Suspense } from 'react';
 import PulseLoader from 'react-spinners/PulseLoader';
 
 export default async function MyPage() {
   const user = await http.get<UserInfoApi>('/user');
+  const certification = await http.get<VerficationAPI>('/certification/check');
   return (
     <>
       <Navigation title="마이페이지" bg="blur" />
@@ -20,7 +22,7 @@ export default async function MyPage() {
         <Suspense fallback={<PulseLoader />}>
           <ScheduleSection />
         </Suspense>
-        <VerificationSection />
+        <VerificationSection certification={certification} user={user} />
         <UserSection />
       </Main>
     </>

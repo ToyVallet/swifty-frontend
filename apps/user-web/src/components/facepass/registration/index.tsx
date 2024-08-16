@@ -29,6 +29,7 @@ import * as faceLandmarksDetection from '@tensorflow-models/face-landmarks-detec
 import '@tensorflow/tfjs-backend-webgl';
 import * as tf from '@tensorflow/tfjs-core';
 import { convertNewlineToJSX } from '@toss/react';
+import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 
 import facepassPost from './post';
@@ -47,6 +48,8 @@ export default function FaceLandMark() {
   const [error, setError] = useState<null | ErrorMessage>(null);
 
   const [modelLoading, setModelLoding] = useState(true);
+
+  const router = useRouter();
 
   const resetError = () => setError(null);
   const makeError = (text: ErrorMessage) => {
@@ -213,6 +216,7 @@ export default function FaceLandMark() {
       const fileArr = convertBase64ToFile(images);
       facepassPost(fileArr).then(() => {
         console.log('sucess');
+        router.replace('/facepass/complete');
       });
     }
   }, [step, modelLoading]);

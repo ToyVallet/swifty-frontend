@@ -64,6 +64,7 @@ export default function Search<T extends { [key in string]: any }>({
         name="search"
         value={value}
         onChange={handleChange}
+        autoComplete="off"
       />
       <AnimatePresence>
         {open && children(searchList, selectSearchValue)}
