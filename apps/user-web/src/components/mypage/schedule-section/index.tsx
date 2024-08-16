@@ -1,8 +1,9 @@
-import { Carousel } from '@components/common';
+import { Carousel, NoTicketCard } from '@components/common';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@components/ui/tabs';
 import type { UserTicketApi } from '@lib/types';
 import { dayDifference, http } from '@swifty/shared-lib';
 import dayjs from 'dayjs';
+import Image from 'next/image';
 
 import Card from './card';
 
@@ -28,40 +29,46 @@ export default async function ScheduleCard() {
           ))}
         </TabsList>
         <TabsContent value={schedule[0]}>
-          <Carousel autoplay hasDotButton>
-            {availableTicketings.map((available) => (
-              <Card
-                title={available.festivalName}
-                date={dayjs(available.concertDate).format(
-                  'YYYY년 MMd월 DD일 hh:mm a',
-                )}
-                backgroundImage={available.festivalImage}
-                enterAt={dayDifference(available.concertDate)}
-                ticketId={available.ticketId}
-                festivalId={available.festivalId}
-                lineups={[]}
-                key={available.ticketId}
-              />
-            ))}
-          </Carousel>
+          {availableTicketings.length > 0 && (
+            <Carousel autoplay hasDotButton>
+              {availableTicketings.map((available) => (
+                <Card
+                  title={available.festivalName}
+                  date={dayjs(available.concertDate).format(
+                    'YYYY년 MMd월 DD일 hh:mm a',
+                  )}
+                  backgroundImage={available.festivalImage}
+                  enterAt={dayDifference(available.concertDate)}
+                  ticketId={available.ticketId}
+                  festivalId={available.festivalId}
+                  lineups={[]}
+                  key={available.ticketId}
+                />
+              ))}
+            </Carousel>
+          )}
+          {availableTicketings.length === 0 && <NoTicketCard />}
         </TabsContent>
         <TabsContent value={schedule[1]}>
-          <Carousel autoplay hasDotButton>
-            {overDateTicketings.map((available) => (
-              <Card
-                title={available.festivalName}
-                date={dayjs(available.concertDate).format(
-                  'YYYY년 MMd월 DD일 hh:mm a',
-                )}
-                backgroundImage={available.festivalImage}
-                enterAt={dayDifference(available.concertDate)}
-                ticketId={available.ticketId}
-                festivalId={available.festivalId}
-                lineups={[]}
-                key={available.ticketId}
-              />
-            ))}
-          </Carousel>
+          {overDateTicketings.length > 0 && (
+            <Carousel autoplay hasDotButton>
+              {overDateTicketings.map((available) => (
+                <Card
+                  title={available.festivalName}
+                  date={dayjs(available.concertDate).format(
+                    'YYYY년 MMd월 DD일 hh:mm a',
+                  )}
+                  backgroundImage={available.festivalImage}
+                  enterAt={dayDifference(available.concertDate)}
+                  ticketId={available.ticketId}
+                  festivalId={available.festivalId}
+                  lineups={[]}
+                  key={available.ticketId}
+                />
+              ))}
+            </Carousel>
+          )}
+          {overDateTicketings.length === 0 && <NoTicketCard />}
         </TabsContent>
       </Tabs>
     </section>
