@@ -180,9 +180,10 @@ export function drawCircleAnimation(
   canvas: HTMLCanvasElement,
   color: string = 'blue',
   onComplete?: () => void,
+  time = 1500,
 ) {
   let startTime: null | number = null;
-  const totalTime = 1500;
+  const totalTime = time;
   const ctx = canvas.getContext('2d');
   const { radius, x, y } = calculateRadius(canvas);
   const startAngle = (3 * Math.PI) / 2;
