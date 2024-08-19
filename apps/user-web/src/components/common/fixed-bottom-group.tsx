@@ -1,9 +1,8 @@
 'use client';
 
 import { cn } from '@swifty/shared-lib';
+import { GlobalPortal } from '@swifty/ui';
 import type { PropsWithChildren } from 'react';
-
-import { GlobalPortal } from '../../app/global-portal';
 
 export default function FixedBottomGroup({
   children,

@@ -36,4 +36,6 @@ export {
   AccordionTrigger,
   AccordionContent,
 } from './accordion';
+
+export * from './provider';
 export { default as Toast } from './toast';

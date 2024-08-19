@@ -1,4 +1,6 @@
-/* import { type ReactNode, createContext, useState } from 'react';
+'use client';
+
+import { type ReactNode, createContext, useState } from 'react';
 import { createPortal } from 'react-dom';
 
 const PortalContext = createContext<HTMLDivElement | null>(null);
@@ -50,4 +52,3 @@ export const GlobalPortal = {
   Provider: PortalProvider,
   Consumer: PortalConsumer,
 };
- */
