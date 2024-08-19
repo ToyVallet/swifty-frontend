@@ -1,13 +1,12 @@
 'use client';
 
 import { DeleteUserContext } from '@app/(backable)/mypage/delete/context';
-import { GlobalPortal } from '@app/global-portal';
 import { FixedBottomCTA } from '@components/common';
 import { FormErrorControl } from '@components/signup';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { passwordSchema } from '@lib/schema/schema';
 import { APIError, http } from '@swifty/shared-lib';
-import { Form, FormField, Input } from '@swifty/ui';
+import { Form, FormField, GlobalPortal, Input } from '@swifty/ui';
 import { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
