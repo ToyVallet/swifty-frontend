@@ -24,7 +24,7 @@ export default function FacepassCompletePage() {
           안면 등록이 완료되었어요
         </h1>
       </header>
-      <div className="my-[88px]">
+      <div className="mt-[88px] mb-10">
         <Icon
           name="user-web/facepass/logo"
           width={184}
