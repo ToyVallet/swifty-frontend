@@ -1,5 +1,10 @@
-export default function Home() {
+import { Main, MainLogo, TicketNavigation } from '@components';
+
+export default function MainPage() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24"></main>
+    <Main className="gap-[58px]">
+      <MainLogo />
+      <TicketNavigation />
+    </Main>
   );
 }

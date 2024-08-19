@@ -5,6 +5,7 @@
     "plugins": [{ "name": "next" }],
     "paths": {
       "@app/*": ["./src/app/*"],
+      "@components": ["./src/components"],
       "@images/*": ["./public/images/*"],
       "react-hook-form": ["../../node_modules/react-hook-form"]
     }
