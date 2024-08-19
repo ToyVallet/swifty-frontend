@@ -1,5 +1,11 @@
 import { Term } from '@components/facepass';
 import { Icon } from '@swifty/assets';
+import dynamic from 'next/dynamic';
+
+const IsMobile = dynamic(
+  () => import('@components/facepass').then((mod) => mod.IsMobile),
+  { ssr: false },
+);
 
 export default function FacePassPage() {
   return (
@@ -26,6 +32,7 @@ export default function FacePassPage() {
         </div>
       </div>
       <Term />
+      <IsMobile />
     </>
   );
 }

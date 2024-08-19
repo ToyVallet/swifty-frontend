@@ -1,6 +1,3 @@
-'use client';
-
-//import { Landmark } from '@components/facepass';
 import dynamic from 'next/dynamic';
 
 const LandMark = dynamic(
@@ -8,6 +5,16 @@ const LandMark = dynamic(
   { ssr: false },
 );
 
+const IsMobile = dynamic(
+  () => import('@components/facepass').then((mod) => mod.IsMobile),
+  { ssr: false },
+);
+
 export default function FacePassRegistrationPage() {
-  return <LandMark />;
+  return (
+    <>
+      <LandMark />
+      <IsMobile />
+    </>
+  );
 }

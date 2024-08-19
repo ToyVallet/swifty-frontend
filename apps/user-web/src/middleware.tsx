@@ -1,7 +1,6 @@
 'use server';
 
 import type { VerficationAPI } from '@lib/types/certification';
-import { ApiCertification } from '@lib/types/certification';
 import { getCookie, http } from '@swifty/shared-lib';
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
@@ -11,12 +10,13 @@ export async function middleware(request: NextRequest) {
   const token = await getCookie('accessToken');
 
   const pathRequiredLogin = [
-    //'verification',
+    'verification',
     'mypage',
     'ticketing',
     'change-password',
     'change-phone-number',
     'ticket',
+    'facepass',
   ] as const;
 
   if (token) {
