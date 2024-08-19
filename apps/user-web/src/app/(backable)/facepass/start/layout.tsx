@@ -14,7 +14,6 @@ type Props = PropsWithChildren<{
 
 export default function FacePassLayout({ camera, start }: Props) {
   const [currentStep, setCurrentStep] = useState<FacePassStep>(facepassStep[0]);
-
   const nextStep = () => {
     const nextStepIndex = facepassStep.indexOf(currentStep) + 1;
 
@@ -22,6 +21,7 @@ export default function FacePassLayout({ camera, start }: Props) {
       setCurrentStep(facepassStep[nextStepIndex]);
     }
   };
+
   return (
     <div className="w-full h-full px-5">
       <Navigation title="돌아가기" bg="transparent" />

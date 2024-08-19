@@ -2,7 +2,13 @@ import { FixedBottomGroup } from '@components/common';
 import { Icon } from '@swifty/assets';
 import { Button } from '@swifty/ui';
 import { convertNewlineToJSX } from '@toss/react';
+import dynamic from 'next/dynamic';
 import Link from 'next/link';
+
+const IsMobile = dynamic(
+  () => import('@components/facepass').then((mod) => mod.IsMobile),
+  { ssr: false },
+);
 
 export default function FacepassCompletePage() {
   return (
@@ -41,6 +47,7 @@ export default function FacepassCompletePage() {
           <Link href="/">홈으로</Link>
         </Button>
       </FixedBottomGroup>
+      <IsMobile />
     </div>
   );
 }

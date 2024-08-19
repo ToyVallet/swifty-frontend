@@ -4,6 +4,7 @@ import type { UserInfoApi } from '@lib/types';
 import type { VerficationAPI } from '@lib/types/certification';
 import { openToast } from '@lib/utils';
 import { Icon } from '@swifty/assets';
+import { getOS } from '@swifty/shared-lib';
 import { Button } from '@swifty/ui';
 import { useRouter } from 'next/navigation';
 
@@ -48,7 +49,7 @@ export default function VerificationSection({ user, certification }: Props) {
       <Header>안증 및 등록 관리</Header>
       <div className="w-full flex gap-[10px] h-[118px] items-center justify-center">
         {verificationLinks.map((props) => (
-          <Link {...props} />
+          <Link {...props} key={props.title} />
         ))}
       </div>
     </section>
@@ -67,17 +68,26 @@ function Link({ href, title, icon, status }: VerificationLink) {
       } else {
         router.push(href);
       }
+    } else if (href === '/facepass/start') {
+      const type = getOS();
+      if (type === 'server' || type === 'desktop') {
+        openToast('모바일 환경에서만 가능합니다.');
+      } else {
+        router.push(href);
+      }
     } else {
       router.push(href);
     }
   };
   return (
-    <Button
-      onClick={onClick}
-      className="rounded-lg bg-swifty-color-200 dark:bg-swifty-color-900 flex flex-col gap-[6px] items-center justify-center w-full h-full text-13 font-semibold"
-    >
-      {icon}
-      {title}
-    </Button>
+    <div className="rounded-lg bg-swifty-color-200 dark:bg-swifty-color-900 w-full h-full text-13 font-semibold">
+      <Button
+        onClick={onClick}
+        className="flex flex-col gap-[6px] items-center justify-center w-full h-full"
+      >
+        {icon}
+        {title}
+      </Button>
+    </div>
   );
 }

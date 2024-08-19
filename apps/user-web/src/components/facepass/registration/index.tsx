@@ -87,9 +87,14 @@ export default function FaceLandMark() {
         currentStep[1],
         imagesRef.current,
       );
-      drawCircleAnimation(canvasRef.current, '#1967FF', () => {
-        setStep((prev) => prev + 1);
-      });
+      drawCircleAnimation(
+        canvasRef.current,
+        '#1967FF',
+        () => {
+          setStep((prev) => prev + 1);
+        },
+        500,
+      );
     }
   };
 
@@ -215,7 +220,6 @@ export default function FaceLandMark() {
       const images = imagesRef.current;
       const fileArr = convertBase64ToFile(images);
       facepassPost(fileArr).then(() => {
-        console.log('sucess');
         router.replace('/facepass/complete');
       });
     }
@@ -225,15 +229,15 @@ export default function FaceLandMark() {
     <div className="relative w-full h-full">
       <video
         ref={videoRef}
-        className="absolute left-0 right-0 top-0 bottom-0 mt-48 mx-auto"
+        className="absolute left-0 right-0 top-0 bottom-0 mt-20 mx-auto"
       />
       <canvas
         ref={canvasRef}
-        className="absolute left-0 right-0 top-0 bottom-0 mt-48 mx-auto"
+        className="absolute left-0 right-0 top-0 bottom-0 mt-20 mx-auto"
       />
 
       {!modelLoading && (
-        <div className="absolute left-0 right-0 bottom-[50px] mb-40 text-26 text-white text-center">
+        <div className="absolute left-0 right-0 bottom-[50px] mb-[72px] text-26 text-white text-center">
           {renderMessage()}
         </div>
       )}

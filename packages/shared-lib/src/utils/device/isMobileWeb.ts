@@ -1,3 +1,5 @@
+'use client';
+
 import { isAndroid } from './isAndroid';
 import { isIOS } from './isIOS';
 import { isServer } from './isServer';

@@ -32,7 +32,7 @@ export default function Term() {
 
   return (
     <>
-      <div className="flex-1 overflow-y-scroll scrollbar-hide">
+      <div className="flex-1 pb-20">
         <Accordion className="flex flex-col gap-2.5" type="single" collapsible>
           {termsOfServices.map((term, index) => (
             <Items

@@ -10,7 +10,7 @@ import { drawInnerCircle, drawMasking } from './draw';
 export function calculateRadius(canvas: HTMLCanvasElement | OffscreenCanvas) {
   const x = canvas.width / 2;
   const y = canvas.height / 2;
-  const radius = Math.min(canvas.width, canvas.height) * 0.5;
+  const radius = Math.min(canvas.width, canvas.height) * 0.46;
 
   return { radius, x, y };
 }
