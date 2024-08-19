@@ -1,6 +1,11 @@
-import { Main } from '@components';
+import { Footer, Main } from '@components';
 import type { PropsWithChildren } from 'react';
 
 export default function NavigationLayout({ children }: PropsWithChildren) {
-  return <Main>{children}</Main>;
+  return (
+    <>
+      <Main>{children}</Main>
+      <Footer />
+    </>
+  );
 }
