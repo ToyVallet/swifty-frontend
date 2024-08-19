@@ -1,3 +1,3 @@
 export default function DynamicPage() {
-  return;
+  return <div></div>;
 }

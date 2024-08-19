@@ -1,3 +1,3 @@
 export default function FacepassPage() {
-  return;
+  return <div></div>;
 }
