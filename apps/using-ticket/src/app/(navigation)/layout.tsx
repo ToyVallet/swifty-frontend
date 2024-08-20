@@ -5,7 +5,7 @@ export default function NavigationLayout({ children }: PropsWithChildren) {
   return (
     <>
       <Navigation />
-      <Main>{children}</Main>
+      <Main className="mt-[84px] mb-20">{children}</Main>
       <Footer />
     </>
   );
