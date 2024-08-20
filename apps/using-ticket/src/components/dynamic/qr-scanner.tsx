@@ -1,12 +1,13 @@
 'use client';
 
-import { convertNewlineToJSX } from '@toss/react';
+import { useRouter } from 'next/navigation';
 import QrScanner from 'qr-scanner';
 import React, { useEffect, useRef, useState } from 'react';
 
 const QrScannerComponent = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [qrCode, setQrCode] = useState<string | null>(null);
+  const router = useRouter();
 
   useEffect(() => {
     let qrScanner: QrScanner | null;
@@ -31,7 +32,11 @@ const QrScannerComponent = () => {
     }
   }, []);
 
-  useEffect(() => {}, [qrCode]);
+  useEffect(() => {
+    if (qrCode) {
+      router.push(`/dynamic/${qrCode}`);
+    }
+  }, [qrCode]);
 
   return (
     <div>

@@ -8,6 +8,8 @@ export type DeepValueOf<T> = T extends object
 
 export type NonEmptyArray<T> = [T, ...T[]];
 
+export type FixedLengthArray<T, N extends number> = [T, ...T[]] & { length: N };
+
 export type Pageable<T> = {
   content: T[];
   hasNext: boolean;

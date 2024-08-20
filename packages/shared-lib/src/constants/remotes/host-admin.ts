@@ -23,9 +23,16 @@ const lineup = [
 
 const university = ['/host/admin/university/{id}'] as const;
 
+const ticket = [
+  '/host/admin/entrance/dynamic/send-sms/{id}',
+  '/host/admin/entrance/dynamic/check-sms',
+  '/host/admin/entrance/facepass',
+] as const;
+
 export const hostApi = [
   ...festival,
   ...concert,
   ...lineup,
   ...university,
+  ...ticket,
 ] as const;

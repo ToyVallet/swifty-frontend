@@ -6,6 +6,7 @@
     "paths": {
       "@app/*": ["./src/app/*"],
       "@components": ["./src/components"],
+      "@type": ["./src/types"],
       "@images/*": ["./public/images/*"],
       "react-hook-form": ["../../node_modules/react-hook-form"]
     }
