@@ -1,10 +1,10 @@
 'use client';
 
-import ChevronDown from '@icons/bottom-arrow.svg';
 import * as VisuallyHidden from '@radix-ui/react-visually-hidden';
 import { cn } from '@swifty/shared-lib';
 import { type ElementRef, forwardRef, useState } from 'react';
 
+import ChevronDown from '../../icon/bottom-arrow.svg';
 import {
   Drawer,
   DrawerClose,

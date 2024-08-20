@@ -1,9 +1,9 @@
 'use client';
 
-import { Toast } from '@swifty/ui';
 import NextTopLoader from 'nextjs-toploader';
 import { type PropsWithChildren } from 'react';
 
+import Toast from '../toast';
 import { GlobalPortal } from './global-portal';
 
 export default function Providers({ children }: PropsWithChildren) {

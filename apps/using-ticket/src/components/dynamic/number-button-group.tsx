@@ -1,0 +1,41 @@
+'use client';
+
+import { http } from '@swifty/shared-lib';
+import type { DynamicSendSms } from '@type';
+import { useRouter } from 'next/navigation';
+
+export default function NumberButtonGroup({ id, codes }: DynamicSendSms) {
+  const router = useRouter();
+  const handleClick = async (event: React.MouseEvent<HTMLDivElement>) => {
+    const target = event.target as HTMLElement;
+
+    // 클릭된 요소가 버튼인지 확인
+    if (target.tagName === 'BUTTON') {
+      const number = target.textContent;
+      try {
+        await http.post('/host/admin/entrance/dynamic/check-sms', {
+          ticketId: id,
+          smsCode: number,
+        });
+      } catch (err) {
+        console.error(err);
+        router.push('/dynamic');
+      }
+    }
+  };
+  return (
+    <div onClick={handleClick} className="grid grid-rows-2 grid-cols-3 gap-5">
+      {codes.map((code) => (
+        <NumberButton key={code} number={code} />
+      ))}
+    </div>
+  );
+}
+
+function NumberButton({ number }: { number: string }) {
+  return (
+    <button className="w-[100px] h-[100px] rounded-full border border-primary text-center text-40 text-primary font-semibold">
+      {number}
+    </button>
+  );
+}

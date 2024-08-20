@@ -1,18 +1,16 @@
+import { Provider } from '@swifty/ui';
 import '@swifty/ui/styles.css';
 import type { Metadata } from 'next';
-import Script from 'next/script';
+import type { Viewport } from 'next';
 import type { PropsWithChildren } from 'react';
 
 import './globals.css';
-import Providers from './providers';
 
 export const metadata: Metadata = {
   title: '스위프티 - 전국 대학 축제 종합 플랫폼',
   description: '스위프티 - 전국 대학 축제 종합 플랫폼',
   applicationName: '스위프티',
   keywords: [],
-  viewport:
-    'minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover',
   openGraph: {
     type: 'website',
     locale: 'ko_KR',
@@ -37,18 +35,19 @@ export const metadata: Metadata = {
   },
 };
 
-// export const viewport: Viewport = {
-//   themeColor: [
-//     { media: '(prefers-color-scheme: light)', color: '#ffffff' },
-//     { media: '(prefers-color-scheme: dark)', color: '#0c0c0c' },
-//   ],
-// };
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  viewportFit: 'cover',
+  userScalable: false,
+};
 
 export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang="ko">
       <body className="font-Pretendard scrollbar-hide bg-swifty-color-100 dark:bg-swifty-color-dark-bg">
-        <Providers>{children}</Providers>
+        <Provider>{children}</Provider>
       </body>
     </html>
   );
