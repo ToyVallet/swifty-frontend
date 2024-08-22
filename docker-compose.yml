@@ -42,3 +42,24 @@ services:
     read_only: true
     tmpfs:
       - /tmp
+
+  using-ticket:
+    build:
+      context: .
+      dockerfile: ./apps/using-ticket/Dockerfile
+    network_mode: 'host'
+    environment:
+      NODE_ENV: production
+      PORT: 3002
+    command: ['node', 'apps/using-ticket/server.js']
+    restart: always
+    logging:
+      driver: json-file
+      options:
+        max-size: '10m'
+        max-file: '3'
+    security_opt:
+      - no-new-privileges:true
+    read_only: true
+    tmpfs:
+      - /tmp

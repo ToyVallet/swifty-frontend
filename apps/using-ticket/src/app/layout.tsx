@@ -1,3 +1,4 @@
+import { cn } from '@swifty/shared-lib';
 import { Provider } from '@swifty/ui';
 import '@swifty/ui/styles.css';
 import type { Metadata } from 'next';
@@ -42,7 +43,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={cn(inter.className, 'w-dvw h-dvh')}>
         <Provider>{children}</Provider>
       </body>
     </html>
