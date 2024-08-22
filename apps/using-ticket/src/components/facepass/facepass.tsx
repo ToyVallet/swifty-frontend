@@ -65,6 +65,11 @@ export default function FaceLandMark() {
     const imageFile = convertBase64ToFile(image);
     formData.append('faceImage', imageFile);
     makeSucess(MESSAGE[1]);
+    setIsSucess(true);
+    await timer(() => {
+      setIsSucess(false);
+      isPredicRef.current = false;
+    });
     /*     try {
       const name = await http.post('/host/admin/entrance/facepass', formData);
       console.log(name);
@@ -204,7 +209,7 @@ export default function FaceLandMark() {
   }, []);
 
   useEffect(() => {
-    if (!modelLoading) {
+    if (!modelLoading && !isSucess) {
       animationIdRef.current = requestAnimationFrame(predict);
     }
     return () => {
@@ -212,7 +217,7 @@ export default function FaceLandMark() {
         cancelAnimationFrame(animationIdRef.current);
       }
     };
-  }, [modelLoading]);
+  }, [modelLoading, isSucess]);
 
   return (
     <div className="relative w-full h-full">
