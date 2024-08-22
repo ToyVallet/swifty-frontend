@@ -21,6 +21,7 @@ import {
   drawMasking,
   resetCanvas,
   saveImage,
+  timer,
 } from '@util';
 import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
@@ -56,12 +57,15 @@ export default function FaceLandMark() {
       const name = await http.post('/host/admin/entrance/facepass', formData);
       console.log(name);
     } catch (err) {
+      console.error(err);
       if (canvasRef.current) {
         resetCanvas(canvasRef.current);
         drawMasking(canvasRef.current);
       }
       makeError(ERROR_TEXT[5]);
-      console.error(err);
+      await timer(() => {
+        router.push('/dynamic');
+      });
     }
   };
 
