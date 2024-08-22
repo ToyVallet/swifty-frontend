@@ -3,6 +3,7 @@
 import { APIError, http } from '@swifty/shared-lib';
 import type { DynamicSendSms } from '@type';
 import { timer } from '@util';
+import { motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
 
@@ -41,8 +42,17 @@ export default function NumberButtonGroup({ id, codes }: DynamicSendSms) {
 
 function NumberButton({ number }: { number: string }) {
   return (
-    <button className="w-[100px] h-[100px] rounded-full border border-primary text-center text-40 text-primary font-semibold">
+    <motion.button
+      className="w-[100px] h-[100px] rounded-full border border-primary text-center text-40 text-primary font-semibold"
+      whileTap={{
+        scale: 0.95,
+      }}
+      transition={{
+        duration: 0.1,
+        ease: 'easeInOut',
+      }}
+    >
       {number}
-    </button>
+    </motion.button>
   );
 }
