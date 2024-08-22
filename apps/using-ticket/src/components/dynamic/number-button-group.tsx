@@ -1,8 +1,10 @@
 'use client';
 
-import { http } from '@swifty/shared-lib';
+import { APIError, http } from '@swifty/shared-lib';
 import type { DynamicSendSms } from '@type';
+import { timer } from '@util';
 import { useRouter } from 'next/navigation';
+import { toast } from 'sonner';
 
 export default function NumberButtonGroup({ id, codes }: DynamicSendSms) {
   const router = useRouter();
@@ -18,8 +20,13 @@ export default function NumberButtonGroup({ id, codes }: DynamicSendSms) {
           smsCode: number,
         });
       } catch (err) {
-        console.error(err);
-        router.push('/dynamic');
+        if (APIError.isAPIError(err)) {
+          toast.error(err.message);
+        }
+
+        timer(() => {
+          router.push('/dynamic');
+        }, 1000);
       }
     }
   };
