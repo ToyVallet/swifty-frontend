@@ -1,6 +1,6 @@
 'use client';
 
-import { useCamera } from '@hooks';
+import { useCamera, useRenderMessage } from '@hooks';
 import { http } from '@swifty/shared-lib';
 import * as faceLandmarksDetection from '@tensorflow-models/face-landmarks-detection';
 import '@tensorflow/tfjs-backend-webgl';
@@ -35,25 +35,33 @@ export default function FaceLandMark() {
 
   // 모델 컨트롤에 필요한 변수 및 이미지 저장 객체
   const animationIdRef = useRef<number | null>(null);
-  const isPredicRef = useRef(false);
+  const isPredictRef = useRef(false);
   const detectorRef =
     useRef<null | faceLandmarksDetection.FaceLandmarksDetector>(null);
-  const [errorMessage, setErrorMessage] = useState<null | ErrorMessage>(null);
-  const [message, setMessage] = useState<Message>(MESSAGE[0]);
-
+  const {
+    renderMessage,
+    resetErrorMessage,
+    makeErrorMessage,
+    makeSucessMessage,
+  } = useRenderMessage();
   const [modelLoading, setModelLoading] = useState(true);
   const [isSucess, setIsSucess] = useState(false);
   const router = useRouter();
 
-  const resetError = () => setErrorMessage(null);
-  const makeError = (text: ErrorMessage) => {
-    setErrorMessage(text);
+  const makeError = (text: ErrorMessage, isFinalFalse = false) => {
+    makeErrorMessage(text);
     if (canvasRef.current) {
+      if (isFinalFalse) {
+        resetCanvas(canvasRef.current);
+        drawMasking(canvasRef.current);
+        drawXAnimation(canvasRef.current);
+      }
       drawErrorCircle(canvasRef.current);
     }
   };
   const makeSucess = (text: Message) => {
-    setMessage(text);
+    setIsSucess(true);
+    makeSucessMessage(text);
     if (canvasRef.current) {
       drawCheckAnimation(canvasRef.current);
     }
@@ -64,27 +72,22 @@ export default function FaceLandMark() {
     const formData = new FormData();
     const imageFile = convertBase64ToFile(image);
     formData.append('faceImage', imageFile);
-    makeSucess(MESSAGE[1]);
-    setIsSucess(true);
-    await timer(() => {
-      setIsSucess(false);
-      isPredicRef.current = false;
-    });
-    /*     try {
+
+    try {
       const name = await http.post('/host/admin/entrance/facepass', formData);
       console.log(name);
+      makeSucess(MESSAGE[1]);
+      await timer(() => {
+        setIsSucess(false);
+        isPredictRef.current = false;
+      });
     } catch (err) {
       console.error(err);
-      if (canvasRef.current) {
-        resetCanvas(canvasRef.current);
-        drawMasking(canvasRef.current);
-        drawXAnimation(canvasRef.current);
-      }
-      makeError(ERROR_TEXT[5]);
+      makeError(ERROR_TEXT[5], true);
       await timer(() => {
         router.push('/dynamic');
       });
-    } */
+    }
   };
 
   const stopPrediction = () => {
@@ -92,8 +95,6 @@ export default function FaceLandMark() {
       cancelAnimationFrame(animationIdRef.current);
     }
   };
-
-  const renderMessage = () => errorMessage || message;
 
   const checkDistance = (distance: number): boolean => {
     if (distance < MIN_DISTANCE) {
@@ -104,12 +105,12 @@ export default function FaceLandMark() {
       makeError(ERROR_TEXT[2]);
       return false;
     }
-    resetError();
+    resetErrorMessage();
     return true;
   };
 
   const findFace = async () => {
-    isPredicRef.current = true;
+    isPredictRef.current = true;
 
     if (canvasRef.current && videoRef.current) {
       const canvas = canvasRef.current;
@@ -141,7 +142,7 @@ export default function FaceLandMark() {
       setModelLoading(false);
     } catch (error) {
       console.error(error);
-      setErrorMessage(ERROR_TEXT[4]);
+      makeErrorMessage(ERROR_TEXT[4]);
     }
   };
 
@@ -176,7 +177,7 @@ export default function FaceLandMark() {
             boxCenterY >= minY &&
             boxCenterY <= maxY
           ) {
-            resetError();
+            resetErrorMessage();
             if (checkDistance(distance)) {
               const absYaw = Math.abs(yaw);
               const absRoll = Math.abs(roll);
@@ -194,7 +195,7 @@ export default function FaceLandMark() {
         }
       }
 
-      if (!isPredicRef.current) {
+      if (!isPredictRef.current) {
         animationIdRef.current = requestAnimationFrame(predict);
       } else {
         stopPrediction();
