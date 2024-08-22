@@ -29,6 +29,7 @@ import {
 import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import { Instruction } from 'src/components/common';
+import sendModelError from 'src/util/error';
 
 export default function FaceLandMark() {
   const { videoRef, canvasRef } = useCamera();
@@ -82,7 +83,6 @@ export default function FaceLandMark() {
         isPredictRef.current = false;
       });
     } catch (err) {
-      console.error(err);
       makeError(ERROR_TEXT[5], true);
       await timer(() => {
         router.push('/dynamic');
@@ -141,7 +141,7 @@ export default function FaceLandMark() {
 
       setModelLoading(false);
     } catch (error) {
-      console.error(error);
+      sendModelError(error);
       makeErrorMessage(ERROR_TEXT[4]);
     }
   };
@@ -201,6 +201,7 @@ export default function FaceLandMark() {
         stopPrediction();
       }
     } catch (error) {
+      sendModelError(error);
       makeError(ERROR_TEXT[4]);
     }
   };
