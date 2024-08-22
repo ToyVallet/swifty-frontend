@@ -1,3 +1,5 @@
+'use client';
+
 import type { FacePassImage } from '@type';
 
 import { calculateRadius } from './calculate';

@@ -19,7 +19,7 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "tailwind.config.ts",
-    "postcss.config.js",
+    "postcss.config.cjs",
     "../../packages/ui/src/drawer/overlay.tsx",
     "../../packages/ui/src/toast/index.tsx",
     "../../packages/shared-lib/src/utils/convertNewlineToJSX.tsx"

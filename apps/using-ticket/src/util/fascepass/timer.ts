@@ -1,3 +1,5 @@
+'use client';
+
 export default function timer(
   callback: () => void,
   time: number = 3000,
