@@ -5,7 +5,7 @@ import { http } from '@swifty/shared-lib';
 import * as faceLandmarksDetection from '@tensorflow-models/face-landmarks-detection';
 import '@tensorflow/tfjs-backend-webgl';
 import * as tf from '@tensorflow/tfjs-core';
-import type { ErrorMessage, FacePassImage, Message } from '@type';
+import type { ErrorMessage, FacePassImage, FacepassApi, Message } from '@type';
 import {
   ERROR_TEXT,
   MAX_DISTANCE,
@@ -75,8 +75,11 @@ export default function FaceLandMark() {
     formData.append('faceImage', imageFile);
 
     try {
-      const name = await http.post('/host/admin/entrance/facepass', formData);
-      console.log(name);
+      const data = await http.post<FacepassApi>(
+        '/host/admin/entrance/facepass',
+        formData,
+      );
+      console.log(data.userName);
       makeSucess(MESSAGE[1]);
       await timer(() => {
         setIsSucess(false);
