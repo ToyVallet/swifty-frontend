@@ -72,6 +72,13 @@ export async function saveImage(
   return image;
 }
 
+export function resetCanvas(canvas: HTMLCanvasElement) {
+  const ctx = canvas.getContext('2d');
+  if (ctx) {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+  }
+}
+
 export function drawCircleAnimation(
   canvas: HTMLCanvasElement,
   color: string = 'blue',

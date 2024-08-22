@@ -19,6 +19,7 @@ import {
   drawCircleAnimation,
   drawErrorCircle,
   drawMasking,
+  resetCanvas,
   saveImage,
 } from '@util';
 import { useRouter } from 'next/navigation';
@@ -37,6 +38,14 @@ export default function FaceLandMark() {
   const [modelLoading, setModelLoading] = useState(true);
   const router = useRouter();
 
+  const resetError = () => setError(null);
+  const makeError = (text: ErrorMessage) => {
+    setError(text);
+    if (canvasRef.current) {
+      drawErrorCircle(canvasRef.current);
+    }
+  };
+
   // post api
   const postFacepass = async (image: FacePassImage) => {
     const formData = new FormData();
@@ -47,15 +56,12 @@ export default function FaceLandMark() {
       const name = await http.post('/host/admin/entrance/facepass', formData);
       console.log(name);
     } catch (err) {
+      if (canvasRef.current) {
+        resetCanvas(canvasRef.current);
+        drawMasking(canvasRef.current);
+      }
+      makeError(ERROR_TEXT[5]);
       console.error(err);
-    }
-  };
-
-  const resetError = () => setError(null);
-  const makeError = (text: ErrorMessage) => {
-    setError(text);
-    if (canvasRef.current) {
-      drawErrorCircle(canvasRef.current);
     }
   };
 
@@ -82,16 +88,21 @@ export default function FaceLandMark() {
 
   const findFace = async () => {
     isPredicRef.current = true;
+
     if (canvasRef.current && videoRef.current) {
-      const image = await saveImage(
-        canvasRef.current,
-        videoRef.current,
-        'face',
+      const canvas = canvasRef.current;
+      const video = videoRef.current;
+      drawCircleAnimation(
+        canvas,
+        'rgba(25, 103, 255, 1)',
+        async () => {
+          const image = await saveImage(canvas, video, 'face');
+          if (image) {
+            await postFacepass(image);
+          }
+        },
+        500,
       );
-      if (image) {
-        await postFacepass(image);
-      }
-      drawCircleAnimation(canvasRef.current, 'rgba(25, 103, 255, 1)');
     }
   };
 
@@ -119,12 +130,9 @@ export default function FaceLandMark() {
         const canvas = canvasRef.current;
         const poses = await detectorRef.current.estimateFaces(video, {});
 
-        const ctx = canvas.getContext('2d');
-        if (ctx && poses.length > 0 && poses[0]?.keypoints) {
+        if (poses.length > 0 && poses[0]?.keypoints) {
           const mesh = poses[0].keypoints;
           const box = poses[0].box;
-
-          ctx.clearRect(0, 0, canvas.width, canvas.height);
 
           // 위치 계산
           const { boxCenterX, boxCenterY } = calculateCenter(box, canvas);
@@ -136,6 +144,7 @@ export default function FaceLandMark() {
           const distance = calculateDistance(box, canvas);
 
           // 필요 선 그리기
+          resetCanvas(canvas);
           drawMasking(canvas);
 
           // 얼굴이 최소 중앙에 위치해 있는지 확인
