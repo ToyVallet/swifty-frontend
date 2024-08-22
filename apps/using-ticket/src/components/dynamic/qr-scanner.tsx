@@ -2,11 +2,10 @@
 
 import { useRouter } from 'next/navigation';
 import QrScanner from 'qr-scanner';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 const QrScannerComponent = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [qrCode, setQrCode] = useState<string | null>(null);
   const router = useRouter();
 
   useEffect(() => {
@@ -16,8 +15,10 @@ const QrScannerComponent = () => {
       qrScanner = new QrScanner(
         videoRef.current,
         (result) => {
-          console.log(result);
-          setQrCode(result.data);
+          const qrCode = result.data;
+          if (qrCode) {
+            router.push(`/dynamic/${qrCode}`);
+          }
         },
         {
           // Optional: camera facing mode ('user' for front camera, 'environment' for back camera)
@@ -31,12 +32,6 @@ const QrScannerComponent = () => {
       };
     }
   }, []);
-
-  useEffect(() => {
-    if (qrCode) {
-      router.push(`/dynamic/${qrCode}`);
-    }
-  }, [qrCode]);
 
   return (
     <div>
