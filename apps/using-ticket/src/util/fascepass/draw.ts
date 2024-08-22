@@ -126,20 +126,20 @@ export function drawXAnimation(
   speed = 0.02,
 ) {
   let progress = 0; // 애니메이션 진행 상태
-  const { x: centerX, y: centerY } = calculateRadius(canvas);
+  const { x: x, y: y } = calculateRadius(canvas);
   const offset = Math.min(canvas.width, canvas.height) / 4;
   const ctx = canvas.getContext('2d');
 
   // X자의 좌표 설정
-  const startX1 = centerX - offset;
-  const startY1 = centerY - offset;
-  const endX1 = centerX + offset;
-  const endY1 = centerY + offset;
+  const startX1 = x - offset;
+  const startY1 = y - offset;
+  const endX1 = x + offset;
+  const endY1 = y + offset;
 
-  const startX2 = centerX + offset;
-  const startY2 = centerY - offset;
-  const endX2 = centerX - offset;
-  const endY2 = centerY + offset;
+  const startX2 = x + offset;
+  const startY2 = y - offset;
+  const endX2 = x - offset;
+  const endY2 = y + offset;
 
   function drawLine(
     startX: number,
@@ -177,4 +177,57 @@ export function drawXAnimation(
 
   // 애니메이션 시작
   animate();
+}
+
+export function drawCheckAnimation(canvas: HTMLCanvasElement) {
+  const ctx = canvas.getContext('2d');
+
+  // 원의 중심 좌표와 반지름 설정
+  const { x, y } = calculateRadius(canvas);
+  // 체크 표시 애니메이션 변수 설정
+  let progress = 0; // 0부터 1까지의 진행 상황을 나타냄
+
+  function drawCheckmark() {
+    // 체크 표시 경로 설정
+    const endX = canvas.width - (x + 70);
+    const endY = y - 40;
+    const midX = canvas.width - (x - 20);
+    const midY = y + 30;
+    const startX = canvas.width - (x - 50);
+    const startY = y - 10;
+
+    if (ctx) {
+      // 체크 표시 그리기
+      ctx.beginPath();
+      ctx.moveTo(startX, startY);
+
+      // 진행 상황에 따라 선을 그리기
+      if (progress <= 0.5) {
+        // 첫 번째 선 그리기 (왼쪽 아래에서 오른쪽 위로)
+        const currentX = startX + progress * 2 * (midX - startX);
+        const currentY = startY + progress * 2 * (midY - startY);
+        ctx.lineTo(currentX, currentY);
+      } else {
+        // 두 번째 선 그리기 (오른쪽 위에서 오른쪽 아래로)
+        ctx.lineTo(midX, midY);
+        const adjustedProgress = (progress - 0.5) * 2;
+        const currentX = midX + adjustedProgress * (endX - midX);
+        const currentY = midY + adjustedProgress * (endY - midY);
+        ctx.lineTo(currentX, currentY);
+      }
+
+      ctx.lineWidth = 15;
+      ctx.strokeStyle = '#007BFF';
+      ctx.lineCap = 'round';
+      ctx.stroke();
+    }
+
+    // 진행 상황 업데이트
+    progress += 0.02;
+
+    if (progress <= 1) {
+      requestAnimationFrame(drawCheckmark);
+    }
+  }
+  drawCheckmark();
 }

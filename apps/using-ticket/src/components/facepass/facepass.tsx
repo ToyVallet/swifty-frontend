@@ -5,10 +5,11 @@ import { http } from '@swifty/shared-lib';
 import * as faceLandmarksDetection from '@tensorflow-models/face-landmarks-detection';
 import '@tensorflow/tfjs-backend-webgl';
 import * as tf from '@tensorflow/tfjs-core';
-import type { ErrorMessage, FacePassImage } from '@type';
+import type { ErrorMessage, FacePassImage, Message } from '@type';
 import {
   ERROR_TEXT,
   MAX_DISTANCE,
+  MESSAGE,
   MIN_DISTANCE,
   SIZE,
   calculateCenter,
@@ -16,6 +17,7 @@ import {
   calculateFaceAngle,
   calculateFixedCenterSquaer,
   convertBase64ToFile,
+  drawCheckAnimation,
   drawCircleAnimation,
   drawErrorCircle,
   drawMasking,
@@ -36,15 +38,24 @@ export default function FaceLandMark() {
   const isPredicRef = useRef(false);
   const detectorRef =
     useRef<null | faceLandmarksDetection.FaceLandmarksDetector>(null);
-  const [error, setError] = useState<null | ErrorMessage>(null);
+  const [errorMessage, setErrorMessage] = useState<null | ErrorMessage>(null);
+  const [message, setMessage] = useState<Message>(MESSAGE[0]);
+
   const [modelLoading, setModelLoading] = useState(true);
+  const [isSucess, setIsSucess] = useState(false);
   const router = useRouter();
 
-  const resetError = () => setError(null);
+  const resetError = () => setErrorMessage(null);
   const makeError = (text: ErrorMessage) => {
-    setError(text);
+    setErrorMessage(text);
     if (canvasRef.current) {
       drawErrorCircle(canvasRef.current);
+    }
+  };
+  const makeSucess = (text: Message) => {
+    setMessage(text);
+    if (canvasRef.current) {
+      drawCheckAnimation(canvasRef.current);
     }
   };
 
@@ -53,8 +64,8 @@ export default function FaceLandMark() {
     const formData = new FormData();
     const imageFile = convertBase64ToFile(image);
     formData.append('faceImage', imageFile);
-
-    try {
+    makeSucess(MESSAGE[1]);
+    /*     try {
       const name = await http.post('/host/admin/entrance/facepass', formData);
       console.log(name);
     } catch (err) {
@@ -68,7 +79,7 @@ export default function FaceLandMark() {
       await timer(() => {
         router.push('/dynamic');
       });
-    }
+    } */
   };
 
   const stopPrediction = () => {
@@ -77,7 +88,7 @@ export default function FaceLandMark() {
     }
   };
 
-  const renderMessage = () => error || '얼굴을 화면 중앙에\n 위치해주세요';
+  const renderMessage = () => errorMessage || message;
 
   const checkDistance = (distance: number): boolean => {
     if (distance < MIN_DISTANCE) {
@@ -125,7 +136,7 @@ export default function FaceLandMark() {
       setModelLoading(false);
     } catch (error) {
       console.error(error);
-      setError(ERROR_TEXT[4]);
+      setErrorMessage(ERROR_TEXT[4]);
     }
   };
 
