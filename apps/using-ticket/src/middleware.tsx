@@ -8,7 +8,7 @@ export async function middleware(request: NextRequest) {
   const url = request.nextUrl.clone();
   const token = await getCookie('accessToken');
 
-  /*   if (token) {
+  if (token) {
     if (url.pathname === '/login') {
       url.pathname = '/';
       return NextResponse.redirect(url);
@@ -22,7 +22,7 @@ export async function middleware(request: NextRequest) {
       url.pathname = '/login';
       return NextResponse.redirect(url);
     }
-  } */
+  }
 
   // 서버 컴포넌트 headername
   const requestHeaders = new Headers(request.headers);

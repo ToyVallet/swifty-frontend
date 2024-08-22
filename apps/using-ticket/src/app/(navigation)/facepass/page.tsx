@@ -1,9 +1,15 @@
 import { Title } from '@components';
 import { Icon } from '@swifty/assets';
+import dynamic from 'next/dynamic';
+
+const Facepass = dynamic(
+  () => import('@components').then((mod) => mod.Facepass),
+  { ssr: false },
+);
 
 export default function FacepassPage() {
   return (
-    <div>
+    <>
       <Title>
         <Icon
           name="user-web/facepass/title"
@@ -11,6 +17,7 @@ export default function FacepassPage() {
         />
         안면 티켓 입장 시스템
       </Title>
-    </div>
+      <Facepass />
+    </>
   );
 }

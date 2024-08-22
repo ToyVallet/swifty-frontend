@@ -1,0 +1,212 @@
+'use client';
+
+import { useCamera } from '@hooks';
+import { http } from '@swifty/shared-lib';
+import * as faceLandmarksDetection from '@tensorflow-models/face-landmarks-detection';
+import '@tensorflow/tfjs-backend-webgl';
+import * as tf from '@tensorflow/tfjs-core';
+import type { ErrorMessage, FacePassImage } from '@type';
+import {
+  ERROR_TEXT,
+  MAX_DISTANCE,
+  MIN_DISTANCE,
+  SIZE,
+  calculateCenter,
+  calculateDistance,
+  calculateFaceAngle,
+  calculateFixedCenterSquaer,
+  convertBase64ToFile,
+  drawCircleAnimation,
+  drawErrorCircle,
+  drawMasking,
+  saveImage,
+} from '@util';
+import { useRouter } from 'next/navigation';
+import { useEffect, useRef, useState } from 'react';
+import { Instruction } from 'src/components/common';
+
+export default function FaceLandMark() {
+  const { videoRef, canvasRef } = useCamera();
+
+  // 모델 컨트롤에 필요한 변수 및 이미지 저장 객체
+  const animationIdRef = useRef<number | null>(null);
+  const isPredicRef = useRef(false);
+  const detectorRef =
+    useRef<null | faceLandmarksDetection.FaceLandmarksDetector>(null);
+  const [error, setError] = useState<null | ErrorMessage>(null);
+  const [modelLoading, setModelLoading] = useState(true);
+  const router = useRouter();
+
+  // post api
+  const postFacepass = async (image: FacePassImage) => {
+    const formData = new FormData();
+    const imageFile = convertBase64ToFile(image);
+    formData.append('faceImage', imageFile);
+
+    try {
+      const name = await http.post('/host/admin/entrance/facepass', formData);
+      console.log(name);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const resetError = () => setError(null);
+  const makeError = (text: ErrorMessage) => {
+    setError(text);
+    if (canvasRef.current) {
+      drawErrorCircle(canvasRef.current);
+    }
+  };
+
+  const stopPrediction = () => {
+    if (animationIdRef.current) {
+      cancelAnimationFrame(animationIdRef.current);
+    }
+  };
+
+  const renderMessage = () => error || '얼굴을 화면 중앙에\n 위치해주세요';
+
+  const checkDistance = (distance: number): boolean => {
+    if (distance < MIN_DISTANCE) {
+      makeError(ERROR_TEXT[1]);
+      return false;
+    }
+    if (distance > MAX_DISTANCE) {
+      makeError(ERROR_TEXT[2]);
+      return false;
+    }
+    resetError();
+    return true;
+  };
+
+  const findFace = async () => {
+    isPredicRef.current = true;
+    if (canvasRef.current && videoRef.current) {
+      const image = await saveImage(
+        canvasRef.current,
+        videoRef.current,
+        'face',
+      );
+      if (image) {
+        await postFacepass(image);
+      }
+      drawCircleAnimation(canvasRef.current, 'rgba(25, 103, 255, 1)');
+    }
+  };
+
+  // model
+  const loadModel = async () => {
+    try {
+      if (!videoRef.current || !canvasRef.current) return;
+      await tf.setBackend('webgl');
+      const model = faceLandmarksDetection.SupportedModels.MediaPipeFaceMesh;
+      detectorRef.current = await faceLandmarksDetection.createDetector(model, {
+        runtime: 'tfjs',
+      } as faceLandmarksDetection.MediaPipeFaceMeshTfjsModelConfig);
+
+      setModelLoading(false);
+    } catch (error) {
+      console.error(error);
+      setError(ERROR_TEXT[4]);
+    }
+  };
+
+  const predict = async () => {
+    try {
+      if (detectorRef.current && videoRef.current && canvasRef.current) {
+        const video = videoRef.current;
+        const canvas = canvasRef.current;
+        const poses = await detectorRef.current.estimateFaces(video, {});
+
+        const ctx = canvas.getContext('2d');
+        if (ctx && poses.length > 0 && poses[0]?.keypoints) {
+          const mesh = poses[0].keypoints;
+          const box = poses[0].box;
+
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+          // 위치 계산
+          const { boxCenterX, boxCenterY } = calculateCenter(box, canvas);
+          const { minX, minY, maxX, maxY } = calculateFixedCenterSquaer(
+            box,
+            canvas,
+          );
+          const { roll, yaw, pitch } = calculateFaceAngle(mesh);
+          const distance = calculateDistance(box, canvas);
+
+          // 필요 선 그리기
+          drawMasking(canvas);
+
+          // 얼굴이 최소 중앙에 위치해 있는지 확인
+          if (
+            boxCenterX >= minX &&
+            boxCenterX <= maxX &&
+            boxCenterY >= minY &&
+            boxCenterY <= maxY
+          ) {
+            resetError();
+            if (checkDistance(distance)) {
+              const absYaw = Math.abs(yaw);
+              const absRoll = Math.abs(roll);
+              const absPitch = Math.abs(pitch);
+              if (absYaw < 0.1 && absPitch < 0.1 && absRoll < 0.1) {
+                await findFace();
+                return;
+              } else {
+                makeError(ERROR_TEXT[3]);
+              }
+            }
+          } else {
+            makeError(ERROR_TEXT[0]);
+          }
+        }
+      }
+
+      if (!isPredicRef.current) {
+        animationIdRef.current = requestAnimationFrame(predict);
+      } else {
+        stopPrediction();
+      }
+    } catch (error) {
+      makeError(ERROR_TEXT[4]);
+    }
+  };
+
+  useEffect(() => {
+    loadModel();
+  }, []);
+
+  useEffect(() => {
+    if (!modelLoading) {
+      animationIdRef.current = requestAnimationFrame(predict);
+    }
+    return () => {
+      if (animationIdRef.current) {
+        cancelAnimationFrame(animationIdRef.current);
+      }
+    };
+  }, [modelLoading]);
+
+  return (
+    <div className="relative w-full h-full">
+      <video
+        ref={videoRef}
+        width={SIZE}
+        height={SIZE}
+        style={{ width: `${SIZE}px`, height: `${SIZE}px` }}
+        className="absolute right-0 left-0 object-cover mx-auto mt-[60px]"
+      />
+      <canvas
+        ref={canvasRef}
+        width={SIZE}
+        height={SIZE}
+        style={{ width: `${SIZE}px`, height: `${SIZE}px` }}
+        className="absolute right-0 left-0 mx-auto mt-[60px] "
+      />
+      {!modelLoading && (
+        <Instruction className="mt-[400px]">{renderMessage()}</Instruction>
+      )}
+    </div>
+  );
+}

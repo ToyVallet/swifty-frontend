@@ -5,6 +5,7 @@ import type { DynamicSendSms } from 'src/types';
 export default async function QrCheckPage({
   params: { token },
 }: Params<{ token: string }>) {
+  console.log(token);
   const data = await http.get<DynamicSendSms>(
     '/host/admin/entrance/dynamic/send-sms/{id}',
     {
