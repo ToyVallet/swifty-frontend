@@ -19,6 +19,7 @@ import {
   drawCircleAnimation,
   drawErrorCircle,
   drawMasking,
+  drawXAnimation,
   resetCanvas,
   saveImage,
   timer,
@@ -61,6 +62,7 @@ export default function FaceLandMark() {
       if (canvasRef.current) {
         resetCanvas(canvasRef.current);
         drawMasking(canvasRef.current);
+        drawXAnimation(canvasRef.current);
       }
       makeError(ERROR_TEXT[5]);
       await timer(() => {

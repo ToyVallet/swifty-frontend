@@ -68,7 +68,6 @@ export async function saveImage(
     image = { src: base64data as string, name };
   }
 
-  console.log(image);
   return image;
 }
 
@@ -118,4 +117,64 @@ export function drawCircleAnimation(
 
   // 애니메이션 시작
   requestAnimationFrame(animate);
+}
+
+export function drawXAnimation(
+  canvas: HTMLCanvasElement,
+  strokeStyle = '#ff005a',
+  lineWidth = 20,
+  speed = 0.02,
+) {
+  let progress = 0; // 애니메이션 진행 상태
+  const { x: centerX, y: centerY } = calculateRadius(canvas);
+  const offset = Math.min(canvas.width, canvas.height) / 4;
+  const ctx = canvas.getContext('2d');
+
+  // X자의 좌표 설정
+  const startX1 = centerX - offset;
+  const startY1 = centerY - offset;
+  const endX1 = centerX + offset;
+  const endY1 = centerY + offset;
+
+  const startX2 = centerX + offset;
+  const startY2 = centerY - offset;
+  const endX2 = centerX - offset;
+  const endY2 = centerY + offset;
+
+  function drawLine(
+    startX: number,
+    startY: number,
+    endX: number,
+    endY: number,
+    progress: number,
+  ) {
+    if (ctx) {
+      ctx.strokeStyle = strokeStyle;
+      ctx.lineWidth = lineWidth;
+      ctx.lineCap = 'round';
+      ctx.beginPath();
+      ctx.moveTo(startX, startY);
+      ctx.lineTo(
+        startX + (endX - startX) * progress,
+        startY + (endY - startY) * progress,
+      );
+      ctx.stroke();
+    }
+  }
+
+  function animate() {
+    if (progress < 1) {
+      drawLine(startX1, startY1, endX1, endY1, progress);
+      drawLine(startX2, startY2, endX2, endY2, progress);
+      progress += speed;
+      requestAnimationFrame(animate); // 애니메이션 계속 실행
+    } else {
+      // 최종적으로 라인을 완전히 그리기
+      drawLine(startX1, startY1, endX1, endY1, 1);
+      drawLine(startX2, startY2, endX2, endY2, 1);
+    }
+  }
+
+  // 애니메이션 시작
+  animate();
 }
