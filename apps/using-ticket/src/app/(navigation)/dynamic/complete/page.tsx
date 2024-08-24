@@ -12,7 +12,7 @@ export default function DynamicCompletePage() {
   return (
     <div className="flex flex-col items-center justify-center gap-[26px]">
       <Image src={check} height={337} width={337} alt="done" />
-      <Instruction>{'티켓리 확인 되었습니다\n 입장해주세요'}</Instruction>
+      <Instruction>{'티켓이 확인 되었습니다\n 입장해주세요'}</Instruction>
       <DynamicComplete />
     </div>
   );
