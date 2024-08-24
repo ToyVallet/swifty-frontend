@@ -1,3 +1,4 @@
+import { ModelStoreProvider } from '@store';
 import { cn } from '@swifty/shared-lib';
 import { Provider } from '@swifty/ui';
 import '@swifty/ui/styles.css';
@@ -44,7 +45,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={cn(inter.className, 'w-dvw h-dvh')}>
-        <Provider>{children}</Provider>
+        <Provider>
+          <ModelStoreProvider>{children}</ModelStoreProvider>
+        </Provider>
       </body>
     </html>
   );
