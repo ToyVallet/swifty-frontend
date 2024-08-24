@@ -72,14 +72,14 @@ export default function FaceLandMark() {
   const postFacepass = async (image: FacePassImage) => {
     const formData = new FormData();
     const imageFile = convertBase64ToFile(image);
-    formData.append('faceImage', imageFile);
+    formData.append('entranceImg', imageFile);
 
     try {
       const data = await http.post<FacepassApi>(
         '/host/admin/entrance/facepass',
         formData,
       );
-      console.log(data.userName);
+
       makeSucess(MESSAGE[1]);
       await timer(() => {
         setIsSucess(false);

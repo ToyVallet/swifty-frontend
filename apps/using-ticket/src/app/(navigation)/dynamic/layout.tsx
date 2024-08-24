@@ -8,7 +8,7 @@ export default function NavigationLayout({ children }: PropsWithChildren) {
       <Title className="mb-10">
         {convertNewlineToJSX('Dynamic QR 티켓\n 입장 시스템')}
       </Title>
-      {children};
+      {children}
     </div>
   );
 }
