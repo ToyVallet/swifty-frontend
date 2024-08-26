@@ -3371,6 +3371,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@radix-ui/react-icons@npm:^1.3.0":
+  version: 1.3.0
+  resolution: "@radix-ui/react-icons@npm:1.3.0"
+  peerDependencies:
+    react: ^16.x || ^17.x || ^18.x
+  checksum: 10c0/581657680e43fd13ff06e01f963e3afa94671d4ce6c3fb126e2c70c993ab8650faa55286974032dbccfecca4db57308fb66d53771d765887e03600cddee84ae5
+  languageName: node
+  linkType: hard
+
 "@radix-ui/react-id@npm:1.1.0":
   version: 1.1.0
   resolution: "@radix-ui/react-id@npm:1.1.0"
@@ -3583,7 +3592,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@radix-ui/react-select@npm:^2.0.0":
+"@radix-ui/react-select@npm:^2.0.0, @radix-ui/react-select@npm:^2.1.1":
   version: 2.1.1
   resolution: "@radix-ui/react-select@npm:2.1.1"
   dependencies:
@@ -3641,7 +3650,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@radix-ui/react-slot@npm:1.1.0, @radix-ui/react-slot@npm:^1.0.2":
+"@radix-ui/react-slot@npm:1.1.0, @radix-ui/react-slot@npm:^1.0.2, @radix-ui/react-slot@npm:^1.1.0":
   version: 1.1.0
   resolution: "@radix-ui/react-slot@npm:1.1.0"
   dependencies:
@@ -5003,6 +5012,7 @@ __metadata:
     "@storybook/react": "npm:^8.1.6"
     "@storybook/react-webpack5": "npm:^8.1.6"
     "@storybook/test": "npm:^8.1.6"
+    "@tanstack/react-table": "npm:^8.20.1"
     "@turbo/gen": "npm:^1.12.4"
     "@types/eslint": "npm:^8.56.5"
     "@types/node": "npm:^20.11.24"
@@ -5018,6 +5028,7 @@ __metadata:
     nextjs-toploader: "npm:^1.6.12"
     postcss: "npm:^8.4.39"
     react-hook-form: "npm:^7.51.5"
+    react-resizable-panels: "npm:^2.1.1"
     react-spinners: "npm:^0.13.8"
     sonner: "npm:^1.5.0"
     storybook: "npm:^8.1.6"
@@ -5035,6 +5046,25 @@ __metadata:
     react-dom: ^18.3.1
   languageName: unknown
   linkType: soft
+
+"@tanstack/react-table@npm:^8.20.1":
+  version: 8.20.1
+  resolution: "@tanstack/react-table@npm:8.20.1"
+  dependencies:
+    "@tanstack/table-core": "npm:8.20.1"
+  peerDependencies:
+    react: ">=16.8"
+    react-dom: ">=16.8"
+  checksum: 10c0/dc0bac56425de05bb51dca32d488a6ca4f2395375f8c02b1c0082ee0f654841efa1263b357c62864f7c44ed39c0be1fb547aa7350ee7e39be5c7dd19b4155260
+  languageName: node
+  linkType: hard
+
+"@tanstack/table-core@npm:8.20.1":
+  version: 8.20.1
+  resolution: "@tanstack/table-core@npm:8.20.1"
+  checksum: 10c0/540a4df688cad9261f77ca454aab62720615569805b5396bd012b411bb65dbb3fdf38f2a0b91a60b2e0def139d1517ad9a3f28f2cede5317d70ad1ad0dd1c5a3
+  languageName: node
+  linkType: hard
 
 "@tensorflow-models/face-detection@npm:^1.0.2":
   version: 1.0.2
@@ -11514,17 +11544,46 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "host-admin@workspace:apps/host-admin"
   dependencies:
+    "@playwright/test": "npm:^1.42.1"
+    "@radix-ui/react-icons": "npm:^1.3.0"
+    "@radix-ui/react-select": "npm:^2.1.1"
+    "@radix-ui/react-slot": "npm:^1.1.0"
+    "@svgr/webpack": "npm:^8.1.0"
+    "@swifty/assets": "npm:*"
+    "@swifty/eslint-config": "npm:*"
+    "@swifty/shared-lib": "npm:*"
+    "@swifty/tailwind-config": "npm:*"
+    "@swifty/typescript-config": "npm:*"
+    "@swifty/ui": "npm:*"
+    "@tanstack/react-table": "npm:^8.20.1"
+    "@testing-library/jest-dom": "npm:^6.4.2"
+    "@testing-library/react": "npm:^14.2.1"
+    "@trivago/prettier-plugin-sort-imports": "npm:^4.3.0"
+    "@types/jest": "npm:^29.5.12"
     "@types/node": "npm:^20"
     "@types/react": "npm:^18"
     "@types/react-dom": "npm:^18"
+    autoprefixer: "npm:^10.4.20"
+    class-variance-authority: "npm:^0.7.0"
+    clsx: "npm:^2.1.1"
+    dayjs: "npm:^1.11.11"
     eslint: "npm:^8"
     eslint-config-next: "npm:14.2.6"
+    framer-motion: "npm:^11.0.6"
+    lucide-react: "npm:^0.435.0"
     next: "npm:14.2.6"
+    next-themes: "npm:^0.3.0"
+    nextjs-toploader: "npm:^1.6.11"
     postcss: "npm:^8"
     react: "npm:^18"
     react-dom: "npm:^18"
+    tailwind-merge: "npm:^2.5.2"
+    tailwind-scrollbar-hide: "npm:^1.1.7"
     tailwindcss: "npm:^3.4.1"
+    tailwindcss-animate: "npm:^1.0.7"
+    ts-node: "npm:^10.9.2"
     typescript: "npm:^5"
+    zod: "npm:^3.22.4"
   languageName: unknown
   linkType: soft
 
@@ -13549,6 +13608,15 @@ __metadata:
     prop-types: ^15.7.2
     react: ^16.5.1 || ^17.0.0 || ^18.0.0
   checksum: 10c0/79515c25303b02ae117bb46092befb1dbe06012968b1b4df8f73b1673f19da64f6ea36b10f8c74c62d2b518b7a89c9b7f72577cb7c5d01436d100c181c5e4ba2
+  languageName: node
+  linkType: hard
+
+"lucide-react@npm:^0.435.0":
+  version: 0.435.0
+  resolution: "lucide-react@npm:0.435.0"
+  peerDependencies:
+    react: ^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0-rc
+  checksum: 10c0/8a1653901a362d83696b555ff2cc1f06126008c8a09b1b8a0db8484b98c9de5c44589d00296d1f419ebb4e65524fcc4eb1fe39f1721dd22242dc34788f8936f5
   languageName: node
   linkType: hard
 
@@ -16628,6 +16696,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-resizable-panels@npm:^2.1.1":
+  version: 2.1.1
+  resolution: "react-resizable-panels@npm:2.1.1"
+  peerDependencies:
+    react: ^16.14.0 || ^17.0.0 || ^18.0.0
+    react-dom: ^16.14.0 || ^17.0.0 || ^18.0.0
+  checksum: 10c0/142e8980d5d7e8e8528c9da1982c2ef71bab9fbb92e0116627cfcb203ebd0bceaea03eba4f54b980868ba7b1a595313eafacf0ef27f900eb983f3f3c595c143c
+  languageName: node
+  linkType: hard
+
 "react-spinners@npm:^0.13.8":
   version: 0.13.8
   resolution: "react-spinners@npm:0.13.8"
@@ -18472,7 +18550,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tailwind-merge@npm:^2.2.2, tailwind-merge@npm:^2.3.0":
+"tailwind-merge@npm:^2.2.2, tailwind-merge@npm:^2.3.0, tailwind-merge@npm:^2.5.2":
   version: 2.5.2
   resolution: "tailwind-merge@npm:2.5.2"
   checksum: 10c0/e43a9a468f7ba4ed5b4a399558d96d6270a3d8131dca111cccc803e71cc23885060d18d721f312a24fff0a75c567dbb30b2a87c18aba25eb4255df197d8170ab
@@ -19704,6 +19782,7 @@ __metadata:
     tailwindcss-animate: "npm:^1.0.7"
     ts-node: "npm:^10.9.2"
     zod: "npm:^3.22.4"
+    zustand: "npm:^4.5.5"
   languageName: unknown
   linkType: soft
 
@@ -20377,7 +20456,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"zustand@npm:^4.5.1":
+"zustand@npm:^4.5.1, zustand@npm:^4.5.5":
   version: 4.5.5
   resolution: "zustand@npm:4.5.5"
   dependencies:

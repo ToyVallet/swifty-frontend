@@ -1,6 +1,7 @@
 'use client';
 
 import { useCamera, useRenderMessage } from '@hooks';
+import { useModelStore } from '@store';
 import { http } from '@swifty/shared-lib';
 import * as faceLandmarksDetection from '@tensorflow-models/face-landmarks-detection';
 import '@tensorflow/tfjs-backend-webgl';
@@ -32,13 +33,12 @@ import { Instruction } from 'src/components/common';
 import sendModelError from 'src/util/error';
 
 export default function FaceLandMark() {
-  const { videoRef, canvasRef } = useCamera();
+  const { videoRef, canvasRef, isVideoLoad } = useCamera();
+  const { model, setModel } = useModelStore((state) => state);
 
   // 모델 컨트롤에 필요한 변수 및 이미지 저장 객체
   const animationIdRef = useRef<number | null>(null);
   const isPredictRef = useRef(false);
-  const detectorRef =
-    useRef<null | faceLandmarksDetection.FaceLandmarksDetector>(null);
   const {
     renderMessage,
     resetErrorMessage,
@@ -72,14 +72,14 @@ export default function FaceLandMark() {
   const postFacepass = async (image: FacePassImage) => {
     const formData = new FormData();
     const imageFile = convertBase64ToFile(image);
-    formData.append('faceImage', imageFile);
+    formData.append('entranceImg', imageFile);
 
     try {
       const data = await http.post<FacepassApi>(
         '/host/admin/entrance/facepass',
         formData,
       );
-      console.log(data.userName);
+
       makeSucess(MESSAGE[1]);
       await timer(() => {
         setIsSucess(false);
@@ -138,10 +138,10 @@ export default function FaceLandMark() {
       if (!videoRef.current || !canvasRef.current) return;
       await tf.setBackend('webgl');
       const model = faceLandmarksDetection.SupportedModels.MediaPipeFaceMesh;
-      detectorRef.current = await faceLandmarksDetection.createDetector(model, {
+      const loadModel = await faceLandmarksDetection.createDetector(model, {
         runtime: 'tfjs',
       } as faceLandmarksDetection.MediaPipeFaceMeshTfjsModelConfig);
-
+      setModel(loadModel);
       setModelLoading(false);
     } catch (error) {
       sendModelError(error);
@@ -151,10 +151,10 @@ export default function FaceLandMark() {
 
   const predict = async () => {
     try {
-      if (detectorRef.current && videoRef.current && canvasRef.current) {
+      if (model && videoRef.current && canvasRef.current) {
         const video = videoRef.current;
         const canvas = canvasRef.current;
-        const poses = await detectorRef.current.estimateFaces(video, {});
+        const poses = await model.estimateFaces(video, {});
 
         if (poses.length > 0 && poses[0]?.keypoints) {
           const mesh = poses[0].keypoints;
@@ -204,17 +204,20 @@ export default function FaceLandMark() {
         stopPrediction();
       }
     } catch (error) {
-      sendModelError(error);
       makeError(ERROR_TEXT[4]);
     }
   };
 
   useEffect(() => {
-    loadModel();
+    if (!model) {
+      loadModel();
+    } else {
+      setModelLoading(false);
+    }
   }, []);
 
   useEffect(() => {
-    if (!modelLoading && !isSucess) {
+    if (!modelLoading && !isSucess && isVideoLoad) {
       animationIdRef.current = requestAnimationFrame(predict);
     }
     return () => {
@@ -222,7 +225,7 @@ export default function FaceLandMark() {
         cancelAnimationFrame(animationIdRef.current);
       }
     };
-  }, [modelLoading, isSucess]);
+  }, [modelLoading, isSucess, isVideoLoad]);
 
   return (
     <div className="relative w-full h-full">

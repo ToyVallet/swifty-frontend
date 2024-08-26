@@ -30,7 +30,7 @@ export default function ConcertCreateForm({
   const onFinish: FormProps<FieldType>['onFinish'] = async (values) => {
     await createConcert(festivalId, values);
     if (!error) {
-      form?.resetFields(Object.keys(values));
+      form?.resetFields(Object.keys(values) as (keyof FieldType)[]);
       onClose?.();
     }
   };

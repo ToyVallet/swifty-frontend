@@ -36,7 +36,7 @@ export default function LineupCreateForm({
     await createLineup(concertId, values, fileList[0] as UploadFile);
     if (!error) {
       await revalidate(FETCH_TAG.festivalsDetail(festivalId));
-      form?.resetFields(Object.keys(values));
+      form?.resetFields(Object.keys(values) as (keyof FieldType)[]);
       setFileList([]);
       onClose?.();
     }

@@ -7,7 +7,7 @@
       "@app/*": ["./src/app/*"],
       "@components": ["./src/components"],
       "@type": ["./src/types"],
-      "@hooks": ["./src/hooks"],
+      "@hooks": ["./src/hook"],
       "@util": ["./src/util"],
       "@images/*": ["./public/images/*"],
       "react-hook-form": ["../../node_modules/react-hook-form"]

@@ -20,6 +20,7 @@ export default function NumberButtonGroup({ id, codes }: DynamicSendSms) {
           ticketId: id,
           smsCode: number,
         });
+        router.push('/dynamic/complete');
       } catch (err) {
         if (APIError.isAPIError(err)) {
           toast.error(err.message);

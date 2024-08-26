@@ -1,6 +1,18 @@
 {
   "extends": "@swifty/typescript-config/nextjs.json",
   "compilerOptions": {
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
     "baseUrl": ".",
     "plugins": [{ "name": "next" }],
     "paths": {
@@ -8,6 +20,7 @@
       "@components": ["./src/components"],
       "@type": ["./src/types"],
       "@hooks": ["./src/hooks"],
+      "@store": ["./src/store"],
       "@util": ["./src/util"],
       "@images/*": ["./public/images/*"],
       "react-hook-form": ["../../node_modules/react-hook-form"]

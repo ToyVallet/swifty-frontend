@@ -13,6 +13,6 @@
     "css": "src/tailwind.css",
     "baseColor": "neutral",
     "cssVariables": true,
-    "prefix": ""
+    "prefix": "ui-"
   }
 }
