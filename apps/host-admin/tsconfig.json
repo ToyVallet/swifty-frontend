@@ -1,0 +1,29 @@
+{
+  "extends": "@swifty/typescript-config/nextjs.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "plugins": [{ "name": "next" }],
+    "paths": {
+      "@app/*": ["./src/app/*"],
+      "@components": ["./src/components"],
+      "@type": ["./src/types"],
+      "@hooks": ["./src/hook"],
+      "@util": ["./src/util"],
+      "@images/*": ["./public/images/*"],
+      "react-hook-form": ["../../node_modules/react-hook-form"]
+    }
+  },
+  "include": [
+    "next.config.mjs",
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "tailwind.config.ts",
+    "postcss.config.mjs",
+    "../../packages/ui/src/drawer/overlay.tsx",
+    "../../packages/ui/src/toast/index.tsx",
+    "../../packages/shared-lib/src/utils/convertNewlineToJSX.tsx"
+  ],
+  "exclude": ["node_modules", "./server.js"]
+}

@@ -9,6 +9,7 @@
     "dev:root": "turbo dev --filter root-admin",
     "dev:user": "turbo dev --filter user-web",
     "dev:ticket": "turbo dev --filter using-ticket",
+    "dev:host": "turbo dev --filter host-admin",
     "dev:ui": "turbo dev --filter @swifty/ui",
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",

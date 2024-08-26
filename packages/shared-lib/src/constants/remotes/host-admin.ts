@@ -29,10 +29,21 @@ const ticket = [
   '/host/admin/entrance/facepass',
 ] as const;
 
+const user = ['/host/admin/user'] as const;
+
+const certification = [
+  '/host/admin/certification/answer',
+  '/host/admin/certification/answer/{id}',
+  '/host/admin/certification/answer/{id}/approval',
+  '/host/admin/certification/answer/{id}/reject',
+] as const;
+
 export const hostApi = [
   ...festival,
   ...concert,
   ...lineup,
   ...university,
   ...ticket,
+  ...user,
+  ...certification,
 ] as const;

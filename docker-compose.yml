@@ -63,3 +63,24 @@ services:
     read_only: true
     tmpfs:
       - /tmp
+
+  host-admin:
+    build:
+      context: .
+      dockerfile: ./apps/host-admin/Dockerfile
+    network_mode: 'host'
+    environment:
+      NODE_ENV: production
+      PORT: 3003
+    command: ['node', 'apps/host-admin/server.js']
+    restart: always
+    logging:
+      driver: json-file
+      options:
+        max-size: '10m'
+        max-file: '3'
+    security_opt:
+      - no-new-privileges:true
+    read_only: true
+    tmpfs:
+      - /tmp
