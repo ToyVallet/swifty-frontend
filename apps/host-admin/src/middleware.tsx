@@ -7,7 +7,7 @@ import { NextResponse } from 'next/server';
 export async function middleware(request: NextRequest) {
   const url = request.nextUrl.clone();
   const token = await getCookie('accessToken');
-  /* 
+
   if (token) {
     if (url.pathname === '/login') {
       url.pathname = '/';
@@ -18,7 +18,7 @@ export async function middleware(request: NextRequest) {
       url.pathname = '/login';
       return NextResponse.redirect(url);
     }
-  } */
+  }
 }
 
 export const config = {

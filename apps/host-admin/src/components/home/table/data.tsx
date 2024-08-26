@@ -47,7 +47,7 @@ function LinkDetail({ id }: { id: string }) {
   return (
     <Link
       className="py-2 px-4 text-16 text-white font-bold rounded-xl bg-primary"
-      href={`/${id}`}
+      href={`/detail/${id}`}
     >
       서류 확인
     </Link>
