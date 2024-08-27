@@ -9,7 +9,7 @@ export default function LoginPage() {
         <h3 className="text-16 font-bold">운영 어드민 포탈 로그인</h3>
       </header>
       <main className="w-[393px] flex flex-col justify-center items-center">
-        <LoginForm />;
+        <LoginForm />
       </main>
     </div>
   );
