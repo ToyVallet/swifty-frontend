@@ -8,9 +8,9 @@ import Link from 'next/link';
 
 export default function SignupCompletePage() {
   return (
-    <section>
+    <section className="overflow-hidden scroball-hide flex flex-col">
       <Image
-        className="m-[86px_auto_134px_auto]"
+        className="self-center my-[10%]"
         src={Check}
         alt="회원가입이 완료되었어요"
         width={255}

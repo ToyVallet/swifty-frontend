@@ -11,9 +11,9 @@ export default function Page() {
   const { push } = useRouter();
 
   return (
-    <section>
+    <section className="flex flex-col items-center justify-center">
       <Image
-        className="m-[152px_auto_159px_auto]"
+        className="my-[15%]"
         src={ChangePassowrd}
         alt="비밀번호 변경 완료"
         width={255}

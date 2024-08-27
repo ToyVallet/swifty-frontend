@@ -22,7 +22,7 @@ export default async function CompleteChangePhoneNumberPage() {
 
       <Image
         src={ChangePhoneNumber}
-        className="m-[120px_auto_220px_auto]"
+        className="mx-auto my-[15%]"
         alt="비밀 번호 변경 완료"
         width={255}
         height={255}
