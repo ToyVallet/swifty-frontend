@@ -8,7 +8,7 @@ FROM base AS builder
 RUN apk update
 RUN apk add --no-cache libc6-compat
 # Set working directory
-WORKDIR /host
+WORKDIR /app
 RUN yarn global add turbo@latest
 COPY . .
 
@@ -18,16 +18,16 @@ RUN turbo prune host-admin --docker
 FROM base AS installer
 RUN apk update
 RUN apk add --no-cache libc6-compat
-WORKDIR /host
+WORKDIR /app
 
 # First install the dependencies (as they change less often)
 COPY .gitignore .gitignore
-COPY --from=builder /host/out/json/ .
-COPY --from=builder /host/out/yarn.lock ./yarn.lock
+COPY --from=builder /app/out/json/ .
+COPY --from=builder /app/out/yarn.lock ./yarn.lock
 RUN yarn install
 
 # Build the project
-COPY --from=builder /host/out/full/ .
+COPY --from=builder /app/out/full/ .
 COPY turbo.json turbo.json
 
 # Uncomment and use build args to enable remote caching
@@ -40,19 +40,18 @@ COPY turbo.json turbo.json
 RUN yarn turbo run build
 
 FROM base AS runner
-WORKDIR /host
+WORKDIR /app
 
 # Don't run production as root
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 USER nextjs
 
-COPY --from=installer /host/apps/host-admin/next.config.mjs .
-COPY --from=installer /host/apps/host-admin/package.json .
+COPY --from=installer /app/apps/host-admin/next.config.mjs .
+COPY --from=installer /app/apps/host-admin/package.json .
 
 # Automatically leverage output traces to reduce image size
 # https://nextjs.org/docs/advanced-features/output-file-tracing
-COPY --from=installer --chown=nextjs:nodejs /host/apps/host-admin/.next/standalone ./
-COPY --from=installer --chown=nextjs:nodejs /host/apps/host-admin/.next/static ./apps/host-admin/.next/static
-COPY --from=installer --chown=nextjs:nodejs /host/apps/host-admin/public ./apps/host-admin/public
-
+COPY --from=installer --chown=nextjs:nodejs /app/apps/host-admin/.next/standalone ./
+COPY --from=installer --chown=nextjs:nodejs /app/apps/host-admin/.next/static ./apps/host-admin/.next/static
+COPY --from=installer --chown=nextjs:nodejs /app/apps/host-admin/public ./apps/host-admin/public
