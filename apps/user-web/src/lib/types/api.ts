@@ -13,6 +13,7 @@ export type UserInfoApi = {
   dob: string;
   gender: 'FEMALE' | 'MALE';
   enrolled: string;
+  universityName?: string;
 };
 
 export type UserTicketApi = {

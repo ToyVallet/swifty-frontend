@@ -10,6 +10,7 @@ import type { PropsWithChildren, ReactNode } from 'react';
 type Props = {
   step: VerficationStatus;
   message?: string;
+  universityName?: string;
 };
 
 type Status = 'not' | 'yet' | 'during' | 'done' | 'sucess' | 'fail';
@@ -173,11 +174,17 @@ const serverStatus: ServerStatus = {
 };
 
 // 전체 컴포넌트
-export default function VerificationStatus({ step, message }: Props) {
+export default function VerificationStatus({
+  step,
+  message,
+  universityName,
+}: Props) {
   const { title, data } = serverStatus[step];
   return (
     <div className="mt-[97px]">
-      <VerificationTitle>{title}</VerificationTitle>
+      <VerificationTitle universityName={universityName}>
+        {title}
+      </VerificationTitle>
       <VerificationData verificationStatus={data} message={message} />
       {step === 'REJECTED' && (
         <FixedBottomCTA asChild>
@@ -239,10 +246,14 @@ function VerticalBar() {
 }
 
 // 제목
-function VerificationTitle({ children }: PropsWithChildren) {
+function VerificationTitle({
+  children,
+  universityName,
+}: PropsWithChildren<{ universityName?: string }>) {
   return (
     <h1 className="text-22 font-semibold">
-      현재 사용자 님의<br></br> {children}
+      현재 사용자 님의 {universityName ? universityName : ''}
+      <br></br> {children}
     </h1>
   );
 }
