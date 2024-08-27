@@ -46,13 +46,14 @@ export default function Select<T extends SelectOptionType[]>({
     options.find((option) => option.value === value)?.label ?? placeholder;
 
   const handleSelect = (event: React.MouseEvent<HTMLDivElement>) => {
-    const target = event.target as HTMLDivElement;
-    const value = target.getAttribute('data-value');
-
-    if (value) {
-      onValueChange?.(value);
-      setIsOpen(false);
-      setSelectedOption(value);
+    const button = (event.target as HTMLElement).closest('button');
+    if (button) {
+      const value = button.getAttribute('data-value');
+      if (value) {
+        onValueChange?.(value);
+        setIsOpen(false);
+        setSelectedOption(value);
+      }
     }
   };
 

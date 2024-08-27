@@ -21,9 +21,10 @@ export default function DateSelect({ options }: DateSelectProps) {
           <div className="flex flex-col ui-divide-y ui-divide-swifty-color-700">
             {options.map((option) => (
               <Button
+                block
                 key={option.id}
                 data-value={option.id}
-                className="flex justify-center items-end rounded-none gap-[60px] py-4 hover:dark:ui-bg-gray-900 hover:ui-bg-swifty-color-300 focus:ui-bg-swifty-color-400  w-full"
+                className="ui-flex ui-justify-center ui-items-end ui-rounded-none ui-gap-[60px] ui-py-4 hover:dark:ui-bg-gray-900 hover:ui-bg-swifty-color-300 focus:ui-bg-swifty-color-400 w-full"
                 disabled={!option.ticketingAvailable}
               >
                 <div>
