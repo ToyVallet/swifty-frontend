@@ -34,7 +34,7 @@ export default async function DateSelectionPage({
 
   return (
     <div>
-      <div className="flex flex-col w-full items-center gap-10 px-5">
+      <div className="flex flex-col w-full items-center gap-10 px-5 mt-5">
         <ImageWithFallback
           src={festivalInfo.festivalImage}
           fallback={FallbackImage}

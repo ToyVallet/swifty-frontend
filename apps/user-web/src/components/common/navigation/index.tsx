@@ -49,7 +49,7 @@ export default function Navigation({
                 name="arrow-left"
                 className={cn(
                   '-translate-x-2.5 stroke-black dark:stroke-white',
-                  bg === 'gradient' && 'dark:stroke-white stroke-black',
+                  bg === 'gradient' && 'stroke-white',
                   bg === 'white' && 'stroke-white',
                   bg === 'black' && 'stroke-black',
                 )}
@@ -64,6 +64,7 @@ export default function Navigation({
                   'font-bold text-16 text-black dark:text-white',
                   bg === 'white' && 'text-white',
                   bg === 'black' && 'text-black',
+                  bg === 'gradient' && 'text-white',
                 )}
               >
                 {title}

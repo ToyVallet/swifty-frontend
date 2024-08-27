@@ -1,8 +1,15 @@
 'use client';
 
 import { FixedBottomCTA, GoogleCaptcha } from '@components/common';
+import * as VisuallyHidden from '@radix-ui/react-visually-hidden';
 import { APIError, http } from '@swifty/shared-lib';
-import { Drawer, DrawerContent, DrawerTrigger } from '@swifty/ui';
+import {
+  Drawer,
+  DrawerContent,
+  DrawerDescription,
+  DrawerTitle,
+  DrawerTrigger,
+} from '@swifty/ui';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
@@ -51,6 +58,10 @@ export default function TicketFixedCta() {
             <GoogleCaptcha onSucess={onSucess} />
           </div>
         </DrawerContent>
+        <VisuallyHidden.Root>
+          <DrawerTitle>Google Recaptcha</DrawerTitle>
+          <DrawerDescription>Check Google Recaptcha</DrawerDescription>
+        </VisuallyHidden.Root>
       </Drawer>
     </>
   );
