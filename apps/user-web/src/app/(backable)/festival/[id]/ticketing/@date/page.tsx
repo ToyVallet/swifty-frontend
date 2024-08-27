@@ -34,14 +34,15 @@ export default async function DateSelectionPage({
 
   return (
     <div>
-      <div className="flex flex-col w-full items-center gap-10 px-5">
+      <div className="flex flex-col w-full items-center gap-10 px-5 mt-5">
         <ImageWithFallback
           src={festivalInfo.festivalImage}
           fallback={FallbackImage}
           alt={festivalInfo.name}
           width={175}
           height={300}
-          className="w-full rounded-xl h-[300px] object-cover"
+          className="w-full rounded-xl h-[300px] object-cover "
+          priority
         />
         <div className="flex flex-col items-center gap-[6px]">
           <h1 className="text-24 font-semibold">{festivalInfo.name}</h1>

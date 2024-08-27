@@ -40,7 +40,7 @@ export default function TicketDrawer({
 
   return (
     <Drawer open={open} onOpenChange={onOpenChange}>
-      <DrawerContent>
+      <DrawerContent className="h-[90dvh] w-[100dvw]">
         <a
           href={backUrl}
           className="flex items-center text-16 font-medium gap-2 px-5"
@@ -54,7 +54,7 @@ export default function TicketDrawer({
           {backUrl === '/' ? 'HOME' : 'MY PAGE'}
         </a>
         <section className="px-[30px] py-10 h-[90%]">
-          <DrawerTitle className="text-26 font-bold">얘매한 티켓</DrawerTitle>
+          <DrawerTitle className="text-26 font-bold">예매한 티켓</DrawerTitle>
           <Tabs defaultValue={TicketTypes[0]}>
             <TabsList className="flex gap-5">
               {TicketTypes.map((tab) => (

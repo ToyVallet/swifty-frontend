@@ -1,11 +1,19 @@
 'use client';
 
 import { FixedBottomCTA, GoogleCaptcha } from '@components/common';
-import { http } from '@swifty/shared-lib';
-import { Drawer, DrawerContent, DrawerTrigger } from '@swifty/ui';
+import * as VisuallyHidden from '@radix-ui/react-visually-hidden';
+import { APIError, http } from '@swifty/shared-lib';
+import {
+  Drawer,
+  DrawerContent,
+  DrawerDescription,
+  DrawerTitle,
+  DrawerTrigger,
+} from '@swifty/ui';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
+import { toast } from 'sonner';
 
 export default function TicketFixedCta() {
   const router = useRouter();
@@ -31,7 +39,11 @@ export default function TicketFixedCta() {
           router.replace(`/ticketing-result/${ticketId}/loading`);
         })
         .catch((err) => {
-          console.error(err);
+          if (APIError.isAPIError(err)) {
+            toast.error(err.message);
+          } else {
+            toast.error('인증에 실패했습니다. 다시 시도해주세요');
+          }
         });
     }
   }, [isSucess]);
@@ -46,6 +58,10 @@ export default function TicketFixedCta() {
             <GoogleCaptcha onSucess={onSucess} />
           </div>
         </DrawerContent>
+        <VisuallyHidden.Root>
+          <DrawerTitle>Google Recaptcha</DrawerTitle>
+          <DrawerDescription>Check Google Recaptcha</DrawerDescription>
+        </VisuallyHidden.Root>
       </Drawer>
     </>
   );

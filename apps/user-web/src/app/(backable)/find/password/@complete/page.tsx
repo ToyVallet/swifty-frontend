@@ -6,9 +6,9 @@ import Link from 'next/link';
 
 export default function Page() {
   return (
-    <div>
+    <section className="flex flex-col items-center justify-center">
       <Image
-        className="m-[152px_auto_159px_auto]"
+        className="my-[10%]"
         src={ChangePassword}
         alt="비밀번호 변경 완료"
         width={255}
@@ -22,6 +22,6 @@ export default function Page() {
           <Link href="/">홈으로 가기</Link>
         </Button>
       </FixedBottomGroup>
-    </div>
+    </section>
   );
 }

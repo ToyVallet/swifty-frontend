@@ -71,7 +71,7 @@ export default function TicketDetailDrawer({ backUrl = '/', ...props }: Props) {
 
   return (
     <Drawer open={open} onOpenChange={onOpenChange}>
-      <DrawerContent>
+      <DrawerContent className="h-[90dvh] w-[100dvw]">
         <section className="w-full px-[50px] pb-10 pt-5 flex flex-col gap-4 items-center">
           <DrawerTitle className="text-center text-26 font-bold relative w-full">
             <Link href="/ticket" className="absolute left-0">

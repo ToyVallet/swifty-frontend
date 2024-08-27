@@ -22,7 +22,7 @@ export default function Page() {
           src={DeleteUser}
           height={250}
           width={250}
-          className="m-[102px_auto_222px_auto]"
+          className="mx-auto my-[15%]"
           alt="탈퇴 완료 이미지"
         />
         <FixedBottomCTA onClick={() => logout().then(() => push('/'))}>

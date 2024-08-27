@@ -6,7 +6,7 @@ export default function MyPageLayout({
   modal,
 }: PropsWithChildren<{ modal: ReactNode }>) {
   return (
-    <div className="pt-[50px]">
+    <div className="pt-[50px] w-full h-full">
       {children}
       {modal}
     </div>

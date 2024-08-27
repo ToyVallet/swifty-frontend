@@ -14,15 +14,33 @@ import { FadeOverlay } from '@components/common';
 import { LineUpSection, TopCard } from '@components/festival';
 import FallbackHero from '@images/fallback-hero.png';
 import type { LineupApi } from '@lib/types/api';
+import type { VerficationAPI } from '@lib/types/certification';
 import type { Festival } from '@lib/types/festival';
 import {
-  APIError,
   type Params,
   formatDateRange,
+  getCookie,
   http,
 } from '@swifty/shared-lib';
 import { BsBellFill } from 'react-icons/bs';
 import { TiStarFullOutline } from 'react-icons/ti';
+
+async function getCertification() {
+  // 재학 정보 가지고 오기
+  const token = await getCookie('accessToken');
+  if (token) {
+    try {
+      const { certificationStatus } = await http.get<VerficationAPI>(
+        '/certification/check',
+      );
+      if (certificationStatus === 'APPROVED') return true;
+      return false;
+    } catch (err) {
+      return false;
+    }
+  }
+  return false;
+}
 
 export default async function FestivalHomePage({
   params: { id },
@@ -34,25 +52,13 @@ export default async function FestivalHomePage({
     params: { id },
   });
 
-  // 축제 정보 모두 가지고 오기 및 상태 확인
-  let isCertificate = true;
-  let isAvaliable = true;
-  try {
-    const ticketings = await http.get<TicketingDate[]>('/ticketing/{id}', {
-      credentials: 'include',
-      params: { id },
-    });
-    isAvaliable = ticketings.some((ticketing) => ticketing.ticketingAvailable);
-  } catch (err) {
-    if (APIError.isAPIError(err)) {
-      isCertificate = false;
-      isAvaliable = false;
-    }
-  }
+  // 재학 인증 상태 확인하기
+  const isCertificate = await getCertification();
 
   const tiles: TileInfo[] = [
     {
       id: 1,
+      festivalId: id,
       subtitle: 'info',
       title: (
         <TileHeader>
@@ -67,13 +73,13 @@ export default async function FestivalHomePage({
     },
     {
       id: 2,
+      festivalId: id,
       subtitle: 'Ticketing',
       title: <TileHeader>티켓 예매하기</TileHeader>,
       link: `/festival/${id}/ticketing`,
       icon: <BsBellFill size={17} />,
       bgColor: 'dark:bg-white dark:text-black text-white bg-black',
       isCertificate,
-      isAvaliable,
     },
   ];
 

@@ -42,7 +42,7 @@ export default function TicketingLayout({ date, check }: TicketingLayoutProps) {
 
   return (
     <>
-      <Navigation title="티켓 예매하기" />
+      <Navigation title="티켓 예매하기" bg="transparent" />
       <TicketingStepContext.Provider value={{ currentStep, nextStep }}>
         <Form {...(form as any)}>
           <main

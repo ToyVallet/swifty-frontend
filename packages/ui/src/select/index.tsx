@@ -46,13 +46,14 @@ export default function Select<T extends SelectOptionType[]>({
     options.find((option) => option.value === value)?.label ?? placeholder;
 
   const handleSelect = (event: React.MouseEvent<HTMLDivElement>) => {
-    const target = event.target as HTMLDivElement;
-    const value = target.getAttribute('data-value');
-
-    if (value) {
-      onValueChange?.(value);
-      setIsOpen(false);
-      setSelectedOption(value);
+    const button = (event.target as HTMLElement).closest('button');
+    if (button) {
+      const value = button.getAttribute('data-value');
+      if (value) {
+        onValueChange?.(value);
+        setIsOpen(false);
+        setSelectedOption(value);
+      }
     }
   };
 
@@ -91,7 +92,7 @@ export default function Select<T extends SelectOptionType[]>({
       </DrawerTrigger>
       <DrawerContent className="ui-px-[30px] ui-pb-[40px]">
         <div
-          className="ui-grid ui-gird-cols-1 ui-divide-y ui-divide-swifty-color-700"
+          className="ui-grid ui-gird-cols-1 ui-divide-y ui-divide-swifty-color-300"
           onClick={handleSelect}
         >
           <Choose value={render}>

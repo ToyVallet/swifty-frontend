@@ -78,6 +78,7 @@ const config: Omit<Config, 'content'> = {
         '18': [18, { lineHeight: 1.5, letterSpacing: '-0.03em' }],
         '20': [20, { lineHeight: 1.5, letterSpacing: '-0.03em' }],
         '22': [22, { lineHeight: 1.5, letterSpacing: '-0.03em' }],
+        '24': [24, { lineHeight: 1.5, letterSpacing: '-0.03em' }],
         '26': [26, { lineHeight: 1.5, letterSpacing: '-0.03em' }],
         '32': [32, { lineHeight: 1.5, letterSpacing: '-0.03em' }],
         '40': [40, { lineHeight: 1.5, letterSpacing: '-0.03em' }],

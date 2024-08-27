@@ -6,8 +6,8 @@ export default function NoTicketCard() {
     <Image
       src={NoFestival}
       alt="no-festival"
-      width={300}
-      height={100}
+      width={353}
+      height={207}
       unoptimized
       className="mx-auto"
     />
