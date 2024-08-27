@@ -92,7 +92,7 @@ export default function Select<T extends SelectOptionType[]>({
       </DrawerTrigger>
       <DrawerContent className="ui-px-[30px] ui-pb-[40px]">
         <div
-          className="ui-grid ui-gird-cols-1 ui-divide-y ui-divide-swifty-color-700"
+          className="ui-grid ui-gird-cols-1 ui-divide-y ui-divide-swifty-color-300"
           onClick={handleSelect}
         >
           <Choose value={render}>
