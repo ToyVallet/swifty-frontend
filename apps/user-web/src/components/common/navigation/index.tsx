@@ -18,7 +18,7 @@ const navigationVariants = cva(
   {
     variants: {
       bg: {
-        gradient: 'bg-gradient-to-b dark:from-black from-white to-transparent',
+        gradient: 'bg-gradient-to-b from-black to-transparent',
         transparent: 'bg-transparent',
         solid: 'bg-black',
         blur: 'backdrop-blur-md backdrop-filter',
