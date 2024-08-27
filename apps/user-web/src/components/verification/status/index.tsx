@@ -100,8 +100,7 @@ const serverStatus: ServerStatus = {
   REJECTED: {
     title: (
       <>
-        재학생 인증이{' '}
-        <span className="text-[rgb(255, 0, 77)]">반려되었습니다.</span>
+        재학생 인증이 <span className="text-destructives">반려되었습니다.</span>
       </>
     ),
     data: [
@@ -155,10 +154,7 @@ const serverStatus: ServerStatus = {
       {
         title: '인증 진행',
         icon: (
-          <Icon
-            name="user-web/verification/varification-request"
-            fill={'#1760EF'}
-          />
+          <Icon name="user-web/verification/varification" fill={'#1760EF'} />
         ),
         status: 'done',
       },
@@ -228,8 +224,8 @@ function StatusNoti({ status }: StatusNotiProps) {
         {status === 'yet' && '진행 예정'}
         {status === 'during' && '진행 중'}
         {status === 'done' && '완료'}
-        {status === 'sucess' && '성공'}
-        {status === 'fail' && '실패'}
+        {status === 'sucess' && '승인'}
+        {status === 'fail' && '반려'}
       </span>
     </div>
   );
@@ -297,7 +293,7 @@ function VerificationData({
         return <VerificationStep key={data.title} {...data} />;
       })}
       {message && (
-        <div className="mx-auto text-12 font-semibold text-center">
+        <div className="mx-auto text-14 font-semibold text-center">
           {convertNewlineToJSX(message)}
         </div>
       )}
