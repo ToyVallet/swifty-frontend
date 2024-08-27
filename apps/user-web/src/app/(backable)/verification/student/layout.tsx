@@ -35,7 +35,7 @@ export default function UnivCertificationLayout({
   });
 
   const [currentStep, setCurrentStep] = useState<CertificationStep>(
-    certificationsSteps[3],
+    certificationsSteps[0],
   );
 
   const nextStep = () => {
