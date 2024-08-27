@@ -3,7 +3,6 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@components/ui/tabs';
 import type { UserTicketApi } from '@lib/types';
 import { dayDifference, http } from '@swifty/shared-lib';
 import dayjs from 'dayjs';
-import Image from 'next/image';
 
 import Card from './card';
 
@@ -14,7 +13,7 @@ export default async function ScheduleCard() {
     credentials: 'include',
   });
   const overDateTicketings = await http.get<UserTicketApi[]>('/user/ticket', {
-    params: { ticketStatus: 'OVER_DATE' },
+    query: { ticketStatus: 'OVER_DATE' },
     credentials: 'include',
   });
 
