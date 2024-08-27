@@ -1,6 +1,8 @@
 'use client';
 
+import type { TicketingDate } from '@app/(backable)/festival/[id]/ticketing/@date/page';
 import { openToast } from '@lib/utils';
+import { http } from '@swifty/shared-lib';
 import { Button, Drawer, DrawerContent } from '@swifty/ui';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -11,6 +13,7 @@ import Tile from './tile';
 
 export type TileInfo = {
   id: number;
+  festivalId: string;
   subtitle: string;
   title: JSX.Element;
   link: string;
@@ -18,8 +21,20 @@ export type TileInfo = {
   bgColor: string;
   textColor?: string;
   isCertificate?: boolean;
-  isAvaliable?: boolean;
 };
+
+// Ticket 활성화 여부 확인 API
+async function getTicketAvailable(id: string) {
+  try {
+    const ticketings = await http.get<TicketingDate[]>('/ticketing/{id}', {
+      credentials: 'include',
+      params: { id },
+    });
+    return ticketings.some((ticketing) => ticketing.ticketingAvailable);
+  } catch (err) {
+    return false;
+  }
+}
 
 export const TileHeader = ({ children }: PropsWithChildren) => (
   <div className="font-bold leading-6">{children}</div>
@@ -28,22 +43,26 @@ export const TileHeader = ({ children }: PropsWithChildren) => (
 export default function MenuTiles({ tiles }: { tiles: TileInfo[] }) {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
-  const controlTicket = (
+
+  /*TICKET TILE CONTROL FUNCTION */
+  const controlTicket = async (
     isCertificate: boolean | undefined,
-    isAvaliable: boolean | undefined,
+    festivalId: string,
     link: string,
   ) => {
+    const isAvaliable = await getTicketAvailable(festivalId);
     if (isAvaliable && isCertificate) {
       router.push(link);
     }
-    /*     if (!isCertificate) {
+    if (!isCertificate) {
       // 학적 인증
       setIsOpen(true);
-    } else  */ if (!isAvaliable) {
+    } else if (!isAvaliable) {
       // 모달
       openToast('현재는 티켓 예매가\n 가능한 시간이 아닙니다.');
     }
   };
+
   return (
     <div className="w-full grid grid-cols-2 gap-4 lg:flex lg:max-w-full lg:aspect-auto lg:gap-8">
       {tiles.map((tile) => {
@@ -52,7 +71,7 @@ export default function MenuTiles({ tiles }: { tiles: TileInfo[] }) {
             <Button
               key={tile.id}
               onClick={() =>
-                controlTicket(tile.isCertificate, tile.isAvaliable, tile.link)
+                controlTicket(tile.isCertificate, tile.festivalId, tile.link)
               }
               className="text-start"
             >
