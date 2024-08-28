@@ -61,7 +61,7 @@ export default function Modal(props: UserDetailApi) {
     studentData.push({ title: '반려 이유', content: rejectReason });
   return (
     <Dialog open={isOpen} onOpenChange={onIsOpne}>
-      <DialogContent className="min-w-[821px] h-[728px]">
+      <DialogContent className="min-w-[821px] min-h-[728px]">
         <DialogHeader>
           <DialogTitle>
             <div className="flex gap-2 items-center mb-[54px]">
@@ -125,7 +125,7 @@ function UserInfo({
         ))}
       </div>
       <div>
-        <ButtonGroup answerStatus={answerStatus} id={id} />
+        <ButtonGroup id={id} />
       </div>
     </div>
   );
@@ -154,13 +154,7 @@ function InfoItem({
   );
 }
 
-function ButtonGroup({
-  answerStatus,
-  id,
-}: {
-  answerStatus: AnswerStatus;
-  id: string;
-}) {
+function ButtonGroup({ id }: { id: string }) {
   const router = useRouter();
   const [loading, setLoading] = useState<'APPROVE' | 'REJECT' | null>(null);
   const [selectValue, setSelectValue] = useState<string | null>(null);
@@ -210,7 +204,6 @@ function ButtonGroup({
     setSelectValue(value);
   };
 
-  if (answerStatus !== 'PENDING') return null;
   return (
     <div className="flex flex-col gap-2.5">
       <div className="flex gap-2.5 text-white font-bold text-16">

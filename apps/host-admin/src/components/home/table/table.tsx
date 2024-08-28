@@ -77,10 +77,11 @@ export default function DataTable<TData, TValue>({
       <HomeTableHeader filter={filter} setFilter={setFilter} />
 
       <div className="mt-5">
-        {/* TABLE */}
-        <TableContent table={table} columns={columns} />
         {/* Pagination Controls */}
         <Pagination table={table} />
+
+        {/* TABLE */}
+        <TableContent table={table} columns={columns} />
       </div>
     </>
   );
