@@ -25,7 +25,9 @@ import {
   saveImage,
 } from '@lib/fascepass';
 import type { DirectionType, ErrorMessage, FacePassImage } from '@lib/types';
+import { getOS } from '@swifty/shared-lib';
 import * as faceLandmarksDetection from '@tensorflow-models/face-landmarks-detection';
+import '@tensorflow/tfjs-backend-cpu';
 import '@tensorflow/tfjs-backend-webgl';
 import * as tf from '@tensorflow/tfjs-core';
 import { convertNewlineToJSX } from '@toss/react';
@@ -101,7 +103,13 @@ export default function FaceLandMark() {
   //facepass model load
   const loadModel = async () => {
     if (!videoRef.current || !canvasRef.current) return;
-    await tf.setBackend('webgl');
+    const os = getOS();
+    if (os === 'ios') {
+      console.log(os);
+      await tf.setBackend('cpu');
+    } else {
+      await tf.setBackend('webgl');
+    }
 
     const model = faceLandmarksDetection.SupportedModels.MediaPipeFaceMesh;
     detectorRef.current = await faceLandmarksDetection.createDetector(model, {
