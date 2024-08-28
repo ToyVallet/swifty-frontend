@@ -4,7 +4,7 @@ import type { UserInfoApi } from '@lib/types';
 import type { VerficationAPI } from '@lib/types/certification';
 import { openToast } from '@lib/utils';
 import { Icon } from '@swifty/assets';
-import { getOS } from '@swifty/shared-lib';
+import { getOS, http } from '@swifty/shared-lib';
 import { Button } from '@swifty/ui';
 import { useRouter } from 'next/navigation';
 
@@ -59,7 +59,7 @@ export default function VerificationSection({ user, certification }: Props) {
 function Link({ href, title, icon, status }: VerificationLink) {
   const router = useRouter();
 
-  const onClick = () => {
+  const onClick = async () => {
     if (href === '/verification/student') {
       if (status === 'APPROVED') {
         openToast('학적 인증이 완료되었습니다.');
@@ -69,8 +69,13 @@ function Link({ href, title, icon, status }: VerificationLink) {
         router.push(href);
       }
     } else if (href === '/facepass/start') {
+      const { result } = await http.get<{ result: boolean }>(
+        '/facepass/check/facepass',
+      );
       const type = getOS();
-      if (type === 'server' || type === 'desktop') {
+      if (result) {
+        openToast('이미 안면인식을 등록하였습니다.');
+      } else if (type === 'server' || type === 'desktop') {
         openToast('모바일 환경에서만 가능합니다.');
       } else {
         router.push(href);

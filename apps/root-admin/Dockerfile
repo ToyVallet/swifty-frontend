@@ -2,7 +2,7 @@ FROM node:20-alpine AS base
  
 FROM base AS builder
 RUN apk update
-RUN apk add --no-cache libc6-compat
+RUN apk add libc6-compat
 # Set working directory
 WORKDIR /app
 # Replace <your-major-version> with the major version installed in your repository. For example:
@@ -18,7 +18,7 @@ RUN turbo prune root-admin --docker
 # Add lockfile and package.json's of isolated subworkspace
 FROM base AS installer
 RUN apk update
-RUN apk add --no-cache libc6-compat
+RUN apk add libc6-compat
 WORKDIR /app
  
 # First install the dependencies (as they change less often)

@@ -23,8 +23,8 @@ export default function FacePassLayout({ camera, start }: Props) {
   };
 
   return (
-    <div className="w-full h-full px-5">
-      <Navigation title="돌아가기" bg="transparent" />
+    <div className="w-dvw h-dvh px-5">
+      <Navigation title="돌아가기" bg="blur" />
       <FacePassContext.Provider value={{ currentStep, nextStep }}>
         <Choose value={currentStep}>
           <When value="start">{start}</When>

@@ -1,4 +1,4 @@
-import { Term } from '@components/facepass';
+import { FacePassDescriptionExample, Term } from '@components/facepass';
 import { Icon } from '@swifty/assets';
 import dynamic from 'next/dynamic';
 
@@ -9,7 +9,7 @@ const IsMobile = dynamic(
 
 export default function FacePassPage() {
   return (
-    <>
+    <main className="w-full h-dvh pb-20 overflow-auto scrollbar-hide">
       <div className="flex flex-col items-center justify-center">
         <header className="flex flex-col items-center justify-center text-center mt-20">
           <Icon
@@ -22,7 +22,7 @@ export default function FacePassPage() {
             안면 등록을 시작할게요
           </h1>
         </header>
-        <div className="my-[88px]">
+        <div className="my-20">
           <Icon
             name="user-web/facepass/logo"
             width={184}
@@ -32,7 +32,8 @@ export default function FacePassPage() {
         </div>
       </div>
       <Term />
+      <FacePassDescriptionExample />
       <IsMobile />
-    </>
+    </main>
   );
 }
