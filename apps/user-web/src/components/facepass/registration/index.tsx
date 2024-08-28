@@ -103,13 +103,8 @@ export default function FaceLandMark() {
   //facepass model load
   const loadModel = async () => {
     if (!videoRef.current || !canvasRef.current) return;
-    const os = getOS();
-    if (os === 'ios') {
-      console.log(os);
-      await tf.setBackend('cpu');
-    } else {
-      await tf.setBackend('webgl');
-    }
+
+    await tf.setBackend('webgl');
 
     const model = faceLandmarksDetection.SupportedModels.MediaPipeFaceMesh;
     detectorRef.current = await faceLandmarksDetection.createDetector(model, {

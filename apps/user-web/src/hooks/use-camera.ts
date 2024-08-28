@@ -18,7 +18,9 @@ const useCamera = () => {
       video.srcObject = stream;
 
       video.onloadedmetadata = () => {
+        video.playsInline = true;
         video.play();
+
         adjustCanvasAndVideoSize(videoRef, canvasRef);
         setIsVideoLoad(true);
       };

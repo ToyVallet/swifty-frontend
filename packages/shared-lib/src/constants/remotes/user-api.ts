@@ -44,6 +44,7 @@ const facepass = [
   '/facepass',
   '/facepass/check/{id}',
   '/facepass/identification/{id}',
+  '/facepass/check/facepass',
 ] as const;
 
 export const userApi = [

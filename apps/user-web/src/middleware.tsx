@@ -38,6 +38,16 @@ export async function middleware(request: NextRequest) {
         return NextResponse.redirect(url);
       }
     }
+
+    if (url.pathname.includes('facepass')) {
+      const { result } = await http.get<{ result: boolean }>(
+        '/facepass/check/facepass',
+      );
+      if (result) {
+        url.pathname = '/mypage';
+        return NextResponse.redirect(url);
+      }
+    }
   } else {
     // 로그인 하지 않았을 경우 접근해서는 안되는 페이지
     // 학적 인증 univ-certification, 마이페이지 mypage, 티켓팅 festival/[id]/ticketing, change-password, change-phone-number
