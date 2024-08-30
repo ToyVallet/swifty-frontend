@@ -2,40 +2,52 @@
 
 import { HomeTableHeader, Pagination, TableContent } from '@components';
 import { usePagination } from '@hooks';
-import { http } from '@swifty/shared-lib';
+import { QueryClient, useQuery } from '@tanstack/react-query';
 import {
   type ColumnDef,
   getCoreRowModel,
   useReactTable,
 } from '@tanstack/react-table';
-import type { AnswerStatus, TableAPI } from '@type';
+import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
+import { fetchTable } from 'src/components/home/home';
 
 import type { Filter } from './header/filter-button-group';
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
-  data: TData[];
-  pageCount: number;
-  currentPage: number;
 }
 
 export default function DataTable<TData, TValue>({
   columns,
-  data,
-  pageCount,
 }: DataTableProps<TData, TValue>) {
-  const [tableData, setData] = useState(data);
   const [filter, setFilter] = useState<Filter>('ALL');
-  const [pageCountState, setPageCountState] = useState(pageCount);
+  const [search, setSearch] = useState('');
+  const router = useRouter();
+  const [queryClient] = React.useState(() => new QueryClient());
   const { pagination, onPaginationChange } = usePagination();
-  const table = useReactTable<TData>({
-    data: tableData,
-    columns,
-    pageCount: pageCountState,
-    getCoreRowModel: getCoreRowModel(),
 
-    manualPagination: true, // 수동으로 페이지네이션 처리
+  const {
+    data: tableData,
+    isLoading,
+    error,
+  } = useQuery({
+    queryKey: [
+      'table',
+      pagination.pageSize,
+      pagination.pageIndex,
+      filter === 'ALL' ? '' : filter,
+      search,
+    ],
+    queryFn: fetchTable,
+  });
+
+  const table = useReactTable<TData>({
+    data: (tableData?.content as TData[]) || [],
+    columns,
+    pageCount: tableData?.totalPages || 0,
+    getCoreRowModel: getCoreRowModel(),
+    manualPagination: true,
     onPaginationChange,
     state: {
       pagination,
@@ -43,34 +55,11 @@ export default function DataTable<TData, TValue>({
   });
 
   useEffect(() => {
-    const fetchData = async (page: number) => {
-      const query: {
-        page: string;
-        answerStatus?: AnswerStatus;
-        size?: string;
-      } = {
-        page: page.toString(),
-        size: `${table.getState().pagination.pageSize}`,
-      };
+    queryClient.invalidateQueries({ queryKey: ['table'] });
+  }, [router]);
 
-      if (filter !== 'ALL') {
-        query.answerStatus = filter; // 필터 값이 ALL이 아니면 쿼리에 추가
-      }
-
-      const result = await http.get<TableAPI>(
-        `/host/admin/certification/answer`,
-        {
-          query,
-          credentials: 'include',
-        },
-      );
-
-      table.setPageIndex(result.page);
-      setPageCountState(result.totalPages);
-      setData(result.content as TData[]);
-    };
-    fetchData(pagination.pageIndex);
-  }, [pagination.pageIndex, filter, pagination.pageSize]);
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error loading data</div>;
 
   return (
     <>

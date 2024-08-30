@@ -2,6 +2,8 @@ import { Home } from '@components';
 import { Suspense } from 'react';
 import PulseLoader from 'react-spinners/PulseLoader';
 
+export const dynamic = 'force-dynamic';
+
 export default async function HomePage() {
   return (
     <Suspense
