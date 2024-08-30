@@ -17,7 +17,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@swifty/ui';
-import { QueryClient, useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import type { AnswerStatus, UserDetailApi } from '@type';
 import dayjs from 'dayjs';
 import Image from 'next/image';
@@ -175,7 +175,7 @@ function ButtonGroup({ id }: { id: string }) {
   const [loading, setLoading] = useState<'APPROVE' | 'REJECT' | null>(null);
   const [selectValue, setSelectValue] = useState<string | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
-  const [queryClient] = React.useState(() => new QueryClient());
+  const queryClient = useQueryClient();
 
   const errorToast = (err: unknown) => {
     if (err instanceof APIError) {
