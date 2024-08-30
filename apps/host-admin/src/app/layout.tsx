@@ -1,3 +1,4 @@
+import { ReactQueryProvider } from '@components';
 import { Provider } from '@swifty/ui';
 import '@swifty/ui/styles.css';
 import type { Viewport } from 'next';
@@ -17,7 +18,9 @@ export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang="ko">
       <body className="font-Pretendard w-dvw h-dvh overflow-hidden scrollbar-hide bg-swifty-color-100 dark:bg-swifty-color-dark-bg">
-        <Provider>{children}</Provider>
+        <Provider>
+          <ReactQueryProvider>{children}</ReactQueryProvider>
+        </Provider>
       </body>
     </html>
   );
