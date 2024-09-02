@@ -21,7 +21,7 @@ export default async function MainLayout({
       <div className="w-full h-full">
         <header className="h-[100px] flex items-center justify-between bg-white px-10">
           <h1 className="text-32 font-bold">인증 관리</h1>
-          <h6 className="text-20 font-semibold text-swifty-color-900 dark:text-swifty-color-50">
+          <h6 className="text-20 font-semibold text-swifty-color-900">
             {universityName || ''}
           </h6>
         </header>

@@ -8,6 +8,7 @@ export interface HostIconMap {
   'host-admin/home': ImportedIconComponent;
   'host-admin/profile': ImportedIconComponent;
   'host-admin/document': ImportedIconComponent;
+  'host-admin/search': ImportedIconComponent;
 }
 
 export const hostIconMap: HostIconMap = {
@@ -16,4 +17,5 @@ export const hostIconMap: HostIconMap = {
   'host-admin/home': lazy(() => import('./home.svg')),
   'host-admin/profile': lazy(() => import('./profile.svg')),
   'host-admin/document': lazy(() => import('./document.svg')),
+  'host-admin/search': lazy(() => import('./search.svg')),
 } as const;

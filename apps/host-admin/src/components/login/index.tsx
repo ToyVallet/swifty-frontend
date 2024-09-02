@@ -66,7 +66,12 @@ export default function LoginForm() {
           render={({ field }) => (
             <FormItem>
               <FormControl>
-                <Input placeholder="ID" label="아이디" {...field} />
+                <Input
+                  placeholder="ID"
+                  label="아이디"
+                  {...field}
+                  isDarkMode={false}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -83,6 +88,7 @@ export default function LoginForm() {
                   label="비밀번호"
                   type="password"
                   autoComplete="new-password"
+                  isDarkMode={false}
                   {...field}
                 />
               </FormControl>
