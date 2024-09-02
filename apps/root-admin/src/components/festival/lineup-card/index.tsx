@@ -45,12 +45,7 @@ export default function LineupCard(props: Props) {
       style={{ width: '100%' }}
       title={title}
       extra={
-        <OpenHiddenToggle
-          id={id}
-          apiTarget="LINEUP"
-          status={lineupStatus}
-          festivalId={festivalId}
-        />
+        <OpenHiddenToggle id={id} apiTarget="LINEUP" status={lineupStatus} />
       }
       cover={
         <Image

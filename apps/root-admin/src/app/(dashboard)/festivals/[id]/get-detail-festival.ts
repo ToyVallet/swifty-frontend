@@ -7,5 +7,6 @@ export async function getDetailFestival(id: string) {
   return http.get<FestivalDetailResponse>('/host/admin/festival/{id}/detail', {
     params: { id },
     credentials: 'include',
+    next: { tags: ['detail-festival'] },
   });
 }

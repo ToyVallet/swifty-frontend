@@ -1,6 +1,6 @@
-import type { BreadcrumbList } from '@components';
 import {
   BreadCrumbs,
+  type BreadcrumbList,
   ConcertPanel,
   FestivalButtonList,
   OpenHiddenToggle,
@@ -44,7 +44,6 @@ export default async function Page({ params: { id } }: Params<{ id: string }>) {
           id={id}
           apiTarget="FESTIVAL"
           status={festivalStatus}
-          festivalId={id}
           size="large"
         />
       </Flex>

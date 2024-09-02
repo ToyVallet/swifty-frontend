@@ -7,6 +7,11 @@ import { createContext, useCallback, useMemo } from 'react';
 
 type NotificationKey = 'success' | 'error' | 'info' | 'warning';
 
+export type ReturnTypeContext = (
+  option: ArgsProps,
+  type?: NotificationKey,
+) => void;
+
 export const NotificationHandlerContext = createContext<
   (option: ArgsProps, type?: NotificationKey) => void
 >(() => {});

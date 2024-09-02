@@ -35,7 +35,10 @@ const certification = [
   '/host/admin/certification/answer',
   '/host/admin/certification/answer/{id}',
   '/host/admin/certification/answer/{id}/approval',
-  '/host/admin/certification/answer/{id}/reject',
+  '/host/admin/certification',
+  '/host/admin/certification/{id}',
+  '/host/admin/certification/{id}/open',
+  '/host/admin/certification/{id}/hidden',
 ] as const;
 
 export const hostApi = [
