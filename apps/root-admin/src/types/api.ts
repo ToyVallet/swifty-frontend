@@ -1,3 +1,5 @@
+import { type Status } from './festival';
+
 export interface UniversityInfo {
   campusName: string;
   collegeinfourl: string;
@@ -16,4 +18,10 @@ export interface UniversityApi {
   dataSearch: {
     content: UniversityInfo[];
   };
+}
+
+export interface CertificationAPI {
+  id: string;
+  name: string;
+  status: Status;
 }

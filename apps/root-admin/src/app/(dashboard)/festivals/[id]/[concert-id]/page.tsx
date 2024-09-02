@@ -42,7 +42,6 @@ export default async function ConcertPage({
           apiTarget="CONCERT"
           status={concertInfo.concertStatus}
           id={consertId}
-          festivalId={festivalId}
           size="large"
         />
       </Flex>
