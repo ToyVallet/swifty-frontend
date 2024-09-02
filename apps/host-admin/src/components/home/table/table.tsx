@@ -59,8 +59,18 @@ export default function DataTable<TData, TValue>({
     queryClient.invalidateQueries({ queryKey: ['table'] });
   }, [router]);
 
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Error loading data</div>;
+  if (isLoading)
+    return (
+      <div className="w-full h-full flex justify-center items-center text-32 font-bold">
+        Loading...
+      </div>
+    );
+  if (error)
+    return (
+      <div className="w-full h-full flex justify-center items-center text-32 font-bold">
+        데이터를 불러오는 것에 실패했습니다. 새로고침 해주세요
+      </div>
+    );
 
   return (
     <>

@@ -114,17 +114,19 @@ function UserInfo({
 }) {
   return (
     <div>
-      <DialogDescription>
-        <div className="flex flex-col gap-2.5 mb-5">
-          <h3 className="text-18 font-bold text-swifty-color-800">
+      <div className="flex flex-col gap-2.5 mb-5">
+        <DialogDescription>
+          <span className="text-18 font-bold text-swifty-color-800">
             요청자 기본 정보
-          </h3>
-          <CertificationStatus status={answerStatus} />
-        </div>
-      </DialogDescription>
+          </span>
+        </DialogDescription>
+
+        <CertificationStatus status={answerStatus} />
+      </div>
+
       <div
         className={cn(
-          'grid grid-cols-2 grid-rows-3 gap-10 mb-[25px]',
+          'grid grid-cols-2 grid-rows-3 gap-5 mb-[25px]',
           studentData.length === 6 && 'grid-rows-4',
         )}
       >
@@ -296,15 +298,16 @@ function ButtonGroup({ id }: { id: string }) {
 function UserImage({ image }: { image: string }) {
   return (
     <DialogDescription>
-      <h3 className="text-18 font-bold text-swifty-color-800 mb-[30px]">
+      <span className="text-18 font-bold text-swifty-color-800 mb-[30px]">
         제출 서류 확인
-      </h3>
+      </span>
       <Image
         src={image}
         alt="학적 인증"
         width={375}
         height={511}
         className="object-fill rounded-xl"
+        priority
       />
     </DialogDescription>
   );
