@@ -14,7 +14,7 @@ type NavigationProps = {
 };
 
 const navigationVariants = cva(
-  'z-30 grid w-full px-5 h-[50px] fixed top-0 left-0 grid-cols-3',
+  'z-30 grid w-full px-5 h-[50px] absolute mx-auto max-w-[640px] top-0 left-0 grid-cols-3',
   {
     variants: {
       bg: {

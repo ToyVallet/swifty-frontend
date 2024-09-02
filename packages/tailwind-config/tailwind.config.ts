@@ -1,7 +1,7 @@
 import { type Config } from 'tailwindcss';
 
 const config: Omit<Config, 'content'> = {
-  darkMode: 'media',
+  darkMode: 'selector',
   theme: {
     extend: {
       boxShadow: {

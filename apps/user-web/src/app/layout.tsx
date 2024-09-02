@@ -1,3 +1,4 @@
+import { ThemeProvider } from '@components/provider/theme-provider';
 import { Provider } from '@swifty/ui';
 import '@swifty/ui/styles.css';
 import type { Metadata } from 'next';
@@ -46,8 +47,17 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang="ko">
-      <body className="font-Pretendard scrollbar-hide bg-swifty-color-100 dark:bg-swifty-color-dark-bg">
-        <Provider>{children}</Provider>
+      <body className="font-Pretendard scrollbar-hide bg-swifty-color-100 dark:bg-swifty-color-dark-bg text-black dark:text-white mx-auto max-w-[640px] relative">
+        <Provider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            {children}
+          </ThemeProvider>
+        </Provider>
       </body>
     </html>
   );

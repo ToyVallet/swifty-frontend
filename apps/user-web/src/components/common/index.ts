@@ -17,3 +17,4 @@ export { default as Main } from './main';
 export { default as Search } from './search';
 export { default as GoogleCaptcha } from './captcha';
 export { default as NoTicketCard } from './no-ticket-card';
+export { default as ThemeToggle } from './theme-toggle';

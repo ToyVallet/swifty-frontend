@@ -46,7 +46,7 @@ export default function VerificationSection({ user, certification }: Props) {
 
   return (
     <section className="w-full">
-      <Header>안증 및 등록 관리</Header>
+      <Header>인증 및 등록 관리</Header>
       <div className="w-full flex gap-[10px] h-[118px] items-center justify-center">
         {verificationLinks.map((props) => (
           <Link {...props} key={props.title} />
