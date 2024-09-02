@@ -13,17 +13,18 @@ export const fetchTable: QueryFunction<
   TableAPI,
   [string, number, number, string, string],
   number
-> = async ({ queryKey, pageParam }) => {
+> = async ({ queryKey }) => {
   const token = await getCookie('accessToken');
   if (!token) redirect('/login');
 
-  const [name, size, page, filter, search] = queryKey;
+  const [, size, page, filter, search] = queryKey;
+
   const table = await http.get<TableAPI>('/host/admin/certification/answer', {
     query: {
       size: `${size}`,
-      page: `${page}`,
+      page: search !== '' ? `${0}` : `${page}`,
       answerStatus: `${filter}`,
-      search: `${search}`,
+      keyword: `${search}`,
     },
     credentials: 'include',
   });
