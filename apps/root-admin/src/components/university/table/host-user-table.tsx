@@ -28,7 +28,6 @@ const columns: TableProps<UniversityHostUser>['columns'] = [
 function HostUserTable({ data }: Props) {
   const [tableData, setTableData] = useState<UniversityHostUser[]>(data);
   const router = useRouter();
-
   const onClickRow = (record: UniversityHostUser) => {
     router.push(`/user/${record.userId}`);
   };

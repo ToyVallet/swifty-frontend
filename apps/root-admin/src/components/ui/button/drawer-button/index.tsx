@@ -15,6 +15,7 @@ const variantButtons = {
   'university-create': '대학교 추가',
   'university-logo-update': '대학 로고 수정',
   'university-update': '대학 수정',
+  'university-certification': '재학생 인증 생성',
   'host-create': '호스트 생성',
   'festival-create': '대학 축제 생성',
   'festival-update': '대학 축제 수정',

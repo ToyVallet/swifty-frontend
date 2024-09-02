@@ -1,17 +1,33 @@
-import type { BreadcrumbList } from '@components';
 import {
   BreadCrumbs,
+  type BreadcrumbList,
   UniversityButtonList,
   UniversityFestivals,
   UniversityHostUsers,
 } from '@components';
 import School from '@icons/school.svg';
 import { type Params, http } from '@swifty/shared-lib';
-import type { UniversityDetail } from '@type';
+import type { CertificationAPI, UniversityDetail } from '@type';
 import { Avatar } from 'antd';
 import Image from 'next/image';
 
 import styles from './university-detail.module.css';
+
+async function getCertificationStatus(id: string) {
+  try {
+    const status = await http.get<CertificationAPI>(
+      '/host/admin/certification/{id}',
+      {
+        credentials: 'include',
+        params: { id },
+        next: { tags: ['university-certificatin'] },
+      },
+    );
+    return status;
+  } catch (err) {
+    return null;
+  }
+}
 
 export default async function UniversityDetailPage({
   params: { id },
@@ -20,6 +36,8 @@ export default async function UniversityDetailPage({
     params: { id },
     credentials: 'include',
   });
+
+  const certificationStatus = await getCertificationStatus(id);
 
   const breadcrumbList: BreadcrumbList = [
     {
@@ -59,6 +77,8 @@ export default async function UniversityDetailPage({
           addr={data.addr}
           name={data.name}
           logo={data.fileInfoResponse.url || ''}
+          certificationId={certificationStatus?.id}
+          certificationStatus={certificationStatus?.status}
         />
       </section>
       <section className={styles.section}>

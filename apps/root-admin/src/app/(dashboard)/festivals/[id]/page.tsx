@@ -1,6 +1,6 @@
-import type { BreadcrumbList } from '@components';
 import {
   BreadCrumbs,
+  type BreadcrumbList,
   ConcertPanel,
   FestivalButtonList,
   OpenHiddenToggle,
@@ -8,6 +8,7 @@ import {
 import type { Params } from '@swifty/shared-lib';
 import type { FestivalDetail } from '@type';
 import { Descriptions, Flex } from 'antd';
+import dayjs from 'dayjs';
 
 import { getDetailFestival } from './get-detail-festival';
 import styles from './page.module.css';
@@ -34,8 +35,12 @@ export default async function Page({ params: { id } }: Params<{ id: string }>) {
   ).map((item) => ({
     key: item,
     label: item,
-    children: adminFestivalInfoResponse[item],
+    children:
+      item === 'description' || item === 'addr'
+        ? item
+        : dayjs(adminFestivalInfoResponse[item]).format('YY-MM-DD HH:mm:ss'),
   }));
+
   return (
     <main className={styles.main}>
       <Flex align="center" gap={'1rem'} className={styles.headerWrapper}>
@@ -44,7 +49,6 @@ export default async function Page({ params: { id } }: Params<{ id: string }>) {
           id={id}
           apiTarget="FESTIVAL"
           status={festivalStatus}
-          festivalId={id}
           size="large"
         />
       </Flex>

@@ -1,5 +1,8 @@
+'use client';
+
 import { cn } from '@swifty/shared-lib';
 import type { ComponentPropsWithoutRef } from 'react';
+import { toast } from 'sonner';
 
 function FilterButton({
   className,
@@ -25,6 +28,7 @@ export type Filter = 'PENDING' | 'ALL' | 'APPROVED' | 'REJECTED';
 type Props = {
   filter: Filter;
   setFilter: (filter: Filter) => void;
+  setSearch: (value: string) => void;
 };
 
 const ButtonText: { [key in Filter]: string } = {
@@ -33,7 +37,11 @@ const ButtonText: { [key in Filter]: string } = {
   REJECTED: '반려처리',
   PENDING: '대기중',
 };
-export default function FilterButtonGroup({ filter, setFilter }: Props) {
+export default function FilterButtonGroup({
+  filter,
+  setFilter,
+  setSearch,
+}: Props) {
   const onClick = async (key: Filter) => {
     setFilter(key);
     // 테이블 api 업로드
@@ -51,6 +59,14 @@ export default function FilterButtonGroup({ filter, setFilter }: Props) {
           className={key === filter ? 'text-white border-none bg-primary' : ''}
         />
       ))}
+      <FilterButton
+        onClick={() => {
+          setSearch('');
+          toast.info('검색어가 초기화 되었습니다.');
+        }}
+        text={'검색 초기화'}
+        className="w-[100px]"
+      />
     </div>
   );
 }

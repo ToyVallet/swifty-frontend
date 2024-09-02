@@ -56,7 +56,7 @@ export default function TableContent<TData, TValue>({
         ) : (
           <TableRow>
             <TableCell colSpan={columns.length} className="h-24 text-center">
-              No results.
+              일치하는 데이터가 없습니다.
             </TableCell>
           </TableRow>
         )}

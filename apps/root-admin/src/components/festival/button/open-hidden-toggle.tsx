@@ -1,16 +1,17 @@
 'use client';
 
-import { http } from '@swifty/shared-lib';
+import { handleApiError } from '@lib';
+import { http, revalidate } from '@swifty/shared-lib';
 import type { Status } from '@type';
 import type { SegmentedProps } from 'antd';
 import { ConfigProvider, Segmented } from 'antd';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { NotificationHandlerContext } from 'src/components/provider';
 
 interface Props {
-  apiTarget: 'FESTIVAL' | 'CONCERT' | 'LINEUP';
+  apiTarget: 'FESTIVAL' | 'CONCERT' | 'LINEUP' | 'CERTIFICATION';
   status: Status;
   id: string;
-  festivalId: string;
   size?: SegmentedProps['size'];
 }
 
@@ -65,24 +66,42 @@ const hiddenOpenHttp = {
         { params: { id }, credentials: 'include' },
       ),
   },
+  CERTIFICATION: {
+    HIDDEN: async (id: string) =>
+      http.patch(
+        '/host/admin/certification/{id}/hidden',
+        {},
+        { params: { id }, credentials: 'include' },
+      ),
+    OPEN: async (id: string) =>
+      http.patch(
+        '/host/admin/certification/{id}/open',
+        {},
+        { params: { id }, credentials: 'include' },
+      ),
+  },
 };
 export default function OpenHiddenToggle({
   apiTarget,
   status,
   id,
-  festivalId,
   size = 'small',
 }: Props) {
   const [curStatus, setCurStatus] = useState(status);
+  const handleNotification = useContext(NotificationHandlerContext);
 
   const onChange = async (value: Status) => {
     const prev = curStatus;
+
     setCurStatus(value);
     try {
-      await hiddenOpenHttp[apiTarget][value](id); //
+      await hiddenOpenHttp[apiTarget][value](id);
+      if (apiTarget === 'CERTIFICATION')
+        await revalidate('university-certificatin');
+      else await revalidate('detail-festival');
     } catch (err) {
       setCurStatus(prev);
-      console.error(err);
+      handleApiError(err, handleNotification);
     }
   };
 
