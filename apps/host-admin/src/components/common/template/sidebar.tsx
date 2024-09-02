@@ -49,7 +49,6 @@ function NavItem({ title, icon, href }: NavMenu) {
   const onClick = async () => {
     if (href) router.push(href);
     else {
-      console.log('logout');
       await removeAllCookies();
     }
   };

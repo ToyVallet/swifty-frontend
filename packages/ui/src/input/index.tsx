@@ -22,6 +22,7 @@ interface InputProps
   name: string;
   placeholder?: string;
   isError?: FieldError | undefined;
+  isDarkMode?: boolean;
 }
 
 export const variants = {
@@ -48,6 +49,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function (
     onChange,
     isError,
     id,
+    isDarkMode = true,
     ...props
   },
   ref,
@@ -103,6 +105,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function (
           !isError &&
           'ui-border ui-border-primary ui-shadow-input-active',
         isError && 'ui-border ui-border-destructive ui-shadow-input-error',
+        !isDarkMode && 'dark:ui-bg-swifty-color-200',
       )}
     >
       {label && (
