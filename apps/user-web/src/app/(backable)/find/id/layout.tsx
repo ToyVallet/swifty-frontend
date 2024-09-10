@@ -45,7 +45,7 @@ export default function Page({ complete, name, phone }: Props) {
     <>
       <Navigation title="아이디 찾기" bg="transparent" />
       <FindIdContext.Provider value={{ currentStep, nextStep }}>
-        <Main className="relative pb-20 scrollbar-hide px-5 mt-[47px]">
+        <Main className="relative pb-20 scrollbar-hide px-5 pt-20">
           <Header>
             {currentStep}
             {currentStep === '회원님의 아이디를 찾았어요' && (

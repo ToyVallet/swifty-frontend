@@ -10,8 +10,8 @@ export default function FixedBottomGroup({
 }: PropsWithChildren<{ className?: string }>) {
   return (
     <GlobalPortal.Consumer>
-      <div className="fixed left-0 bottom-0 w-full dark:bg-black rounded-t-xl dark:shadow-[0_-40px_50px_0px_rgba(0,0,0,0.6)]">
-        <div className={cn('p-[0_20px_18px] flex flex-col', className)}>
+      <div className="fixed left-0 bottom-0 right-0 mx-auto max-w-[640px] dark:bg-black rounded-t-xl dark:shadow-[0_-40px_50px_0px_rgba(0,0,0,0.6)]">
+        <div className={cn('p-[0_20px_18px] mx-auto flex flex-col', className)}>
           {children}
         </div>
       </div>
