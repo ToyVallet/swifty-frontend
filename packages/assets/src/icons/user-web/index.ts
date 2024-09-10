@@ -21,6 +21,8 @@ export interface UserWebIconsMap {
   'user-web/facepass/mask': ImportedIconComponent;
   'user-web/facepass/phone': ImportedIconComponent;
   'user-web/facepass/title': ImportedIconComponent;
+  'user-web/facepass/big-logo': ImportedIconComponent;
+  'user-web/facepass/full-title': ImportedIconComponent;
   'user-web/theme/sun': ImportedIconComponent;
   'user-web/theme/moon': ImportedIconComponent;
 }
@@ -52,6 +54,12 @@ export const userWebIcons: UserWebIconsMap = {
   'user-web/facepass/mask': lazy(() => import('./facepass/mask.svg')),
   'user-web/facepass/phone': lazy(() => import('./facepass/phone.svg')),
   'user-web/facepass/title': lazy(() => import('./facepass/title.svg')),
+  'user-web/facepass/full-title': lazy(
+    () => import('./facepass/facepass-full-title.svg'),
+  ),
+  'user-web/facepass/big-logo': lazy(
+    () => import('./facepass/facepass-big-logo.svg'),
+  ),
   'user-web/theme/sun': lazy(() => import('./theme/sun.svg')),
   'user-web/theme/moon': lazy(() => import('./theme/moon.svg')),
 } as const;

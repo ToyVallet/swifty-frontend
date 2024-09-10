@@ -1,4 +1,5 @@
 import { TicketDetailDrawer } from '@components/ticket';
+import FacePassDetailDrawer from '@components/ticket/facepass-detail-drawer';
 import type { TicketingResultApi } from '@lib/types';
 import { type Params, http } from '@swifty/shared-lib';
 import QRCode from 'qrcode';
@@ -11,9 +12,33 @@ export default async function TicketDeatilPage({
     query: { type: 'MY' },
     credentials: 'include',
   });
+
+  const { result } = await http.get<{ result: boolean }>(
+    '/facepass/check/facepass',
+  );
+
   const qrEmbeddedId = await QRCode.toDataURL(ticketDetail.qrEmbeddedId);
+
+  if (!result) {
+    return (
+      <TicketDetailDrawer
+        qrEmbeddedId={qrEmbeddedId}
+        name={ticketDetail.name}
+        issuedDateTime={ticketDetail.issuedDateTime}
+        concertStartDateTime={ticketDetail.concertStartDateTime}
+        concertEndDateTime={ticketDetail.concertEndDateTime}
+        concertLocation={ticketDetail.concertLocation}
+        areaName={ticketDetail.areaName}
+        ticketIdentifier={ticketDetail.ticketIdentifier}
+        ticketStatus={ticketDetail.ticketStatus}
+        festivalName={ticketDetail.festivalName}
+        concertName={ticketDetail.concertName}
+        image={ticketDetail.image}
+      />
+    );
+  }
   return (
-    <TicketDetailDrawer
+    <FacePassDetailDrawer
       qrEmbeddedId={qrEmbeddedId}
       name={ticketDetail.name}
       issuedDateTime={ticketDetail.issuedDateTime}
