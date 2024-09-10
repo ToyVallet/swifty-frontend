@@ -12,8 +12,8 @@ const FixedBottomCTA: ForwardRefExoticComponent<Props> = forwardRef<
 >((props, ref) => {
   return (
     <GlobalPortal.Consumer>
-      <div className="fixed left-0 bottom-0 w-full dark:bg-black rounded-t-xl dark:shadow-[0_-40px_50px_0px_rgba(0,0,0,0.6)]">
-        <div className="p-[0_20px_18px]">
+      <div className="fixed bottom-0 right-0 left-0 mx-auto max-w-[640px] dark:bg-black rounded-t-xl dark:shadow-[0_-40px_50px_0px_rgba(0,0,0,0.6)]">
+        <div className="p-[0_20px_18px] mx-auto">
           <Button
             block
             type={props.type ?? 'button'}

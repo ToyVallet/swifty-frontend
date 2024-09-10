@@ -71,8 +71,8 @@ export default function TicketDetailDrawer({ backUrl = '/', ...props }: Props) {
 
   return (
     <Drawer open={open} onOpenChange={onOpenChange}>
-      <DrawerContent className="h-[90dvh] w-[100dvw]">
-        <section className="w-full px-[50px] pb-10 pt-5 flex flex-col gap-4 items-center">
+      <DrawerContent className="min-h-[90dvh] max-w-[640px] mx-auto scrollbar-hide overflow-auto">
+        <section className="w-full px-5 pb-10 pt-5 flex flex-col gap-4 items-center">
           <DrawerTitle className="text-center text-26 font-bold relative w-full">
             <Link href="/ticket" className="absolute left-0">
               <Icon
@@ -101,12 +101,12 @@ export default function TicketDetailDrawer({ backUrl = '/', ...props }: Props) {
           </header>
           <Tabs value={activeTab} className="w-full h-full">
             <TabsContent value={BUTTON_VALUE[0]}>
-              <div className="relative rounded-3xl h-[270px] max-w-[290px] w-full mx-auto">
+              <div className="relative rounded-3xl h-[220px] max-w-[220px] w-full mx-auto">
                 <QrCode qr={qrEmbeddedId} ticketId={ticketId} />
               </div>
             </TabsContent>
             <TabsContent value={BUTTON_VALUE[1]}>
-              <div className="flex flex-col gap-5 bg-swifty-color-100 dark:bg-swifty-color-900 rounded-3xl py-[25px]">
+              <div className="flex flex-col gap-3 bg-swifty-color-100 dark:bg-swifty-color-900 rounded-3xl py-3">
                 <InfoContainer>
                   <Title>행사명</Title>
                   <Text>{convertNewlineToJSX(`${festivalName}`)}</Text>

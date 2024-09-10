@@ -40,7 +40,7 @@ export default function TicketDrawer({
 
   return (
     <Drawer open={open} onOpenChange={onOpenChange}>
-      <DrawerContent className="h-[90dvh] w-[100dvw]">
+      <DrawerContent className="h-[90dvh] max-w-[640px] mx-auto overflow-auto scrollbar-hide">
         <a
           href={backUrl}
           className="flex items-center text-16 font-medium gap-2 px-5"

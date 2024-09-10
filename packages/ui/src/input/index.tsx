@@ -127,7 +127,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function (
         type={!isVisible && type !== 'number' ? type : 'text'}
         value={inputValue}
         className={cn(
-          'ui-w-full ui-bg-transparent ui-text-16 ui-py-3 ui-px-5 autofill:ui-bg-transparent ui-transition-all ui-duration-200 ui-ease-in-out',
+          'ui-w-full ui-bg-transparent ui-text-16 ui-py-3 ui-px-5 autofill:ui-bg-transparent ui-transition-all ui-duration-200 ui-ease-in-out ui-text-black',
           isActive && 'ui-mt-[30px]',
         )}
         inputMode={

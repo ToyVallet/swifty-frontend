@@ -47,7 +47,7 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang="ko">
-      <body className="font-Pretendard scrollbar-hide bg-swifty-color-100 dark:bg-swifty-color-dark-bg text-black dark:text-white mx-auto max-w-[640px] relative">
+      <body className="font-Pretendard scrollbar-hide bg-swifty-color-100 dark:bg-swifty-color-dark-bg text-black dark:text-white">
         <Provider>
           <ThemeProvider
             attribute="class"
@@ -55,7 +55,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
             enableSystem
             disableTransitionOnChange
           >
-            {children}
+            <div className="mx-auto max-w-[640px] relative">{children}</div>
           </ThemeProvider>
         </Provider>
       </body>
