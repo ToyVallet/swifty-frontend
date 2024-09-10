@@ -38,7 +38,11 @@ const ticketing = [
   '/ticketing/schedule/{id}/check',
 ] as const;
 
-const recaptcha = ['/recaptcha'] as const;
+const recaptcha = [
+  '/captcha/key',
+  '/captcha/verify',
+  '/captcha/image/{key}',
+] as const;
 
 const facepass = [
   '/facepass',

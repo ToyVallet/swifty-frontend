@@ -63,7 +63,12 @@ async function request<Res>(
       throw error;
     }
 
-    if (url === '/log/export') {
+    const contentType = response.headers.get('Content-Type');
+    if (
+      contentType?.includes('image/') ||
+      contentType?.includes('application/octet-stream')
+    ) {
+      // JSON 응답 처리
       const data: Blob = await response.blob();
       return data as unknown as Res;
     }

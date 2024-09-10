@@ -24,6 +24,7 @@ export default async function TicketingCheckPage({
     params: { id },
   });
 
+  const { key } = await http.get<{ key: string }>('/captcha/key');
   return (
     <div className="bg-swifty-color-100 dark:bg-swifty-color-dark-bg">
       <Hero variant="image">
@@ -48,7 +49,7 @@ export default async function TicketingCheckPage({
         />
         <TicketDescription description={festivalInfoResponse.description} />
       </Main>
-      <TicketFixedCta />
+      <TicketFixedCta captchaKey={key} />
     </div>
   );
 }

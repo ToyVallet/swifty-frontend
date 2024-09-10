@@ -42,13 +42,19 @@ export default function TicketingLayout({ date, check }: TicketingLayoutProps) {
 
   return (
     <>
-      <Navigation title="티켓 예매하기" bg="transparent" />
+      <Navigation
+        title="티켓 예매하기"
+        bg={
+          currentStep === '티켓 예매 정보를 확인해주세요'
+            ? 'text-white'
+            : 'transparent'
+        }
+      />
       <TicketingStepContext.Provider value={{ currentStep, nextStep }}>
         <Form {...(form as any)}>
           <main
             className={cn(
-              'h-full flex flex-col relative pb-20 overflow-y-auto scrollbar-hide',
-              currentStep !== '티켓 예매 정보를 확인해주세요' && 'mt-[47px]',
+              'h-full flex flex-col relative pb-20 overflow-y-auto scrollbar-hide py-10',
             )}
           >
             <Choose value={currentStep}>
