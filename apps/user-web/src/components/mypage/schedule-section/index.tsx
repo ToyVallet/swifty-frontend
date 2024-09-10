@@ -19,7 +19,7 @@ export default async function ScheduleCard() {
 
   return (
     <section className="w-full">
-      <Tabs defaultValue={schedule[0]}>
+      <Tabs defaultValue={schedule[0]} className="overflow-hidden">
         <TabsList>
           {schedule.map((tab) => (
             <TabsTrigger key={tab} value={tab}>

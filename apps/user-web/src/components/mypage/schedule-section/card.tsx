@@ -38,7 +38,7 @@ export default function Card({
   };
   return (
     <div
-      className="w-full rounded-xl p-5 relative overflow-hidden text-white"
+      className="w-full rounded-xl p-5 relative overflow-hidden text-white flex-[0_0_100%]"
       onClick={onNavigateTicketDetail}
     >
       <ImageWithFallback
