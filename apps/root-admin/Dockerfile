@@ -109,6 +109,3 @@ COPY --from=installer /root-admin/package.json .
 COPY --from=installer --chown=nextjs:nodejs /root-admin/.next/standalone ./
 COPY --from=installer --chown=nextjs:nodejs /root-admin/.next/static ./root-admin/.next/static
 COPY --from=installer --chown=nextjs:nodejs /root-admin/public ./root-admin/public
-
-# Specify the command to run the application (adjust according to your setup)
-CMD ["node", "server.js"]
