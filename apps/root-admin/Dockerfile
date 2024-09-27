@@ -1,111 +1,111 @@
-# FROM node:20-alpine AS base
- 
-# FROM base AS builder
-# RUN apk update
-# RUN apk add libc6-compat
-# # Set working directory
-# WORKDIR /app
-# # Replace <your-major-version> with the major version installed in your repository. For example:
-# # RUN yarn global add turbo@^2
-# RUN yarn global add turbo@latest
-# COPY . .
- 
-# # Generate a partial monorepo with a pruned lockfile for a target workspace.
-# # Assuming "web" is the name entered in the project's package.json: { name: "web" }
-# RUN turbo prune user-web --docker
-# RUN turbo prune root-admin --docker
- 
-# # Add lockfile and package.json's of isolated subworkspace
-# FROM base AS installer
-# RUN apk update
-# RUN apk add libc6-compat
-# WORKDIR /app
- 
-# # First install the dependencies (as they change less often)
-# COPY .gitignore .gitignore
-# COPY --from=builder /app/out/json/ .
-# COPY --from=builder /app/out/yarn.lock ./yarn.lock
-# RUN yarn install
- 
-# # Build the project
-# COPY --from=builder /app/out/full/ .
-# COPY turbo.json turbo.json
-# RUN yarn turbo build
- 
-# FROM base AS runner
-# WORKDIR /app
- 
-# # Don't run production as root
-# RUN addgroup --system --gid 1001 nodejs
-# RUN adduser --system --uid 1001 nextjs
-# USER nextjs
- 
-# COPY --from=installer /app/apps/user-web/next.config.mjs .
-# COPY --from=installer /app/apps/user-web/package.json .
- 
-# # Automatically leverage output traces to reduce image size
-# # https://nextjs.org/docs/advanced-features/output-file-tracing
-# COPY --from=installer --chown=nextjs:nodejs /app/apps/user-web/.next/standalone ./
-# COPY --from=installer --chown=nextjs:nodejs /app/apps/user-web/.next/static ./apps/user-web/.next/static
-# COPY --from=installer --chown=nextjs:nodejs /app/apps/user-web/public ./apps/user-web/public
- 
-
-# COPY --from=installer /app/apps/root-admin/next.config.mjs .
-# COPY --from=installer /app/apps/root-admin/package.json .
-
-# # Automatically leverage output traces to reduce image size
-# # https://nextjs.org/docs/advanced-features/output-file-tracing
-# COPY --from=installer --chown=nextjs:nodejs /app/apps/root-admin/.next/standalone ./
-# COPY --from=installer --chown=nextjs:nodejs /app/apps/root-admin/.next/static ./apps/root-admin/.next/static
-# COPY --from=installer --chown=nextjs:nodejs /app/apps/root-admin/public ./apps/root-admin/public
-
-# Base image
 FROM node:20-alpine AS base
-
-# Builder stage
+ 
 FROM base AS builder
 RUN apk update
 RUN apk add libc6-compat
 # Set working directory
 WORKDIR /app
-# Install turbo globally
+# Replace <your-major-version> with the major version installed in your repository. For example:
+# RUN yarn global add turbo@^2
 RUN yarn global add turbo@latest
 COPY . .
-
-# Generate a partial monorepo with a pruned lockfile for the root-admin workspace
+ 
+# Generate a partial monorepo with a pruned lockfile for a target workspace.
+# Assuming "web" is the name entered in the project's package.json: { name: "web" }
+RUN turbo prune user-web --docker
 RUN turbo prune root-admin --docker
-
-# Installer stage
+ 
+# Add lockfile and package.json's of isolated subworkspace
 FROM base AS installer
 RUN apk update
 RUN apk add libc6-compat
-WORKDIR /root-admin  # Workdir set to /root-admin
-
+WORKDIR /app
+ 
 # First install the dependencies (as they change less often)
 COPY .gitignore .gitignore
 COPY --from=builder /app/out/json/ .
 COPY --from=builder /app/out/yarn.lock ./yarn.lock
 RUN yarn install
-
-# Build the root-admin project
+ 
+# Build the project
 COPY --from=builder /app/out/full/ .
 COPY turbo.json turbo.json
 RUN yarn turbo build
-
-# Runner stage
+ 
 FROM base AS runner
-WORKDIR /root-admin  # Workdir set to /root-admin
-
+WORKDIR /app
+ 
 # Don't run production as root
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 USER nextjs
+ 
+COPY --from=installer /app/apps/user-web/next.config.mjs .
+COPY --from=installer /app/apps/user-web/package.json .
+ 
+# Automatically leverage output traces to reduce image size
+# https://nextjs.org/docs/advanced-features/output-file-tracing
+COPY --from=installer --chown=nextjs:nodejs /app/apps/user-web/.next/standalone ./
+COPY --from=installer --chown=nextjs:nodejs /app/apps/user-web/.next/static ./apps/user-web/.next/static
+COPY --from=installer --chown=nextjs:nodejs /app/apps/user-web/public ./apps/user-web/public
+ 
 
-# Copy necessary files for root-admin
-COPY --from=installer /root-admin/next.config.mjs .
-COPY --from=installer /root-admin/package.json .
+COPY --from=installer /app/apps/root-admin/next.config.mjs .
+COPY --from=installer /app/apps/root-admin/package.json .
 
 # Automatically leverage output traces to reduce image size
-COPY --from=installer --chown=nextjs:nodejs /root-admin/.next/standalone ./
-COPY --from=installer --chown=nextjs:nodejs /root-admin/.next/static ./root-admin/.next/static
-COPY --from=installer --chown=nextjs:nodejs /root-admin/public ./root-admin/public
+# https://nextjs.org/docs/advanced-features/output-file-tracing
+COPY --from=installer --chown=nextjs:nodejs /app/apps/root-admin/.next/standalone ./
+COPY --from=installer --chown=nextjs:nodejs /app/apps/root-admin/.next/static ./apps/root-admin/.next/static
+COPY --from=installer --chown=nextjs:nodejs /app/apps/root-admin/public ./apps/root-admin/public
+
+# # Base image
+# FROM node:20-alpine AS base
+
+# # Builder stage
+# FROM base AS builder
+# RUN apk update
+# RUN apk add libc6-compat
+# # Set working directory
+# WORKDIR /root-admin
+# # Install turbo globally
+# RUN yarn global add turbo@latest
+# COPY . .
+
+# # Generate a partial monorepo with a pruned lockfile for the root-admin workspace
+# RUN turbo prune root-admin --docker
+
+# # Installer stage
+# FROM base AS installer
+# RUN apk update
+# RUN apk add libc6-compat
+# WORKDIR /root-admin  # Workdir set to /root-admin
+
+# # First install the dependencies (as they change less often)
+# COPY .gitignore .gitignore
+# COPY --from=builder /root-admin/out/json/ .
+# COPY --from=builder /root-admin/out/yarn.lock ./yarn.lock
+# RUN yarn install
+
+# # Build the root-admin project
+# COPY --from=builder /root-admin/out/full/ .
+# COPY turbo.json turbo.json
+# RUN yarn turbo run build
+
+# # Runner stage
+# FROM base AS runner
+# WORKDIR /root-admin  # Workdir set to /root-admin
+
+# # Don't run production as root
+# RUN addgroup --system --gid 1001 nodejs
+# RUN adduser --system --uid 1001 nextjs
+# USER nextjs
+
+# # Copy necessary files for root-admin
+# COPY --from=installer /root-admin/next.config.mjs .
+# COPY --from=installer /root-admin/package.json .
+
+# # Automatically leverage output traces to reduce image size
+# COPY --from=installer --chown=nextjs:nodejs /root-admin/.next/standalone ./
+# COPY --from=installer --chown=nextjs:nodejs /root-admin/.next/static ./root-admin/.next/static
+# COPY --from=installer --chown=nextjs:nodejs /root-admin/public ./root-admin/public

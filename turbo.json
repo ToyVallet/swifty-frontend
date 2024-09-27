@@ -14,7 +14,7 @@
       ],
       "env": ["SERVER_URL", "PORT"],
       "dependsOn": ["^build"],
-      "outputs": [".next/**", "!.next/cache/**"]
+      "outputs": ["build/**", ".next/**", "public/**", "!.next/cache/**"]
     },
     "build-storybook": {
       "dependsOn": ["^build-storybook"],
